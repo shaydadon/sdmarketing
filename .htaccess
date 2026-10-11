@@ -1,0 +1,15 @@
+# Branded "page not found"
+ErrorDocument 404 /404.php
+
+# Force HTTPS (enable once the SSL certificate is active on Hostinger)
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Keep project notes and tooling private
+<FilesMatch "^(PRODUCT\.md|skills-lock\.json)$">
+  Require all denied
+</FilesMatch>
+RedirectMatch 404 ^/\.claude(/|$)
+RedirectMatch 404 ^/includes(/|$)
+RedirectMatch 404 ^/e2e(/|$)
