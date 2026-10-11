@@ -33,13 +33,20 @@ npx playwright install chromium
 npm test
 ```
 
-## Dev site (staging)
+## Deploys (GitHub Actions)
 
-Every push to the `development` branch runs the Playwright tests on GitHub Actions and, if they pass, uploads the site to https://dev.sdmarketing.co.il over FTPS ([.github/workflows/deploy-dev.yml](.github/workflows/deploy-dev.yml)). The dev copy is hidden from search engines, shows a "סביבת פיתוח" badge, and contact-form emails from it start with `[DEV]`.
+[.github/workflows/deploy.yml](.github/workflows/deploy.yml): every push runs the Playwright tests and, only if they pass, uploads the site over SSH (rsync):
 
-Needed once in GitHub (Settings > Secrets and variables > Actions): secrets `DEV_FTP_SERVER`, `DEV_FTP_USERNAME`, `DEV_FTP_PASSWORD`; optional variable `DEV_FTP_DIR` (defaults to the FTP account's root).
+| Branch | Goes to |
+| --- | --- |
+| `development` | https://dev.sdmarketing.co.il (hidden from search engines, "סביבת פיתוח" badge, contact emails tagged `[DEV]`) |
+| `main` | https://sdmarketing.co.il (live) |
 
-## Deploy (production)
+A manual run (Actions > Deploy to Hostinger > Run workflow) can pick dev or live; live only from `main`.
+
+Repository secrets: `SSH_HOST`, `SSH_USER`, `SSH_PORT`, `SSH_KEY`, `DEV_PATH`, `LIVE_PATH`. Missing secrets skip the deploy with a warning.
+
+## Manual deploy (production, without Actions)
 
 Upload everything except `e2e/`, `README.md`, `PRODUCT.md` and `skills-lock.json` to `public_html` on Hostinger. Then:
 
