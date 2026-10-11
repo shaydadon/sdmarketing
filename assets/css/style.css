@@ -1338,3 +1338,10 @@ html { scrollbar-color: var(--blue-300) var(--blue-50); }
 
 /* Custom press feedback replaces the grey tap flash on touch screens */
 a, button, .btn, [role="tab"] { -webkit-tap-highlight-color: transparent; }
+
+/* Staging marker (only rendered on dev.sdmarketing.co.il) */
+.env-badge {
+  position: fixed; z-index: 60; inset-inline-start: 12px; bottom: 12px;
+  padding: 4px 12px; border-radius: 99px; font: 600 .8125rem/1.5 var(--font-display);
+  background: #f5b301; color: #1f1600; box-shadow: var(--shadow-s); pointer-events: none;
+}

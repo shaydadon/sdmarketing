@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             '',
             '— נשלח מטופס יצירת הקשר ב-' . $site['domain'] . ' · ' . date('d/m/Y H:i'),
         ];
-        $subject = '=?UTF-8?B?' . base64_encode('פנייה חדשה מהאתר: ' . $clean($values['name'])) . '?=';
+        $subject = '=?UTF-8?B?' . base64_encode(($is_dev ? '[DEV] ' : '') . 'פנייה חדשה מהאתר: ' . $clean($values['name'])) . '?=';
         $headers = [
             'MIME-Version: 1.0',
             'Content-Type: text/plain; charset=UTF-8',

@@ -33,7 +33,13 @@ npx playwright install chromium
 npm test
 ```
 
-## Deploy
+## Dev site (staging)
+
+Every push to the `development` branch runs the Playwright tests on GitHub Actions and, if they pass, uploads the site to https://dev.sdmarketing.co.il over FTPS ([.github/workflows/deploy-dev.yml](.github/workflows/deploy-dev.yml)). The dev copy is hidden from search engines, shows a "סביבת פיתוח" badge, and contact-form emails from it start with `[DEV]`.
+
+Needed once in GitHub (Settings > Secrets and variables > Actions): secrets `DEV_FTP_SERVER`, `DEV_FTP_USERNAME`, `DEV_FTP_PASSWORD`; optional variable `DEV_FTP_DIR` (defaults to the FTP account's root).
+
+## Deploy (production)
 
 Upload everything except `e2e/`, `README.md`, `PRODUCT.md` and `skills-lock.json` to `public_html` on Hostinger. Then:
 

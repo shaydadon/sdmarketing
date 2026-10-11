@@ -28,7 +28,7 @@ function logo_mark(string $class = 'logo-mark'): string
   $page_file = basename($_SERVER['SCRIPT_NAME'] ?? 'index.php');
   $canonical = 'https://' . $site['domain'] . '/' . ($page_file === 'index.php' ? '' : $page_file);
   ?>
-  <?php if (!empty($noindex)): ?>
+  <?php if (!empty($noindex) || $is_dev): ?>
   <meta name="robots" content="noindex">
   <?php else: ?>
   <link rel="canonical" href="<?= e($canonical) ?>">
@@ -51,6 +51,7 @@ function logo_mark(string $class = 'logo-mark'): string
 <body class="page-<?= e($page_id) ?>">
 <?php require __DIR__ . '/icons.php'; ?>
 <a class="skip-link" href="#main">דילוג לתוכן</a>
+<?php if ($is_dev): ?><div class="env-badge" role="note">סביבת פיתוח</div><?php endif; ?>
 
 <header class="site-header is-<?= e($header_theme) ?>" data-header>
   <div class="container header-inner">

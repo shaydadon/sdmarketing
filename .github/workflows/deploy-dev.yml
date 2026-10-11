@@ -1,0 +1,89 @@
+# Push to `development` -> run the Playwright suite -> if green, upload the site to dev.sdmarketing.co.il over FTPS.
+#
+# Repository secrets (Settings > Secrets and variables > Actions):
+#   DEV_FTP_SERVER    FTP host from Hostinger (e.g. ftp.sdmarketing.co.il or the server IP)
+#   DEV_FTP_USERNAME  FTP account created for the dev subdomain folder only
+#   DEV_FTP_PASSWORD  that account's password
+# Optional repository variable:
+#   DEV_FTP_DIR       remote folder, default "./" (the FTP account's own root = the dev subdomain folder)
+
+name: Deploy to dev
+
+on:
+  push:
+    branches: [development]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-dev
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Playwright tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: e2e
+    env:
+      PHP_BIN: php
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: e2e/package-lock.json
+
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test
+
+      - name: Upload test report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: e2e/playwright-report
+          retention-days: 7
+
+  deploy:
+    name: Upload to dev.sdmarketing.co.il
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: dev
+      url: https://dev.sdmarketing.co.il
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Keep search engines out of the dev site
+        run: printf 'User-agent: *\nDisallow: /\n' > robots.txt
+
+      - name: Deploy over FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.DEV_FTP_SERVER }}
+          username: ${{ secrets.DEV_FTP_USERNAME }}
+          password: ${{ secrets.DEV_FTP_PASSWORD }}
+          protocol: ftps
+          server-dir: ${{ vars.DEV_FTP_DIR || './' }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            .github/**
+            e2e/**
+            README.md
+            PRODUCT.md
+            skills-lock.json
