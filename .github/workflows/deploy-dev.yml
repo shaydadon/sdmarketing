@@ -69,7 +69,8 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Keep search engines out of the dev site
-        run: printf 'User-agent: *\nDisallow: /\n' > robots.txt
+        run: |
+          printf 'User-agent: *\nDisallow: /\n' > robots.txt
 
       - name: Deploy over FTPS
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
