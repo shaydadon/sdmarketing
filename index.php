@@ -1,24 +1,20 @@
 <?php
 $page_id      = 'index';
-$page_title   = 'SDmarketing | אוטומציות, צ\'אטבוטים, אתרים ושיווק דיגיטלי לעסקים';
-$page_desc    = 'SDmarketing בונה לעסקים צ\'אטבוטים לוואטסאפ, אוטומציות מייל ושיווק, אתרים וחנויות אונליין, אפליקציות PWA וקמפיינים ממוטבים.';
+$page_title   = 'SDmarketing | צ׳אטבוט לוואטסאפ לעסקים, אוטומציות, בניית אתרים, קידום אורגני וקמפיינים';
+$page_desc    = 'SDmarketing בונה לעסקים צ׳אטבוט לוואטסאפ, אוטומציות לעסקים, בניית חנות אונליין, דף נחיתה, אתרי תדמית, אפליקציות PWA ללא צורך בחנות האפליקציות, קידום אורגני, וקמפיינים ממומנים בגוגל ובמטא.';
 require __DIR__ . '/includes/header.php';
 require __DIR__ . '/includes/services-data.php';
 require __DIR__ . '/includes/projects-data.php';
 
-$by = [];
-foreach ($projects as $p) $by[$p['slug']] = $p;
-$fisha = $by['fisha'];
-$excerly = $by['excerly'];
 ?>
 
 <section class="hero dark">
   <div class="glow" aria-hidden="true"></div>
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow">אוטומציות · אתרים · PWA · שיווק</span>
+      <span class="eyebrow">אוטומציות · אתרים · PWA · קידום · קמפיינים</span>
       <h1 id="hero-title">העסק שלך ממשיך לעבוד.<span class="l2">גם כשאתה לא.</span></h1>
-      <p class="lead">צ'אטבוטים, אוטומציות, אתרים וקמפיינים שמחוברים זה לזה, כדי שכל פנייה תקבל מענה וכל ליד יגיע למקום הנכון.</p>
+      <p class="lead">צ׳אטבוט לוואטסאפ לעסקים, אוטומציות, בניית אתרים, קידום אורגני וקמפיינים ממומנים שמחוברים זה לזה, כדי שכל פנייה תקבל מענה וכל ליד יגיע למקום הנכון.</p>
       <div class="ctas">
         <a class="btn btn-acc" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span>דברו איתי בוואטסאפ</span></a>
         <a class="btn btn-ghost-d" href="projects.php">לעבודות שלי<?= icon('arrow') ?></a>
@@ -58,7 +54,8 @@ $excerly = $by['excerly'];
       <span>חיבור בין מערכות</span>
       <span>אתרים וחנויות</span>
       <span>אפליקציות PWA</span>
-      <span>קמפיינים בגוגל ובמטא</span>
+      <span>קידום אורגני</span>
+      <span>קמפיינים ממומנים</span>
     </div>
   </div>
 </section>
@@ -75,9 +72,9 @@ $excerly = $by['excerly'];
     <div class="sec-head">
       <div>
         <span class="eyebrow">מה אני בונה</span>
-        <h2 class="sec" id="services-title">ארבעה תחומים.<br>מערכת אחת שעובדת יחד.</h2>
+        <h2 class="sec" id="services-title">חמישה תחומים.<br>מערכת אחת שעובדת יחד.</h2>
       </div>
-      <p class="lead">הבוט שעונה ללקוחות, האתר שהוא יושב עליו והקמפיין שמביא אליו תנועה. כשאותו אדם בונה את כולם, הם מדברים זה עם זה.</p>
+      <p class="lead">הבוט שעונה ללקוחות, האתר שהוא יושב עליו, הקידום האורגני והקמפיין הממומן שמביאים אליו תנועה. כשאותו אדם בונה את כולם, הם מדברים זה עם זה.</p>
     </div>
 
     <div class="svc-grid">
@@ -136,40 +133,28 @@ $excerly = $by['excerly'];
       <a class="btn btn-ink" href="projects.php">לכל הפרויקטים<?= icon('arrow') ?></a>
     </div>
     <div class="proj-grid">
-      <article class="proj big">
-        <div class="media media-fisha">
-          <div class="browser">
-            <div class="bar"><i></i><i></i><i></i><u>fisha.shop</u></div>
-            <img class="tall" src="assets/img/projects/fisha/originals-main.webp" alt="עמוד Originals בחנות fisha.shop" width="1600" height="1133" decoding="async">
+      <?php foreach ($projects as $p): ?>
+        <article class="proj big<?= $p['layout'] === 'phones' ? ' rev' : '' ?>">
+          <?php if ($p['layout'] === 'phones'): ?>
+            <div class="media media-ex">
+              <?php foreach ($p['shots'] as $shot): ?>
+                <div class="mphone"><img src="<?= e($shot['src']) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" loading="lazy" decoding="async"></div>
+              <?php endforeach; ?>
+            </div>
+          <?php else: $shot = $p['shots'][0]; ?>
+            <div class="media media-fisha">
+              <div class="browser">
+                <div class="bar"><i></i><i></i><i></i><u></u></div>
+                <img src="<?= e($shot['src']) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" decoding="async">
+              </div>
+            </div>
+          <?php endif; ?>
+          <div class="body">
+            <div class="row"><h3 lang="en"><?= e($p['name']) ?></h3><span class="tag acc"><?= e($p['tag']) ?></span></div>
+            <p><?= e($p['summary']) ?></p>
           </div>
-          <div class="thumbs">
-            <img src="assets/img/projects/fisha/tattoos-1.webp" alt="עמוד הקעקועים של fisha.shop" width="1600" height="1000" loading="lazy" decoding="async">
-            <img src="assets/img/projects/fisha/tattoos-2.webp" alt="Flash sheet בחנות fisha.shop" width="1600" height="1000" loading="lazy" decoding="async">
-            <img src="assets/img/projects/fisha/shop-hq-c.webp" alt="עמוד החנות של fisha.shop" width="1600" height="929" loading="lazy" decoding="async">
-          </div>
-        </div>
-        <div class="body">
-          <div class="row"><h3 lang="en"><?= e($fisha['name']) ?></h3><span class="tag acc"><?= e($fisha['type']) ?></span></div>
-          <p><?= e($fisha['home']) ?></p>
-          <div class="row" style="justify-content:flex-start;gap:8px">
-            <?php foreach ($fisha['tags'] as $tag): ?><span class="tag" lang="en"><?= e($tag) ?></span><?php endforeach; ?>
-          </div>
-          <a class="link" href="<?= e($fisha['url']) ?>" target="_blank" rel="noopener">לאתר החי <?= icon('external') ?></a>
-        </div>
-      </article>
-
-      <article class="proj big rev">
-        <div class="media media-ex">
-          <div class="mphone"><img src="assets/img/projects/excerly/workouts-m.webp" alt="מסך האימונים באפליקציית Excerly" width="780" height="1688" loading="lazy" decoding="async"></div>
-          <div class="mphone"><img src="assets/img/projects/excerly/home-m.webp" alt="מסך היום באפליקציית Excerly" width="780" height="1688" loading="lazy" decoding="async"></div>
-          <div class="mphone"><img src="assets/img/projects/excerly/nutrition-m.webp" alt="מסך התזונה באפליקציית Excerly" width="780" height="1688" loading="lazy" decoding="async"></div>
-        </div>
-        <div class="body">
-          <div class="row"><h3 lang="en"><?= e($excerly['name']) ?></h3><span class="tag acc"><?= e($excerly['type']) ?></span></div>
-          <p><?= e($excerly['home']) ?></p>
-          <a class="link" href="projects.php#case-excerly">פרטים על הפרויקט <?= icon('arrow') ?></a>
-        </div>
-      </article>
+        </article>
+      <?php endforeach; ?>
     </div>
   </div>
 </section>
@@ -198,6 +183,70 @@ $excerly = $by['excerly'];
     </div>
   </div>
 </section>
+
+<?php
+$faq = [
+    [
+        'q' => 'יש לי מוצרים מעולים אבל אין לי איך למכור אותם אונליין?',
+        'a' => 'חנות אונליין נבנית סביב הקנייה: קטלוג, עגלה, סליקה וניהול הזמנות, בלי שהגולש ילך לאיבוד בדרך. אותו קו עבודה מתאים גם לדף נחיתה לקמפיין או לאתר תדמית שמוביל לשיחה. דוגמה לחנות חיה היא fisha.shop.',
+    ],
+    [
+        'q' => 'פניות מגיעות בוואטסאפ ובמייל, ואני לא מספיק לחזור לכולן?',
+        'a' => 'אוטומציה מעבירה את מה שחוזר על עצמו לרוץ לבד: הודעה, מייל או עדכון בטבלה. בוט יכול לענות על שאלות נפוצות, לאסוף פרטים ולקבוע תור, והפרטים עוברים ליומן או לגיליון בלי להעתיק אותם ידנית.',
+    ],
+    [
+        'q' => 'אני רוצה אפליקציה ללקוחות, בלי לעבור דרך חנות האפליקציות?',
+        'a' => 'אפליקציית PWA מתקינים ישר מהדפדפן, ללא צורך בחנות האפליקציות, והיא נפתחת עם אייקון במסך הבית. אותו קוד רץ על אנדרואיד, על אייפון ועל מחשב. כך נבנתה Excerly.',
+    ],
+    [
+        'q' => 'אני משלם על פרסום ולא ברור לי מה באמת מביא פניות?',
+        'a' => 'קמפיין בגוגל או במטא נמדד לפי פניות ומכירות, לא לפי לייקים. קודם מוודאים שכל פנייה נספרת, ואז משפרים את מה שמביא תוצאה ועוצרים את מה שלא. בסוף יש דוח ברור: מה עבד ומה כדאי לשנות הלאה.',
+    ],
+    [
+        'q' => 'יש לי דף נחיתה, אבל הוא לא מביא פניות או לידים?',
+        'a' => 'דף נחיתה שעובד נבנה סביב מסר אחד ופעולה אחת, כדי שמי שמגיע מקמפיין ישאיר פרטים או יכתוב בוואטסאפ. בודקים מה עוצר את הגולשים, מחדדים את המסר והפעולה, ומחברים מעקב כדי לדעת מאיפה הגיעה כל פנייה.',
+    ],
+];
+$faq_ld = [
+    '@context' => 'https://schema.org',
+    '@type' => 'FAQPage',
+    'mainEntity' => array_map(fn($item) => [
+        '@type' => 'Question',
+        'name' => $item['q'],
+        'acceptedAnswer' => ['@type' => 'Answer', 'text' => $item['a']],
+    ], $faq),
+];
+?>
+<section class="faq" aria-labelledby="faq-title">
+  <div class="wrap">
+    <span class="eyebrow">שאלות נפוצות</span>
+    <h2 class="sec" id="faq-title">שאלות שבעלי עסקים שואלים אותי</h2>
+    <div class="faq-list">
+      <?php foreach ($faq as $i => $item): ?>
+        <details>
+          <summary id="faq-q-<?= $i ?>"><span><?= e($item['q']) ?></span></summary>
+          <div class="faq-a" role="region" aria-labelledby="faq-q-<?= $i ?>">
+            <p><?php
+              $html = e($item['a']);
+              $html = str_replace(
+                  'fisha.shop',
+                  '<a href="https://fisha.shop" target="_blank" rel="noopener">fisha.shop</a>',
+                  $html
+              );
+              $html = str_replace(
+                  'Excerly',
+                  '<a href="https://shaydadon.github.io/Excerly/" target="_blank" rel="noopener">Excerly</a>',
+                  $html
+              );
+              echo $html;
+            ?></p>
+          </div>
+        </details>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+<script type="application/ld+json"><?= json_encode($faq_ld, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) ?></script>
 
 <?php
 $cta_contacts = true;

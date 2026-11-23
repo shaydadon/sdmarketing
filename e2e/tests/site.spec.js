@@ -8,6 +8,7 @@ const PAGES = [
   { path: '/projects.php', name: 'projects' },
   { path: '/about.php', name: 'about' },
   { path: '/contact.php', name: 'contact' },
+  { path: '/articles.php', name: 'articles' },
   { path: '/terms.php', name: 'terms' },
   { path: '/privacy.php', name: 'privacy' },
   { path: '/accessibility.php', name: 'accessibility' },
@@ -48,7 +49,7 @@ test.describe('every page', () => {
       await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
       await expect(page).toHaveTitle(/SDmarketing/);
       await expect(page.locator('h1')).toHaveCount(1);
-      await expect(page.locator('body')).not.toContainText('Boardog');
+      if (p.name !== 'home' && p.name !== 'projects') await expect(page.locator('body')).not.toContainText('Boardog');
       await expect(page.locator('body')).not.toContainText('10+');
       await expect(page.locator('body')).not.toContainText('יותר מעשר');
       await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /.{20,}/);
@@ -142,13 +143,26 @@ test.describe('navigation', () => {
 });
 
 test.describe('homepage', () => {
-  test('four service areas link to the services page', async ({ page }) => {
+  test('five service areas link to the services page', async ({ page }) => {
     await page.goto('/index.php');
     const cards = page.locator('.svc-grid .svc');
-    await expect(cards).toHaveCount(4);
+    await expect(cards).toHaveCount(5);
     await expect(cards.first()).toContainText('אוטומציות לעסקים');
+    await expect(page.locator('.svc-grid')).toContainText('SEO / קידום אורגני');
+    await expect(page.locator('.svc-grid')).toContainText('קמפיינים ממומנים');
+    await expect(page.locator('.svc-grid')).toContainText('התאמה מלאה למובייל, מוכן ל-SEO');
     await expect(page.locator('a[href="services.php#automations"]')).toBeVisible();
     await expect(page.locator('a[href="services.php#pwa"]')).toBeVisible();
+    await expect(page.locator('a[href="services.php#seo"]')).toBeVisible();
+    await expect(page.locator('a[href="services.php#campaigns"]')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'חמישה תחומים. מערכת אחת שעובדת יחד.' })).toBeVisible();
+    await page.goto('/services.php');
+    await expect(page.locator('#seo')).toContainText('מחקר מילות מפתח');
+    await expect(page.locator('#seo')).toContainText('הדגמה להמחשה · ללא נתונים אמיתיים');
+    await expect(page.locator('#seo a[href="articles.php"]')).toBeVisible();
+    await expect(page.locator('#campaigns')).toContainText('Google Ads');
+    await expect(page.locator('#campaigns')).toContainText('פייסבוק');
+    await expect(page.locator('#websites')).toContainText('fisha.shop');
   });
 
   test('hero demo shows the bot conversation and the automations it triggers', async ({ page }) => {
@@ -158,6 +172,27 @@ test.describe('homepage', () => {
     await expect(demo).toContainText('13:30 מעולה');
     await expect(demo).toContainText('התור נכנס ליומן');
     await expect(demo).toContainText('הדגמה להמחשה');
+  });
+
+  test('faq lists every service and publishes FAQPage data', async ({ page }) => {
+    await page.goto('/index.php');
+    const faq = page.locator('.faq');
+    await expect(faq.locator('h2')).toHaveText('שאלות שבעלי עסקים שואלים אותי');
+    await expect(faq.locator('details')).toHaveCount(5);
+    await expect(faq).toContainText('ללא צורך בחנות האפליקציות');
+    await expect(faq).toContainText('fisha.shop');
+    await expect(faq).toContainText('Excerly');
+    await expect(faq).toContainText('יש לי דף נחיתה, אבל הוא לא מביא פניות או לידים?');
+    await expect(faq).not.toContainText('פנסיון');
+    await expect(faq).not.toContainText('קלעי');
+    const ld = await page.locator('script[type="application/ld+json"]').textContent();
+    const data = JSON.parse(ld);
+    expect(data['@type']).toBe('FAQPage');
+    expect(data.mainEntity).toHaveLength(5);
+    const first = faq.locator('details').first();
+    await expect(first).not.toHaveAttribute('open', '');
+    await first.locator('summary').click();
+    await expect(first).toHaveAttribute('open', '');
   });
 });
 
@@ -181,7 +216,26 @@ test.describe('projects', () => {
     await page.getByRole('button', { name: /הכל/ }).click();
     await expect(fisha).toBeVisible();
     await expect(apps).toBeVisible();
-    await expect(page.locator('body')).not.toContainText('Boardog');
+  });
+
+  test('whatsapp bot showcase renders', async ({ page }) => {
+    await page.goto('/projects.php');
+    const block = page.locator('#case-bot');
+    await expect(block).toBeVisible();
+    await expect(block.locator('h2')).toHaveText('Boardog');
+    await expect(block).toContainText('אפליקציית צ׳אטבוט לבעלי פנסיונים');
+    await expect(block).not.toContainText('צילום מסך אמיתי');
+    await expect(block).toContainText('הפנסיון של ג׳רי');
+    await expect(block).toContainText('מחובר/ת');
+    await expect(block).toContainText('הקלדה...');
+    // The chat plays as a video; the HTML chat is only a fallback, shown if the video fails to load.
+    const video = block.locator('video.wad-video');
+    await expect(video).toBeVisible();
+    await expect(video.locator('source[src$="boardog-chat.mp4"]')).toHaveCount(1);
+    await expect.poll(() => video.evaluate((node) => (node.videoWidth && node.videoHeight) ? `${node.videoWidth}x${node.videoHeight}` : '')).toBe('382x532');
+    await expect(block.locator('[data-wa-log] .wad-msg')).not.toHaveCount(0);
+    await expect(block).not.toContainText('Claude');
+    await expect(block).not.toContainText('AI (Claude)');
   });
 });
 

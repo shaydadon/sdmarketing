@@ -1,36 +1,35 @@
 <?php
-// The two live projects. Screenshots are real captures, stored as resized WebP.
+// Portfolio examples. To add one, append an item:
+//   layout "browser" for a site or store, "phones" for an app.
+//   cat: web, pwa, landing, brochure.
+// Shots are real screenshots only. Copy stays short: what kind of work it is,
+// not a tour of the client's product.
 $projects = [
     [
-        'slug'     => 'fisha',
-        'name'     => 'fisha.shop',
-        'cat'      => 'web',
-        'type'     => 'חנות אונליין',
-        'home'     => 'חנות אונליין למותג האמנות Fisha: דמות שעוברת בין ציורים, בובות, קרמיקה וטקסטיל. סיפור המותג במרכז, וקטגוריות שמובילות ישר לקנייה.',
-        'long'     => 'Fisha היא דמות שמשנה צורה כל הזמן: מציורים לבובות, מקרמיקה לטקסטיל. החנות נבנתה כדי שהעולם הזה ירגיש שלם גם אונליין, עם סיפור המותג במרכז וקטגוריות שמובילות ישר לקנייה.',
-        'tags'     => ['E-commerce', 'Responsive', 'Branding'],
-        'url'      => 'https://fisha.shop',
-        'url_label'=> 'לאתר החי',
-        'blocks'   => [
-            ['title' => 'מה נבנה', 'items' => ['חנות מלאה עם קטלוג ועגלת קניות', 'שלוש קטגוריות: Wearables, Collectibles, Originals', 'עמוד קעקועים עם Flash Sheet', 'דף סיפור המותג, אודות ויצירת קשר', 'אזור אישי ללקוחות, תקנון ומדיניות']],
-            ['title' => 'האתגר', 'text' => 'עולם אמנותי עשיר שצריך להרגיש שלם אונליין, בלי לפגוע בדרך הקצרה לקנייה.'],
-            ['title' => 'התוצאה', 'dark' => true, 'big' => 'חנות חיה שמוכרת,', 'accent' => 'בדסקטופ ובמובייל.'],
+        'slug'      => 'fisha',
+        'name'      => 'fisha.shop',
+        'cat'       => 'web',
+        'tag'       => 'חנות אונליין / E-commerce',
+        'summary'   => 'דוגמה לחנות אונליין. החנות מוכרת בפועל: עיצוב, פיתוח, וניהול הזמנות וסליקה.',
+        'url'       => 'https://fisha.shop',
+        'url_label' => 'לאתר החי',
+        'layout'    => 'browser',
+        'shots'     => [
+            ['src' => 'assets/img/projects/fisha/shop-hq-c.webp', 'alt' => 'צילום מסך של החנות fisha.shop', 'w' => 1600, 'h' => 929, 'chrome' => 'fisha.shop'],
         ],
     ],
     [
-        'slug'     => 'excerly',
-        'name'     => 'Excerly',
-        'cat'      => 'pwa',
-        'type'     => 'אפליקציית PWA',
-        'home'     => 'אפליקציית כושר ותזונה שמותקנת ישר מהדפדפן ועובדת כמו אפליקציה רגילה.',
-        'long'     => 'אפליקציית כושר ותזונה בעברית. נבנתה כ־PWA: המשתמשים מתקינים אותה ישר מהדפדפן, היא נפתחת במסך מלא עם אייקון משלה, ואותו קוד רץ על אנדרואיד, אייפון ומחשב.',
-        'tags'     => ['PWA', 'Mobile-first'],
-        'url'      => 'https://shaydadon.github.io/Excerly/',
-        'url_label'=> 'לנסות את האפליקציה',
-        'blocks'   => [
-            ['title' => 'מה נבנה', 'items' => ['התקנה מהדפדפן למסך הבית', 'ממשק מותאם מובייל', 'קוד אחד לכל המכשירים']],
-            ['title' => 'מסכים עיקריים', 'items' => ['היום: אימון יומי, תזונה ויומן', 'אימונים: תוכנית אישית ותרגילים', 'תזונה: יעד יומי ורישום ארוחות']],
-            ['title' => 'למה PWA', 'dark' => true, 'big' => 'אפליקציה אמיתית,', 'accent' => 'בלי האפליקציה־סטור.'],
+        'slug'      => 'excerly',
+        'name'      => 'Excerly',
+        'cat'       => 'pwa',
+        'tag'       => 'אפליקציית PWA',
+        'summary'   => 'דוגמה לאפליקציית ווב. נבנתה כך שאפשר להתקין אותה מהדפדפן, והיא נפתחת כמו אפליקציה.',
+        'url'       => 'https://shaydadon.github.io/Excerly/',
+        'url_label' => 'לאפליקציה',
+        'layout'    => 'phones',
+        'shots'     => [
+            ['src' => 'assets/img/projects/excerly/home-m.webp', 'alt' => 'צילום מסך של האפליקציה Excerly', 'w' => 780, 'h' => 1688],
+            ['src' => 'assets/img/projects/excerly/workouts-m.webp', 'alt' => 'צילום מסך נוסף של האפליקציה Excerly', 'w' => 780, 'h' => 1688],
         ],
     ],
 ];
@@ -40,3 +39,5 @@ $project_cats = [
     'web' => 'אתרים וחנויות',
     'pwa' => 'אפליקציות PWA',
 ];
+
+$projects_soon = 'בקרוב: דפי נחיתה ואתרי תדמית';

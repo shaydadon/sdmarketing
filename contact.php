@@ -74,7 +74,7 @@ $sent = isset($_GET['sent']);
 
 $page_id      = 'contact';
 $page_title   = 'צור קשר | SDmarketing';
-$page_desc    = 'דברו עם שי דדון מ-SDmarketing: וואטסאפ, טלפון, מייל או טופס קצר, על אוטומציות, צ\'אטבוטים, אתרים, אפליקציות וקמפיינים.';
+$page_desc    = 'דברו עם שי דדון מ-SDmarketing: וואטסאפ, טלפון, מייל או טופס קצר, על אוטומציות, צ\'אטבוטים, אתרים, אפליקציות, קידום אורגני וקמפיינים ממומנים.';
 require __DIR__ . '/includes/header.php';
 
 function field_attrs(string $name, array $errors): string

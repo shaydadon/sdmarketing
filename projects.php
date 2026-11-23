@@ -1,7 +1,7 @@
 <?php
 $page_id    = 'projects';
-$page_title = 'פרויקטים | SDmarketing | חנויות, אתרים ואפליקציות שעלו לאוויר';
-$page_desc  = 'עבודות של SDmarketing: החנות fisha.shop ואפליקציית הכושר Excerly, עם צילומי מסך אמיתיים.';
+$page_title = 'פרויקטים | SDmarketing | בניית חנות אונליין, אתרים ואפליקציות PWA';
+$page_desc  = 'עבודות של SDmarketing: בניית חנות אונליין, אתרי תדמית ואפליקציית PWA ללא צורך בחנות האפליקציות, עם צילומי מסך אמיתיים.';
 require __DIR__ . '/includes/header.php';
 require __DIR__ . '/includes/projects-data.php';
 ?>
@@ -33,63 +33,50 @@ require __DIR__ . '/includes/projects-data.php';
   <div class="wrap">
     <div class="case-head">
       <div>
-        <div class="case-idx"><b><?= sprintf('%02d', $i + 1) ?></b> / <?= sprintf('%02d', count($projects)) ?> · <?= e($p['type']) ?></div>
+        <div class="case-idx"><b><?= sprintf('%02d', $i + 1) ?></b> / <?= sprintf('%02d', count($projects)) ?></div>
         <h2 id="case-title-<?= e($p['slug']) ?>" lang="en"><?= e($p['name']) ?></h2>
-        <div class="tags"><?php foreach ($p['tags'] as $tag): ?><span class="tag" lang="en"><?= e($tag) ?></span><?php endforeach; ?></div>
+        <div class="tags"><span class="tag acc"><?= e($p['tag']) ?></span></div>
       </div>
       <div>
-        <p class="desc"><?= e($p['long']) ?></p>
-        <div class="acts">
-          <a class="btn btn-ink" href="<?= e($p['url']) ?>" target="_blank" rel="noopener"><?= e($p['url_label']) ?><?= icon('external') ?></a>
-        </div>
+        <p class="desc"><?= e($p['summary']) ?></p>
       </div>
     </div>
 
-    <?php if ($p['slug'] === 'fisha'): ?>
+    <?php if ($p['slug'] === 'excerly'): ?>
+      <div class="stage stage-ex-nice">
+        <?php foreach ([
+          ['assets/img/projects/excerly/home-m.webp', 'מסך היום באפליקציית Excerly'],
+          ['assets/img/projects/excerly/workouts-m.webp', 'מסך האימונים באפליקציית Excerly'],
+          ['assets/img/projects/excerly/session-m.webp', 'מסך אימון באפליקציית Excerly'],
+          ['assets/img/projects/excerly/nutrition-m.webp', 'מסך התזונה באפליקציית Excerly'],
+        ] as $shot): ?>
+          <div class="mphone"><img src="<?= e($shot[0]) ?>" alt="<?= e($shot[1]) ?>" width="780" height="1688" loading="lazy" decoding="async"></div>
+        <?php endforeach; ?>
+      </div>
+    <?php elseif ($p['slug'] === 'fisha'): ?>
       <div class="stage stage-fisha">
         <div class="browser main">
-          <div class="bar"><i></i><i></i><i></i><u>fisha.shop/originals</u></div>
+          <div class="bar"><i></i><i></i><i></i><u></u></div>
           <img class="tall" src="assets/img/projects/fisha/originals-main.webp" alt="עמוד Originals בחנות fisha.shop" width="1600" height="1133" loading="lazy" decoding="async">
         </div>
         <div class="side">
-          <div class="browser"><div class="bar"><i></i><i></i><i></i><u>/tattoos</u></div><img src="assets/img/projects/fisha/tattoos-1.webp" alt="עמוד הקעקועים של fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
-          <div class="browser"><div class="bar"><i></i><i></i><i></i><u>/tattoos</u></div><img src="assets/img/projects/fisha/tattoos-2.webp" alt="Flash sheet בחנות fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
-          <div class="browser"><div class="bar"><i></i><i></i><i></i><u>/shop</u></div><img src="assets/img/projects/fisha/shop-hq-c.webp" alt="עמוד החנות של fisha.shop" width="1600" height="929" loading="lazy" decoding="async"></div>
+          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="assets/img/projects/fisha/shop-hq-c.webp" alt="עמוד החנות fisha.shop" width="1600" height="929" loading="lazy" decoding="async"></div>
+          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="assets/img/projects/fisha/tattoos-2.webp" alt="Flash sheet בחנות fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
+          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="assets/img/projects/fisha/tattoos-1.webp" alt="עמוד הקעקועים של fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
         </div>
-        <p class="stage-cap">צילומי מסך אמיתיים · <span class="ltr">dev.fisha.shop</span></p>
       </div>
-      <div class="tat-strip">
-        <div class="browser"><div class="bar"><i></i><i></i><i></i><u>/tattoos</u></div><img src="assets/img/projects/fisha/tattoos-3.webp" alt="עמוד קעקועים נוסף בחנות fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
-        <div class="browser"><div class="bar"><i></i><i></i><i></i><u>/tattoos</u></div><img src="assets/img/projects/fisha/tattoos-4.webp" alt="עמוד קעקועים נוסף בחנות fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
-        <div class="browser"><div class="bar"><i></i><i></i><i></i><u>/collectibles</u></div><img src="assets/img/projects/fisha/collectibles-dc.webp" alt="עמוד Collectibles בחנות fisha.shop" width="1440" height="836" loading="lazy" decoding="async"></div>
-      </div>
-    <?php else: ?>
-      <div class="stage stage-ex">
-        <div class="mphone"><img src="assets/img/projects/excerly/home-m.webp" alt="מסך היום באפליקציית Excerly" width="780" height="1688" loading="lazy" decoding="async"></div>
-        <div class="mphone"><img src="assets/img/projects/excerly/workouts-m.webp" alt="מסך האימונים באפליקציית Excerly" width="780" height="1688" loading="lazy" decoding="async"></div>
-        <div class="mphone"><img src="assets/img/projects/excerly/session-m.webp" alt="מסך אימון באפליקציית Excerly" width="780" height="1688" loading="lazy" decoding="async"></div>
-        <div class="mphone"><img src="assets/img/projects/excerly/nutrition-m.webp" alt="מסך התזונה באפליקציית Excerly" width="780" height="1688" loading="lazy" decoding="async"></div>
-        <p class="stage-cap">צילומי מסך אמיתיים מהגרסה הציבורית · נתוני פרופיל לדוגמה</p>
+    <?php else: $shot = $p['shots'][0]; ?>
+      <div class="stage stage-one">
+        <div class="browser">
+          <div class="bar"><i></i><i></i><i></i><u></u></div>
+          <img src="<?= e($shot['src']) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" loading="lazy" decoding="async">
+        </div>
       </div>
     <?php endif; ?>
-
-    <div class="built">
-      <?php foreach ($p['blocks'] as $b): ?>
-        <div class="cell<?= !empty($b['dark']) ? ' dk' : '' ?>">
-          <h3><?= e($b['title']) ?></h3>
-          <?php if (!empty($b['items'])): ?>
-            <ul><?php foreach ($b['items'] as $item): ?><li><?= e($item) ?></li><?php endforeach; ?></ul>
-          <?php elseif (!empty($b['text'])): ?>
-            <p><?= e($b['text']) ?></p>
-          <?php else: ?>
-            <div class="big"><?= e($b['big']) ?><br><span class="acc"><?= e($b['accent']) ?></span></div>
-          <?php endif; ?>
-        </div>
-      <?php endforeach; ?>
-    </div>
   </div>
 </section>
 <?php endforeach; ?>
+<?php require __DIR__ . '/includes/wa-demo.php'; ?>
 </div>
 
 <section class="next" style="padding-top:0">
@@ -97,7 +84,7 @@ require __DIR__ . '/includes/projects-data.php';
     <div class="box">
       <div>
         <h2>הפרויקט הבא<br><span>יכול להיות שלך.</span></h2>
-        <p>חנות, אתר, אפליקציה או בוט? כל פרויקט כאן התחיל בהודעה אחת. ספרו לי מה אתם צריכים ואחזור עם הצעה.</p>
+        <p>חנות, אתר, אפליקציה, בוט, קידום אורגני או קמפיין ממומן? כל פרויקט כאן התחיל בהודעה אחת. ספרו לי מה אתם צריכים ואחזור עם הצעה.</p>
       </div>
       <div class="ctas">
         <a class="btn btn-acc" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span>דברו איתי בוואטסאפ</span></a>

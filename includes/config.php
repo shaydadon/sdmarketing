@@ -21,6 +21,7 @@ $nav = [
     'services' => ['href' => 'services.php', 'label' => 'שירותים'],
     'projects' => ['href' => 'projects.php', 'label' => 'פרויקטים'],
     'about'    => ['href' => 'about.php',    'label' => 'אודות'],
+    'articles' => ['href' => 'articles.php', 'label' => 'מאמרים', 'soon' => true],
     'contact'  => ['href' => 'contact.php',  'label' => 'צור קשר'],
 ];
 
