@@ -153,9 +153,17 @@
       if (typing) typing.hidden = true;
       pin();
     };
+    const video = wa.closest('#case-bot')?.querySelector('.wad-video');
+    if (video) {
+      video.addEventListener('error', () => {
+        video.hidden = true;
+        wa.style.display = 'flex';
+        showAll();
+      });
+    }
     if (reduce) {
       showAll();
-    } else {
+    } else if (!video) {
       const reset = () => {
         if (typing) typing.hidden = true;
         items.forEach((el) => {

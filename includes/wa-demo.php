@@ -57,6 +57,10 @@ $wa_n = count($wa_msgs);
     </div>
 
     <div class="stage wad-stage">
+      <video class="wad-video" autoplay muted loop playsinline preload="auto" poster="assets/video/boardog-chat-poster.jpg">
+        <source src="assets/video/boardog-chat.webm" type="video/webm">
+        <source src="assets/video/boardog-chat.mp4" type="video/mp4">
+      </video>
       <div class="wad-phone" data-wa-demo>
         <div class="wad-top">
           <div class="wad-who">

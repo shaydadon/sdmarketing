@@ -45,25 +45,33 @@ require __DIR__ . '/includes/projects-data.php';
       </div>
     </div>
 
-    <?php if ($p['layout'] === 'phones'): ?>
-      <div class="stage stage-ex compact">
-        <?php foreach ($p['shots'] as $shot): ?>
-          <div class="mphone"><img src="<?= e($shot['src']) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" loading="lazy" decoding="async"></div>
+    <?php if ($p['slug'] === 'excerly'): ?>
+      <div class="stage stage-ex-nice">
+        <?php foreach ([
+          ['assets/img/projects/excerly/home-m.webp', 'מסך היום באפליקציית Excerly'],
+          ['assets/img/projects/excerly/workouts-m.webp', 'מסך האימונים באפליקציית Excerly'],
+          ['assets/img/projects/excerly/session-m.webp', 'מסך אימון באפליקציית Excerly'],
+          ['assets/img/projects/excerly/nutrition-m.webp', 'מסך התזונה באפליקציית Excerly'],
+        ] as $i => $shot): ?>
+          <div class="mphone"><img src="<?= e($shot[0]) ?>" alt="<?= e($shot[1]) ?>" width="780" height="1688" loading="lazy" decoding="async"></div>
         <?php endforeach; ?>
       </div>
     <?php elseif ($p['slug'] === 'fisha'): ?>
-      <div class="stage stage-fisha-stack">
-        <?php foreach ([
-          ['assets/img/projects/fisha/originals-main.webp', 'עמוד Originals בחנות fisha.shop', 1600, 1133],
-          ['assets/img/projects/fisha/shop-hq-c.webp', 'עמוד החנות fisha.shop', 1600, 929],
-          ['assets/img/projects/fisha/tattoos-2.webp', 'Flash sheet בחנות fisha.shop', 1600, 1000],
-          ['assets/img/projects/fisha/tattoos-1.webp', 'עמוד הקעקועים של fisha.shop', 1600, 1000],
-        ] as $shot): ?>
-          <div class="browser">
-            <div class="bar"><i></i><i></i><i></i><u></u></div>
-            <img src="<?= e($shot[0]) ?>" alt="<?= e($shot[1]) ?>" width="<?= (int) $shot[2] ?>" height="<?= (int) $shot[3] ?>" loading="lazy" decoding="async">
-          </div>
-        <?php endforeach; ?>
+      <div class="stage stage-fisha">
+        <div class="browser main">
+          <div class="bar"><i></i><i></i><i></i><u></u></div>
+          <img class="tall" src="assets/img/projects/fisha/originals-main.webp" alt="עמוד Originals בחנות fisha.shop" width="1600" height="1133" loading="lazy" decoding="async">
+        </div>
+        <div class="side">
+          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="assets/img/projects/fisha/tattoos-1.webp" alt="עמוד הקעקועים של fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
+          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="assets/img/projects/fisha/tattoos-2.webp" alt="Flash sheet בחנות fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
+          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="assets/img/projects/fisha/shop-hq-c.webp" alt="עמוד החנות של fisha.shop" width="1600" height="929" loading="lazy" decoding="async"></div>
+        </div>
+      </div>
+      <div class="tat-strip">
+        <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="assets/img/projects/fisha/tattoos-3.webp" alt="עמוד קעקועים נוסף בחנות fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
+        <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="assets/img/projects/fisha/tattoos-4.webp" alt="עמוד קעקועים נוסף בחנות fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
+        <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="assets/img/projects/fisha/collectibles-dc.webp" alt="עמוד Collectibles בחנות fisha.shop" width="1440" height="836" loading="lazy" decoding="async"></div>
       </div>
     <?php else: $shot = $p['shots'][0]; ?>
       <div class="stage stage-one">
