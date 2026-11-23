@@ -83,6 +83,7 @@ require __DIR__ . '/includes/projects-data.php';
   </div>
 </section>
 <?php endforeach; ?>
+<?php require __DIR__ . '/includes/wa-demo.php'; ?>
 </div>
 
 <p class="soon wrap"><?= e($projects_soon) ?></p>
