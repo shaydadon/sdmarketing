@@ -179,7 +179,10 @@ h2.sec{font-size:60px;font-weight:900;margin:18px 0 0}
 .faq details[open] summary::after{content:"–"}
 .faq .faq-a{padding:0 22px 20px}
 .faq .faq-a p{margin:0;color:var(--mute);font-size:17px;line-height:1.65;max-width:68ch}
-.faq .faq-a a{color:var(--accent);border-bottom:1.5px solid var(--accent)}
+.faq .faq-a a{color:var(--accent-ink);border-bottom:1.5px solid var(--accent-ink)}
+.soon-badge{display:inline-flex;align-items:center;margin-inline-start:6px;padding:1px 7px;border-radius:999px;background:var(--accent);color:var(--ink);font-style:normal;font-family:var(--display);font-weight:700;font-size:11px;line-height:1.4;vertical-align:middle}
+.visual.wad-svc{display:flex;justify-content:center;align-items:flex-end;padding:36px 24px 28px;min-height:420px}
+.visual.wad-svc .wad-video{width:min(260px,78%);height:auto;border-radius:28px;background:#000;box-shadow:0 28px 50px #0008}
 @media (max-width:800px){
   .faq{padding-bottom:72px}
   .faq summary{font-size:17px;padding:16px}
@@ -510,7 +513,8 @@ footer .about{max-width:360px;margin-top:18px}
   .events .ev:nth-child(2){transform:none}
   .events .ev{width:100%}
   .demo-tag{position:static;width:auto;margin-top:16px}
-  .ticker .wrap{height:auto;flex-wrap:wrap;gap:12px 22px;padding-top:20px;padding-bottom:20px;font-size:15px;justify-content:flex-start}
+  .ticker .wrap{display:grid;grid-template-columns:1fr 1fr;height:auto;gap:14px 18px;padding:18px 20px;font-size:15px;justify-items:stretch;align-items:center}
+  .ticker .wrap span{min-height:28px}
   .statement{padding:72px 0}
   .statement p{font-size:31px}
   h2.sec,.founder h2.sec{font-size:36px}

@@ -15,7 +15,7 @@
         <h2>ניווט</h2>
         <ul>
           <?php foreach ($nav as $item): ?>
-            <li><a href="<?= e($item['href']) ?>"><?= e($item['label']) ?></a></li>
+            <li><a href="<?= e($item['href']) ?>"><?= e($item['label']) ?><?php if (!empty($item['soon'])): ?><i class="soon-badge">בקרוב</i><?php endif; ?></a></li>
           <?php endforeach; ?>
         </ul>
       </nav>

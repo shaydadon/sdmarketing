@@ -8,6 +8,7 @@ const PAGES = [
   { path: '/projects.php', name: 'projects' },
   { path: '/about.php', name: 'about' },
   { path: '/contact.php', name: 'contact' },
+  { path: '/articles.php', name: 'articles' },
   { path: '/terms.php', name: 'terms' },
   { path: '/privacy.php', name: 'privacy' },
   { path: '/accessibility.php', name: 'accessibility' },
@@ -168,7 +169,8 @@ test.describe('homepage', () => {
     await expect(faq).toContainText('ללא צורך בחנות האפליקציות');
     await expect(faq).toContainText('fisha.shop');
     await expect(faq).toContainText('Excerly');
-    await expect(faq).toContainText('Boardog');
+    await expect(faq).toContainText('צריך דף נחיתה או אתר תדמית שמביא פניות?');
+    await expect(faq).not.toContainText('פנסיון');
     await expect(faq).not.toContainText('קלעי');
     const ld = await page.locator('script[type="application/ld+json"]').textContent();
     const data = JSON.parse(ld);

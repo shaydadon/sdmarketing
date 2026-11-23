@@ -3,22 +3,17 @@
 function service_visual(string $id): void
 {
     if ($id === 'automations'): ?>
-      <div class="visual">
-        <div class="vflow">
-          <div class="node"><i><?= icon('whatsapp') ?></i><div>הודעה נכנסת<small>וואטסאפ · 02:14 בלילה</small></div></div>
-          <div class="wire"></div>
-          <div class="node"><i><?= icon('flow') ?></i><div>הבוט מסנן<small>שואל, מבין, קובע תור</small></div></div>
-          <div class="wire"></div>
-          <div class="node"><i><?= icon('database') ?></i><div>ליד ב־CRM<small>מתויג לפי מקור</small></div></div>
-          <div class="wire"></div>
-          <div class="node hl"><i><?= icon('mail') ?></i><div>מייל המשך<small>נשלח אוטומטית</small></div></div>
-        </div>
-        <span class="note">הדגמה להמחשה</span>
+      <div class="visual real ex wad-svc">
+        <video class="wad-video" autoplay muted loop playsinline preload="auto" poster="assets/video/boardog-chat-poster.jpg">
+          <source src="assets/video/boardog-chat.webm" type="video/webm">
+          <source src="assets/video/boardog-chat.mp4" type="video/mp4">
+        </video>
+        <span class="note">הדגמה: צ׳אטבוט לוואטסאפ לעסקים</span>
       </div>
     <?php elseif ($id === 'websites'): ?>
       <div class="visual real">
         <div class="browser" style="width:100%">
-          <div class="bar"><i></i><i></i><i></i><u>fisha.shop/shop</u></div>
+          <div class="bar"><i></i><i></i><i></i><u></u></div>
           <img src="assets/img/projects/fisha/shop-hq-c.webp" alt="צילום מסך של החנות fisha.shop" width="1600" height="929" loading="lazy" decoding="async">
         </div>
         <div class="mphone"><img src="assets/img/projects/fisha/collectibles-mc.webp" alt="החנות fisha.shop במובייל" width="780" height="1568" loading="lazy" decoding="async"></div>
