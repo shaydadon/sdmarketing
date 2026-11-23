@@ -1,20 +1,20 @@
 <?php
 // Shared layout for legal pages. Expects $legal = ['title', 'lead', 'sections' => [[id, title, html], ...]].
 ?>
-<section class="page-hero page-hero--short page-hero--legal" aria-labelledby="page-title">
-  <div class="hero-bg" aria-hidden="true"></div>
-  <div class="container">
-    <nav class="breadcrumbs" aria-label="מיקום בעמוד">
-      <a href="index.php">בית</a><span aria-hidden="true">/</span><span aria-current="page"><?= e($legal['title']) ?></span>
+<section class="hero dark">
+  <div class="glow" style="top:-100px;left:-200px" aria-hidden="true"></div>
+  <div class="wrap p-hero sm legal">
+    <nav class="crumb" aria-label="מיקום בעמוד">
+      <a href="index.php">בית</a> / <b><?= e($legal['title']) ?></b>
     </nav>
     <h1 id="page-title"><?= e($legal['title']) ?></h1>
-    <p class="page-lead"><?= e($legal['lead']) ?></p>
+    <p class="lead"><?= e($legal['lead']) ?></p>
     <p class="legal-meta">עודכן לאחרונה: <?= e($site['legal_updated']) ?></p>
   </div>
 </section>
 
-<section class="section legal">
-  <div class="container legal-grid">
+<section class="legal">
+  <div class="wrap legal-grid">
     <nav class="legal-toc" aria-label="תוכן העניינים">
       <h2>תוכן העניינים</h2>
       <ol>
@@ -41,8 +41,8 @@
         <h2>שאלות? כתבו לי.</h2>
         <p>על כל שאלה בנוגע למסמך הזה אפשר לפנות אליי ישירות.</p>
         <div class="legal-contact-links">
-          <a class="btn btn-primary" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span>וואטסאפ</span></a>
-          <a class="btn btn-outline" href="mailto:<?= e($site['email']) ?>"><?= icon('mail') ?><span dir="ltr"><?= e($site['email']) ?></span></a>
+          <a class="btn btn-ink" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span>וואטסאפ</span></a>
+          <a class="btn btn-ghost" href="mailto:<?= e($site['email']) ?>"><?= icon('mail') ?><span dir="ltr"><?= e($site['email']) ?></span></a>
         </div>
       </aside>
     </article>
