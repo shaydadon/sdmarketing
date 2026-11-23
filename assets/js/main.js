@@ -145,7 +145,8 @@
     };
     const typingFor = (el) => {
       const chars = (el.textContent || '').replace(/\s/g, '').length;
-      return Math.round(Math.min(1400, Math.max(640, 420 + chars * 6)));
+      const extra = Math.max(0, chars - 70);
+      return Math.round(Math.min(2000, 1200 + extra * 12));
     };
     const showAll = () => {
       items.forEach((el) => { el.hidden = false; });
@@ -160,8 +161,11 @@
       log.classList.remove('wad-pending');
       let started = false;
       const play = async () => {
-        for (const el of items) {
+        for (let i = 0; i < items.length; i++) {
+          const el = items[i];
+          const prev = items[i - 1];
           if (el.dataset.msg === 'b' && typing) {
+            if (prev && prev.dataset.msg === 'c') await wait(500);
             typing.hidden = false;
             log.appendChild(typing);
             pin();
@@ -171,7 +175,8 @@
           el.hidden = false;
           el.classList.add('wad-enter');
           pin();
-          await wait(el.dataset.msg === 'b' ? 460 : 340);
+          const next = items[i + 1];
+          if (next && next.dataset.msg === 'c') await wait(90);
         }
         wa.dataset.waDone = '1';
       };
