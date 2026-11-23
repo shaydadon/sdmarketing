@@ -143,7 +143,7 @@ require __DIR__ . '/includes/projects-data.php';
           <?php else: $shot = $p['shots'][0]; ?>
             <div class="media media-fisha">
               <div class="browser">
-                <div class="bar"><i></i><i></i><i></i><u><?= e($shot['chrome'] ?? $p['name']) ?></u></div>
+                <div class="bar"><i></i><i></i><i></i><u></u></div>
                 <img src="<?= e($shot['src']) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" decoding="async">
               </div>
             </div>

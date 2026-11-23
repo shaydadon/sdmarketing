@@ -52,25 +52,18 @@ require __DIR__ . '/includes/projects-data.php';
         <?php endforeach; ?>
       </div>
     <?php elseif ($p['slug'] === 'fisha'): ?>
-      <div class="stage stage-fisha-orig">
-        <div class="browser main">
-          <div class="bar"><i></i><i></i><i></i><u></u></div>
-          <img src="assets/img/projects/fisha/originals-main.webp" alt="עמוד Originals בחנות fisha.shop" width="1600" height="1133" loading="lazy" decoding="async">
-        </div>
-        <div class="row">
+      <div class="stage stage-fisha-stack">
+        <?php foreach ([
+          ['assets/img/projects/fisha/originals-main.webp', 'עמוד Originals בחנות fisha.shop', 1600, 1133],
+          ['assets/img/projects/fisha/shop-hq-c.webp', 'עמוד החנות fisha.shop', 1600, 929],
+          ['assets/img/projects/fisha/tattoos-2.webp', 'Flash sheet בחנות fisha.shop', 1600, 1000],
+          ['assets/img/projects/fisha/tattoos-1.webp', 'עמוד הקעקועים של fisha.shop', 1600, 1000],
+        ] as $shot): ?>
           <div class="browser">
             <div class="bar"><i></i><i></i><i></i><u></u></div>
-            <img src="assets/img/projects/fisha/shop-hq-c.webp" alt="עמוד החנות fisha.shop" width="1600" height="929" loading="lazy" decoding="async">
+            <img src="<?= e($shot[0]) ?>" alt="<?= e($shot[1]) ?>" width="<?= (int) $shot[2] ?>" height="<?= (int) $shot[3] ?>" loading="lazy" decoding="async">
           </div>
-          <div class="browser">
-            <div class="bar"><i></i><i></i><i></i><u></u></div>
-            <img src="assets/img/projects/fisha/tattoos-2.webp" alt="Flash sheet בחנות fisha.shop" width="1600" height="1000" loading="lazy" decoding="async">
-          </div>
-          <div class="browser">
-            <div class="bar"><i></i><i></i><i></i><u></u></div>
-            <img src="assets/img/projects/fisha/tattoos-1.webp" alt="עמוד הקעקועים של fisha.shop" width="1600" height="1000" loading="lazy" decoding="async">
-          </div>
-        </div>
+        <?php endforeach; ?>
       </div>
     <?php else: $shot = $p['shots'][0]; ?>
       <div class="stage stage-one">

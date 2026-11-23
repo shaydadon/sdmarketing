@@ -151,14 +151,12 @@
     const showAll = () => {
       items.forEach((el) => { el.hidden = false; });
       if (typing) typing.hidden = true;
-      log.classList.remove('wad-pending');
       pin();
     };
     if (reduce) {
       showAll();
     } else {
       items.forEach((el) => { el.hidden = true; });
-      log.classList.remove('wad-pending');
       let started = false;
       const play = async () => {
         for (let i = 0; i < items.length; i++) {
@@ -185,7 +183,7 @@
           started = true;
           play();
         }
-      }, { threshold: 0.35 }).observe(wa);
+      }, { threshold: 0.01, rootMargin: '120px 0px' }).observe(wa);
     }
   }
 })();

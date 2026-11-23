@@ -67,7 +67,7 @@ $wa_n = count($wa_msgs);
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M12 3.5v2.2M12 18.3v2.2M3.5 12h2.2M18.3 12h2.2M6 6l1.6 1.6M16.4 16.4 18 18M18 6l-1.6 1.6M7.6 16.4 6 18"/></svg>
           </span>
         </div>
-        <div class="wad-log wad-pending" data-wa-log>
+        <div class="wad-log" data-wa-log>
           <?php foreach ($wa_msgs as $i => $m):
             $who = $m[0] === 'c' ? 'c' : 'b';
             $tail = $i === 0 || $wa_msgs[$i - 1][0] !== $m[0];

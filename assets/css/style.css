@@ -173,10 +173,10 @@ h2.sec{font-size:60px;font-weight:900;margin:18px 0 0}
 .faq{padding:0 0 110px}
 .faq-list{margin-top:36px;display:flex;flex-direction:column;gap:12px;max-width:860px}
 .faq details{background:#fff;border:1px solid var(--line);border-radius:16px}
-.faq summary{cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:18px 22px;font-family:var(--display);font-weight:700;font-size:20px;line-height:1.35}
+.faq summary{cursor:pointer;list-style:none;display:flex;flex-direction:row;align-items:center;gap:16px;min-height:52px;padding:16px 22px;font-family:var(--display);font-weight:700;font-size:20px;line-height:1.4}
 .faq summary span{flex:1;min-width:0}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"+";flex:none;color:var(--accent);font-size:26px;line-height:1;font-weight:500}
+.faq summary::after{content:"+";flex:none;margin-inline-start:auto;color:var(--accent);font-size:28px;line-height:1;font-weight:500}
 .faq details[open]{border-color:var(--accent)}
 .faq details[open] summary::after{content:"–"}
 .faq .faq-a{padding:0 22px 20px}
@@ -196,8 +196,8 @@ h2.sec{font-size:60px;font-weight:900;margin:18px 0 0}
 .f-photo .cap span{font-size:13px;color:var(--mute-d)}
 .founder h2.sec{font-size:56px}
 .founder p.body{font-size:19px;color:#2e2d2b;margin-top:22px;max-width:620px}
-.creds{display:grid;grid-template-columns:repeat(3,1fr);margin-top:40px;border-top:2px solid var(--ink)}
-.creds div{padding:20px 0 0;}
+.creds{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 40px;margin-top:40px;border-top:2px solid var(--ink)}
+.creds div{padding:20px 8px 0;min-width:0}
 .creds b{font-family:var(--display);font-weight:900;font-size:44px;line-height:1;display:block}
 .creds span{font-size:15px;color:var(--mute);display:block;margin-top:8px}
 .vs{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px}
@@ -354,7 +354,7 @@ footer .about{max-width:360px;margin-top:18px}
 .story h2{font-size:60px;font-weight:900;letter-spacing:-.03em}
 .story p{font-size:19px;color:#2e2d2b;margin-bottom:18px}
 .story p.hl{font-family:var(--display);font-weight:800;font-size:26px;line-height:1.3;border-inline-start:4px solid var(--accent);padding-inline-start:20px;color:var(--ink)}
-.cred-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:64px}
+.cred-row{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:64px}
 .cred-row .c{background:#fff;border:1px solid var(--line);border-radius:18px;padding:30px}
 .cred-row b{font-family:var(--display);font-weight:900;font-size:56px;line-height:1;display:block}
 .cred-row b.sm{font-size:34px;line-height:1.1}
@@ -551,7 +551,7 @@ footer .about{max-width:360px;margin-top:18px}
   .f-photo{margin-inline-end:20px}
   .f-photo .sq{inset:28px -16px -16px 28px}
   .founder p.body{font-size:17px}
-  .creds{gap:14px}.creds b{font-size:26px}
+  .creds{gap:18px 16px}.creds b{font-size:26px}
   .creds span{font-size:13.5px}
   .vs{grid-template-columns:1fr}
   .cta{padding:72px 0}
@@ -661,7 +661,7 @@ footer .about{max-width:360px;margin-top:18px}
   .story h2{font-size:40px}
   .story p{font-size:17px}
   .story p.hl{font-size:21px}
-  .cred-row{grid-template-columns:1fr 1fr;gap:10px;margin-top:36px}
+  .cred-row{grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
   .cred-row .c{padding:20px}
   .cred-row b{font-size:36px} .cred-row b.sm{font-size:24px}
   .cred-row span{font-size:15px;margin-top:10px}
@@ -866,26 +866,18 @@ footer .logo small{color:#9A9893}
   .soon{margin:-12px auto 48px}
 }
 
-/* fisha projects stage: Originals window, then the three smaller shots, scaled down. */
-.stage-fisha-orig{display:flex;flex-direction:column;align-items:center;gap:12px;height:auto;margin-top:24px;padding:18px 22px 18px}
-.stage-fisha-orig .browser.main{width:min(760px,100%);position:static}
-.stage-fisha-orig .browser.main img{width:100%;height:400px;aspect-ratio:auto;object-fit:cover;object-position:top center}
-.stage-fisha-orig .row{width:min(760px,100%);display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.stage-fisha-orig .row .browser img{width:100%;height:86px;aspect-ratio:auto;object-fit:cover;object-position:top center}
+/* fisha projects stage: four full-width windows, stacked. */
+.stage-fisha-stack{display:flex;flex-direction:column;gap:16px;height:auto;margin-top:28px;padding:22px}
+.stage-fisha-stack .browser{width:100%}
+.stage-fisha-stack .browser img{width:100%;height:auto;aspect-ratio:auto;object-fit:contain;object-position:top center}
 .stage .browser .bar u:empty{width:42%}
 @media (max-width:800px){
-  .stage-fisha-orig{margin-top:16px;padding:14px 10px 14px;gap:8px}
-  .stage-fisha-orig .browser.main img{height:240px}
-  .stage-fisha-orig .row{gap:6px}
-  .stage-fisha-orig .row .browser img{height:62px}
-  .stage-fisha-orig .row .browser .bar{height:18px;padding:0 6px;gap:3px}
-  .stage-fisha-orig .row .browser .bar i{width:5px;height:5px}
-  .stage-fisha-orig .row .browser .bar u{display:none}
+  .stage-fisha-stack{gap:10px;margin-top:20px;padding:14px 10px}
 }
 
 /* WhatsApp bot showcase. Scoped so fisha and Excerly are unchanged. */
 #case-bot .wad-stage{display:flex;justify-content:center;align-items:flex-start;padding:36px 16px 32px;min-height:0}
-#case-bot .wad-phone{width:min(360px,100%);height:560px;background:#000;border-radius:36px;padding:8px;box-shadow:0 30px 60px #000a,0 0 0 1px #333;display:flex;flex-direction:column}
+#case-bot .wad-phone{width:min(360px,100%);height:auto;max-height:min(560px,72dvh);background:#000;border-radius:36px;padding:8px;box-shadow:0 30px 60px #000a,0 0 0 1px #333;display:flex;flex-direction:column}
 #case-bot .wad-top{flex:none;background:#1F2C34;color:#E9EDEF;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:28px 28px 0 0}
 #case-bot .wad-who{display:flex;align-items:center;gap:10px;min-width:0}
 #case-bot .wad-av{width:38px;height:38px;border-radius:50%;background:#2A3942;display:grid;place-items:center;font-size:20px;flex:none}
@@ -894,8 +886,7 @@ footer .logo small{color:#9A9893}
 #case-bot .wad-name small{color:#8696A0;font-size:12.5px}
 #case-bot .wad-name small::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:#25D366;margin-inline-end:6px}
 #case-bot .wad-gear{color:#AEBAC1;flex:none;display:grid}
-#case-bot .wad-log{position:relative;flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;background-color:#0B141A;background-image:url("../img/wa-doodle.svg");background-repeat:repeat;background-size:220px 220px;background-attachment:local;padding:12px 10px 14px;display:flex;flex-direction:column;gap:3px}
-#case-bot .wad-log.wad-pending [data-msg]{display:none}
+#case-bot .wad-log{position:relative;flex:1 1 auto;min-height:160px;max-height:min(430px,54dvh);overflow-y:auto;overflow-x:hidden;background-color:#0B141A;background-image:url("../img/wa-doodle.svg");background-repeat:repeat;background-size:220px 220px;padding:12px 10px 14px;display:flex;flex-direction:column;gap:3px}
 #case-bot .wad-msg{position:relative;max-width:86%;padding:6px 8px 4px;border-radius:8px;font-family:var(--body);font-size:15.5px;line-height:1.35;color:#E9EDEF;overflow:visible}
 #case-bot .wad-msg p{margin:0}
 #case-bot .wad-b{align-self:flex-start;background:#202C33}
@@ -925,10 +916,10 @@ footer .logo small{color:#9A9893}
 #case-bot .wad-ico{width:20px;height:20px;flex:none}
 #case-bot .wad-mic{width:42px;height:42px;border-radius:50%;background:#00A884;display:grid;place-items:center;flex:none}
 @media (max-width:800px){
-  #case-bot .wad-phone{height:520px}
+  #case-bot .wad-phone{max-height:min(520px,70dvh)}
+  #case-bot .wad-log{max-height:min(360px,48dvh)}
   #case-bot .wad-stage{padding:24px 0 20px}
 }
 @media (prefers-reduced-motion:reduce){
-  #case-bot .wad-log.wad-pending [data-msg]{display:block}
   #case-bot .wad-dots i,#case-bot .wad-b.wad-enter,#case-bot .wad-c.wad-enter{animation:none}
 }
