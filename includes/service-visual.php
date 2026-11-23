@@ -4,7 +4,7 @@ function service_visual(string $id): void
 {
     if ($id === 'automations'): ?>
       <div class="visual real ex wad-svc">
-        <video class="wad-video" autoplay muted loop playsinline preload="auto" poster="assets/video/boardog-chat-poster.jpg">
+        <video class="wad-video" width="382" height="532" autoplay muted loop playsinline preload="auto" poster="assets/video/boardog-chat-poster.jpg">
           <source src="assets/video/boardog-chat.webm" type="video/webm">
           <source src="assets/video/boardog-chat.mp4" type="video/mp4">
         </video>

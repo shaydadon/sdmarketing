@@ -219,6 +219,7 @@ test.describe('projects', () => {
     const video = block.locator('video.wad-video');
     await expect(video).toBeVisible();
     await expect(video.locator('source[src$="boardog-chat.mp4"]')).toHaveCount(1);
+    await expect.poll(() => video.evaluate((node) => (node.videoWidth && node.videoHeight) ? `${node.videoWidth}x${node.videoHeight}` : '')).toBe('382x532');
     await expect(block.locator('[data-wa-log] .wad-msg')).not.toHaveCount(0);
     await expect(block).not.toContainText('Claude');
     await expect(block).not.toContainText('AI (Claude)');
