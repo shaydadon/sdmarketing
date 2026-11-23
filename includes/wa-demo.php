@@ -45,8 +45,8 @@ $wa_n = count($wa_msgs);
     <div class="case-head">
       <div>
         <div class="case-idx"><b>03</b></div>
-        <h2 id="case-bot-title">צ׳אטבוט לוואטסאפ</h2>
-        <div class="tags"><span class="tag acc">בוט וואטסאפ</span></div>
+        <h2 id="case-bot-title" lang="en">Boardog</h2>
+        <div class="tags"><span class="tag acc">אפליקציית צ׳אטבוט לבעלי פנסיונים</span></div>
       </div>
       <div>
         <p class="desc">דוגמה לצ׳אטבוט לוואטסאפ שמקבל פנייה, אוסף את הפרטים וקובע פגישה לבד.</p>
@@ -101,7 +101,6 @@ $wa_n = count($wa_msgs);
           <span class="wad-mic"><svg viewBox="0 0 24 24" width="20" height="20"><rect x="9" y="3" width="6" height="11" rx="3" fill="#fff"/><path d="M6.5 11.5a5.5 5.5 0 0 0 11 0M12 17.2V21" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/></svg></span>
         </div>
       </div>
-      <p class="stage-cap">הדגמה להמחשה</p>
     </div>
   </div>
 </section>

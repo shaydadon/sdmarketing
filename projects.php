@@ -50,7 +50,6 @@ require __DIR__ . '/includes/projects-data.php';
         <?php foreach ($p['shots'] as $shot): ?>
           <div class="mphone"><img src="<?= e($shot['src']) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" loading="lazy" decoding="async"></div>
         <?php endforeach; ?>
-        <p class="stage-cap">צילום מסך אמיתי</p>
       </div>
     <?php else:
       $shot = $p['shots'][0];
@@ -60,10 +59,9 @@ require __DIR__ . '/includes/projects-data.php';
     ?>
       <div class="stage stage-one<?= $p['slug'] === 'fisha' ? ' stage-fisha-slim' : '' ?>">
         <div class="browser">
-          <div class="bar"><i></i><i></i><i></i><u><?= e($shot['chrome'] ?? $p['name']) ?></u></div>
+          <div class="bar"><i></i><i></i><i></i><u></u></div>
           <img src="<?= e($shot['src']) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" loading="lazy" decoding="async">
         </div>
-        <p class="stage-cap">צילום מסך אמיתי</p>
       </div>
     <?php endif; ?>
   </div>

@@ -48,7 +48,7 @@ test.describe('every page', () => {
       await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
       await expect(page).toHaveTitle(/SDmarketing/);
       await expect(page.locator('h1')).toHaveCount(1);
-      await expect(page.locator('body')).not.toContainText('Boardog');
+      if (p.name !== 'projects') await expect(page.locator('body')).not.toContainText('Boardog');
       await expect(page.locator('body')).not.toContainText('10+');
       await expect(page.locator('body')).not.toContainText('יותר מעשר');
       await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /.{20,}/);
@@ -181,15 +181,15 @@ test.describe('projects', () => {
     await page.getByRole('button', { name: /הכל/ }).click();
     await expect(fisha).toBeVisible();
     await expect(apps).toBeVisible();
-    await expect(page.locator('body')).not.toContainText('Boardog');
   });
 
   test('whatsapp bot showcase renders', async ({ page }) => {
     await page.goto('/projects.php');
     const block = page.locator('#case-bot');
     await expect(block).toBeVisible();
-    await expect(block.locator('h2')).toHaveText('צ׳אטבוט לוואטסאפ');
-    await expect(block).toContainText('בוט וואטסאפ');
+    await expect(block.locator('h2')).toHaveText('Boardog');
+    await expect(block).toContainText('אפליקציית צ׳אטבוט לבעלי פנסיונים');
+    await expect(block).not.toContainText('צילום מסך אמיתי');
     await expect(block).toContainText('הפנסיון של ג׳רי');
     await expect(block).toContainText('מחובר/ת');
     await expect(block).toContainText('הקלדה...');
