@@ -169,7 +169,7 @@ test.describe('homepage', () => {
     await expect(faq).toContainText('ללא צורך בחנות האפליקציות');
     await expect(faq).toContainText('fisha.shop');
     await expect(faq).toContainText('Excerly');
-    await expect(faq).toContainText('צריך דף נחיתה או אתר תדמית שמביא פניות?');
+    await expect(faq).toContainText('יש לי דף נחיתה, אבל הוא לא מביא פניות או לידים?');
     await expect(faq).not.toContainText('פנסיון');
     await expect(faq).not.toContainText('קלעי');
     const ld = await page.locator('script[type="application/ld+json"]').textContent();
