@@ -156,8 +156,15 @@
     if (reduce) {
       showAll();
     } else {
-      items.forEach((el) => { el.hidden = true; });
-      let started = false;
+      const reset = () => {
+        if (typing) typing.hidden = true;
+        items.forEach((el) => {
+          el.hidden = true;
+          el.classList.remove('wad-enter');
+        });
+        log.scrollTop = 0;
+        delete wa.dataset.waDone;
+      };
       const play = async () => {
         for (let i = 0; i < items.length; i++) {
           const el = items[i];
@@ -170,6 +177,8 @@
             await wait(typingFor(el));
             typing.hidden = true;
           }
+          el.classList.remove('wad-enter');
+          void el.offsetWidth;
           el.hidden = false;
           el.classList.add('wad-enter');
           pin();
@@ -177,13 +186,15 @@
           if (next && next.dataset.msg === 'c') await wait(90);
         }
         wa.dataset.waDone = '1';
+        await wait(4000);
       };
-      new IntersectionObserver((entries) => {
-        if (!started && entries.some((entry) => entry.isIntersecting)) {
-          started = true;
-          play();
+      const loop = async () => {
+        while (true) {
+          reset();
+          await play();
         }
-      }, { threshold: 0.01, rootMargin: '120px 0px' }).observe(wa);
+      };
+      loop();
     }
   }
 })();
