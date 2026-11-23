@@ -10,6 +10,10 @@ name: Deploy to Hostinger
 #   SSH_KEY     private deploy key (its public half is added in hPanel > SSH Access)
 #   DEV_PATH    /home/u654862842/domains/sdmarketing.co.il/public_html/dev
 #   LIVE_PATH   /home/u654862842/domains/sdmarketing.co.il/public_html
+#
+# Or, instead of the SSH secrets (no SSH Access needed):
+#   HOSTINGER_API_TOKEN  hPanel > Account > API > New token
+# When HOSTINGER_API_TOKEN is set it is used; otherwise the SSH secrets are.
 # Missing secrets skip the deploy with a warning instead of failing.
 
 on:
@@ -73,6 +77,8 @@ jobs:
     timeout-minutes: 15
     env:
       TARGET: ${{ github.event_name == 'workflow_dispatch' && inputs.target || (github.ref_name == 'main' && 'live' || 'dev') }}
+      HOSTINGER_API_TOKEN: ${{ secrets.HOSTINGER_API_TOKEN }}
+      HOSTINGER_USER: ${{ vars.HOSTINGER_USER || 'u654862842' }}
       SSH_HOST: ${{ secrets.SSH_HOST }}
       SSH_USER: ${{ secrets.SSH_USER }}
       SSH_PORT: ${{ secrets.SSH_PORT }}
@@ -82,27 +88,37 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # HOSTINGER_API_TOKEN set -> upload through the Hostinger API (does not need SSH).
+      # Otherwise -> rsync over SSH (needs SSH Access turned on in hPanel).
       - name: Pick target
         id: cfg
         run: |
           if [ "$TARGET" = "live" ]; then
             if [ "$GITHUB_REF_NAME" != "main" ]; then echo "::error::Live deploys only from main"; exit 1; fi
-            P="$LIVE_PATH"; URL="https://sdmarketing.co.il"
+            P="$LIVE_PATH"; DOMAIN="sdmarketing.co.il"
           else
-            P="$DEV_PATH"; URL="https://dev.sdmarketing.co.il"
+            P="$DEV_PATH"; DOMAIN="dev.sdmarketing.co.il"
           fi
-          if [ -z "$SSH_HOST" ] || [ -z "$SSH_USER" ] || [ -z "$SSH_KEY" ] || [ -z "$P" ]; then
-            echo "::warning::Secrets for '$TARGET' are not set yet - skipping deploy."
-            echo "ready=false" >> "$GITHUB_OUTPUT"
+          if [ -n "$HOSTINGER_API_TOKEN" ]; then
+            METHOD=api
+          elif [ -n "$SSH_HOST" ] && [ -n "$SSH_USER" ] && [ -n "$SSH_KEY" ] && [ -n "$P" ]; then
+            METHOD=ssh
           else
-            echo "ready=true" >> "$GITHUB_OUTPUT"
-            echo "path=$P" >> "$GITHUB_OUTPUT"
-            echo "url=$URL" >> "$GITHUB_OUTPUT"
+            METHOD=none
+            echo "::warning::No HOSTINGER_API_TOKEN and no SSH secrets for '$TARGET' - skipping deploy."
           fi
-          echo "### Target: $TARGET ($URL)" >> "$GITHUB_STEP_SUMMARY"
+          echo "method=$METHOD" >> "$GITHUB_OUTPUT"
+          echo "path=$P" >> "$GITHUB_OUTPUT"
+          echo "domain=$DOMAIN" >> "$GITHUB_OUTPUT"
+          echo "url=https://$DOMAIN" >> "$GITHUB_OUTPUT"
+          echo "### Target: $TARGET (https://$DOMAIN) via $METHOD" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload site (Hostinger API)
+        if: steps.cfg.outputs.method == 'api'
+        run: bash .github/scripts/hostinger-deploy.sh "${{ steps.cfg.outputs.domain }}" "$TARGET"
 
       - name: Set up SSH
-        if: steps.cfg.outputs.ready == 'true'
+        if: steps.cfg.outputs.method == 'ssh'
         run: |
           mkdir -p ~/.ssh
           printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ed25519
@@ -114,15 +130,16 @@ jobs:
           [ -s ~/.ssh/known_hosts ] || { echo "::error::Could not reach $SSH_HOST:${SSH_PORT:-65002}"; exit 1; }
 
       - name: Dev only - keep search engines out
-        if: steps.cfg.outputs.ready == 'true' && env.TARGET == 'dev'
+        if: steps.cfg.outputs.method == 'ssh' && env.TARGET == 'dev'
         run: |
           printf 'User-agent: *\nDisallow: /\n' > robots.txt
 
       # Only the site's own files are sent. Tooling, tests and notes stay in the repo.
       # Dev mirrors the repo exactly (--delete). Live never deletes, and never touches the dev/ folder inside it.
-      - name: Upload site
-        if: steps.cfg.outputs.ready == 'true'
+      - name: Upload site (SSH)
+        if: steps.cfg.outputs.method == 'ssh'
         run: |
+          trap 'echo "::error::SSH upload failed. If the log shows /sbin/nologin, SSH Access is off in hPanel - turn it on, or add the HOSTINGER_API_TOKEN secret to deploy without SSH."' ERR
           SSH="ssh -p ${SSH_PORT:-65002}"
           EXCLUDES=(--exclude '.git/' --exclude '.github/' --exclude '.claude/' --exclude 'e2e/'
                     --exclude 'README.md' --exclude 'PRODUCT.md' --exclude 'skills-lock.json'
@@ -134,7 +151,7 @@ jobs:
           fi
 
       - name: Smoke test
-        if: steps.cfg.outputs.ready == 'true'
+        if: steps.cfg.outputs.method != 'none'
         run: |
           URL="${{ steps.cfg.outputs.url }}"
           for p in / /services.php /projects.php /about.php /contact.php; do
