@@ -844,14 +844,12 @@ footer .logo small{color:#9A9893}
   .soon{margin:-12px auto 48px}
 }
 
-/* fisha.shop projects stage: the old top row of two tattoo browsers, at about half the original block height. */
-.stage-fisha-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start;height:auto;margin-top:28px;padding:40px 22px 18px}
-.stage-fisha-pair .stage-cap{top:14px;inset-inline-start:22px}
-.stage-fisha-pair .browser img{width:100%;height:150px;aspect-ratio:auto;object-fit:cover;object-position:top center}
+/* fisha.shop projects stage: one compact shop window. */
+.stage-fisha-shop{display:flex;justify-content:center;height:auto;margin-top:24px;padding:36px 22px 16px}
+.stage-fisha-shop .browser{width:min(640px,100%)}
+.stage-fisha-shop .stage-cap{top:12px;inset-inline-start:22px}
+.stage-fisha-shop .browser img{width:100%;height:168px;aspect-ratio:auto;object-fit:cover;object-position:top center}
 @media (max-width:800px){
-  .stage-fisha-pair{gap:8px;margin-top:20px;padding:34px 10px 12px}
-  .stage-fisha-pair .browser .bar{height:22px;padding:0 8px;gap:4px}
-  .stage-fisha-pair .browser .bar i{width:6px;height:6px}
-  .stage-fisha-pair .browser .bar u{display:none}
-  .stage-fisha-pair .browser img{height:112px}
+  .stage-fisha-shop{margin-top:20px;padding:34px 12px 14px}
+  .stage-fisha-shop .browser img{height:132px}
 }

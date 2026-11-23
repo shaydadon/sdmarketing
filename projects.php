@@ -53,14 +53,10 @@ require __DIR__ . '/includes/projects-data.php';
         <p class="stage-cap">צילום מסך אמיתי</p>
       </div>
     <?php elseif ($p['slug'] === 'fisha'): ?>
-      <div class="stage stage-fisha-pair">
+      <div class="stage stage-fisha-shop">
         <div class="browser">
-          <div class="bar"><i></i><i></i><i></i><u>/tattoos</u></div>
-          <img src="assets/img/projects/fisha/tattoos-1.webp" alt="עמוד הקעקועים של fisha.shop" width="1600" height="1000" loading="lazy" decoding="async">
-        </div>
-        <div class="browser">
-          <div class="bar"><i></i><i></i><i></i><u>/tattoos</u></div>
-          <img src="assets/img/projects/fisha/tattoos-2.webp" alt="Flash sheet בחנות fisha.shop" width="1600" height="1000" loading="lazy" decoding="async">
+          <div class="bar"><i></i><i></i><i></i><u>fisha.shop</u></div>
+          <img src="assets/img/projects/fisha/shop-hq-c.webp" alt="צילום מסך של החנות fisha.shop" width="1600" height="929" loading="lazy" decoding="async">
         </div>
         <p class="stage-cap">צילום מסך אמיתי</p>
       </div>
