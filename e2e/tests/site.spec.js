@@ -213,7 +213,11 @@ test.describe('projects', () => {
     await expect(block).toContainText('הפנסיון של ג׳רי');
     await expect(block).toContainText('מחובר/ת');
     await expect(block).toContainText('הקלדה...');
-    await expect(block.locator('[data-wa-log]')).toBeVisible();
+    // The chat plays as a video; the HTML chat is only a fallback, shown if the video fails to load.
+    const video = block.locator('video.wad-video');
+    await expect(video).toBeVisible();
+    await expect(video.locator('source[src$="boardog-chat.mp4"]')).toHaveCount(1);
+    await expect(block.locator('[data-wa-log] .wad-msg')).not.toHaveCount(0);
     await expect(block).not.toContainText('Claude');
     await expect(block).not.toContainText('AI (Claude)');
   });

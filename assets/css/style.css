@@ -140,7 +140,7 @@ h2.sec{font-size:60px;font-weight:900;margin:18px 0 0}
 .proj .row{display:flex;justify-content:space-between;align-items:center;gap:16px}
 .proj h3{font-size:32px;font-weight:800}
 .tag{display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:999px;border:1px solid var(--line);font-family:var(--mono);font-size:12px;font-weight:500;color:var(--mute);white-space:nowrap}
-.tag.acc{background:var(--accent-soft);border-color:transparent;color:var(--accent);font-family:var(--display);font-weight:700;font-size:13px}
+.tag.acc{background:var(--accent-soft);border-color:transparent;color:#8a4a00;font-family:var(--display);font-weight:700;font-size:13px}
 .proj p{color:var(--mute);font-size:16.5px}
 .proj .link{align-self:flex-start;margin-top:8px;font-size:16px}
 .proj.big{grid-column:span 2;flex-direction:row}
@@ -302,7 +302,7 @@ footer .about{max-width:360px;margin-top:18px}
 .vflow .node i svg{width:20px;height:20px;color:var(--accent)}
 .vflow .node.hl{background:var(--accent)} .vflow .node.hl i{background:#0000001a} .vflow .node.hl i svg{color:var(--ink)}
 .vflow .node small{display:block;font-weight:500;font-size:13px;color:var(--mute)}
-.vflow .node.hl small{color:var(--accent)}
+.vflow .node.hl small{color:#5a3000}
 .vflow .wire{height:30px;width:2px;margin-inline-start:37px;background:repeating-linear-gradient(to bottom,var(--accent) 0 5px,transparent 5px 10px)}
 .vsite{width:100%;max-width:460px;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 30px 60px #0008}
 .vsite .bar{height:34px;background:#1b1b1b;display:flex;align-items:center;gap:7px;padding:0 14px}
@@ -433,7 +433,7 @@ footer .about{max-width:360px;margin-top:18px}
 .flow .st.last i{background:var(--ink);border-color:var(--ink);color:#fff}
 .slots i.on{background:var(--ink);border-color:var(--ink);color:#fff}
 .chip.on{background:var(--paper);border-color:var(--paper);color:var(--ink)} .chip.on i{color:var(--accent-ink)}
-.tag.acc{background:transparent;color:var(--accent);border-color:var(--accent)}
+.tag.acc{background:transparent;color:var(--accent-ink);border-color:var(--accent)}
 .ex-chip{background:transparent;border:1px solid var(--line);color:#3a3936}
 .f-photo .sq{background:transparent;border:1.5px solid var(--accent)}
 .about-hero .ph .badge{background:var(--paper);color:var(--ink);border-inline-start:3px solid var(--accent)}
@@ -778,7 +778,7 @@ footer a:hover{color:#fff}
 .legal-body{max-width:46em}
 .legal-section{padding-bottom:36px;margin-bottom:36px;border-bottom:1px solid var(--line);scroll-margin-top:110px}
 .legal-section h2{font-family:var(--display);font-size:28px;font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
-.legal-n{color:var(--accent);margin-inline-end:8px}
+.legal-n{color:#7A4E2A;margin-inline-end:8px}
 .legal-section p,.legal-section li{font-size:17px;line-height:1.75;color:#2e2d2b}
 .legal-section ul,.legal-section ol{margin:8px 0 14px;padding-inline-start:1.2em}
 .legal-section ul{list-style:disc}
@@ -846,7 +846,11 @@ input.inp.ltr{text-align:right}
   .next .box h2{font-size:38px}
   .cbox h2,.after h2{font-size:22px}
 }
-.acc,.svc-block .tagline span,.vrep .ft .acc,.built .cell.dk .acc{color:var(--accent)}
+/* Text on light surfaces needs a deeper terracotta to clear WCAG contrast. Decorative accent stays #C8864F. */
+.acc{color:#C17A42}
+.svc-block .tagline span{color:#C17A42}
+.vrep .ft .acc{color:#9C6232}
+.built .cell.dk .acc{color:var(--accent-2)}
 .step .n{color:#8A8A8A;-webkit-text-stroke-color:#8A8A8A}
 .step:first-child .n{color:var(--accent);-webkit-text-stroke-color:var(--accent)}
 footer .logo small{color:#9A9893}
