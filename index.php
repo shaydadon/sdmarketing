@@ -6,10 +6,6 @@ require __DIR__ . '/includes/header.php';
 require __DIR__ . '/includes/services-data.php';
 require __DIR__ . '/includes/projects-data.php';
 
-$by = [];
-foreach ($projects as $p) $by[$p['slug']] = $p;
-$fisha = $by['fisha'];
-$excerly = $by['excerly'];
 ?>
 
 <section class="hero dark">
@@ -136,40 +132,29 @@ $excerly = $by['excerly'];
       <a class="btn btn-ink" href="projects.php">לכל הפרויקטים<?= icon('arrow') ?></a>
     </div>
     <div class="proj-grid">
-      <article class="proj big">
-        <div class="media media-fisha">
-          <div class="browser">
-            <div class="bar"><i></i><i></i><i></i><u>fisha.shop</u></div>
-            <img class="tall" src="assets/img/projects/fisha/originals-main.webp" alt="עמוד Originals בחנות fisha.shop" width="1600" height="1133" decoding="async">
+      <?php foreach ($projects as $p): ?>
+        <article class="proj big<?= $p['layout'] === 'phones' ? ' rev' : '' ?>">
+          <?php if ($p['layout'] === 'phones'): ?>
+            <div class="media media-ex">
+              <?php foreach ($p['shots'] as $shot): ?>
+                <div class="mphone"><img src="<?= e($shot['src']) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" loading="lazy" decoding="async"></div>
+              <?php endforeach; ?>
+            </div>
+          <?php else: $shot = $p['shots'][0]; ?>
+            <div class="media media-fisha">
+              <div class="browser">
+                <div class="bar"><i></i><i></i><i></i><u><?= e($shot['chrome'] ?? $p['name']) ?></u></div>
+                <img src="<?= e($shot['src']) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" decoding="async">
+              </div>
+            </div>
+          <?php endif; ?>
+          <div class="body">
+            <div class="row"><h3 lang="en"><?= e($p['name']) ?></h3><span class="tag acc"><?= e($p['tag']) ?></span></div>
+            <p><?= e($p['summary']) ?></p>
+            <a class="link" href="<?= e($p['url']) ?>" target="_blank" rel="noopener"><?= e($p['url_label']) ?> <?= icon('external') ?></a>
           </div>
-          <div class="thumbs">
-            <img src="assets/img/projects/fisha/tattoos-1.webp" alt="עמוד הקעקועים של fisha.shop" width="1600" height="1000" loading="lazy" decoding="async">
-            <img src="assets/img/projects/fisha/tattoos-2.webp" alt="Flash sheet בחנות fisha.shop" width="1600" height="1000" loading="lazy" decoding="async">
-            <img src="assets/img/projects/fisha/shop-hq-c.webp" alt="עמוד החנות של fisha.shop" width="1600" height="929" loading="lazy" decoding="async">
-          </div>
-        </div>
-        <div class="body">
-          <div class="row"><h3 lang="en"><?= e($fisha['name']) ?></h3><span class="tag acc"><?= e($fisha['type']) ?></span></div>
-          <p><?= e($fisha['home']) ?></p>
-          <div class="row" style="justify-content:flex-start;gap:8px">
-            <?php foreach ($fisha['tags'] as $tag): ?><span class="tag" lang="en"><?= e($tag) ?></span><?php endforeach; ?>
-          </div>
-          <a class="link" href="<?= e($fisha['url']) ?>" target="_blank" rel="noopener">לאתר החי <?= icon('external') ?></a>
-        </div>
-      </article>
-
-      <article class="proj big rev">
-        <div class="media media-ex">
-          <div class="mphone"><img src="assets/img/projects/excerly/workouts-m.webp" alt="מסך האימונים באפליקציית Excerly" width="780" height="1688" loading="lazy" decoding="async"></div>
-          <div class="mphone"><img src="assets/img/projects/excerly/home-m.webp" alt="מסך היום באפליקציית Excerly" width="780" height="1688" loading="lazy" decoding="async"></div>
-          <div class="mphone"><img src="assets/img/projects/excerly/nutrition-m.webp" alt="מסך התזונה באפליקציית Excerly" width="780" height="1688" loading="lazy" decoding="async"></div>
-        </div>
-        <div class="body">
-          <div class="row"><h3 lang="en"><?= e($excerly['name']) ?></h3><span class="tag acc"><?= e($excerly['type']) ?></span></div>
-          <p><?= e($excerly['home']) ?></p>
-          <a class="link" href="projects.php#case-excerly">פרטים על הפרויקט <?= icon('arrow') ?></a>
-        </div>
-      </article>
+        </article>
+      <?php endforeach; ?>
     </div>
   </div>
 </section>

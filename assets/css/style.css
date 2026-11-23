@@ -833,3 +833,15 @@ input.inp.ltr{text-align:right}
 .step:first-child .n{color:#D9A57A;-webkit-text-stroke-color:#D9A57A}
 footer .logo small{color:#9A9893}
 .browser .bar u,.vsite .bar u{direction:ltr;unicode-bidi:isolate}
+.stage-one{height:auto;display:flex;justify-content:center;padding:48px 48px 56px}
+.stage-one .browser{width:min(960px,100%)}
+.stage-ex.compact{height:auto;padding:56px 24px 48px;align-items:flex-start}
+.stage-ex.compact .mphone:nth-child(2){transform:none}
+.soon{margin:-40px auto 88px;font-family:var(--display);font-weight:700;font-size:16px;color:var(--mute)}
+.proj .row,.case .tags{flex-wrap:wrap}
+.tag.acc{white-space:normal;height:auto;min-height:28px;padding:4px 12px;line-height:1.35}
+@media (max-width:800px){
+  .stage-one{padding:36px 14px 28px}
+  .stage-ex.compact{padding:40px 12px 28px}
+  .soon{margin:-12px auto 48px}
+}
