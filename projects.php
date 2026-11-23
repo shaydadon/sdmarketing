@@ -50,23 +50,34 @@ require __DIR__ . '/includes/projects-data.php';
         <?php foreach ($p['shots'] as $shot): ?>
           <div class="mphone"><img src="<?= e($shot['src']) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" loading="lazy" decoding="async"></div>
         <?php endforeach; ?>
-        <p class="stage-cap">צילום מסך אמיתי</p>
       </div>
     <?php elseif ($p['slug'] === 'fisha'): ?>
-      <div class="stage stage-fisha-shop">
-        <div class="browser">
-          <div class="bar"><i></i><i></i><i></i><u>fisha.shop</u></div>
-          <img src="assets/img/projects/fisha/shop-hq-c.webp" alt="צילום מסך של החנות fisha.shop" width="1600" height="929" loading="lazy" decoding="async">
+      <div class="stage stage-fisha-orig">
+        <div class="browser main">
+          <div class="bar"><i></i><i></i><i></i><u></u></div>
+          <img src="assets/img/projects/fisha/originals-main.webp" alt="עמוד Originals בחנות fisha.shop" width="1600" height="1133" loading="lazy" decoding="async">
         </div>
-        <p class="stage-cap">צילום מסך אמיתי</p>
+        <div class="row">
+          <div class="browser">
+            <div class="bar"><i></i><i></i><i></i><u></u></div>
+            <img src="assets/img/projects/fisha/shop-hq-c.webp" alt="עמוד החנות fisha.shop" width="1600" height="929" loading="lazy" decoding="async">
+          </div>
+          <div class="browser">
+            <div class="bar"><i></i><i></i><i></i><u></u></div>
+            <img src="assets/img/projects/fisha/tattoos-2.webp" alt="Flash sheet בחנות fisha.shop" width="1600" height="1000" loading="lazy" decoding="async">
+          </div>
+          <div class="browser">
+            <div class="bar"><i></i><i></i><i></i><u></u></div>
+            <img src="assets/img/projects/fisha/tattoos-1.webp" alt="עמוד הקעקועים של fisha.shop" width="1600" height="1000" loading="lazy" decoding="async">
+          </div>
+        </div>
       </div>
     <?php else: $shot = $p['shots'][0]; ?>
       <div class="stage stage-one">
         <div class="browser">
-          <div class="bar"><i></i><i></i><i></i><u><?= e($shot['chrome'] ?? $p['name']) ?></u></div>
+          <div class="bar"><i></i><i></i><i></i><u></u></div>
           <img src="<?= e($shot['src']) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" loading="lazy" decoding="async">
         </div>
-        <p class="stage-cap">צילום מסך אמיתי</p>
       </div>
     <?php endif; ?>
   </div>

@@ -844,12 +844,19 @@ footer .logo small{color:#9A9893}
   .soon{margin:-12px auto 48px}
 }
 
-/* fisha.shop projects stage: one compact shop window. */
-.stage-fisha-shop{display:flex;justify-content:center;height:auto;margin-top:24px;padding:36px 22px 16px}
-.stage-fisha-shop .browser{width:min(640px,100%)}
-.stage-fisha-shop .stage-cap{top:12px;inset-inline-start:22px}
-.stage-fisha-shop .browser img{width:100%;height:168px;aspect-ratio:auto;object-fit:cover;object-position:top center}
+/* fisha projects stage: Originals window, then the three smaller shots, scaled down. */
+.stage-fisha-orig{display:flex;flex-direction:column;align-items:center;gap:12px;height:auto;margin-top:24px;padding:18px 22px 18px}
+.stage-fisha-orig .browser.main{width:min(760px,100%);position:static}
+.stage-fisha-orig .browser.main img{width:100%;height:400px;aspect-ratio:auto;object-fit:cover;object-position:top center}
+.stage-fisha-orig .row{width:min(760px,100%);display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stage-fisha-orig .row .browser img{width:100%;height:86px;aspect-ratio:auto;object-fit:cover;object-position:top center}
+.stage .browser .bar u:empty{width:42%}
 @media (max-width:800px){
-  .stage-fisha-shop{margin-top:20px;padding:34px 12px 14px}
-  .stage-fisha-shop .browser img{height:132px}
+  .stage-fisha-orig{margin-top:16px;padding:14px 10px 14px;gap:8px}
+  .stage-fisha-orig .browser.main img{height:240px}
+  .stage-fisha-orig .row{gap:6px}
+  .stage-fisha-orig .row .browser img{height:62px}
+  .stage-fisha-orig .row .browser .bar{height:18px;padding:0 6px;gap:3px}
+  .stage-fisha-orig .row .browser .bar i{width:5px;height:5px}
+  .stage-fisha-orig .row .browser .bar u{display:none}
 }
