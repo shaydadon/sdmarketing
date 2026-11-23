@@ -75,7 +75,6 @@ $sent = isset($_GET['sent']);
 $page_id      = 'contact';
 $page_title   = 'צור קשר | SDmarketing';
 $page_desc    = 'דברו עם שי דדון מ-SDmarketing: וואטסאפ, טלפון, מייל או טופס קצר, על אוטומציות, צ\'אטבוטים, אתרים, אפליקציות וקמפיינים.';
-$header_theme = 'dark';
 require __DIR__ . '/includes/header.php';
 
 function field_attrs(string $name, array $errors): string
@@ -88,37 +87,31 @@ function field_error(string $name, array $errors): string
 }
 ?>
 
-<!-- ============ PAGE HERO ============ -->
-<section class="page-hero page-hero--short" aria-labelledby="page-title">
-  <div class="hero-bg" aria-hidden="true"></div>
-  <div class="container">
-    <nav class="breadcrumbs" aria-label="מיקום בעמוד">
-      <a href="index.php">בית</a><span aria-hidden="true">/</span><span aria-current="page">צור קשר</span>
-    </nav>
-    <h1 id="page-title">בואו נדבר. <span>הודעה אחת מספיקה.</span></h1>
-    <p class="page-lead">ספרו בכמה מילים מה העסק עושה ומה הייתם רוצים לשפר. אחזור אליכם עם רעיון אחד שאפשר להתחיל ממנו, בלי התחייבות.</p>
+<section class="hero dark">
+  <div class="glow" style="top:-100px;left:-200px" aria-hidden="true"></div>
+  <div class="wrap p-hero sm" style="padding-bottom:160px">
+    <nav class="crumb" aria-label="מיקום בעמוד"><a href="index.php">בית</a> / <b>צור קשר</b></nav>
+    <h1 id="page-title">בואו נדבר.<span>הודעה אחת מספיקה.</span></h1>
+    <p class="lead" style="max-width:640px;margin-top:28px">ספרו בכמה מילים מה העסק עושה ומה הייתם רוצים לשפר. אחזור אליכם עם רעיון אחד שאפשר להתחיל ממנו, בלי התחייבות.</p>
   </div>
 </section>
 
-<section class="section contact" aria-label="פרטי התקשרות וטופס">
-  <div class="container contact-grid">
-
-    <!-- ===== Form / success ===== -->
-    <div class="contact-main">
+<section class="contact-wrap" aria-label="פרטי התקשרות וטופס">
+  <div class="wrap cgrid">
+    <div class="cform">
       <?php if ($sent): ?>
         <div class="sent-card" id="sent" tabindex="-1" role="status">
-          <span class="sent-ico"><?= icon('check') ?></span>
           <h2>ההודעה התקבלה. תודה.</h2>
           <p>אעבור עליה ואחזור אליכם לטלפון או לוואטסאפ שהשארתם. אם זה דחוף, אפשר גם לכתוב לי ישירות.</p>
-          <div class="sent-actions">
-            <a class="btn btn-primary" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span>דברו איתי בוואטסאפ</span></a>
-            <a class="btn btn-outline" href="projects.php"><span>בינתיים, לעבודות שלי</span><?= icon('arrow') ?></a>
+          <div class="ctas">
+            <a class="btn btn-ink" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span>דברו איתי בוואטסאפ</span></a>
+            <a class="btn btn-ghost" href="projects.php">בינתיים, לעבודות שלי</a>
           </div>
         </div>
       <?php else: ?>
         <form class="contact-form" method="post" action="contact.php" novalidate data-contact-form>
           <h2>השאירו פרטים</h2>
-          <p class="form-intro">שדות עם <span class="req" aria-hidden="true">*</span> הם חובה. השאר עוזר לי להגיע לשיחה מוכן.</p>
+          <p class="hint">שדות עם <b class="req">*</b> הם חובה. השאר עוזר לי להגיע לשיחה מוכן.</p>
 
           <?php if ($errors || $send_failed): ?>
             <div class="form-alert" role="alert" tabindex="-1" data-form-alert>
@@ -140,92 +133,80 @@ function field_error(string $name, array $errors): string
           <input type="hidden" name="csrf" value="<?= e($_SESSION['csrf']) ?>">
           <div class="hp" aria-hidden="true"><label>אתר <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
 
-          <div class="form-row">
-            <div class="field">
-              <label for="f-name">שם מלא <span class="req" aria-hidden="true">*</span></label>
-              <input id="f-name" name="name" type="text" autocomplete="name" required minlength="2" value="<?= e($values['name']) ?>"<?= field_attrs('name', $errors) ?>>
+          <div class="fgrid">
+            <div class="field fl">
+              <label for="f-name">שם מלא <b class="req" aria-hidden="true">*</b></label>
+              <input class="inp" id="f-name" name="name" type="text" autocomplete="name" required minlength="2" value="<?= e($values['name']) ?>"<?= field_attrs('name', $errors) ?>>
               <?= field_error('name', $errors) ?>
             </div>
-            <div class="field">
-              <label for="f-phone">טלפון <span class="req" aria-hidden="true">*</span></label>
-              <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" required placeholder="050-1234567" value="<?= e($values['phone']) ?>"<?= field_attrs('phone', $errors) ?>>
+            <div class="field fl">
+              <label for="f-phone">טלפון <b class="req" aria-hidden="true">*</b></label>
+              <input class="inp ltr" id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" dir="ltr" required placeholder="050-1234567" value="<?= e($values['phone']) ?>"<?= field_attrs('phone', $errors) ?>>
               <?= field_error('phone', $errors) ?>
             </div>
-          </div>
-
-          <div class="form-row">
-            <div class="field">
+            <div class="field fl full">
               <label for="f-email">מייל</label>
-              <input id="f-email" name="email" type="email" autocomplete="email" dir="ltr" placeholder="name@example.com" value="<?= e($values['email']) ?>"<?= field_attrs('email', $errors) ?>>
+              <input class="inp ltr" id="f-email" name="email" type="email" autocomplete="email" dir="ltr" placeholder="name@example.com" value="<?= e($values['email']) ?>"<?= field_attrs('email', $errors) ?>>
               <?= field_error('email', $errors) ?>
             </div>
-            <div class="field">
-              <label for="f-service">במה אפשר לעזור?</label>
-              <div class="select">
-                <select id="f-service" name="service">
-                  <?php foreach ($service_options as $k => $label): ?>
-                    <option value="<?= e($k) ?>"<?= $values['service'] === $k ? ' selected' : '' ?>><?= e($label) ?></option>
-                  <?php endforeach; ?>
-                </select>
+            <fieldset class="fl full">
+              <legend>במה אפשר לעזור?</legend>
+              <div class="svc-pick">
+                <?php foreach ($service_options as $k => $label): if ($k === '') continue; ?>
+                  <label>
+                    <input type="radio" name="service" value="<?= e($k) ?>"<?= $values['service'] === $k ? ' checked' : '' ?>>
+                    <span><?= e($label) ?></span>
+                  </label>
+                <?php endforeach; ?>
               </div>
+            </fieldset>
+            <div class="field fl full">
+              <label for="f-message">ספרו קצת על העסק ועל מה שאתם צריכים</label>
+              <textarea class="inp ta" id="f-message" name="message" rows="5" maxlength="3000" placeholder="לדוגמה: יש לי מספרה, הרבה פניות בוואטסאפ ואין לי זמן לענות לכולן..."<?= field_attrs('message', $errors) ?>><?= e($values['message']) ?></textarea>
+              <?= field_error('message', $errors) ?>
+            </div>
+            <div class="field full">
+              <label class="consent">
+                <input id="f-consent" type="checkbox" name="consent" value="1" required<?= $values['consent'] === '1' ? ' checked' : '' ?><?= field_attrs('consent', $errors) ?>>
+                <span class="box" aria-hidden="true"><?= icon('check') ?></span>
+                <span>קראתי ואני מסכים/ה ל<a href="privacy.php">מדיניות הפרטיות</a>, ומאשר/ת שייצרו איתי קשר בנוגע לפנייה. <b class="req" aria-hidden="true">*</b></span>
+              </label>
+              <?= field_error('consent', $errors) ?>
             </div>
           </div>
 
-          <div class="field">
-            <label for="f-message">ספרו קצת על העסק ועל מה שאתם צריכים</label>
-            <textarea id="f-message" name="message" rows="5" maxlength="3000" placeholder="לדוגמה: יש לי מספרה, הרבה פניות בוואטסאפ ואין לי זמן לענות לכולן..."<?= field_attrs('message', $errors) ?>><?= e($values['message']) ?></textarea>
-            <?= field_error('message', $errors) ?>
-          </div>
-
-          <div class="field field--check">
-            <label class="check">
-              <input id="f-consent" type="checkbox" name="consent" value="1" required<?= $values['consent'] === '1' ? ' checked' : '' ?><?= field_attrs('consent', $errors) ?>>
-              <span class="check-box" aria-hidden="true"><?= icon('check') ?></span>
-              <span>קראתי ואני מסכים/ה ל<a href="privacy.php" target="_blank">מדיניות הפרטיות</a>, ומאשר/ת שייצרו איתי קשר בנוגע לפנייה. <span class="req" aria-hidden="true">*</span></span>
-            </label>
-            <?= field_error('consent', $errors) ?>
-          </div>
-
-          <button class="btn btn-primary btn-lg btn-submit" type="submit" data-submit>
+          <button class="btn btn-acc" type="submit" data-submit>
             <span class="btn-label">שליחת הפנייה</span><span class="spinner" aria-hidden="true"></span><?= icon('arrow') ?>
           </button>
         </form>
       <?php endif; ?>
     </div>
 
-    <!-- ===== Direct channels ===== -->
-    <aside class="contact-side" aria-labelledby="direct-title">
-      <h2 id="direct-title">מעדיפים לדבר ישירות?</h2>
-      <ul class="channels">
-        <li>
-          <a class="channel channel--wa" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener">
-            <span class="channel-ico"><?= icon('whatsapp') ?></span>
-            <span class="channel-text"><b>וואטסאפ</b><small>הדרך הכי מהירה להגיע אליי</small></span>
-            <?= icon('arrow', 'icon channel-arrow') ?>
-          </a>
-        </li>
-        <li>
-          <a class="channel" href="tel:<?= e(preg_replace('/\D/', '', $site['phone'])) ?>">
-            <span class="channel-ico"><?= icon('phone') ?></span>
-            <span class="channel-text"><b>טלפון</b><small dir="ltr"><?= e($site['phone']) ?></small></span>
-            <?= icon('arrow', 'icon channel-arrow') ?>
-          </a>
-        </li>
-        <li>
-          <a class="channel" href="mailto:<?= e($site['email']) ?>">
-            <span class="channel-ico"><?= icon('mail') ?></span>
-            <span class="channel-text"><b>מייל</b><small dir="ltr"><?= e($site['email']) ?></small></span>
-            <?= icon('arrow', 'icon channel-arrow') ?>
-          </a>
-        </li>
-      </ul>
-
-      <div class="next-steps">
-        <h3>מה קורה אחרי שתשלחו?</h3>
+    <aside class="cside">
+      <div class="cbox">
+        <h2>מעדיפים לדבר ישירות?</h2>
+        <a class="cline wa" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener">
+          <span class="ic"><?= icon('whatsapp') ?></span>
+          <span class="tx"><b>וואטסאפ</b><span>הדרך הכי מהירה להגיע אליי</span></span>
+          <?= icon('arrow', 'glyph arr2') ?>
+        </a>
+        <a class="cline" href="tel:<?= e(preg_replace('/\D/', '', $site['phone'])) ?>">
+          <span class="ic"><?= icon('phone') ?></span>
+          <span class="tx"><b class="ltr" dir="ltr"><?= e($site['phone']) ?></b><span>טלפון</span></span>
+          <?= icon('arrow', 'glyph arr2') ?>
+        </a>
+        <a class="cline" href="mailto:<?= e($site['email']) ?>">
+          <span class="ic"><?= icon('mail') ?></span>
+          <span class="tx"><b class="ltr" dir="ltr"><?= e($site['email']) ?></b><span>מייל</span></span>
+          <?= icon('arrow', 'glyph arr2') ?>
+        </a>
+      </div>
+      <div class="after">
+        <h2>מה קורה אחרי שתשלחו?</h2>
         <ol>
-          <li><span>1</span><p>אני קורא את הפנייה ובודק אם ואיך אפשר לעזור.</p></li>
-          <li><span>2</span><p>חוזר אליכם לשיחת היכרות קצרה בטלפון או בוואטסאפ.</p></li>
-          <li><span>3</span><p>אם יש התאמה, מקבלים תוכנית כתובה עם מחיר ולוח זמנים.</p></li>
+          <li><i>1</i><span>אני קורא את הפנייה ובודק אם ואיך אפשר לעזור.</span></li>
+          <li><i>2</i><span>חוזר אליכם לשיחת היכרות קצרה בטלפון או בוואטסאפ.</span></li>
+          <li><i>3</i><span>אם יש התאמה, מקבלים תוכנית כתובה עם מחיר ולוח זמנים.</span></li>
         </ol>
       </div>
     </aside>

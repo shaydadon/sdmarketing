@@ -48,6 +48,9 @@ test.describe('every page', () => {
       await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
       await expect(page).toHaveTitle(/SDmarketing/);
       await expect(page.locator('h1')).toHaveCount(1);
+      await expect(page.locator('body')).not.toContainText('Boardog');
+      await expect(page.locator('body')).not.toContainText('10+');
+      await expect(page.locator('body')).not.toContainText('יותר מעשר');
       await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /.{20,}/);
       await expect(page.locator('.skip-link')).toHaveAttribute('href', '#main');
 
@@ -139,47 +142,46 @@ test.describe('navigation', () => {
 });
 
 test.describe('homepage', () => {
-  test('services tabs switch by click and keyboard', async ({ page }) => {
+  test('four service areas link to the services page', async ({ page }) => {
     await page.goto('/index.php');
-    const tabs = page.getByRole('tab');
-    await expect(tabs).toHaveCount(4);
-    await expect(page.locator('#panel-automations')).toBeVisible();
-
-    await tabs.nth(2).click();
-    await expect(tabs.nth(2)).toHaveAttribute('aria-selected', 'true');
-    await expect(page.locator('#panel-pwa')).toBeVisible();
-    await expect(page.locator('#panel-automations')).toBeHidden();
-
-    await page.keyboard.press('ArrowDown');
-    await expect(tabs.nth(3)).toBeFocused();
-    await expect(page.locator('#panel-marketing')).toBeVisible();
+    const cards = page.locator('.svc-grid .svc');
+    await expect(cards).toHaveCount(4);
+    await expect(cards.first()).toContainText('אוטומציות לעסקים');
+    await expect(page.locator('a[href="services.php#automations"]')).toBeVisible();
+    await expect(page.locator('a[href="services.php#pwa"]')).toBeVisible();
   });
 
-  test('hero demo plays the bot conversation', async ({ page }) => {
+  test('hero demo shows the bot conversation and the automations it triggers', async ({ page }) => {
     await page.goto('/index.php');
-    const lastStep = page.locator('.hero-demo [data-step="7"]');
-    await expect(lastStep).toHaveClass(/is-on/, { timeout: 15000 });
+    const demo = page.locator('[data-demo]');
+    await expect(demo).toContainText('המספרה של דנה');
+    await expect(demo).toContainText('13:30 מעולה');
+    await expect(demo).toContainText('התור נכנס ליומן');
+    await expect(demo).toContainText('הדגמה להמחשה');
   });
 });
 
 test.describe('projects', () => {
   test('filters show and hide the right projects', async ({ page }) => {
     await page.goto('/projects.php');
-    const fisha = page.locator('[data-cat="web"]');
-    const apps = page.locator('.case-pair [data-cat="pwa"]');
+    const fisha = page.locator('[data-showcase] [data-cat="web"]');
+    const apps = page.locator('[data-showcase] [data-cat="pwa"]');
+
+    await expect(fisha).toHaveCount(1);
+    await expect(apps).toHaveCount(1);
 
     await page.getByRole('button', { name: /אפליקציות PWA/ }).click();
     await expect(fisha).toBeHidden();
-    await expect(apps).toHaveCount(2);
-    await expect(apps.first()).toBeVisible();
+    await expect(apps).toBeVisible();
 
     await page.getByRole('button', { name: /אתרים וחנויות/ }).click();
     await expect(fisha).toBeVisible();
-    await expect(page.locator('.case-pair')).toBeHidden();
+    await expect(apps).toBeHidden();
 
     await page.getByRole('button', { name: /הכל/ }).click();
     await expect(fisha).toBeVisible();
-    await expect(apps.first()).toBeVisible();
+    await expect(apps).toBeVisible();
+    await expect(page.locator('body')).not.toContainText('Boardog');
   });
 });
 
@@ -214,7 +216,7 @@ test.describe('contact form', () => {
     await page.fill('#f-name', 'בדיקת מערכת');
     await page.fill('#f-phone', '050-1234567');
     await page.fill('#f-message', 'בדיקה אוטומטית');
-    await page.locator('label.check').click();
+    await page.locator('label.consent').click();
     await page.getByRole('button', { name: 'שליחת הפנייה' }).click();
     // Locally there is no mail server, so the friendly failure appears with the data kept.
     // On Hostinger the same flow redirects to contact.php?sent=1.
