@@ -1,6 +1,7 @@
 <?php
 // Illustrative WhatsApp bot. Rendered only on the projects page, after Excerly.
 $wa_msgs = [
+    ['c', 'היי'],
     ['b', 'ברוכים הבאים לפנסיון של ג׳רי! איזה כיף שפנית אלינו 🐾 איך קוראים לך?'],
     ['c', 'הי נעים להכיר שמי יפה מרחובות'],
     ['b', 'נעים מאוד יפה! איך קוראים לכלב שלך?'],
