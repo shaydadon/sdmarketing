@@ -84,7 +84,7 @@ require __DIR__ . '/includes/projects-data.php';
     <div class="box">
       <div>
         <h2>הפרויקט הבא<br><span>יכול להיות שלך.</span></h2>
-        <p>חנות, אתר, אפליקציה או בוט? כל פרויקט כאן התחיל בהודעה אחת. ספרו לי מה אתם צריכים ואחזור עם הצעה.</p>
+        <p>חנות, אתר, אפליקציה, בוט, קידום אורגני או קמפיין ממומן? כל פרויקט כאן התחיל בהודעה אחת. ספרו לי מה אתם צריכים ואחזור עם הצעה.</p>
       </div>
       <div class="ctas">
         <a class="btn btn-acc" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span>דברו איתי בוואטסאפ</span></a>

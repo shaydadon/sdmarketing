@@ -143,13 +143,26 @@ test.describe('navigation', () => {
 });
 
 test.describe('homepage', () => {
-  test('four service areas link to the services page', async ({ page }) => {
+  test('five service areas link to the services page', async ({ page }) => {
     await page.goto('/index.php');
     const cards = page.locator('.svc-grid .svc');
-    await expect(cards).toHaveCount(4);
+    await expect(cards).toHaveCount(5);
     await expect(cards.first()).toContainText('אוטומציות לעסקים');
+    await expect(page.locator('.svc-grid')).toContainText('SEO / קידום אורגני');
+    await expect(page.locator('.svc-grid')).toContainText('קמפיינים ממומנים');
+    await expect(page.locator('.svc-grid')).toContainText('התאמה מלאה למובייל, מוכן ל-SEO');
     await expect(page.locator('a[href="services.php#automations"]')).toBeVisible();
     await expect(page.locator('a[href="services.php#pwa"]')).toBeVisible();
+    await expect(page.locator('a[href="services.php#seo"]')).toBeVisible();
+    await expect(page.locator('a[href="services.php#campaigns"]')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'חמישה תחומים. מערכת אחת שעובדת יחד.' })).toBeVisible();
+    await page.goto('/services.php');
+    await expect(page.locator('#seo')).toContainText('מחקר מילות מפתח');
+    await expect(page.locator('#seo')).toContainText('הדגמה להמחשה · ללא נתונים אמיתיים');
+    await expect(page.locator('#seo a[href="articles.php"]')).toBeVisible();
+    await expect(page.locator('#campaigns')).toContainText('Google Ads');
+    await expect(page.locator('#campaigns')).toContainText('פייסבוק');
+    await expect(page.locator('#websites')).toContainText('fisha.shop');
   });
 
   test('hero demo shows the bot conversation and the automations it triggers', async ({ page }) => {

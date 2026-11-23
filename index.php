@@ -1,7 +1,7 @@
 <?php
 $page_id      = 'index';
-$page_title   = 'SDmarketing | צ׳אטבוט לוואטסאפ לעסקים, אוטומציות, בניית אתרים ושיווק דיגיטלי';
-$page_desc    = 'SDmarketing בונה לעסקים צ׳אטבוט לוואטסאפ, אוטומציות לעסקים, בניית חנות אונליין, דף נחיתה, אתרי תדמית, אפליקציות PWA ללא צורך בחנות האפליקציות, וקמפיינים בגוגל ובמטא.';
+$page_title   = 'SDmarketing | צ׳אטבוט לוואטסאפ לעסקים, אוטומציות, בניית אתרים, קידום אורגני וקמפיינים';
+$page_desc    = 'SDmarketing בונה לעסקים צ׳אטבוט לוואטסאפ, אוטומציות לעסקים, בניית חנות אונליין, דף נחיתה, אתרי תדמית, אפליקציות PWA ללא צורך בחנות האפליקציות, קידום אורגני, וקמפיינים ממומנים בגוגל ובמטא.';
 require __DIR__ . '/includes/header.php';
 require __DIR__ . '/includes/services-data.php';
 require __DIR__ . '/includes/projects-data.php';
@@ -12,9 +12,9 @@ require __DIR__ . '/includes/projects-data.php';
   <div class="glow" aria-hidden="true"></div>
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow">אוטומציות · אתרים · PWA · שיווק</span>
+      <span class="eyebrow">אוטומציות · אתרים · PWA · קידום · קמפיינים</span>
       <h1 id="hero-title">העסק שלך ממשיך לעבוד.<span class="l2">גם כשאתה לא.</span></h1>
-      <p class="lead">צ׳אטבוט לוואטסאפ לעסקים, אוטומציות, בניית אתרים וקמפיינים בגוגל ובמטא שמחוברים זה לזה, כדי שכל פנייה תקבל מענה וכל ליד יגיע למקום הנכון.</p>
+      <p class="lead">צ׳אטבוט לוואטסאפ לעסקים, אוטומציות, בניית אתרים, קידום אורגני וקמפיינים ממומנים שמחוברים זה לזה, כדי שכל פנייה תקבל מענה וכל ליד יגיע למקום הנכון.</p>
       <div class="ctas">
         <a class="btn btn-acc" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span>דברו איתי בוואטסאפ</span></a>
         <a class="btn btn-ghost-d" href="projects.php">לעבודות שלי<?= icon('arrow') ?></a>
@@ -54,7 +54,8 @@ require __DIR__ . '/includes/projects-data.php';
       <span>חיבור בין מערכות</span>
       <span>אתרים וחנויות</span>
       <span>אפליקציות PWA</span>
-      <span>קמפיינים בגוגל ובמטא</span>
+      <span>קידום אורגני</span>
+      <span>קמפיינים ממומנים</span>
     </div>
   </div>
 </section>
@@ -71,9 +72,9 @@ require __DIR__ . '/includes/projects-data.php';
     <div class="sec-head">
       <div>
         <span class="eyebrow">מה אני בונה</span>
-        <h2 class="sec" id="services-title">ארבעה תחומים.<br>מערכת אחת שעובדת יחד.</h2>
+        <h2 class="sec" id="services-title">חמישה תחומים.<br>מערכת אחת שעובדת יחד.</h2>
       </div>
-      <p class="lead">הבוט שעונה ללקוחות, האתר שהוא יושב עליו והקמפיין שמביא אליו תנועה. כשאותו אדם בונה את כולם, הם מדברים זה עם זה.</p>
+      <p class="lead">הבוט שעונה ללקוחות, האתר שהוא יושב עליו, הקידום האורגני והקמפיין הממומן שמביאים אליו תנועה. כשאותו אדם בונה את כולם, הם מדברים זה עם זה.</p>
     </div>
 
     <div class="svc-grid">

@@ -1,7 +1,7 @@
 <?php
 $page_id    = 'services';
-$page_title = 'שירותים | SDmarketing | צ׳אטבוט לוואטסאפ, אוטומציות לעסקים, בניית אתרים ושיווק דיגיטלי';
-$page_desc  = 'צ׳אטבוט לוואטסאפ לעסקים, אוטומציות לעסקים, בניית חנות אונליין, דף נחיתה ואתר תדמית, אפליקציות PWA ללא צורך בחנות האפליקציות, וקמפיינים בגוגל ובמטא.';
+$page_title = 'שירותים | SDmarketing | צ׳אטבוט לוואטסאפ, אוטומציות, בניית אתרים, קידום אורגני וקמפיינים ממומנים';
+$page_desc  = 'צ׳אטבוט לוואטסאפ לעסקים, אוטומציות לעסקים, בניית חנות אונליין, דף נחיתה ואתר תדמית, אפליקציות PWA ללא צורך בחנות האפליקציות, קידום אורגני בגוגל, וקמפיינים ממומנים בגוגל, בפייסבוק ובמטא.';
 require __DIR__ . '/includes/header.php';
 require __DIR__ . '/includes/services-data.php';
 require __DIR__ . '/includes/service-visual.php';
@@ -12,7 +12,7 @@ require __DIR__ . '/includes/service-visual.php';
   <div class="wrap p-hero sm">
     <nav class="crumb" aria-label="מיקום בעמוד"><a href="index.php">בית</a> / <b>שירותים</b></nav>
     <h1 id="page-title">כל מה שהעסק צריך כדי למכור אונליין.<span>ולעבוד פחות.</span></h1>
-    <p class="lead" style="max-width:720px;margin-top:28px">ארבעה תחומים שנבנים כך שיתחברו זה לזה: הקמפיין מביא את הלקוח, האתר משכנע אותו, הבוט עונה לו והאוטומציה דואגת שאף אחד לא ייפול בין הכיסאות.</p>
+    <p class="lead" style="max-width:720px;margin-top:28px">חמישה תחומים שנבנים כך שיתחברו זה לזה: חיפוש אורגני או קמפיין ממומן מביאים את הלקוח, האתר משכנע אותו, הבוט עונה לו והאוטומציה דואגת שאף אחד לא ייפול בין הכיסאות.</p>
     <nav class="subnav" aria-label="מעבר בין שירותים" data-jump>
       <?php foreach ($services as $i => $s): ?>
         <a class="chip<?= $i === 0 ? ' on' : '' ?>" href="#<?= e($s['id']) ?>" data-jump-link="<?= e($s['id']) ?>"><?= sprintf('%02d', $i + 1) ?> · <?= e($s['title']) ?></a>
@@ -33,6 +33,9 @@ require __DIR__ . '/includes/service-visual.php';
       <h2 id="<?= e($s['id']) ?>-title"><?= e($s['title']) ?></h2>
       <div class="tagline"><?= e($s['headline']) ?> <span><?= e($s['headline_accent']) ?></span></div>
       <p class="intro"><?= e($s['intro']) ?></p>
+      <?php if (!empty($s['more'])): ?>
+        <p class="more"><a href="<?= e($s['more']['href']) ?>"><?= e($s['more']['label']) ?></a></p>
+      <?php endif; ?>
       <div class="feat-grid">
         <?php foreach ($s['features'] as $f): ?>
           <div class="feat"><h3><?= e($f['title']) ?></h3><p><?= e($f['text']) ?></p></div>
@@ -55,7 +58,7 @@ require __DIR__ . '/includes/service-visual.php';
       <p class="lead">ככה נראית דרכו של לקוח אחד כשכל השירותים בנויים על ידי אותו אדם: בלי פערים בין ספקים, ובלי מידע שהולך לאיבוד בדרך.</p>
     </div>
     <div class="jsteps">
-      <div class="jstep"><span class="k">01</span><h3>רואה מודעה</h3><p>קמפיין ממוקד בפייסבוק או בגוגל.</p><span class="s">שיווק דיגיטלי</span></div>
+      <div class="jstep"><span class="k">01</span><h3>רואה מודעה</h3><p>קמפיין ממוקד בפייסבוק, בגוגל או באינסטגרם.</p><span class="s">קמפיינים ממומנים</span></div>
       <div class="jstep"><span class="k">02</span><h3>נוחת בעמוד</h3><p>דף נחיתה מהיר עם מסר אחד ברור.</p><span class="s">פיתוח אתרים</span></div>
       <div class="jstep"><span class="k">03</span><h3>שולח הודעה</h3><p>הבוט עונה מיד, שואל ומסנן.</p><span class="s">צ'אטבוט לוואטסאפ</span></div>
       <div class="jstep"><span class="k">04</span><h3>נשמר ומטופל</h3><p>הליד נכנס ל־CRM ומקבל מייל המשך.</p><span class="s">אוטומציות</span></div>
