@@ -871,8 +871,8 @@ footer .logo small{color:#9A9893}
 #case-bot .wad-msg p{margin:0}
 #case-bot .wad-b{align-self:flex-start;background:#202C33}
 #case-bot .wad-c{align-self:flex-end;background:#005C4B}
-#case-bot .wad-b.wad-enter{animation:wad-in-b .32s ease-out}
-#case-bot .wad-c.wad-enter{animation:wad-in-c .32s ease-out}
+#case-bot .wad-b.wad-enter{animation:wad-in-b .48s ease-out}
+#case-bot .wad-c.wad-enter{animation:wad-in-c .48s ease-out}
 @keyframes wad-in-b{from{transform:translateX(22px);opacity:0}to{transform:none;opacity:1}}
 @keyframes wad-in-c{from{transform:translateX(-22px);opacity:0}to{transform:none;opacity:1}}
 #case-bot .wad-msg.tail::before{content:"";position:absolute;top:0;width:10px;height:12px}
