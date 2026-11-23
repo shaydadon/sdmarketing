@@ -1,0 +1,145 @@
+name: Deploy to Hostinger
+
+# development -> dev.sdmarketing.co.il   |   main -> sdmarketing.co.il (live)
+# Every deploy runs the Playwright suite first; nothing is uploaded unless it passes.
+#
+# Repository secrets (Settings > Secrets and variables > Actions):
+#   SSH_HOST    Hostinger SSH IP            (hPanel > Advanced > SSH Access)
+#   SSH_USER    SSH username, e.g. u654862842
+#   SSH_PORT    SSH port (Hostinger uses 65002)
+#   SSH_KEY     private deploy key (its public half is added in hPanel > SSH Access)
+#   DEV_PATH    /home/u654862842/domains/sdmarketing.co.il/public_html/dev
+#   LIVE_PATH   /home/u654862842/domains/sdmarketing.co.il/public_html
+# Missing secrets skip the deploy with a warning instead of failing.
+
+on:
+  push:
+    branches: [main, development]
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Where to deploy'
+        type: choice
+        options: [dev, live]
+        default: dev
+
+concurrency:
+  group: deploy-${{ github.ref_name }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Playwright tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: e2e
+    env:
+      PHP_BIN: php
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          coverage: none
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: e2e/package-lock.json
+
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test
+
+      - name: Upload test report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: e2e/playwright-report
+          retention-days: 7
+
+  deploy:
+    name: Deploy
+    needs: test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      TARGET: ${{ github.event_name == 'workflow_dispatch' && inputs.target || (github.ref_name == 'main' && 'live' || 'dev') }}
+      SSH_HOST: ${{ secrets.SSH_HOST }}
+      SSH_USER: ${{ secrets.SSH_USER }}
+      SSH_PORT: ${{ secrets.SSH_PORT }}
+      SSH_KEY: ${{ secrets.SSH_KEY }}
+      LIVE_PATH: ${{ secrets.LIVE_PATH }}
+      DEV_PATH: ${{ secrets.DEV_PATH }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pick target
+        id: cfg
+        run: |
+          if [ "$TARGET" = "live" ]; then
+            if [ "$GITHUB_REF_NAME" != "main" ]; then echo "::error::Live deploys only from main"; exit 1; fi
+            P="$LIVE_PATH"; URL="https://sdmarketing.co.il"
+          else
+            P="$DEV_PATH"; URL="https://dev.sdmarketing.co.il"
+          fi
+          if [ -z "$SSH_HOST" ] || [ -z "$SSH_USER" ] || [ -z "$SSH_KEY" ] || [ -z "$P" ]; then
+            echo "::warning::Secrets for '$TARGET' are not set yet - skipping deploy."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+            echo "path=$P" >> "$GITHUB_OUTPUT"
+            echo "url=$URL" >> "$GITHUB_OUTPUT"
+          fi
+          echo "### Target: $TARGET ($URL)" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Set up SSH
+        if: steps.cfg.outputs.ready == 'true'
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          for i in 1 2 3 4 5; do
+            ssh-keyscan -T 15 -p "${SSH_PORT:-65002}" "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null && [ -s ~/.ssh/known_hosts ] && break
+            echo "server not answering yet (try $i) - retrying in 10s"; sleep 10
+          done
+          [ -s ~/.ssh/known_hosts ] || { echo "::error::Could not reach $SSH_HOST:${SSH_PORT:-65002}"; exit 1; }
+
+      - name: Dev only - keep search engines out
+        if: steps.cfg.outputs.ready == 'true' && env.TARGET == 'dev'
+        run: |
+          printf 'User-agent: *\nDisallow: /\n' > robots.txt
+
+      # Only the site's own files are sent. Tooling, tests and notes stay in the repo.
+      # Dev mirrors the repo exactly (--delete). Live never deletes, and never touches the dev/ folder inside it.
+      - name: Upload site
+        if: steps.cfg.outputs.ready == 'true'
+        run: |
+          SSH="ssh -p ${SSH_PORT:-65002}"
+          EXCLUDES=(--exclude '.git/' --exclude '.github/' --exclude '.claude/' --exclude 'e2e/'
+                    --exclude 'README.md' --exclude 'PRODUCT.md' --exclude 'skills-lock.json'
+                    --exclude '.gitignore' --exclude '.gitattributes' --exclude '.well-known/')
+          if [ "$TARGET" = "live" ]; then
+            rsync -rlptzv "${EXCLUDES[@]}" --exclude 'dev/' --exclude 'robots.txt' -e "$SSH" ./ "$SSH_USER@$SSH_HOST:${{ steps.cfg.outputs.path }}/"
+          else
+            rsync -rlptzv --delete "${EXCLUDES[@]}" -e "$SSH" ./ "$SSH_USER@$SSH_HOST:${{ steps.cfg.outputs.path }}/"
+          fi
+
+      - name: Smoke test
+        if: steps.cfg.outputs.ready == 'true'
+        run: |
+          URL="${{ steps.cfg.outputs.url }}"
+          for p in / /services.php /projects.php /about.php /contact.php; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "$URL$p")
+            echo "$code $URL$p"
+            [ "$code" = "200" ] || { echo "::error::$URL$p returned $code"; exit 1; }
+          done
+          echo "Deployed to $URL" >> "$GITHUB_STEP_SUMMARY"

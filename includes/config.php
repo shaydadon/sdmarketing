@@ -24,6 +24,9 @@ $nav = [
     'contact'  => ['href' => 'contact.php',  'label' => 'צור קשר'],
 ];
 
+// True on the staging copy (dev.sdmarketing.co.il): hidden from search engines, marked emails, visible badge.
+$is_dev = str_starts_with(strtolower($_SERVER['HTTP_HOST'] ?? ''), 'dev.');
+
 function wa_link(array $site, ?string $text = null): string
 {
     return 'https://wa.me/' . $site['whatsapp'] . '?text=' . rawurlencode($text ?? $site['wa_text']);

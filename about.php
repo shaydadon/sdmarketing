@@ -1,150 +1,103 @@
 <?php
-$page_id      = 'about';
-$page_title   = 'אודות | SDmarketing | מפתח, משווק ואיש אוטומציות באדם אחד';
-$page_desc    = 'מי עומד מאחורי SDmarketing, איך אני עובד, ולמה עסק מרוויח כשאותו אדם בונה את האוטומציה, האתר והקמפיין.';
-$header_theme = 'dark';
+$page_id    = 'about';
+$page_title = 'אודות | SDmarketing | מפתח, משווק ואיש אוטומציות באדם אחד';
+$page_desc  = 'שי דדון, מייסד SDmarketing: יותר מ־15 שנה כמפתח תוכנה, B.Sc. במדעי המחשב, קורס שיווק ושנתיים בשיווק דיגיטלי.';
 require __DIR__ . '/includes/header.php';
-require __DIR__ . '/includes/projects-data.php';
 ?>
 
-<!-- ============ ABOUT HERO ============ -->
-<section class="page-hero about-hero" aria-labelledby="page-title">
-  <div class="hero-bg" aria-hidden="true"></div>
-  <div class="container about-hero-grid">
-    <div>
-      <nav class="breadcrumbs" aria-label="מיקום בעמוד">
-        <a href="index.php">בית</a><span aria-hidden="true">/</span><span aria-current="page">אודות</span>
-      </nav>
-      <h1 id="page-title">נעים מאוד, אני <span class="nowrap">שי דדון.</span><br><span>המייסד של <bdi>SDmarketing</bdi></span></h1>
-      <p class="page-lead">מפתח עם יותר מעשר שנות ניסיון, שבונה לעסקים את מה שמחבר בין הלקוח לבין המכירה: הבוט שעונה בוואטסאפ, האתר או האפליקציה שהלקוח נוחת בהם, הקמפיין שמביא אותו, והאוטומציה שדואגת שאף אחד לא ייפול באמצע.</p>
-      <div class="hero-actions">
-        <a class="btn btn-light btn-lg" href="<?= e(wa_link($site, 'היי, קראתי עליך באתר ואשמח לדבר')) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span>דברו איתי בוואטסאפ</span></a>
-        <a class="btn btn-ghost btn-lg" href="projects.php"><span>לעבודות שלי</span><?= icon('arrow') ?></a>
+<section class="hero dark">
+  <div class="glow" style="top:-100px;left:-200px" aria-hidden="true"></div>
+  <div class="wrap about-hero">
+    <div style="padding-bottom:90px">
+      <nav class="crumb" aria-label="מיקום בעמוד"><a href="index.php">בית</a> / <b>אודות</b></nav>
+      <h1 id="page-title">נעים מאוד,<span>אני שי דדון.</span></h1>
+      <p class="lead">מפתח תוכנה עם יותר מ־15 שנות ניסיון, שבונה לעסקים את מה שמחבר בין הלקוח לבין המכירה: הבוט שעונה בוואטסאפ, האתר או האפליקציה שהלקוח נוחת בהם, הקמפיין שמביא אותו, והאוטומציה שדואגת שאף אחד לא ייפול באמצע.</p>
+      <div class="ctas">
+        <a class="btn btn-acc" href="<?= e(wa_link($site, 'היי, קראתי עליך באתר ואשמח לדבר')) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span>דברו איתי בוואטסאפ</span></a>
+        <a class="btn btn-ghost-d" href="projects.php">לעבודות שלי</a>
       </div>
     </div>
-    <figure class="about-hero-photo">
-      <img src="assets/img/founder.jpg" alt="שי דדון, מייסד SDmarketing" width="1024" height="1024">
-      <figcaption><?= logo_mark() ?><span><b>שי דדון</b><small>מייסד SDmarketing</small></span></figcaption>
-    </figure>
-  </div>
-</section>
-
-<!-- ============ BACKGROUND ============ -->
-<section class="section story" aria-labelledby="story-title">
-  <div class="container story-grid">
-    <div class="story-copy">
-      <h2 id="story-title">מתכנת שלמד לדבר שיווק.</h2>
-      <p>את רוב הקריירה שלי ביליתי בפיתוח: יותר מעשר שנים של בניית מערכות, אתרים ואפליקציות, על בסיס תואר ראשון במדעי המחשב.</p>
-      <p>עם הזמן הבנתי שהקוד הוא רק חצי מהסיפור. אתר מצוין לא שווה הרבה אם אף אחד לא מגיע אליו, וליד שנכנס לא שווה כלום אם אף אחד לא חוזר אליו. אז הוספתי לימודי שיווק דיגיטלי, והקמתי את SDmarketing כדי לחבר בין שני העולמות.</p>
-      <p>התוצאה: מישהו שמבין גם איך הקמפיין עובד, גם איך האתר בנוי מבפנים, וגם איך לגרום לשניהם לדבר עם הוואטסאפ של העסק.</p>
-    </div>
-    <ul class="creds" aria-label="השכלה וניסיון">
-      <li><span class="cred-ico"><?= icon('code') ?></span><span><b><bdi dir="ltr">10+</bdi> שנות ניסיון בפיתוח</b><small>מערכות, אתרים ואפליקציות</small></span></li>
-      <li><span class="cred-ico"><?= icon('cap') ?></span><span><b><bdi dir="ltr">B.Sc.</bdi> במדעי המחשב</b><small>תואר ראשון</small></span></li>
-      <li><span class="cred-ico"><?= icon('chart') ?></span><span><b>בוגר קורס שיווק דיגיטלי</b><small>קמפיינים, מדידה ואופטימיזציה</small></span></li>
-    </ul>
-  </div>
-</section>
-
-<!-- ============ ONE PERSON vs THREE SUPPLIERS ============ -->
-<section class="section why-one" aria-labelledby="why-title">
-  <div class="container">
-    <div class="section-head">
-      <h2 id="why-title">למה אדם אחד עדיף על שלושה ספקים.</h2>
-      <p>כשהמתכנת, המשווק ומי ש"מחבר את הוואטסאפ" הם שלושה אנשים שונים, כל העברה ביניהם היא מקום שבו מידע הולך לאיבוד. וכשמשהו לא עובד, כל אחד מצביע על השני.</p>
-    </div>
-
-    <div class="compare">
-      <div class="compare-side compare-side--before">
-        <h3>הדרך הרגילה</h3>
-        <div class="compare-diagram" aria-hidden="true">
-          <span class="cd-node cd-a"><?= icon('browser') ?>מתכנת</span>
-          <span class="cd-node cd-b"><?= icon('chart') ?>משווק</span>
-          <span class="cd-node cd-c"><?= icon('bot') ?>איש אוטומציות</span>
-          <svg class="cd-lines" viewBox="0 0 300 200" preserveAspectRatio="none"><path d="M80 52 L 220 52"/><path d="M70 70 L 140 150"/><path d="M230 70 L 160 150"/></svg>
-          <span class="cd-break cd-break-1">?</span><span class="cd-break cd-break-2">?</span><span class="cd-break cd-break-3">?</span>
-        </div>
-        <ul class="compare-list">
-          <li>שלוש הצעות מחיר, שלושה לוחות זמנים</li>
-          <li>אתה מתווך בין הספקים</li>
-          <li>כשמשהו נשבר, לא ברור של מי האחריות</li>
-        </ul>
-      </div>
-
-      <div class="compare-side compare-side--after">
-        <h3>עם SDmarketing</h3>
-        <div class="compare-diagram" aria-hidden="true">
-          <span class="cd-hub"><?= logo_mark('cd-mark') ?></span>
-          <span class="cd-node cd-a"><?= icon('browser') ?>אתר</span>
-          <span class="cd-node cd-b"><?= icon('chart') ?>קמפיין</span>
-          <span class="cd-node cd-c"><?= icon('bot') ?>אוטומציה</span>
-          <svg class="cd-lines" viewBox="0 0 300 200" preserveAspectRatio="none"><path d="M150 100 L 70 50"/><path d="M150 100 L 230 50"/><path d="M150 100 L 150 165"/></svg>
-        </div>
-        <ul class="compare-list">
-          <li>תוכנית אחת, מחיר אחד, איש קשר אחד</li>
-          <li>כל חלק נבנה כדי לעבוד עם השאר</li>
-          <li>אחריות מלאה על התוצאה, מקצה לקצה</li>
-        </ul>
-      </div>
+    <div class="ph">
+      <img src="assets/img/founder.webp" alt="שי דדון, מייסד SDmarketing" width="1024" height="1024" decoding="async">
+      <div class="badge">המייסד של<br>SDmarketing</div>
     </div>
   </div>
 </section>
 
-<!-- ============ HOW I WORK ============ -->
-<section class="section principles" aria-labelledby="principles-title">
-  <div class="container principles-grid">
-    <div class="principles-head">
-      <h2 id="principles-title">איך אני עובד.</h2>
-      <p>ארבעה כללים שמלווים כל פרויקט, מהשיחה הראשונה ועד אחרי שהוא עולה לאוויר.</p>
-    </div>
-    <ul class="principle-list">
-      <li>
-        <h3>קודם מבינים את העסק, אחר כך בונים.</h3>
-        <p>לא מתחילים מטכנולוגיה. מתחילים מהשאלה איפה הולך לכם זמן ואיפה הולכים לאיבוד לקוחות. ובונים רק את מה שפותר את זה.</p>
-      </li>
-      <li>
-        <h3>הכל בכתב, לפני שמתחילים.</h3>
-        <p>מה בונים, באיזה סדר, כמה זה עולה ומתי זה עולה לאוויר. בלי הפתעות באמצע.</p>
-      </li>
-      <li>
-        <h3>מודדים, ואז משפרים.</h3>
-        <p>כל אתר, בוט וקמפיין מחוברים למעקב מהיום הראשון, כדי שהחלטות יתקבלו לפי נתונים ולא לפי תחושה.</p>
-      </li>
-      <li>
-        <h3>זמין כמו שהלקוחות שלכם זמינים.</h3>
-        <p>מדברים בוואטסאפ, בשפה פשוטה, בלי טפסים ובלי מערכת כרטיסים. אתם יודעים בכל רגע איפה הפרויקט עומד.</p>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<!-- ============ PROOF: RECENT WORK ============ -->
-<section class="section about-work" aria-labelledby="work-title">
-  <div class="container">
-    <div class="section-head section-head--row">
+<section class="story" id="bio" aria-labelledby="story-title">
+  <div class="wrap">
+    <div class="split">
       <div>
-        <h2 id="work-title">ההוכחה נמצאת באוויר.</h2>
-        <p>כמה מהדברים שבניתי לאחרונה. אפשר להיכנס ולנסות בעצמכם.</p>
+        <span class="eyebrow">הסיפור</span>
+        <h2 id="story-title" style="margin-top:16px">מתכנת<br>שלמד <span class="acc">לדבר שיווק.</span></h2>
       </div>
-      <a class="btn btn-outline" href="projects.php"><span>לכל הפרויקטים</span><?= icon('arrow') ?></a>
+      <div>
+        <p>את רוב הקריירה שלי ביליתי בפיתוח: יותר מ־15 שנים של בניית מערכות, אתרים ואפליקציות, על בסיס תואר ראשון במדעי המחשב.</p>
+        <p>עם הזמן הבנתי שהקוד הוא רק חצי מהסיפור. אתר מצוין לא שווה הרבה אם אף אחד לא מגיע אליו, וליד שנכנס לא שווה כלום אם אף אחד לא חוזר אליו. אז השלמתי קורס בשיווק, ובשנתיים האחרונות אני עוסק גם בשיווק דיגיטלי. הקמתי את SDmarketing כדי לחבר בין שני העולמות.</p>
+        <p class="hl">התוצאה: מישהו שמבין גם איך הקמפיין עובד, גם איך האתר בנוי מבפנים, וגם איך לגרום לשניהם לדבר עם הוואטסאפ של העסק.</p>
+      </div>
     </div>
-    <ul class="work-strip">
-      <?php foreach ($projects as $p): ?>
-        <li>
-          <a class="work-item" href="<?= e($p['url'] ?: 'projects.php#case-' . $p['slug']) ?>"<?= $p['url'] ? ' target="_blank" rel="noopener"' : '' ?>>
-            <span class="work-mono" aria-hidden="true"><?= e(mb_strtoupper(mb_substr($p['name'], 0, 1))) ?></span>
-            <span class="work-text"><b dir="ltr" lang="en"><?= e($p['name']) ?></b><small><?= e($p['type']) ?></small></span>
-            <?= icon($p['url'] ? 'external' : 'arrow', 'icon work-arrow') ?>
-          </a>
-        </li>
-      <?php endforeach; ?>
-    </ul>
+    <div class="cred-row" id="creds">
+      <div class="c"><b class="ltr">15+</b><span>שנות ניסיון כמפתח תוכנה</span><small>מערכות, אתרים ואפליקציות</small></div>
+      <div class="c"><b class="ltr">B.Sc.</b><span>במדעי המחשב</span><small>תואר ראשון</small></div>
+      <div class="c"><b class="sm">קורס שיווק</b><span>בוגר קורס בשיווק</span><small>אסטרטגיה, קהלים ומסרים</small></div>
+      <div class="c"><b>שנתיים</b><span>בשיווק דיגיטלי</span><small>קמפיינים, מדידה ואופטימיזציה</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="compare dark" aria-labelledby="compare-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">למה זה חשוב</span>
+        <h2 class="sec" id="compare-title">למה אדם אחד<br><span class="acc">עדיף על שלושה ספקים.</span></h2>
+      </div>
+      <p class="lead">כשהמתכנת, המשווק ומי ש"מחבר את הוואטסאפ" הם שלושה אנשים שונים, כל העברה ביניהם היא מקום שבו מידע הולך לאיבוד. וכשמשהו לא עובד, כל אחד מצביע על השני.</p>
+    </div>
+    <div class="cmp">
+      <div class="col old">
+        <h3>הדרך הרגילה</h3>
+        <div class="nodes"><span>מתכנת</span><span>משווק</span><span>איש אוטומציות</span></div>
+        <ul>
+          <li><i>✕</i>שלוש הצעות מחיר, שלושה לוחות זמנים</li>
+          <li><i>✕</i>אתה מתווך בין הספקים</li>
+          <li><i>✕</i>כשמשהו נשבר, לא ברור של מי האחריות</li>
+        </ul>
+      </div>
+      <div class="col new">
+        <h3>עם SDmarketing</h3>
+        <div class="nodes"><span>אתר</span><span>קמפיין</span><span>אוטומציה</span></div>
+        <ul>
+          <li><i>✓</i>תוכנית אחת, מחיר אחד, איש קשר אחד</li>
+          <li><i>✓</i>כל חלק נבנה כדי לעבוד עם השאר</li>
+          <li><i>✓</i>אחריות מלאה על התוצאה, מקצה לקצה</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rules" aria-labelledby="rules-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">איך אני עובד</span>
+        <h2 class="sec" id="rules-title">ארבעה כללים.</h2>
+      </div>
+      <p class="lead">ארבעה כללים שמלווים כל פרויקט, מהשיחה הראשונה ועד אחרי שהוא עולה לאוויר.</p>
+    </div>
+    <div class="rule-grid">
+      <div class="rule"><span class="n">01</span><div><h3>קודם מבינים את העסק, אחר כך בונים.</h3><p>לא מתחילים מטכנולוגיה. מתחילים מהשאלה איפה הולך לכם זמן ואיפה הולכים לאיבוד לקוחות, ובונים רק את מה שפותר את זה.</p></div></div>
+      <div class="rule"><span class="n">02</span><div><h3>הכל בכתב, לפני שמתחילים.</h3><p>מה בונים, באיזה סדר, כמה זה עולה ומתי זה עולה לאוויר. בלי הפתעות באמצע.</p></div></div>
+      <div class="rule"><span class="n">03</span><div><h3>מודדים, ואז משפרים.</h3><p>כל אתר, בוט וקמפיין מחוברים למעקב מהיום הראשון, כדי שהחלטות יתקבלו לפי נתונים ולא לפי תחושה.</p></div></div>
+      <div class="rule"><span class="n">04</span><div><h3>זמין כמו שהלקוחות שלכם זמינים.</h3><p>מדברים בוואטסאפ, בשפה פשוטה, בלי טפסים ובלי מערכת כרטיסים. אתם יודעים בכל רגע איפה הפרויקט עומד.</p></div></div>
+    </div>
   </div>
 </section>
 
 <?php
-$cta_title = 'בואו נכיר.';
-$cta_text  = 'שיחה קצרה, בלי התחייבות: תספרו לי על העסק, ואגיד לכם בכנות מה הייתי בונה ראשון (ואם בכלל צריך).';
+$cta_title = "שיחה קצרה,\nבלי התחייבות.";
+$cta_text  = 'תספרו לי על העסק, ואגיד לכם בכנות מה הייתי בונה ראשון (ואם בכלל צריך).';
 require __DIR__ . '/includes/cta.php';
 require __DIR__ . '/includes/footer.php';
-?>

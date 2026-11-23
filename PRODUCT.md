@@ -24,16 +24,17 @@ One person who connects automation, development and marketing end-to-end: the ch
 - Service lines: business automations (WhatsApp chatbots, email automations, marketing automations, system integrations); websites (landing pages, e-commerce); PWA apps; digital marketing (campaign optimization).
 
 ## Brand Commitments
-- Name: SDmarketing. Existing logo: navy "SD" with rising arrow + bars, "DIGITAL MARKETING" (assets/img/logo-original.webp). Owner open to a new logo.
-- Colors: blue and white; play between dark navy and lighter blues.
-- Clean and professional.
+- Name: SDmarketing. Mark: three rising bars in terracotta on an ink square.
+- Colors: ink black `#0A0A0A`, warm paper `#F5F4F0`, one terracotta accent `#C8864F` (tint `#D9A57A` on dark).
+- Type: Heebo for headings, IBM Plex Sans Hebrew for body, IBM Plex Mono for small Latin labels.
+- Clean, editorial, and serious. Hebrew, RTL.
 
 ## Evidence on Hand
-- Founder portrait: assets/img/founder.jpg
-- Projects: fisha.shop (e-commerce), Excerly (PWA), Boardog (PWA) — no screenshots yet.
-- No testimonials, client counts or metrics — do not fabricate.
-- Founder: Shay Dadon (שי דדון) — 10+ years in software development, B.Sc. in Computer Science, graduate of a digital marketing course (a course, not a degree).
-- Phone/WhatsApp number and business email not yet provided (placeholders in includes/config.php).
+- Founder portrait: assets/img/founder.webp (shown in grayscale).
+- Projects: fisha.shop (e-commerce, https://fisha.shop) and Excerly (PWA, https://shaydadon.github.io/Excerly/). Real screenshots only.
+- No testimonials, client counts or metrics — do not fabricate. Illustrative visuals are labelled "הדגמה להמחשה".
+- Founder: Shay Dadon (שי דדון) — 15+ years as a software developer, B.Sc. in Computer Science, completed a marketing course, 2 years in digital marketing.
+- Phone/WhatsApp 052-620-3423, email shay@sdmarketing.co.il.
 
 ## Product Principles
 - Show the mechanism working (a bot answering, a flow firing) rather than claiming results.

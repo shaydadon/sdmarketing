@@ -33,7 +33,20 @@ npx playwright install chromium
 npm test
 ```
 
-## Deploy
+## Deploys (GitHub Actions)
+
+[.github/workflows/deploy.yml](.github/workflows/deploy.yml): every push runs the Playwright tests and, only if they pass, uploads the site over SSH (rsync):
+
+| Branch | Goes to |
+| --- | --- |
+| `development` | https://dev.sdmarketing.co.il (hidden from search engines, "סביבת פיתוח" badge, contact emails tagged `[DEV]`) |
+| `main` | https://sdmarketing.co.il (live) |
+
+A manual run (Actions > Deploy to Hostinger > Run workflow) can pick dev or live; live only from `main`.
+
+Repository secrets: `SSH_HOST`, `SSH_USER`, `SSH_PORT`, `SSH_KEY`, `DEV_PATH`, `LIVE_PATH`. Missing secrets skip the deploy with a warning.
+
+## Manual deploy (production, without Actions)
 
 Upload everything except `e2e/`, `README.md`, `PRODUCT.md` and `skills-lock.json` to `public_html` on Hostinger. Then:
 
