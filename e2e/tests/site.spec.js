@@ -48,7 +48,7 @@ test.describe('every page', () => {
       await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
       await expect(page).toHaveTitle(/SDmarketing/);
       await expect(page.locator('h1')).toHaveCount(1);
-      await expect(page.locator('body')).not.toContainText('Boardog');
+      if (p.name !== 'home') await expect(page.locator('body')).not.toContainText('Boardog');
       await expect(page.locator('body')).not.toContainText('10+');
       await expect(page.locator('body')).not.toContainText('יותר מעשר');
       await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /.{20,}/);
@@ -158,6 +158,26 @@ test.describe('homepage', () => {
     await expect(demo).toContainText('13:30 מעולה');
     await expect(demo).toContainText('התור נכנס ליומן');
     await expect(demo).toContainText('הדגמה להמחשה');
+  });
+
+  test('faq lists every service and publishes FAQPage data', async ({ page }) => {
+    await page.goto('/index.php');
+    const faq = page.locator('.faq');
+    await expect(faq.locator('h2')).toHaveText('שאלות שבעלי עסקים שואלים אותי');
+    await expect(faq.locator('details')).toHaveCount(5);
+    await expect(faq).toContainText('ללא צורך בחנות האפליקציות');
+    await expect(faq).toContainText('fisha.shop');
+    await expect(faq).toContainText('Excerly');
+    await expect(faq).toContainText('Boardog');
+    await expect(faq).not.toContainText('קלעי');
+    const ld = await page.locator('script[type="application/ld+json"]').textContent();
+    const data = JSON.parse(ld);
+    expect(data['@type']).toBe('FAQPage');
+    expect(data.mainEntity).toHaveLength(5);
+    const first = faq.locator('details').first();
+    await expect(first).not.toHaveAttribute('open', '');
+    await first.locator('summary').click();
+    await expect(first).toHaveAttribute('open', '');
   });
 });
 

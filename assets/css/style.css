@@ -170,6 +170,23 @@ h2.sec{font-size:60px;font-weight:900;margin:18px 0 0}
 .media-bd .ph-frame{width:150px;height:300px;border-radius:24px}
 /* founder */
 .founder{padding:0 0 130px}
+.faq{padding:0 0 110px}
+.faq-list{margin-top:36px;display:flex;flex-direction:column;gap:12px;max-width:860px}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:16px}
+.faq summary{cursor:pointer;list-style:none;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:18px 22px;font-family:var(--display);font-weight:700;font-size:20px;line-height:1.35}
+.faq summary span{flex:1;min-width:0}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex:none;color:var(--accent);font-size:26px;line-height:1;font-weight:500}
+.faq details[open]{border-color:var(--accent)}
+.faq details[open] summary::after{content:"–"}
+.faq .faq-a{padding:0 22px 20px}
+.faq .faq-a p{margin:0;color:var(--mute);font-size:17px;line-height:1.65;max-width:68ch}
+.faq .faq-a a{color:var(--accent);border-bottom:1.5px solid var(--accent)}
+@media (max-width:800px){
+  .faq{padding-bottom:72px}
+  .faq summary{font-size:17px;padding:16px}
+  .faq .faq-a{padding:0 16px 16px}
+}
 .f-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:80px;align-items:center}
 .f-photo{position:relative}
 .f-photo .sq{position:absolute;inset:40px -24px -24px 40px;background:var(--accent);border-radius:var(--r)}

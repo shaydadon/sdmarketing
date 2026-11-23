@@ -185,6 +185,70 @@ require __DIR__ . '/includes/projects-data.php';
 </section>
 
 <?php
+$faq = [
+    [
+        'q' => 'יש לי מוצרים מעולים אבל אין לי איך למכור אותם אונליין?',
+        'a' => 'חנות אונליין נבנית סביב הקנייה: קטלוג, עגלה, סליקה וניהול הזמנות, בלי שהגולש ילך לאיבוד בדרך. אותו קו עבודה מתאים גם לדף נחיתה לקמפיין או לאתר תדמית שמוביל לשיחה. דוגמה לחנות חיה היא fisha.shop.',
+    ],
+    [
+        'q' => 'פניות מגיעות בוואטסאפ ובמייל, ואני לא מספיק לחזור לכולן?',
+        'a' => 'אוטומציה מעבירה את מה שחוזר על עצמו לרוץ לבד: הודעה, מייל או עדכון בטבלה. בוט יכול לענות על שאלות נפוצות, לאסוף פרטים ולקבוע תור, והפרטים עוברים ליומן או לגיליון בלי להעתיק אותם ידנית.',
+    ],
+    [
+        'q' => 'אני רוצה אפליקציה ללקוחות, בלי לעבור דרך חנות האפליקציות?',
+        'a' => 'אפליקציית PWA מתקינים ישר מהדפדפן, ללא צורך בחנות האפליקציות, והיא נפתחת עם אייקון במסך הבית. אותו קוד רץ על אנדרואיד, על אייפון ועל מחשב. כך נבנתה Excerly.',
+    ],
+    [
+        'q' => 'אני משלם על פרסום ולא ברור לי מה באמת מביא פניות?',
+        'a' => 'קמפיין בגוגל או במטא נמדד לפי פניות ומכירות, לא לפי לייקים. קודם מוודאים שכל פנייה נספרת, ואז משפרים את מה שמביא תוצאה ועוצרים את מה שלא. בסוף יש דוח ברור: מה עבד ומה כדאי לשנות הלאה.',
+    ],
+    [
+        'q' => 'יש לי פנסיון, והוואטסאפ מתמלא בשאלות על תאריכים ופגישות?',
+        'a' => 'Boardog הוא צ׳אטבוט לוואטסאפ לבעלי פנסיונים. הוא מקבל את הפנייה, אוסף את פרטי בעל החיים ואת התאריכים, וקובע פגישת היכרות בלי שתנהלו את כל השיחה ידנית.',
+    ],
+];
+$faq_ld = [
+    '@context' => 'https://schema.org',
+    '@type' => 'FAQPage',
+    'mainEntity' => array_map(fn($item) => [
+        '@type' => 'Question',
+        'name' => $item['q'],
+        'acceptedAnswer' => ['@type' => 'Answer', 'text' => $item['a']],
+    ], $faq),
+];
+?>
+<section class="faq" aria-labelledby="faq-title">
+  <div class="wrap">
+    <span class="eyebrow">שאלות נפוצות</span>
+    <h2 class="sec" id="faq-title">שאלות שבעלי עסקים שואלים אותי</h2>
+    <div class="faq-list">
+      <?php foreach ($faq as $i => $item): ?>
+        <details>
+          <summary id="faq-q-<?= $i ?>"><span><?= e($item['q']) ?></span></summary>
+          <div class="faq-a" role="region" aria-labelledby="faq-q-<?= $i ?>">
+            <p><?php
+              $html = e($item['a']);
+              $html = str_replace(
+                  'fisha.shop',
+                  '<a href="https://fisha.shop" target="_blank" rel="noopener">fisha.shop</a>',
+                  $html
+              );
+              $html = str_replace(
+                  'Excerly',
+                  '<a href="https://shaydadon.github.io/Excerly/" target="_blank" rel="noopener">Excerly</a>',
+                  $html
+              );
+              echo $html;
+            ?></p>
+          </div>
+        </details>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+<script type="application/ld+json"><?= json_encode($faq_ld, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) ?></script>
+
+<?php
 $cta_contacts = true;
 require __DIR__ . '/includes/cta.php';
 require __DIR__ . '/includes/footer.php';
