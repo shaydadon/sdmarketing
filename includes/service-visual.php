@@ -19,15 +19,15 @@ function service_visual(string $id): void
       <div class="visual real">
         <div class="browser" style="width:100%">
           <div class="bar"><i></i><i></i><i></i><u>fisha.shop/shop</u></div>
-          <img src="assets/img/projects/fisha/shop-hq-c.webp" alt="עמוד החנות של fisha.shop" width="1600" height="929" loading="lazy" decoding="async">
+          <img src="assets/img/projects/fisha/shop-hq-c.webp" alt="צילום מסך של החנות fisha.shop" width="1600" height="929" loading="lazy" decoding="async">
         </div>
-        <div class="mphone"><img src="assets/img/projects/fisha/collectibles-mc.webp" alt="fisha.shop במובייל, קטגוריית Collectibles" width="780" height="1568" loading="lazy" decoding="async"></div>
+        <div class="mphone"><img src="assets/img/projects/fisha/collectibles-mc.webp" alt="החנות fisha.shop במובייל" width="780" height="1568" loading="lazy" decoding="async"></div>
         <span class="note">צילום מסך אמיתי · fisha.shop</span>
       </div>
     <?php elseif ($id === 'pwa'): ?>
       <div class="visual real ex">
-        <div class="mphone"><img src="assets/img/projects/excerly/home-m.webp" alt="מסך היום באפליקציית Excerly" width="780" height="1688" loading="lazy" decoding="async"></div>
-        <div class="mphone"><img src="assets/img/projects/excerly/workouts-m.webp" alt="מסך האימונים באפליקציית Excerly" width="780" height="1688" loading="lazy" decoding="async"></div>
+        <div class="mphone"><img src="assets/img/projects/excerly/home-m.webp" alt="צילום מסך של האפליקציה Excerly" width="780" height="1688" loading="lazy" decoding="async"></div>
+        <div class="mphone"><img src="assets/img/projects/excerly/workouts-m.webp" alt="צילום מסך נוסף של האפליקציה Excerly" width="780" height="1688" loading="lazy" decoding="async"></div>
         <span class="note">צילום מסך אמיתי · Excerly</span>
       </div>
     <?php else: ?>
