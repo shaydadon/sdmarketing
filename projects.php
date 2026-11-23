@@ -52,13 +52,20 @@ require __DIR__ . '/includes/projects-data.php';
         <?php endforeach; ?>
         <p class="stage-cap">צילום מסך אמיתי</p>
       </div>
-    <?php else:
-      $shot = $p['shots'][0];
-      if ($p['slug'] === 'fisha') {
-        $shot = ['src' => 'assets/img/projects/fisha/tattoos-1.webp', 'alt' => 'צילום מסך של החנות fisha.shop', 'w' => 1600, 'h' => 1000, 'chrome' => 'fisha.shop'];
-      }
-    ?>
-      <div class="stage stage-one<?= $p['slug'] === 'fisha' ? ' stage-fisha-slim' : '' ?>">
+    <?php elseif ($p['slug'] === 'fisha'): ?>
+      <div class="stage stage-fisha-pair">
+        <div class="browser">
+          <div class="bar"><i></i><i></i><i></i><u>/tattoos</u></div>
+          <img src="assets/img/projects/fisha/tattoos-1.webp" alt="עמוד הקעקועים של fisha.shop" width="1600" height="1000" loading="lazy" decoding="async">
+        </div>
+        <div class="browser">
+          <div class="bar"><i></i><i></i><i></i><u>/tattoos</u></div>
+          <img src="assets/img/projects/fisha/tattoos-2.webp" alt="Flash sheet בחנות fisha.shop" width="1600" height="1000" loading="lazy" decoding="async">
+        </div>
+        <p class="stage-cap">צילום מסך אמיתי</p>
+      </div>
+    <?php else: $shot = $p['shots'][0]; ?>
+      <div class="stage stage-one">
         <div class="browser">
           <div class="bar"><i></i><i></i><i></i><u><?= e($shot['chrome'] ?? $p['name']) ?></u></div>
           <img src="<?= e($shot['src']) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" loading="lazy" decoding="async">
