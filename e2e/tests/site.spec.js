@@ -183,6 +183,20 @@ test.describe('projects', () => {
     await expect(apps).toBeVisible();
     await expect(page.locator('body')).not.toContainText('Boardog');
   });
+
+  test('whatsapp bot showcase renders', async ({ page }) => {
+    await page.goto('/projects.php');
+    const block = page.locator('#case-bot');
+    await expect(block).toBeVisible();
+    await expect(block.locator('h2')).toHaveText('צ׳אטבוט לוואטסאפ');
+    await expect(block).toContainText('בוט וואטסאפ');
+    await expect(block).toContainText('הפנסיון של ג׳רי');
+    await expect(block).toContainText('מחובר/ת');
+    await expect(block).toContainText('הקלדה...');
+    await expect(block.locator('[data-wa-log]')).toBeVisible();
+    await expect(block).not.toContainText('Claude');
+    await expect(block).not.toContainText('AI (Claude)');
+  });
 });
 
 test.describe('contact form', () => {

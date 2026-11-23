@@ -116,4 +116,49 @@
     }, { rootMargin: '-20% 0px -70% 0px' });
     document.querySelectorAll('[data-toc-section]').forEach((s) => io.observe(s));
   }
+
+  const wa = document.querySelector('[data-wa-demo]');
+  if (wa) {
+    const log = wa.querySelector('[data-wa-log]');
+    const items = [...log.querySelectorAll('[data-msg]')];
+    const typing = log.querySelector('[data-typing]');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    const pin = () => log.scrollTo({ top: log.scrollHeight, behavior: reduce ? 'auto' : 'smooth' });
+    const showAll = () => {
+      items.forEach((el) => { el.hidden = false; });
+      if (typing) typing.hidden = true;
+      log.classList.remove('wad-pending');
+      pin();
+    };
+    if (reduce) {
+      showAll();
+    } else {
+      items.forEach((el) => { el.hidden = true; });
+      log.classList.remove('wad-pending');
+      let started = false;
+      const play = async () => {
+        for (const el of items) {
+          if (el.dataset.msg === 'b' && typing) {
+            typing.hidden = false;
+            log.appendChild(typing);
+            pin();
+            await wait(480);
+            typing.hidden = true;
+          }
+          el.hidden = false;
+          el.classList.add('wad-enter');
+          pin();
+          await wait(el.dataset.msg === 'b' ? 320 : 240);
+        }
+        wa.dataset.waDone = '1';
+      };
+      new IntersectionObserver((entries) => {
+        if (!started && entries.some((entry) => entry.isIntersecting)) {
+          started = true;
+          play();
+        }
+      }, { threshold: 0.35 }).observe(wa);
+    }
+  }
 })();
