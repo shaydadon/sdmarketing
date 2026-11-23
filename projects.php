@@ -52,9 +52,13 @@ require __DIR__ . '/includes/projects-data.php';
         <?php endforeach; ?>
         <p class="stage-cap">צילום מסך אמיתי</p>
       </div>
-    <?php else: ?>
-      <div class="stage stage-one">
-        <?php $shot = $p['shots'][0]; ?>
+    <?php else:
+      $shot = $p['shots'][0];
+      if ($p['slug'] === 'fisha') {
+        $shot = ['src' => 'assets/img/projects/fisha/tattoos-1.webp', 'alt' => 'צילום מסך של החנות fisha.shop', 'w' => 1600, 'h' => 1000, 'chrome' => 'fisha.shop'];
+      }
+    ?>
+      <div class="stage stage-one<?= $p['slug'] === 'fisha' ? ' stage-fisha-slim' : '' ?>">
         <div class="browser">
           <div class="bar"><i></i><i></i><i></i><u><?= e($shot['chrome'] ?? $p['name']) ?></u></div>
           <img src="<?= e($shot['src']) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" loading="lazy" decoding="async">
