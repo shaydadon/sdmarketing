@@ -799,6 +799,20 @@ footer a:hover{color:#fff}
   .sent-card .ctas .btn{justify-content:center}
   .env-badge{bottom:88px}
 }
+@media (max-width:420px){
+  .statement h2{font-size:28px;line-height:1.55}
+  .statement h2 mark{
+    border-bottom:0;
+    padding:0;
+    white-space:nowrap;
+    text-decoration:underline;
+    text-decoration-color:var(--accent);
+    text-decoration-thickness:2px;
+    text-underline-offset:.22em;
+    -webkit-box-decoration-break:clone;
+    box-decoration-break:clone;
+  }
+}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   .btn.is-loading .spinner{animation:none}
