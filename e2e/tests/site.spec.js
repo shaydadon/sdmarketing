@@ -151,13 +151,13 @@ test.describe('homepage', () => {
     await expect(page.locator('a[href="services.php#pwa"]')).toBeVisible();
   });
 
-  test('hero demo shows the bot conversation and the automations it triggers', async ({ page }) => {
+  test('hero leads with the headline, one clear action, and real work', async ({ page }) => {
     await page.goto('/index.php');
-    const demo = page.locator('[data-demo]');
-    await expect(demo).toContainText('המספרה של דנה');
-    await expect(demo).toContainText('13:30 מעולה');
-    await expect(demo).toContainText('התור נכנס ליומן');
-    await expect(demo).toContainText('הדגמה להמחשה');
+    await expect(page.locator('h1')).toContainText('העסק שלך ממשיך לעבוד.');
+    await expect(page.locator('.h3ro .btn-main')).toHaveText(/בואו נדבר על העסק שלכם/);
+    await expect(page.locator('.h3-art img')).toHaveCount(3);
+    await expect(page.locator('.h3-why li')).toHaveCount(3);
+    await expect(page.locator('.services.lite .svc .out').first()).toContainText('פחות עבודה ידנית');
   });
 
   test('faq lists every service and publishes FAQPage data', async ({ page }) => {

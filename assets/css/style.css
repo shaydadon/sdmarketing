@@ -938,3 +938,108 @@ footer .logo small{color:#9A9893}
 @media (prefers-reduced-motion:reduce){
   #case-bot .wad-dots i,#case-bot .wad-b.wad-enter,#case-bot .wad-c.wad-enter{animation:none}
 }
+
+/* ================= v4: original design + the light hero with real work + animated service cards ================= */
+:root{--accent-big:#AD6E3A}   /* large terracotta text on paper (3.7:1) */
+
+/* Light header on the home page, to sit on the light hero */
+.page-index .topbar{background:var(--paper);color:var(--ink)}
+.page-index .topbar.is-scrolled{box-shadow:0 1px 0 var(--line)}
+.page-index .topbar .logo,.page-index .topbar .menu a{color:var(--ink)}
+.page-index .topbar .logo small{color:var(--mute)}
+.page-index .topbar .btn-acc{background:var(--ink);color:#fff}
+.page-index .nav-toggle{color:var(--ink);border-color:var(--line)}
+
+/* Hero */
+.h3ro{padding:40px 0 120px;overflow:hidden}
+.h3-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}
+.h3ro h1{font-size:58px;font-weight:800;line-height:1.06;letter-spacing:-.03em;margin-top:22px}
+.h3ro h1 .l1{white-space:nowrap}
+.h3ro h1 .l2{display:block;color:var(--accent-big)}
+.h3ro .lead{max-width:520px;margin-top:22px;color:#4a4845}
+.btn-main{background:var(--accent);color:var(--ink);height:60px;padding:0 30px;margin-top:34px;font-size:18px;box-shadow:0 14px 30px -14px #ad6e3a88;transition:transform .25s ease,box-shadow .25s ease}
+.btn-main:hover{transform:translateY(-2px);box-shadow:0 18px 36px -14px #ad6e3abb}
+.btn-main svg{transition:transform .25s ease}.btn-main:hover svg{transform:translateX(-3px)}
+.h3ro .offer{font-size:15px;color:var(--mute);margin-top:16px;max-width:440px}
+.h3-meta{list-style:none;display:flex;gap:32px;margin-top:34px;padding-top:24px;border-top:1px solid var(--line);max-width:560px}
+.h3-meta li{font-size:14.5px;color:var(--mute);line-height:1.35}
+.h3-meta b{display:block;font-family:var(--display);font-weight:800;font-size:19px;color:var(--ink);margin-bottom:2px}
+
+/* Hero image: staggered real work. Site on top, PWA one step down beside it (never over it), chatbot lowest. */
+.h3-art{position:relative;margin:0;padding:0;aspect-ratio:640/660}
+.h3-art .h3-b{position:absolute;top:0;left:22%;width:78%;margin:0;box-shadow:0 40px 80px -30px #0006;border-color:var(--line)}
+.h3-art .h3-b img{aspect-ratio:1600/1000}
+.device{position:absolute;background:#0b0b0b;border-radius:16%/7.4%;padding:7px;
+  box-shadow:0 0 0 1.5px #c9c6bf,0 0 0 3px #f2f0ea,0 0 0 4px #b9b5ad,0 40px 70px -24px #000a,0 14px 28px -14px #0006}
+.device img{display:block;width:100%;border-radius:12.5%/5.8%;aspect-ratio:780/1690;object-fit:cover;object-position:top}
+.device::before{content:"";position:absolute;top:4.6%;left:50%;width:30%;height:2.6%;transform:translateX(-50%);background:#000;border-radius:99px;z-index:2}
+.device::after{content:"";position:absolute;top:20%;right:-3.5%;width:2%;height:11%;background:#b9b5ad;border-radius:0 3px 3px 0}
+.h3-art .h3-p{top:13%;left:0;width:20.5%}
+.h3-art .h3-bd{top:39%;left:25%;width:25.5%;z-index:2}
+.h3-why{list-style:none;position:absolute;top:56%;left:55%;right:0;display:grid;gap:10px}
+.h3-why li{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:11px 14px;box-shadow:0 14px 30px -18px #0005;font-size:13px;color:var(--mute);line-height:1.3}
+.h3-why li svg{flex:none;width:22px;height:22px;padding:4px;border-radius:50%;background:var(--accent);color:var(--ink)}
+.h3-why b{display:block;font-family:var(--display);font-weight:700;font-size:15px;color:var(--ink)}
+.h3-why li span{font-size:13.5px}
+.h3-cap{position:absolute;bottom:-40px;left:0;right:0;text-align:center;font-size:14px;color:var(--mute)}
+.h3-cap a{color:var(--ink);font-family:var(--display);font-weight:700;border-bottom:1.5px solid var(--accent)}
+
+/* Hero motion */
+@keyframes up-in{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes art-in{from{opacity:0;transform:translateY(30px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 -10px}}
+@keyframes why-in{0%,3%{opacity:0;transform:translateX(-14px)}9%,88%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}
+.hero-in > *{animation:up-in .9s cubic-bezier(.2,.7,.2,1) both}
+.hero-in > :nth-child(2){animation-delay:.08s}.hero-in > :nth-child(3){animation-delay:.18s}.hero-in > :nth-child(4){animation-delay:.28s}.hero-in > :nth-child(5){animation-delay:.36s}.hero-in > :nth-child(6){animation-delay:.44s}
+.h3-art .h3-b{animation:art-in 1s .15s cubic-bezier(.2,.7,.2,1) both}
+.h3-art .h3-p{animation:art-in 1s .35s cubic-bezier(.2,.7,.2,1) both,bob 7s 1.4s ease-in-out infinite}
+.h3-art .h3-bd{animation:art-in 1s .5s cubic-bezier(.2,.7,.2,1) both,bob 8s 2s ease-in-out infinite}
+.h3-why li{animation:why-in 10s infinite both}
+.h3-why li:nth-child(1){animation-delay:1.2s}.h3-why li:nth-child(2){animation-delay:2.1s}.h3-why li:nth-child(3){animation-delay:3s}
+
+/* Service cards: clean cards with the business outcome; hover lifts the card and marks the outcome */
+.services.lite{padding:0 0 130px}
+.services.lite .sec-head{margin-bottom:44px}
+.services.lite .svc-grid{grid-template-columns:repeat(4,1fr);gap:16px}
+.services.lite .svc{min-height:290px;padding:30px 26px;display:flex;flex-direction:column;overflow:hidden;transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease}
+.services.lite .svc .icon{position:static;width:48px;height:48px;border-radius:12px;background:var(--paper);border:1px solid var(--line)}
+.services.lite .svc .icon svg{width:22px;height:22px;color:var(--accent-ink)}
+.services.lite .svc h3{font-size:24px;font-weight:700;margin-top:26px}
+.services.lite .svc p.d{font-size:16px;margin-top:10px}
+.services.lite .svc .out{margin-top:auto;padding-top:22px;font-family:var(--display);font-weight:700;font-size:17px;line-height:1.35;color:var(--mute);display:flex;align-items:flex-end;justify-content:space-between;gap:10px;border-top:1px solid var(--line);transition:color .3s}
+.services.lite .svc .out svg{flex:none;width:18px;height:18px;color:var(--accent);transition:transform .3s}
+.services.lite .svc:hover,.services.lite .svc:focus-visible{transform:translateY(-6px);box-shadow:0 30px 60px -30px #0005;border-color:var(--accent)}
+.services.lite .svc:hover .out,.services.lite .svc:focus-visible .out{color:var(--ink)}
+.services.lite .svc:hover .out svg,.services.lite .svc:focus-visible .out svg{transform:translateX(-4px)}
+
+/* Scroll reveal (JS adds .rv-on to <html>; without JS nothing is hidden) */
+.rv-on .rv{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.rv-on .rv.in{opacity:1;transform:none}
+.rv-on .svc-grid .rv:nth-child(2){transition-delay:.06s}.rv-on .svc-grid .rv:nth-child(3){transition-delay:.12s}.rv-on .svc-grid .rv:nth-child(4){transition-delay:.18s}
+.rv-on .services.lite .svc.rv.in:hover{transform:translateY(-6px)}
+
+@media (prefers-reduced-motion:reduce){
+  .hero-in > *,.h3-art > *,.h3-why li{animation:none!important;opacity:1}
+  .rv-on .rv{opacity:1;transform:none;transition:none}
+  .services.lite .svc:hover,.btn-main:hover{transform:none}
+}
+@media (max-width:1100px){.services.lite .svc-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:1000px){.h3-grid{grid-template-columns:1fr;gap:48px}}
+@media (max-width:800px){
+  .h3ro{padding:20px 0 70px}
+  .h3ro h1{font-size:40px}
+  .h3ro h1 .l1{white-space:normal}
+  .btn-main{width:100%;justify-content:center}
+  .h3-meta{gap:18px;margin-top:26px;padding-top:18px}.h3-meta li{font-size:13px}.h3-meta b{font-size:17px}
+  .h3-art{margin-bottom:34px}
+  .device{padding:4px;box-shadow:0 0 0 1px #c9c6bf,0 0 0 2px #f2f0ea,0 0 0 2.5px #b9b5ad,0 24px 44px -18px #000a}
+  .h3-why{left:54%;top:62%;gap:6px}
+  .h3-why li{padding:6px 8px;gap:6px;border-radius:10px}
+  .h3-why li svg{width:16px;height:16px;padding:3px}
+  .h3-why b{font-size:11.5px}
+  .h3-why li span{font-size:0}
+  .h3-cap{bottom:-34px;font-size:13px}
+  .services.lite{padding:0 0 76px}
+  .services.lite .svc-grid{grid-template-columns:1fr}
+  .services.lite .svc{min-height:0;padding:24px 22px}
+}
