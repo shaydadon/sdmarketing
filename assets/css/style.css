@@ -1129,3 +1129,11 @@ h1,h2,h3{text-wrap:balance}
   .h3ro .offer{display:none}
   .h3-grid{gap:30px}
 }
+
+/* Home: the mobile menu sits on the light header, so it takes ink text and light dividers */
+.page-index .mobile-nav:not([hidden]){border-top-color:var(--line)}
+.page-index .mobile-nav a{color:var(--ink);border-bottom-color:var(--line)}
+.page-index .mobile-nav a[aria-current="page"]{color:var(--accent-big)}
+.page-index .mobile-nav a svg{color:var(--accent)}
+/* Closing CTA on mobile: no decorative ring behind the heading and text */
+@media (max-width:800px){.cta .ring{display:none}}
