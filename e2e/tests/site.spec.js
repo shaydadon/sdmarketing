@@ -181,6 +181,16 @@ test.describe('clean URLs', () => {
     expect(robots).toContain('Sitemap: https://sdmarketing.co.il/sitemap.xml');
   });
 
+  test('the IndexNow key file is served at the root and contains its own key', async ({ request }) => {
+    const fs = require('fs');
+    const path = require('path');
+    const keyFile = fs.readdirSync(path.resolve(__dirname, '../..')).find((f) => /^[0-9a-f]{32}\.txt$/.test(f));
+    expect(keyFile).toBeTruthy();
+    const res = await request.get('/' + keyFile, { maxRedirects: 0 });
+    expect(res.status()).toBe(200);
+    expect((await res.text()).trim()).toBe(keyFile.replace('.txt', ''));
+  });
+
   test('every internal link on every page is clean (no .php, no ?slug=)', async ({ page }) => {
     for (const path of ['/', '/services', '/projects', '/articles', '/articles/whatsapp-chatbot', '/about', '/contact', '/terms']) {
       await page.goto(path);
