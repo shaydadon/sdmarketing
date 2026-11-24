@@ -160,16 +160,15 @@ test.describe('articles', () => {
     }
   });
 
-  test('the mobile menu lists every article under Articles, with its image', async ({ page, isMobile }) => {
-    test.skip(!isMobile, 'mobile menu only');
+  test('the menu starts with Services, has no Home item, and Articles is a plain link', async ({ page, isMobile }) => {
     await page.goto('/index.php');
-    await page.locator('[data-nav-toggle]').click();
-    const sub = page.locator('.mobile-nav .mn-sub a');
-    await expect(sub).toHaveCount(6);
-    await expect(sub.first().locator('img')).toBeVisible();
-    await sub.nth(2).click();
-    await expect(page).toHaveURL(/article\.php\?slug=/);
-    await expect(page.locator('.post-cover img')).toBeVisible();
+    if (isMobile) await page.locator('[data-nav-toggle]').click();
+    const links = page.locator(isMobile ? '.mobile-nav > ul > li > a' : '[data-nav] a');
+    await expect(links).toHaveText([/שירותים/, /פרויקטים/, /מאמרים/, /אודות/, /צור קשר/]);
+    await expect(page.locator('.mobile-nav .mn-sub')).toHaveCount(0);
+    await links.nth(2).click();
+    await expect(page).toHaveURL(/articles\.php$/);
+    await expect(page.locator('header a.logo')).toHaveAttribute('href', 'index.php');
   });
 
   test('topic filters show only that topic, and each article names its author and date', async ({ page }) => {

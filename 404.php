@@ -14,6 +14,7 @@ require __DIR__ . '/includes/header.php';
     <h1 id="page-title">העמוד הזה לא קיים. <span>אבל העסק שלך כן.</span></h1>
     <p class="lead">ייתכן שהקישור שבור או שהעמוד הועבר. אפשר להמשיך מכאן:</p>
     <ul class="not-found-links">
+      <li><a href="index.php">בית<?= icon('arrow') ?></a></li>
       <?php foreach ($nav as $item): ?>
         <li><a href="<?= e($item['href']) ?>"><?= e($item['label']) ?><?= icon('arrow') ?></a></li>
       <?php endforeach; ?>

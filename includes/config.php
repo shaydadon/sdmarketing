@@ -17,11 +17,11 @@ $site = [
 ];
 
 $nav = [
-    'index'    => ['href' => 'index.php',    'label' => 'בית'],
+    // Order by importance; the logo links home, so there is no 'Home' item.
     'services' => ['href' => 'services.php', 'label' => 'שירותים'],
     'projects' => ['href' => 'projects.php', 'label' => 'פרויקטים'],
-    'about'    => ['href' => 'about.php',    'label' => 'אודות'],
     'articles' => ['href' => 'articles.php', 'label' => 'מאמרים'],
+    'about'    => ['href' => 'about.php',    'label' => 'אודות'],
     'contact'  => ['href' => 'contact.php',  'label' => 'צור קשר'],
 ];
 
