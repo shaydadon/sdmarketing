@@ -14,9 +14,20 @@ require __DIR__ . '/includes/service-visual.php';
     <nav class="crumb" aria-label="<?= tr('מיקום בעמוד', 'Breadcrumb') ?>"><a href="<?= lurl('') ?>"><?= tr('בית', 'Home') ?></a> / <b><?= tr('שירותים', 'Services') ?></b></nav>
     <h1 id="page-title"><?= tr('כל מה שהעסק צריך כדי למכור אונליין.<span>ולעבוד פחות.</span>', 'Everything your business needs to sell more online.<span>While you work less.</span>') ?></h1>
     <p class="lead" style="max-width:720px;margin-top:28px"><?= tr('חמישה תחומים שנבנים כך שיתחברו זה לזה: חיפוש אורגני או קמפיין ממומן מביאים את הלקוח, האתר משכנע אותו, הבוט עונה לו והאוטומציה דואגת שאף אחד לא ייפול בין הכיסאות.', 'Five services designed to work together: SEO or a paid campaign brings customers in, your website wins them over, a chatbot answers instantly, and automation makes sure no one slips through the cracks.') ?></p>
-    <nav class="subnav" aria-label="<?= tr('מעבר בין שירותים', 'Jump to a service') ?>" data-jump>
+  </div>
+</section>
+
+<section class="svc-overview" aria-label="<?= tr('סיכום השירותים', 'Services at a glance') ?>">
+  <div class="wrap">
+    <nav class="svo-grid" aria-label="<?= tr('מעבר בין שירותים', 'Jump to a service') ?>" data-jump>
       <?php foreach ($services as $i => $s): ?>
-        <a class="chip<?= $i === 0 ? ' on' : '' ?>" href="#<?= e($s['id']) ?>" data-jump-link="<?= e($s['id']) ?>"><?= sprintf('%02d', $i + 1) ?> · <?= e($s['title']) ?></a>
+        <a class="svo" href="#<?= e($s['id']) ?>" data-jump-link="<?= e($s['id']) ?>">
+          <span class="svo-ic"><?= icon($s['icon']) ?></span>
+          <span class="svo-t"><?= e($s['title']) ?></span>
+          <span class="svo-d"><?= e($s['lead']) ?></span>
+          <span class="svo-f"><small><?= tr('מתאים ל', 'Good for') ?></small><?= e($s['fit']) ?></span>
+          <span class="svo-go"><?= tr('לפרטים', 'Details') ?><?= icon('arrow') ?></span>
+        </a>
       <?php endforeach; ?>
     </nav>
   </div>
@@ -30,13 +41,8 @@ require __DIR__ . '/includes/service-visual.php';
   <div class="wrap split">
     <?php if ($alt) service_visual($s['id']); ?>
     <div>
-      <span class="eyebrow"><?= sprintf('%02d', $i + 1) ?> · <?= e($s['title']) ?></span>
       <h2 id="<?= e($s['id']) ?>-title"><?= e($s['title']) ?></h2>
-      <div class="tagline"><?= e($s['headline']) ?> <span><?= e($s['headline_accent']) ?></span></div>
       <p class="intro"><?= e($s['intro']) ?></p>
-      <?php if (!empty($s['more'])): ?>
-        <p class="more"><a href="<?= e(url($s['more']['href'])) ?>"><?= e($s['more']['label']) ?></a></p>
-      <?php endif; ?>
       <div class="feat-grid">
         <?php foreach ($s['features'] as $f): ?>
           <div class="feat"><h3><?= e($f['title']) ?></h3><p><?= e($f['text']) ?></p></div>
@@ -53,10 +59,10 @@ require __DIR__ . '/includes/service-visual.php';
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <span class="eyebrow"><?= tr('איך זה מתחבר', 'How it all connects') ?></span>
-        <h2 class="sec" id="journey-title"><?= tr('הכוח האמיתי:<br><span class="acc">כשהכל מחובר.</span>', 'The real advantage:<br><span class="acc">everything works together.</span>') ?></h2>
+        <span class="eyebrow"><?= tr('איך זה מתחבר', 'How it connects') ?></span>
+        <h2 class="sec" id="journey-title"><?= tr('איך השירותים<br><span class="acc">עובדים יחד.</span>', 'How the services<br><span class="acc">work together.</span>') ?></h2>
       </div>
-      <p class="lead"><?= tr('ככה נראית דרכו של לקוח אחד כשכל השירותים בנויים על ידי אותו אדם: בלי פערים בין ספקים, ובלי מידע שהולך לאיבוד בדרך.', 'Here’s one customer’s journey when every piece is built by the same person: no gaps between vendors, and no data lost along the way.') ?></p>
+      <p class="lead"><?= tr('ככה נראית הדרך של לקוח אחד כשאותו אדם בונה את כל השירותים, והמידע עובר משלב לשלב.', 'This is one customer’s journey when the same person builds every service, and the information moves from one step to the next.') ?></p>
     </div>
     <div class="jsteps">
       <?php if ($is_en): ?>

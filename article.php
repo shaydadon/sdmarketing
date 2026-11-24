@@ -80,6 +80,17 @@ $related = [$others[$i % count($others)], $others[($i + 1) % count($others)]];
 <article class="post" aria-labelledby="page-title">
   <div class="wrap post-wrap">
     <figure class="post-cover"><img src="<?= e(url($article['image'])) ?>" alt="<?= e($article['image_alt']) ?>" width="1200" height="630" fetchpriority="high" decoding="async"></figure>
+    <?php if (count($article['toc'] ?? []) >= 3): ?>
+      <nav class="post-toc" aria-labelledby="post-toc-title">
+        <h2 id="post-toc-title">במאמר</h2>
+        <ul>
+          <?php foreach ($article['toc'] as $t): ?>
+            <li><a href="#<?= e($t['id']) ?>"><?= e($t['text']) ?></a></li>
+          <?php endforeach; ?>
+          <?php if ($article['faq']): ?><li><a href="#post-faq-title">שאלות נפוצות</a></li><?php endif; ?>
+        </ul>
+      </nav>
+    <?php endif; ?>
     <div class="post-body">
       <?= str_replace('{BASE}', $base, $article['html']) ?>
     </div>

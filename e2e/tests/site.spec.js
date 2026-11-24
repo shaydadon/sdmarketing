@@ -298,12 +298,11 @@ test.describe('homepage', () => {
     await expect(page.locator('a[href="/services#pwa"]')).toBeVisible();
     await expect(page.locator('a[href="/services#seo"]')).toBeVisible();
     await expect(page.locator('a[href="/services#campaigns"]')).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'חמישה תחומים. מערכת אחת שעובדת יחד.' })).toBeVisible();
-    await expect(page.locator('.svc-grid')).toContainText('לקוחות שמוצאים אתכם בגוגל');
+    await expect(page.getByRole('heading', { name: 'חמישה שירותים שבנויים לעבוד יחד.' })).toBeVisible();
     await page.goto('/services');
     await expect(page.locator('#seo')).toContainText('מחקר מילות מפתח');
     await expect(page.locator('#seo')).toContainText('הדגמה להמחשה · ללא נתונים אמיתיים');
-    await expect(page.locator('#seo a[href="/articles"]')).toBeVisible();
+    await expect(page.locator('#seo')).not.toContainText('יעלו בעמוד המאמרים');
     await expect(page.locator('#campaigns')).toContainText('Google Ads');
     await expect(page.locator('#campaigns')).toContainText('פייסבוק');
     await expect(page.locator('#websites')).toContainText('fisha.shop');
@@ -311,11 +310,11 @@ test.describe('homepage', () => {
 
   test('hero leads with the headline, one clear action, and real work', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('h1')).toContainText('העסק שלך ממשיך לעבוד.');
+    await expect(page.locator('h1')).toContainText('העסק שלכם ממשיך לעבוד.');
     await expect(page.locator('.h3ro .btn-main')).toHaveText(/בואו נדבר על העסק שלכם/);
     await expect(page.locator('.h3-art img')).toHaveCount(3);
     await expect(page.locator('.h3-why li')).toHaveCount(3);
-    await expect(page.locator('.services.lite .svc .out').first()).toContainText('פחות עבודה ידנית');
+    await expect(page.locator('.services.lite .svc .out').first()).toContainText('לפרטים על השירות');
   });
 
   test('faq lists every service and publishes FAQPage data', async ({ page }) => {
@@ -543,5 +542,66 @@ test.describe('english version', () => {
     await expect(block.locator('video')).toHaveCount(0);
     await expect(block.locator('[data-wa-demo]')).toBeVisible();
     await expect(block.locator('[data-wa-log]')).toContainText('Welcome to Jerry’s Dog Boarding', { timeout: 15000 });
+  });
+});
+
+test.describe('site review fixes', () => {
+  test('services open with a 5-card overview that jumps to each service, with no numbered labels', async ({ page }) => {
+    for (const [path, fit] of [['/services', 'מתאים ל'], ['/en/services', 'Good for']]) {
+      await page.goto(path);
+      const cards = page.locator('.svo-grid .svo');
+      await expect(cards).toHaveCount(5);
+      await expect(cards.first()).toContainText(fit);
+      for (const id of ['automations', 'websites', 'pwa', 'seo', 'campaigns']) {
+        await expect(page.locator(`.svo[href="#${id}"]`)).toHaveCount(1);
+        await expect(page.locator(`#${id}`)).toHaveCount(1);
+      }
+      await expect(page.locator('body')).not.toContainText('01 ·');
+      await expect(page.locator('.svc-block .tagline')).toHaveCount(0);
+    }
+  });
+
+  test('the Hebrew home page shows the 3 latest guides; English (no articles yet) does not', async ({ page }) => {
+    await page.goto('/');
+    const posts = page.locator('.home-posts .hp-card');
+    await expect(posts).toHaveCount(3);
+    await expect(page.locator('.home-posts a[href="/articles"]')).toBeVisible();
+    await posts.first().click();
+    await expect(page).toHaveURL(/\/articles\/[a-z0-9-]+$/);
+    await page.goto('/en/');
+    await expect(page.locator('.home-posts')).toHaveCount(0);
+  });
+
+  test('every article has a table of contents whose links land on real headings', async ({ page }) => {
+    await page.goto('/articles');
+    const hrefs = await page.locator('.post-card a').evaluateAll((as) => as.map((a) => a.getAttribute('href')));
+    for (const href of hrefs) {
+      await page.goto(href);
+      const links = page.locator('.post-toc a');
+      expect(await links.count(), href).toBeGreaterThanOrEqual(3);
+      for (const id of await links.evaluateAll((as) => as.map((a) => a.getAttribute('href').slice(1)))) {
+        await expect(page.locator(`[id="${id}"]`), `${href} #${id}`).toHaveCount(1);
+      }
+    }
+  });
+
+  test('copy: no repeated stock lines, and one form of address', async ({ page }) => {
+    for (const path of ['/', '/services', '/about', '/projects']) {
+      await page.goto(path);
+      const text = await page.locator('main').innerText();
+      expect((text.match(/בלי הפתעות/g) || []).length, path).toBe(0);
+      expect(text, path).not.toContain('ההוכחה נמצאת באוויר');
+      expect(text, path).not.toContain('בלי טפסים');
+      expect(text, path).not.toMatch(/העסק שלך|כשאתה /);
+    }
+  });
+
+  test('phones: header buttons, footer links and breadcrumbs are at least 44px tall', async ({ page, isMobile }) => {
+    test.skip(!isMobile, 'touch targets are a phone concern');
+    await page.goto('/services');
+    for (const sel of ['.nav-toggle', '.lang-switch', '.nav .nav-wa', '.crumb a', 'footer ul a']) {
+      const box = await page.locator(sel).first().boundingBox();
+      expect(box?.height, sel).toBeGreaterThanOrEqual(44);
+    }
   });
 });

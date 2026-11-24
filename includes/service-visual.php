@@ -43,7 +43,7 @@ function service_visual(string $id): void
           <div class="rw"><span>Google Ads</span><div class="bar2" role="img" aria-label="<?= tr('הדגמה: Google Ads, העמודה הארוכה, בלי נתון אמיתי', 'Demo: Google Ads, the longest bar, no real data') ?>"><i class="a" style="width:78%"></i></div></div>
           <div class="rw"><span><?= tr('פייסבוק', 'Facebook') ?></span><div class="bar2" role="img" aria-label="<?= tr('הדגמה: קמפיין פייסבוק, עמודה בינונית, בלי נתון אמיתי', 'Demo: Facebook campaign, a medium bar, no real data') ?>"><i style="width:52%"></i></div></div>
           <div class="rw"><span><?= tr('אינסטגרם', 'Instagram') ?></span><div class="bar2" role="img" aria-label="<?= tr('הדגמה: קמפיין אינסטגרם, העמודה הקצרה, בלי נתון אמיתי', 'Demo: Instagram campaign, the shortest bar, no real data') ?>"><i style="width:34%"></i></div></div>
-          <div class="ft"><span><?= tr('מה בודקים', 'What we measure') ?></span><span class="acc"><?= tr('פניות, לא לייקים', 'Leads, not likes') ?></span></div>
+          <div class="ft"><span><?= tr('מה בודקים', 'What we measure') ?></span><span class="acc"><?= tr('מודדים פניות', 'We measure leads') ?></span></div>
         </div>
         <span class="note"><?= tr('הדגמה להמחשה · ללא נתונים אמיתיים', 'Illustration only · No real data') ?></span>
       </div>

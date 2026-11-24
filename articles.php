@@ -44,6 +44,6 @@ require __DIR__ . '/includes/articles-meta.php';
 
 <?php
 $cta_title = "יש לכם שאלה\nשלא מופיעה כאן?";
-$cta_text  = 'שלחו הודעה קצרה על העסק. אחזור עם רעיון אחד שאפשר להתחיל ממנו, בלי התחייבות.';
+$cta_text  = 'שלחו לי אותה בוואטסאפ, ואולי היא תהיה המאמר הבא.';
 require __DIR__ . '/includes/cta.php';
 require __DIR__ . '/includes/footer.php';

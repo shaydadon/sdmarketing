@@ -12,10 +12,10 @@ require __DIR__ . '/includes/projects-data.php';
   <div class="wrap p-hero">
     <nav class="crumb" aria-label="<?= tr('מיקום בעמוד', 'Breadcrumb') ?>"><a href="<?= lurl('') ?>"><?= tr('בית', 'Home') ?></a> / <b><?= tr('פרויקטים', 'Projects') ?></b></nav>
     <div class="row">
-      <h1 id="page-title"><?= tr('לא מצגות.<span>דברים שעובדים באוויר.</span>', 'No mockups.<span>Just work that’s live.</span>') ?></h1>
+      <h1 id="page-title"><?= tr('פרויקטים<span>שעובדים באוויר.</span>', 'Projects<span>that are live.</span>') ?></h1>
     </div>
     <div class="row" style="align-items:center;margin-top:36px">
-      <p class="lead" style="margin:0;max-width:560px"><?= tr('חנויות, אתרים ואפליקציות שבניתי ושלקוחות משתמשים בהם עכשיו. אפשר להיכנס ולנסות בעצמכם.', 'Online stores, websites and apps I’ve built that real customers are using right now. Take a look and try them yourself.') ?></p>
+      <p class="lead" style="margin:0;max-width:560px"><?= tr('חנויות, אתרים ואפליקציות שבניתי. אפשר להיכנס ולנסות בעצמכם.', 'Online stores, websites and apps I’ve built. Open them and try them yourself.') ?></p>
       <div class="filters" role="group" aria-label="<?= tr('סינון לפי סוג', 'Filter by type') ?>" data-filters>
         <?php foreach ($project_cats as $key => $label):
           $count = $key === 'all'
@@ -85,7 +85,7 @@ require __DIR__ . '/includes/projects-data.php';
   <div class="wrap">
     <div class="box">
       <div>
-        <h2><?= tr('הפרויקט הבא<br><span>יכול להיות שלך.</span>', 'Your project<br><span>could be next.</span>') ?></h2>
+        <h2><?= tr('הפרויקט הבא<br><span>יכול להיות שלכם.</span>', 'Your project<br><span>could be next.</span>') ?></h2>
         <p><?= tr('חנות, אתר, אפליקציה, בוט, קידום אורגני או קמפיין ממומן? כל פרויקט כאן התחיל בהודעה אחת. ספרו לי מה אתם צריכים ואחזור עם הצעה.', 'An online store, a website, an app, a chatbot, SEO or a paid campaign? Every project here started with a single message. Tell me what you need and I’ll get back to you with a proposal.') ?></p>
       </div>
       <div class="ctas">

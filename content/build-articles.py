@@ -34,8 +34,9 @@ def inline(text, slugs):
     return out
 
 
-def blocks_to_html(lines, slugs):
-    """Render body lines (no front matter, no H1, no FAQ, no CTA) to HTML."""
+def blocks_to_html(lines, slugs, toc=None):
+    """Render body lines (no front matter, no H1, no FAQ, no CTA) to HTML.
+    Each ## heading gets an id (part-1, part-2, ...) and, when toc is a list, is appended to it."""
     out, i = [], 0
     while i < len(lines):
         line = lines[i].rstrip()
@@ -44,7 +45,10 @@ def blocks_to_html(lines, slugs):
             continue
         if line.startswith('## '):
             text = line[3:].strip()
-            out.append(f'<h2>{inline(text, slugs)}</h2>')
+            hid = f'part-{len(toc) + 1}' if toc is not None else ''
+            if toc is not None:
+                toc.append({'id': hid, 'text': re.sub(r'\*\*|\[([^\]]+)\]\([^)]+\)', r'\1', text)})
+            out.append(f'<h2 id="{hid}">{inline(text, slugs)}</h2>' if hid else f'<h2>{inline(text, slugs)}</h2>')
             i += 1
         elif line.startswith('|'):
             rows = []
@@ -109,6 +113,7 @@ def parse(path, slugs):
             a = faq_lines[j + 1].strip()
             faq.append({'q': q, 'a_html': inline(a, slugs), 'a_text': re.sub(r'\[([^\]]+)\]\([^)]+\)', r'\1', a).replace('**', '')})
     words = len(re.findall(r'\S+', body))
+    toc = []
     return {
         'slug': meta['slug'],
         'title': h1,
@@ -123,7 +128,8 @@ def parse(path, slugs):
         'image': f"assets/img/articles/{meta['slug']}.webp",
         'image_alt': meta.get('image_alt', ''),
         'minutes': max(2, round(words / 170)),
-        'html': blocks_to_html(lines, slugs),
+        'html': blocks_to_html(lines, slugs, toc),
+        'toc': toc,
         'faq': faq,
         'cta_html': inline(cta, slugs),
     }

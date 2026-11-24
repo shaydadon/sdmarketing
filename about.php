@@ -12,7 +12,7 @@ require __DIR__ . '/includes/header.php';
     <div style="padding-bottom:90px">
       <nav class="crumb" aria-label="<?= tr('מיקום בעמוד', 'Breadcrumb') ?>"><a href="<?= lurl('') ?>"><?= tr('בית', 'Home') ?></a> / <b><?= tr('אודות', 'About') ?></b></nav>
       <h1 id="page-title"><?= tr('נעים מאוד,<span>אני שי דדון.</span>', 'Hi, I’m<span>Shay Dadon.</span>') ?></h1>
-      <p class="lead"><?= tr('מפתח תוכנה עם יותר מ־15 שנות ניסיון, שבונה לעסקים את מה שמחבר בין הלקוח לבין המכירה: הבוט שעונה בוואטסאפ, האתר או האפליקציה שהלקוח נוחת בהם, הקמפיין שמביא אותו, והאוטומציה שדואגת שאף אחד לא ייפול באמצע.', 'A software developer with 15+ years of experience. I build everything that connects your customers to your sales: the WhatsApp chatbot that answers them, the website or app they land on, the campaign that brings them in, and the automation that makes sure no one falls through the cracks.') ?></p>
+      <p class="lead"><?= tr('מפתח תוכנה עם יותר מ־15 שנות ניסיון, שבונה לעסקים את מה שמחבר בין הלקוח לבין המכירה: הבוט שעונה בוואטסאפ, האתר או האפליקציה שהלקוח נוחת בהם, הקמפיין שמביא אותו, והאוטומציה שממשיכה לטפל בו אחרי הפנייה.', 'A software developer with 15+ years of experience. I build everything that connects your customers to your sales: the WhatsApp chatbot that answers them, the website or app they land on, the campaign that brings them in, and the automation that keeps handling them after they get in touch.') ?></p>
       <div class="ctas">
         <a class="btn btn-acc" href="<?= e(wa_link($site, tr('היי, קראתי עליך באתר ואשמח לדבר', 'Hi, I read about you on your website and would like to talk'))) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span><?= tr('דברו איתי בוואטסאפ', 'Chat on WhatsApp') ?></span></a>
         <a class="btn btn-ghost-d" href="<?= lurl('projects') ?>"><?= tr('לעבודות שלי', 'See my work') ?></a>
@@ -36,11 +36,11 @@ require __DIR__ . '/includes/header.php';
         <?php if ($is_en): ?>
         <p>I’ve spent most of my career as a developer: more than 15 years building systems, websites and apps, backed by a B.Sc. in Computer Science.</p>
         <p>Along the way I realized that code is only half the story. A great website is worth little if nobody visits it, and a new lead is worth nothing if nobody follows up. So I completed a marketing course and have spent the past two years working in digital marketing. I founded SDmarketing to bring both worlds together.</p>
-        <p class="hl">The result: one person who understands how your campaigns perform, how your website works under the hood, and how to connect both to your business’s WhatsApp.</p>
+        <p class="hl">I understand how your campaigns perform, how your website works under the hood, and how to connect both to your business’s WhatsApp.</p>
         <?php else: ?>
         <p>את רוב הקריירה שלי ביליתי בפיתוח: יותר מ־15 שנים של בניית מערכות, אתרים ואפליקציות, על בסיס תואר ראשון במדעי המחשב.</p>
         <p>עם הזמן הבנתי שהקוד הוא רק חצי מהסיפור. אתר מצוין לא שווה הרבה אם אף אחד לא מגיע אליו, וליד שנכנס לא שווה כלום אם אף אחד לא חוזר אליו. אז השלמתי קורס בשיווק, ובשנתיים האחרונות אני עוסק גם בשיווק דיגיטלי. הקמתי את SDmarketing כדי לחבר בין שני העולמות.</p>
-        <p class="hl">התוצאה: מישהו שמבין גם איך הקמפיין עובד, גם איך האתר בנוי מבפנים, וגם איך לגרום לשניהם לדבר עם הוואטסאפ של העסק.</p>
+        <p class="hl">אני מבין גם איך הקמפיין עובד, גם איך האתר בנוי מבפנים, וגם איך לחבר את שניהם לוואטסאפ של העסק.</p>
         <?php endif; ?>
       </div>
     </div>
@@ -77,7 +77,7 @@ require __DIR__ . '/includes/header.php';
         <div class="nodes"><span><?= tr('מתכנת', 'Developer') ?></span><span><?= tr('משווק', 'Marketer') ?></span><span><?= tr('איש אוטומציות', 'Automation specialist') ?></span></div>
         <ul>
           <li><i><?= icon('close') ?></i><?= tr('שלוש הצעות מחיר, שלושה לוחות זמנים', 'Three quotes, three timelines') ?></li>
-          <li><i><?= icon('close') ?></i><?= tr('אתה מתווך בין הספקים', 'You end up managing the vendors') ?></li>
+          <li><i><?= icon('close') ?></i><?= tr('אתם מתווכים בין הספקים', 'You end up managing the vendors') ?></li>
           <li><i><?= icon('close') ?></i><?= tr('כשמשהו נשבר, לא ברור של מי האחריות', 'When something breaks, nobody owns it') ?></li>
         </ul>
       </div>
@@ -105,15 +105,15 @@ require __DIR__ . '/includes/header.php';
     </div>
     <div class="rule-grid">
       <?php if ($is_en): ?>
-      <div class="rule"><span class="n">01</span><div><h3>Understand the business first, then build.</h3><p>I don’t start with technology. I start with where you’re losing time and customers, and build only what solves that.</p></div></div>
-      <div class="rule"><span class="n">02</span><div><h3>Everything in writing before we start.</h3><p>Scope, order of work, cost and launch date, all agreed upfront. No surprises along the way.</p></div></div>
-      <div class="rule"><span class="n">03</span><div><h3>Measure, then improve.</h3><p>Every website, chatbot and campaign is tracked from day one, so decisions are based on data, not guesswork.</p></div></div>
-      <div class="rule"><span class="n">04</span><div><h3>Available when your customers are.</h3><p>We talk on WhatsApp, in plain language, with no forms or ticket systems. You always know where your project stands.</p></div></div>
+      <div class="rule"><span class="n">01</span><div><h3>Understand the business first, then build.</h3><p>I start with where you’re losing time and customers, and build only what solves that.</p></div></div>
+      <div class="rule"><span class="n">02</span><div><h3>Everything in writing before we start.</h3><p>Before anything is built, you get a written plan with the scope, the order of work, the cost and the launch date.</p></div></div>
+      <div class="rule"><span class="n">03</span><div><h3>Measure, then improve.</h3><p>Every website, chatbot and campaign is tracked from day one, so decisions are based on data.</p></div></div>
+      <div class="rule"><span class="n">04</span><div><h3>Available when your customers are.</h3><p>We talk on WhatsApp, in plain language, and you always know where your project stands.</p></div></div>
       <?php else: ?>
-      <div class="rule"><span class="n">01</span><div><h3>קודם מבינים את העסק, אחר כך בונים.</h3><p>לא מתחילים מטכנולוגיה. מתחילים מהשאלה איפה הולך לכם זמן ואיפה הולכים לאיבוד לקוחות, ובונים רק את מה שפותר את זה.</p></div></div>
-      <div class="rule"><span class="n">02</span><div><h3>הכל בכתב, לפני שמתחילים.</h3><p>מה בונים, באיזה סדר, כמה זה עולה ומתי זה עולה לאוויר. בלי הפתעות באמצע.</p></div></div>
-      <div class="rule"><span class="n">03</span><div><h3>מודדים, ואז משפרים.</h3><p>כל אתר, בוט וקמפיין מחוברים למעקב מהיום הראשון, כדי שהחלטות יתקבלו לפי נתונים ולא לפי תחושה.</p></div></div>
-      <div class="rule"><span class="n">04</span><div><h3>זמין כמו שהלקוחות שלכם זמינים.</h3><p>מדברים בוואטסאפ, בשפה פשוטה, בלי טפסים ובלי מערכת כרטיסים. אתם יודעים בכל רגע איפה הפרויקט עומד.</p></div></div>
+      <div class="rule"><span class="n">01</span><div><h3>קודם מבינים את העסק, אחר כך בונים.</h3><p>מתחילים מהשאלה איפה הולך לכם זמן ואיפה הולכים לאיבוד לקוחות, ובונים רק את מה שפותר את זה.</p></div></div>
+      <div class="rule"><span class="n">02</span><div><h3>הכל בכתב, לפני שמתחילים.</h3><p>לפני שמתחילים לבנות, מקבלים תוכנית כתובה עם היקף, סדר עבודה, מחיר ותאריך עלייה לאוויר.</p></div></div>
+      <div class="rule"><span class="n">03</span><div><h3>מודדים, ואז משפרים.</h3><p>כל אתר, בוט וקמפיין מחוברים למעקב מהיום הראשון, כדי שההחלטות יתקבלו לפי נתונים.</p></div></div>
+      <div class="rule"><span class="n">04</span><div><h3>זמין כמו שהלקוחות שלכם זמינים.</h3><p>מדברים בוואטסאפ ובשפה פשוטה, ואתם יודעים בכל רגע איפה הפרויקט עומד.</p></div></div>
       <?php endif; ?>
     </div>
   </div>
