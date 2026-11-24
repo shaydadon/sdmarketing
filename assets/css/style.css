@@ -1080,3 +1080,41 @@ footer .logo small{color:#9A9893}
 .eyebrow{gap:0}
 /* "Real work" caption under the hero image: plain text, not links */
 .h3-cap b{color:var(--ink);font-family:var(--display);font-weight:700}
+
+/* ================= Polish pass (Impeccable) ================= */
+/* Browser surfaces in the palette */
+::selection{background:var(--accent-soft);color:var(--ink)}
+.dark ::selection,.approach ::selection,.process ::selection{background:var(--accent);color:var(--ink)}
+input,textarea{caret-color:var(--accent-ink)}
+html{scrollbar-color:#b9b5ad var(--paper)}
+a{text-underline-offset:.2em}
+
+/* Typography: no single-word last lines, balanced headings */
+p,li,dd,blockquote{text-wrap:pretty}
+h1,h2,h3{text-wrap:balance}
+
+/* Sub-page hero titles: within the 6rem display ceiling */
+.p-hero h1{font-size:80px}
+.p-hero.sm h1{font-size:72px}
+
+/* Legal pages: comfortable reading measure (~70 characters) */
+.legal-body{max-width:38em}
+
+/* Form placeholders and step numbers readable (4.5:1) */
+.inp::placeholder{color:#6f6d68}
+.after li i{color:var(--accent-ink)}
+
+/* No one-sided bars on rounded boxes: full border or tint instead */
+.about-hero .ph .badge{border-inline-start:0;border:1.5px solid var(--accent)}
+.story p.hl{border-inline-start:0;padding:22px 24px;background:var(--accent-soft);border-radius:16px}
+
+/* Home service cards: the icon leads its heading rather than a tile stacked above it */
+.services.lite .svc .svc-h{display:flex;align-items:center;gap:12px;margin-top:4px}
+.services.lite .svc .svc-h .icon{width:40px;height:40px;border-radius:50%;flex:none}
+.services.lite .svc .svc-h .icon svg{width:19px;height:19px}
+
+/* Projects page: Boardog recording clipped to the phone (the file has other page content below it) */
+#case-bot .wad-clip{width:min(280px,78%);aspect-ratio:390/535;overflow:hidden;border-radius:28px 28px 0 0;box-shadow:0 30px 60px #000a}
+#case-bot .wad-clip .wad-video{width:100%;height:auto;border-radius:0;box-shadow:none}
+@media (max-width:800px){.p-hero h1,.p-hero.sm h1{font-size:44px}}
+@media (prefers-reduced-motion:reduce){#case-bot .wad-clip{display:none}}

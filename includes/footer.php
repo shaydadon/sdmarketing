@@ -42,6 +42,6 @@
 
 <a class="wa-float" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener" aria-label="דברו איתי בוואטסאפ"><?= icon('whatsapp') ?></a>
 
-<script src="assets/js/main.js?v=50" defer></script>
+<script src="assets/js/main.js?v=51" defer></script>
 </body>
 </html>

@@ -156,7 +156,7 @@
     const video = wa.closest('#case-bot')?.querySelector('.wad-video');
     if (video) {
       video.addEventListener('error', () => {
-        video.hidden = true;
+        (video.closest('.wad-clip') || video).hidden = true;
         wa.style.display = 'flex';
         showAll();
       });

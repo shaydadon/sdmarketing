@@ -61,8 +61,7 @@ $outcomes = [
     <div class="svc-grid">
       <?php foreach ($services as $i => $s): ?>
         <a class="svc rv" href="services.php#<?= e($s['id']) ?>">
-          <span class="icon"><?= icon($s['icon']) ?></span>
-          <h3><?= e($s['title']) ?></h3>
+          <h3 class="svc-h"><span class="icon"><?= icon($s['icon']) ?></span><?= e($s['title']) ?></h3>
           <p class="d"><?= e($s['lead']) ?></p>
           <p class="out"><?= e($outcomes[$s['id']] ?? '') ?><?= icon('arrow') ?></p>
         </a>

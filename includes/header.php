@@ -38,7 +38,7 @@ function logo_mark(): string
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&family=IBM+Plex+Sans+Hebrew:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=52">
+  <link rel="stylesheet" href="assets/css/style.css?v=53">
 </head>
 <body class="page-<?= e($page_id) ?>">
 <?php require __DIR__ . '/icons.php'; ?>
