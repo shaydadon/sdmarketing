@@ -232,12 +232,11 @@
   }
 
   // Work process: the step in view lights up as the visitor scrolls.
-  // Stacked (mobile): the step nearest the middle of the screen. Side by side (desktop): by scroll progress through the section.
+  // Only when the steps are stacked (mobile): the step nearest the middle of the screen lights up.
   const stepList = document.querySelector('.steps');
   if (stepList) {
     const steps = [...stepList.querySelectorAll('.step')];
     if (steps.length > 1) {
-      stepList.classList.add('steps-live');
       let current = -1;
       const setOn = (i) => {
         if (i === current) return;
@@ -247,7 +246,10 @@
       const update = () => {
         const mid = innerHeight / 2;
         const stacked = steps[1].getBoundingClientRect().top > steps[0].getBoundingClientRect().top + 10;
-        if (stacked) {
+        // Side by side (desktop) all four steps are visible at once: keep the first one lit, no scroll effect.
+        stepList.classList.toggle('steps-live', stacked);
+        if (!stacked) { current = -1; steps.forEach((s) => s.classList.remove('is-on')); return; }
+        {
           let best = 0;
           let bestD = Infinity;
           steps.forEach((s, j) => {
@@ -256,12 +258,6 @@
             if (d < bestD) { bestD = d; best = j; }
           });
           setOn(best);
-        } else {
-          const r = stepList.closest('section').getBoundingClientRect();
-          const start = innerHeight * 0.75;
-          const end = innerHeight * 0.15;
-          const p = Math.min(1, Math.max(0, (start - r.top) / (start - end + r.height * 0.5)));
-          setOn(Math.min(steps.length - 1, Math.floor(p * steps.length)));
         }
       };
       let raf = 0;
