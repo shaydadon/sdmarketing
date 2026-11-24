@@ -16,11 +16,6 @@ require __DIR__ . '/includes/projects-data.php';
       <p class="lead">אתרים חכמים, אוטומציות ופתרונות דיגיטליים שמתחברים לעסק שלך, וחוסכים לך זמן, עבודה וכאב ראש.</p>
       <a class="btn btn-main" href="<?= e(wa_link($site, 'היי שי, אשמח לדבר על העסק שלי')) ?>" target="_blank" rel="noopener"><span>בואו נדבר על העסק שלכם</span><?= icon('arrow') ?></a>
       <p class="offer">הודעה קצרה בוואטסאפ מספיקה. אחזור עם רעיון אחד שאפשר להתחיל ממנו, בלי התחייבות.</p>
-      <ul class="h3-meta" aria-label="למה לעבוד איתי">
-        <li><b class="ltr">15+</b>שנות פיתוח תוכנה</li>
-        <li><b>אדם אחד</b>מהקמפיין ועד הבוט</li>
-        <li><b>הכל בכתב</b>תוכנית ומחיר מראש</li>
-      </ul>
     </div>
     <figure class="h3-art" aria-label="עבודות אמיתיות: החנות fisha.shop, האפליקציה Excerly והצ׳אטבוט Boardog">
       <div class="browser h3-b">
@@ -34,7 +29,7 @@ require __DIR__ . '/includes/projects-data.php';
         <li><?= icon('check') ?><span><b>אוסף את כל הפרטים</b>בלי טלפונים חוזרים</span></li>
         <li><?= icon('check') ?><span><b>קובע פגישה לבד</b>ושולח סיכום מסודר</span></li>
       </ul>
-      <figcaption class="h3-cap">עבודות אמיתיות: <a href="#work" lang="en">fisha.shop</a> · <a href="#work" lang="en">Excerly</a> · <a href="#work" lang="en">Boardog</a></figcaption>
+      <figcaption class="h3-cap">עבודות אמיתיות: <b lang="en">fisha.shop</b> · <b lang="en">Excerly</b> · <b lang="en">Boardog</b></figcaption>
     </figure>
   </div>
 </section>

@@ -1074,3 +1074,9 @@ footer .logo small{color:#9A9893}
   .qs b{font-size:20px}
   .qs li{gap:14px}
 }
+
+/* No short accent rule before the small section titles */
+.eyebrow::before{display:none}
+.eyebrow{gap:0}
+/* "Real work" caption under the hero image: plain text, not links */
+.h3-cap b{color:var(--ink);font-family:var(--display);font-weight:700}
