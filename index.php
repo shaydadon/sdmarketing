@@ -111,7 +111,7 @@ $outcomes = [
             <div class="media media-fisha">
               <div class="browser">
                 <div class="bar"><i></i><i></i><i></i><u></u></div>
-                <img src="<?= e($shot['src']) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" decoding="async">
+                <img src="<?= e($shot['src']) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" loading="lazy" decoding="async">
               </div>
             </div>
           <?php endif; ?>

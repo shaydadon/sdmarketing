@@ -1160,3 +1160,13 @@ h1,h2,h3{text-wrap:balance}
 /* Closing CTA: original rings, same thickness and shape; one of them filled with the signal yellow */
 .cta .ring{box-shadow:0 0 0 60px #F5B301,0 0 0 61px var(--line)}
 @media (max-width:800px){.cta .ring{border-color:#F5B301;box-shadow:0 0 0 60px #F5F4F0,0 0 0 61px var(--line)}}
+
+/* ================= v8: full-site scan fixes ================= */
+/* Hero decoration (grid lines, glow) never sits above the content or catches clicks */
+.hero::before,.hero .glow{pointer-events:none}
+.hero > .wrap{position:relative;z-index:1}
+/* Touch targets of at least 24px on small links and the consent box */
+.crumb a{display:inline-block;padding:6px 4px;margin:-6px -4px}
+.f-bot nav a{display:inline-block;padding-block:5px}
+.consent .box{width:24px;height:24px}
+.consent input{width:24px;height:24px}

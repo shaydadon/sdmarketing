@@ -141,6 +141,24 @@ test.describe('navigation', () => {
   });
 });
 
+test.describe('hero buttons', () => {
+  for (const path of ['/index.php', '/about.php', '/services.php', '/projects.php', '/contact.php']) {
+    test(`${path}: every hero link is clickable (no decoration on top)`, async ({ page }) => {
+      await page.goto(path);
+      const blocked = await page.evaluate(() => [...document.querySelectorAll('main section:first-of-type a')]
+        .filter((a) => a.getClientRects().length)
+        .filter((a) => {
+          a.scrollIntoView({ block: 'center', behavior: 'instant' });
+          const r = a.getBoundingClientRect();
+          const t = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2);
+          return t && !(t === a || a.contains(t)) && !t.closest('.wa-float,.env-badge');
+        })
+        .map((a) => a.textContent.trim()));
+      expect(blocked).toEqual([]);
+    });
+  }
+});
+
 test.describe('homepage', () => {
   test('four service areas link to the services page', async ({ page }) => {
     await page.goto('/index.php');

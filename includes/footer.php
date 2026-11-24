@@ -40,8 +40,8 @@
   </div>
 </footer>
 
-<a class="wa-float" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener" aria-label="דברו איתי בוואטסאפ"><?= icon('whatsapp') ?></a>
+<aside aria-label="יצירת קשר מהירה"><a class="wa-float" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener" aria-label="דברו איתי בוואטסאפ"><?= icon('whatsapp') ?></a></aside>
 
-<script src="assets/js/main.js?v=51" defer></script>
+<script src="assets/js/main.js?v=80" defer></script>
 </body>
 </html>
