@@ -1183,3 +1183,6 @@ h1,h2,h3{text-wrap:balance}
   .h3ro::before{background-size:48px 48px}
   .h3-art .device{box-shadow:0 0 0 1px #3a3a3a,0 0 0 2px #1c1c1c,0 0 0 2.5px #4a4a4a,0 28px 48px -18px #000}
 }
+
+/* v10: the solution line of the problem statement in terracotta (large text, 3.7:1 on paper) */
+.statement h2 em{color:var(--accent-big)}
