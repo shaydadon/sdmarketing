@@ -1136,7 +1136,6 @@ h1,h2,h3{text-wrap:balance}
 .page-index .mobile-nav a[aria-current="page"]{color:var(--accent-big)}
 .page-index .mobile-nav a svg{color:var(--accent)}
 /* Closing CTA on mobile: no decorative ring behind the heading and text */
-@media (max-width:800px){.cta .ring{display:none}}
 
 /* ================= v6 ================= */
 /* Mobile menu: large, calm links; current page marked with a dot; WhatsApp at the bottom */
@@ -1158,8 +1157,6 @@ h1,h2,h3{text-wrap:balance}
 @media (min-width:801px){.mobile-nav .mn-cta{display:none}}
 @media (prefers-reduced-motion:reduce){.mobile-nav li,.mobile-nav .mn-cta{animation:none!important}}
 
-/* Closing CTA: the rings in the signal yellow */
-.cta .ring{border:1.5px solid #F5B301;box-shadow:0 0 0 56px #FDE7A6,0 0 0 57.5px #F5B301}
-@media (max-width:800px){
-  .cta .ring{display:block;width:150px;height:150px;top:-50px;inset-inline-end:-50px;box-shadow:0 0 0 26px #FDE7A6,0 0 0 27.5px #F5B301}
-}
+/* Closing CTA: original rings, same thickness and shape; one of them filled with the signal yellow */
+.cta .ring{box-shadow:0 0 0 60px #F5B301,0 0 0 61px var(--line)}
+@media (max-width:800px){.cta .ring{border-color:#F5B301;box-shadow:0 0 0 60px #F5F4F0,0 0 0 61px var(--line)}}
