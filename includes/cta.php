@@ -12,7 +12,7 @@ $cta_contacts = $cta_contacts ?? false;
     <p><?= e($cta_text) ?></p>
     <div class="ctas">
       <a class="btn btn-ink" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span>דברו איתי בוואטסאפ</span></a>
-      <a class="btn btn-ghost" href="contact.php">לטופס יצירת קשר</a>
+      <a class="btn btn-ghost" href="<?= url('contact') ?>">לטופס יצירת קשר</a>
     </div>
     <?php if ($cta_contacts): ?>
       <div class="contact-list">

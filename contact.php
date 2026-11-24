@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (!$errors && ($bot || $too_fast)) {
         // Quietly pretend it worked so bots learn nothing.
-        header('Location: contact.php?sent=1#sent');
+        header('Location: ' . url('contact') . '?sent=1#sent');
         exit;
     }
     if (!$errors && $too_often) $errors['form'] = 'כבר קיבלנו ממך הודעה לפני רגע. אפשר לשלוח שוב בעוד חצי דקה.';
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (@mail($site['email'], $subject, implode("\n", $lines), implode("\r\n", $headers))) {
             $_SESSION['last_sent'] = time();
             $_SESSION['csrf'] = bin2hex(random_bytes(16));
-            header('Location: contact.php?sent=1#sent');
+            header('Location: ' . url('contact') . '?sent=1#sent');
             exit;
         }
         $send_failed = true;
@@ -90,7 +90,7 @@ function field_error(string $name, array $errors): string
 <section class="hero dark">
   <div class="glow" style="top:-100px;left:-200px" aria-hidden="true"></div>
   <div class="wrap p-hero sm" style="padding-bottom:160px">
-    <nav class="crumb" aria-label="מיקום בעמוד"><a href="index.php">בית</a> / <b>צור קשר</b></nav>
+    <nav class="crumb" aria-label="מיקום בעמוד"><a href="<?= url('') ?>">בית</a> / <b>צור קשר</b></nav>
     <h1 id="page-title">בואו נדבר.<span>הודעה אחת מספיקה.</span></h1>
     <p class="lead" style="max-width:640px;margin-top:28px">ספרו בכמה מילים מה העסק עושה ומה הייתם רוצים לשפר. אחזור אליכם עם רעיון אחד שאפשר להתחיל ממנו, בלי התחייבות.</p>
   </div>
@@ -105,11 +105,11 @@ function field_error(string $name, array $errors): string
           <p>אעבור עליה ואחזור אליכם לטלפון או לוואטסאפ שהשארתם. אם זה דחוף, אפשר גם לכתוב לי ישירות.</p>
           <div class="ctas">
             <a class="btn btn-ink" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span>דברו איתי בוואטסאפ</span></a>
-            <a class="btn btn-ghost" href="projects.php">בינתיים, לעבודות שלי</a>
+            <a class="btn btn-ghost" href="<?= url('projects') ?>">בינתיים, לעבודות שלי</a>
           </div>
         </div>
       <?php else: ?>
-        <form class="contact-form" method="post" action="contact.php" novalidate data-contact-form>
+        <form class="contact-form" method="post" action="<?= url('contact') ?>" novalidate data-contact-form>
           <h2>השאירו פרטים</h2>
           <p class="hint">שדות עם <b class="req">*</b> הם חובה. השאר עוזר לי להגיע לשיחה מוכן.</p>
 
@@ -169,7 +169,7 @@ function field_error(string $name, array $errors): string
               <label class="consent">
                 <input id="f-consent" type="checkbox" name="consent" value="1" required<?= $values['consent'] === '1' ? ' checked' : '' ?><?= field_attrs('consent', $errors) ?>>
                 <span class="box" aria-hidden="true"><?= icon('check') ?></span>
-                <span>קראתי ואני מסכים/ה ל<a href="privacy.php">מדיניות הפרטיות</a>, ומאשר/ת שייצרו איתי קשר בנוגע לפנייה. <b class="req" aria-hidden="true">*</b></span>
+                <span>קראתי ואני מסכים/ה ל<a href="<?= url('privacy') ?>">מדיניות הפרטיות</a>, ומאשר/ת שייצרו איתי קשר בנוגע לפנייה. <b class="req" aria-hidden="true">*</b></span>
               </label>
               <?= field_error('consent', $errors) ?>
             </div>

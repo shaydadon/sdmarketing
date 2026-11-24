@@ -20,8 +20,11 @@ def inline(text, slugs):
 
     def link(m):
         label, url = m.group(1), m.group(2)
+        # Internal links become clean, root-relative URLs. {BASE} is replaced with the site root at render time.
         if url in slugs:
-            url = 'article.php?slug=' + url
+            url = '{BASE}articles/' + url
+        elif not url.startswith(('http', '#', 'mailto:', 'tel:')):
+            url = '{BASE}' + re.sub(r'^index\.php', '', re.sub(r'\.php(?=#|$)', '', url))
         ext = url.startswith('http')
         attrs = ' target="_blank" rel="noopener"' if ext else ''
         return f'<a href="{html.escape(url)}"{attrs}>{label}</a>'
@@ -153,8 +156,8 @@ def main():
         fh.write('$articles_by_slug = array_column($articles, null, \'slug\');\n')
     print(f'wrote {OUT}: {len(arts)} articles: ' + ', '.join(a["slug"] for a in arts))
     # sitemap.xml: the site's pages plus every article
-    pages = ['', 'services.php', 'projects.php', 'about.php', 'articles.php', 'contact.php', 'terms.php', 'privacy.php', 'accessibility.php']
-    urls = [f'https://sdmarketing.co.il/{p}' for p in pages] + [f'https://sdmarketing.co.il/article.php?slug={a["slug"]}' for a in arts]
+    pages = ['', 'services', 'projects', 'articles', 'about', 'contact', 'terms', 'privacy', 'accessibility']
+    urls = [f'https://sdmarketing.co.il/{p}' for p in pages] + [f'https://sdmarketing.co.il/articles/{a["slug"]}' for a in arts]
     with open(os.path.join(ROOT, 'sitemap.xml'), 'w', encoding='utf-8') as fh:
         fh.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
         for u in urls:

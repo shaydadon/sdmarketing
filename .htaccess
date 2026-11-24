@@ -6,6 +6,40 @@ ErrorDocument 404 /404.php
 # RewriteCond %{HTTPS} off
 # RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+# ---------------------------------------------------------------------------
+# Clean URLs: /services, /projects, /articles, /articles/<slug>, ...
+# e2e/router.php mirrors these rules for the PHP dev server the tests use.
+# ---------------------------------------------------------------------------
+Options -MultiViews
+RewriteEngine On
+RewriteBase /
+
+# Old addresses -> clean ones, permanently (301), so shared links and Google keep working.
+# Only for what the browser asked for (THE_REQUEST), so the internal rewrites below never loop,
+# and only for GET/HEAD: a 301 would drop a form's POST data.
+RewriteCond %{REQUEST_METHOD} ^(GET|HEAD)$
+RewriteCond %{THE_REQUEST} \s/+index\.php[\s?] [NC]
+RewriteRule ^index\.php$ / [R=301,L]
+
+RewriteCond %{REQUEST_METHOD} ^(GET|HEAD)$
+RewriteCond %{THE_REQUEST} \s/+article\.php\?slug=([a-z0-9-]+)[\s&] [NC]
+RewriteRule ^article\.php$ /articles/%1? [R=301,L]
+
+RewriteCond %{REQUEST_METHOD} ^(GET|HEAD)$
+RewriteCond %{THE_REQUEST} \s/+(services|projects|articles|about|contact|terms|privacy|accessibility)\.php[\s?] [NC]
+RewriteRule ^[a-z]+\.php$ /%1 [R=301,L]
+
+# Trailing slash -> none (one address per page)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+# Clean address -> the PHP file that serves it
+RewriteRule ^articles/([a-z0-9-]+)$ article.php?slug=$1 [L,QSA]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([a-z]+)$ $1.php [L]
+
 # Keep project notes and tooling private
 <FilesMatch "^(PRODUCT\.md|skills-lock\.json)$">
   Require all denied
@@ -13,3 +47,4 @@ ErrorDocument 404 /404.php
 RedirectMatch 404 ^/\.claude(/|$)
 RedirectMatch 404 ^/includes(/|$)
 RedirectMatch 404 ^/e2e(/|$)
+RedirectMatch 404 ^/content(/|$)

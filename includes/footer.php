@@ -4,7 +4,7 @@
   <div class="wrap">
     <div class="f-cols">
       <div>
-        <a class="logo" href="index.php" aria-label="SDmarketing, לדף הבית">
+        <a class="logo" href="<?= url('') ?>" aria-label="SDmarketing, לדף הבית">
           <?= logo_mark() ?>
           <span class="lt"><b>SD</b><small>marketing</small></span>
         </a>
@@ -15,7 +15,7 @@
         <h2>ניווט</h2>
         <ul>
           <?php foreach ($nav as $item): ?>
-            <li><a href="<?= e($item['href']) ?>"><?= e($item['label']) ?><?php if (!empty($item['soon'])): ?><i class="soon-badge">בקרוב</i><?php endif; ?></a></li>
+            <li><a href="<?= e(url($item['href'])) ?>"><?= e($item['label']) ?><?php if (!empty($item['soon'])): ?><i class="soon-badge">בקרוב</i><?php endif; ?></a></li>
           <?php endforeach; ?>
         </ul>
       </nav>
@@ -32,9 +32,9 @@
     <div class="f-bot">
       <span><span class="ltr">© <?= date('Y') ?> SDmarketing</span>. כל הזכויות שמורות.</span>
       <nav aria-label="מסמכים">
-        <a href="terms.php">תקנון ותנאי שימוש</a>
-        <a href="privacy.php">מדיניות פרטיות</a>
-        <a href="accessibility.php">הצהרת נגישות</a>
+        <a href="<?= url('terms') ?>">תקנון ותנאי שימוש</a>
+        <a href="<?= url('privacy') ?>">מדיניות פרטיות</a>
+        <a href="<?= url('accessibility') ?>">הצהרת נגישות</a>
       </nav>
     </div>
   </div>
@@ -42,6 +42,6 @@
 
 <aside aria-label="יצירת קשר מהירה"><a class="wa-float" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener" aria-label="דברו איתי בוואטסאפ"><?= icon('whatsapp') ?></a></aside>
 
-<script src="assets/js/main.js?v=112" defer></script>
+<script src="<?= url('assets/js/main.js?v=112') ?>" defer></script>
 </body>
 </html>

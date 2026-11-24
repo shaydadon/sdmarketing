@@ -10,7 +10,7 @@ require __DIR__ . '/includes/service-visual.php';
 <section class="hero dark">
   <div class="glow" style="top:-100px;left:-200px" aria-hidden="true"></div>
   <div class="wrap p-hero sm">
-    <nav class="crumb" aria-label="מיקום בעמוד"><a href="index.php">בית</a> / <b>שירותים</b></nav>
+    <nav class="crumb" aria-label="מיקום בעמוד"><a href="<?= url('') ?>">בית</a> / <b>שירותים</b></nav>
     <h1 id="page-title">כל מה שהעסק צריך כדי למכור אונליין.<span>ולעבוד פחות.</span></h1>
     <p class="lead" style="max-width:720px;margin-top:28px">חמישה תחומים שנבנים כך שיתחברו זה לזה: חיפוש אורגני או קמפיין ממומן מביאים את הלקוח, האתר משכנע אותו, הבוט עונה לו והאוטומציה דואגת שאף אחד לא ייפול בין הכיסאות.</p>
     <nav class="subnav" aria-label="מעבר בין שירותים" data-jump>
@@ -34,7 +34,7 @@ require __DIR__ . '/includes/service-visual.php';
       <div class="tagline"><?= e($s['headline']) ?> <span><?= e($s['headline_accent']) ?></span></div>
       <p class="intro"><?= e($s['intro']) ?></p>
       <?php if (!empty($s['more'])): ?>
-        <p class="more"><a href="<?= e($s['more']['href']) ?>"><?= e($s['more']['label']) ?></a></p>
+        <p class="more"><a href="<?= e(url($s['more']['href'])) ?>"><?= e($s['more']['label']) ?></a></p>
       <?php endif; ?>
       <div class="feat-grid">
         <?php foreach ($s['features'] as $f): ?>

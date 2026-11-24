@@ -9,7 +9,7 @@ require __DIR__ . '/includes/projects-data.php';
 <section class="hero dark">
   <div class="glow" style="top:-100px;left:-200px" aria-hidden="true"></div>
   <div class="wrap p-hero">
-    <nav class="crumb" aria-label="מיקום בעמוד"><a href="index.php">בית</a> / <b>פרויקטים</b></nav>
+    <nav class="crumb" aria-label="מיקום בעמוד"><a href="<?= url('') ?>">בית</a> / <b>פרויקטים</b></nav>
     <div class="row">
       <h1 id="page-title">לא מצגות.<span>דברים שעובדים באוויר.</span></h1>
     </div>
@@ -59,19 +59,19 @@ require __DIR__ . '/includes/projects-data.php';
       <div class="stage stage-fisha">
         <div class="browser main">
           <div class="bar"><i></i><i></i><i></i><u></u></div>
-          <img class="tall" src="assets/img/projects/fisha/originals-main.webp" alt="עמוד Originals בחנות fisha.shop" width="1600" height="1133" loading="lazy" decoding="async">
+          <img class="tall" src="<?= url('assets/img/projects/fisha/originals-main.webp') ?>" alt="עמוד Originals בחנות fisha.shop" width="1600" height="1133" loading="lazy" decoding="async">
         </div>
         <div class="side">
-          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="assets/img/projects/fisha/shop-hq-c.webp" alt="עמוד החנות fisha.shop" width="1600" height="929" loading="lazy" decoding="async"></div>
-          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="assets/img/projects/fisha/tattoos-2.webp" alt="Flash sheet בחנות fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
-          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="assets/img/projects/fisha/tattoos-1.webp" alt="עמוד הקעקועים של fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
+          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="<?= url('assets/img/projects/fisha/shop-hq-c.webp') ?>" alt="עמוד החנות fisha.shop" width="1600" height="929" loading="lazy" decoding="async"></div>
+          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="<?= url('assets/img/projects/fisha/tattoos-2.webp') ?>" alt="Flash sheet בחנות fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
+          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="<?= url('assets/img/projects/fisha/tattoos-1.webp') ?>" alt="עמוד הקעקועים של fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
         </div>
       </div>
     <?php else: $shot = $p['shots'][0]; ?>
       <div class="stage stage-one">
         <div class="browser">
           <div class="bar"><i></i><i></i><i></i><u></u></div>
-          <img src="<?= e($shot['src']) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" loading="lazy" decoding="async">
+          <img src="<?= e(url($shot['src'])) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" loading="lazy" decoding="async">
         </div>
       </div>
     <?php endif; ?>
@@ -90,7 +90,7 @@ require __DIR__ . '/includes/projects-data.php';
       </div>
       <div class="ctas">
         <a class="btn btn-acc" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span>דברו איתי בוואטסאפ</span></a>
-        <a class="btn btn-ghost-d" href="contact.php">לטופס יצירת קשר</a>
+        <a class="btn btn-ghost-d" href="<?= url('contact') ?>">לטופס יצירת קשר</a>
       </div>
     </div>
   </div>

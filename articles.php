@@ -10,7 +10,7 @@ require __DIR__ . '/includes/articles-meta.php';
 <section class="hero dark">
   <div class="glow" aria-hidden="true"></div>
   <div class="wrap p-hero sm">
-    <nav class="crumb" aria-label="מיקום בעמוד"><a href="index.php">בית</a> / <b>מאמרים</b></nav>
+    <nav class="crumb" aria-label="מיקום בעמוד"><a href="<?= url('') ?>">בית</a> / <b>מאמרים</b></nav>
     <h1 id="page-title">מאמרים ומדריכים.<span>קצר, מעשי, בלי מילים מיותרות.</span></h1>
     <p class="lead">איך לא לאבד פניות, מה לעשות עם הוואטסאפ, מתי אפליקציה שווה את זה, ואיך יודעים מה באמת עובד בפרסום. כל מאמר נקרא בכמה דקות.</p>
     <div class="filters" role="group" aria-label="סינון לפי נושא" data-filters>
@@ -28,8 +28,8 @@ require __DIR__ . '/includes/articles-meta.php';
     <ul class="post-grid" data-showcase>
       <?php foreach ($articles as $i => $a): ?>
         <li class="post-card rv" data-cat="<?= e($a['topic']) ?>">
-          <a href="article.php?slug=<?= e($a['slug']) ?>">
-            <img class="pc-img" src="<?= e($a['image']) ?>" alt="<?= e($a['image_alt']) ?>" width="1200" height="630" <?= $i < 3 ? 'fetchpriority="high"' : 'loading="lazy"' ?> decoding="async">
+          <a href="<?= e(url('articles/' . $a['slug'])) ?>">
+            <img class="pc-img" src="<?= e(url($a['image'])) ?>" alt="<?= e($a['image_alt']) ?>" width="1200" height="630" <?= $i < 3 ? 'fetchpriority="high"' : 'loading="lazy"' ?> decoding="async">
             <span class="pc-top"><span class="pc-type"><?= e($a['type']) ?></span><span class="pc-min"><?= (int) $a['minutes'] ?> דקות קריאה</span></span>
             <h2><?= e($a['title']) ?></h2>
             <p><?= e($a['description']) ?></p>
