@@ -943,12 +943,6 @@ footer .logo small{color:#9A9893}
 :root{--accent-big:#AD6E3A}   /* large terracotta text on paper (3.7:1) */
 
 /* Light header on the home page, to sit on the light hero */
-.page-index .topbar{background:var(--paper);color:var(--ink)}
-.page-index .topbar.is-scrolled{box-shadow:0 1px 0 var(--line)}
-.page-index .topbar .logo,.page-index .topbar .menu a{color:var(--ink)}
-.page-index .topbar .logo small{color:var(--mute)}
-.page-index .topbar .btn-acc{background:var(--ink);color:#fff}
-.page-index .nav-toggle{color:var(--ink);border-color:var(--line)}
 
 /* Hero */
 .h3ro{padding:40px 0 120px;overflow:hidden}
@@ -1131,10 +1125,6 @@ h1,h2,h3{text-wrap:balance}
 }
 
 /* Home: the mobile menu sits on the light header, so it takes ink text and light dividers */
-.page-index .mobile-nav:not([hidden]){border-top-color:var(--line)}
-.page-index .mobile-nav a{color:var(--ink);border-bottom-color:var(--line)}
-.page-index .mobile-nav a[aria-current="page"]{color:var(--accent-big)}
-.page-index .mobile-nav a svg{color:var(--accent)}
 /* Closing CTA on mobile: no decorative ring behind the heading and text */
 
 /* ================= v6 ================= */
@@ -1148,7 +1138,6 @@ h1,h2,h3{text-wrap:balance}
 .mobile-nav li a[aria-current="page"] svg{margin-inline-start:auto}
 .mobile-nav .mn-cta{display:flex;width:100%;justify-content:center;margin-top:18px;height:56px}
 .mobile-nav .mn-cta svg{color:var(--accent)}
-.page-index .mobile-nav .mn-cta{background:var(--ink);color:#fff}
 @keyframes mn-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .mobile-nav:not([hidden]) li,.mobile-nav:not([hidden]) .mn-cta{animation:mn-in .45s cubic-bezier(.2,.7,.2,1) both}
 .mobile-nav li:nth-child(2){animation-delay:.04s}.mobile-nav li:nth-child(3){animation-delay:.08s}.mobile-nav li:nth-child(4){animation-delay:.12s}.mobile-nav li:nth-child(5){animation-delay:.16s}
@@ -1170,3 +1159,27 @@ h1,h2,h3{text-wrap:balance}
 .f-bot nav a{display:inline-block;padding-block:5px}
 .consent .box{width:24px;height:24px}
 .consent input{width:24px;height:24px}
+
+/* ================= v9: dark home hero, staged like a studio shot ================= */
+.h3ro{background:var(--ink);color:#fff;position:relative;isolation:isolate}
+.h3ro::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:linear-gradient(#ffffff0b 1px,transparent 1px),linear-gradient(90deg,#ffffff0b 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse at 70% 45%,#000 15%,transparent 72%)}
+/* warm terracotta light behind the devices */
+.h3ro::after{content:"";position:absolute;z-index:-1;pointer-events:none;width:760px;height:760px;left:-140px;top:50%;transform:translateY(-50%);background:radial-gradient(circle,color-mix(in srgb,var(--accent) 22%,transparent),transparent 62%);filter:blur(12px)}
+.h3ro .eyebrow{color:var(--mute-d)}
+.h3ro h1{color:#fff}
+.h3ro h1 .l2{color:var(--accent-2)}
+.h3ro .lead{color:#c9c6bf}
+.h3ro .offer{color:var(--mute-d)}
+.btn-main{box-shadow:0 18px 40px -16px color-mix(in srgb,var(--accent) 70%,transparent)}
+.btn-main:hover{box-shadow:0 22px 48px -16px color-mix(in srgb,var(--accent) 85%,transparent)}
+/* devices float above the dark stage */
+.h3-art .h3-b{border-color:#2a2a2a;box-shadow:0 50px 90px -30px #000,0 0 0 1px #ffffff12}
+.h3-art .device{box-shadow:0 0 0 1.5px #3a3a3a,0 0 0 3px #1c1c1c,0 0 0 4px #4a4a4a,0 50px 80px -24px #000,0 16px 30px -12px #000c}
+.h3-why li{box-shadow:0 18px 40px -18px #000}
+.h3-cap,.h3-art .h3-cap{color:var(--mute-d)}
+.h3-cap b{color:#fff}
+@media (max-width:800px){
+  .h3ro::after{width:460px;height:460px;left:-120px;top:72%}
+  .h3ro::before{background-size:48px 48px}
+  .h3-art .device{box-shadow:0 0 0 1px #3a3a3a,0 0 0 2px #1c1c1c,0 0 0 2.5px #4a4a4a,0 28px 48px -18px #000}
+}
