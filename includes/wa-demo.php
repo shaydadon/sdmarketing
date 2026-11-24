@@ -41,11 +41,11 @@ $wa_msgs = [
 ];
 $wa_n = count($wa_msgs);
 ?>
-<section class="case" id="case-bot" aria-labelledby="case-bot-title">
+<section class="case" id="case-bot" data-cat="automations" aria-labelledby="case-bot-title">
   <div class="wrap">
     <div class="case-head">
       <div>
-        <div class="case-idx"><b>03</b></div>
+        <div class="case-idx"><b><?= sprintf('%02d', count($projects) + 1) ?></b> / <?= sprintf('%02d', count($projects) + array_sum($extra_cases)) ?></div>
         <h2 id="case-bot-title" lang="en">Boardog</h2>
         <div class="tags"><span class="tag acc">אפליקציית צ׳אטבוט לבעלי פנסיונים</span></div>
       </div>

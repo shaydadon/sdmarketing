@@ -270,25 +270,36 @@ test.describe('homepage', () => {
 });
 
 test.describe('projects', () => {
-  test('filters show and hide the right projects', async ({ page }) => {
+  test('filters show and hide the right projects, including the Boardog bot', async ({ page }) => {
     await page.goto('/projects.php');
     const fisha = page.locator('[data-showcase] [data-cat="web"]');
     const apps = page.locator('[data-showcase] [data-cat="pwa"]');
+    const bot = page.locator('#case-bot');
 
     await expect(fisha).toHaveCount(1);
     await expect(apps).toHaveCount(1);
+    await expect(bot).toHaveAttribute('data-cat', 'automations');
+    await expect(page.getByRole('button', { name: /הכל/ })).toContainText('3');
 
     await page.getByRole('button', { name: /אפליקציות PWA/ }).click();
     await expect(fisha).toBeHidden();
     await expect(apps).toBeVisible();
+    await expect(bot).toBeHidden();
 
     await page.getByRole('button', { name: /אתרים וחנויות/ }).click();
     await expect(fisha).toBeVisible();
     await expect(apps).toBeHidden();
+    await expect(bot).toBeHidden();
+
+    await page.getByRole('button', { name: /אוטומציות לעסקים/ }).click();
+    await expect(fisha).toBeHidden();
+    await expect(apps).toBeHidden();
+    await expect(bot).toBeVisible();
 
     await page.getByRole('button', { name: /הכל/ }).click();
     await expect(fisha).toBeVisible();
     await expect(apps).toBeVisible();
+    await expect(bot).toBeVisible();
   });
 
   test('whatsapp bot showcase renders', async ({ page }) => {

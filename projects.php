@@ -17,7 +17,9 @@ require __DIR__ . '/includes/projects-data.php';
       <p class="lead" style="margin:0;max-width:560px">חנויות, אתרים ואפליקציות שבניתי ושלקוחות משתמשים בהם עכשיו. אפשר להיכנס ולנסות בעצמכם.</p>
       <div class="filters" role="group" aria-label="סינון לפי סוג" data-filters>
         <?php foreach ($project_cats as $key => $label):
-          $count = $key === 'all' ? count($projects) : count(array_filter($projects, fn($p) => $p['cat'] === $key)); ?>
+          $count = $key === 'all'
+              ? count($projects) + array_sum($extra_cases)
+              : count(array_filter($projects, fn($p) => $p['cat'] === $key)) + ($extra_cases[$key] ?? 0); ?>
           <button type="button" class="chip<?= $key === 'all' ? ' on' : '' ?>" data-filter="<?= e($key) ?>" aria-pressed="<?= $key === 'all' ? 'true' : 'false' ?>">
             <?= e($label) ?> <i><?= $count ?></i>
           </button>
@@ -33,7 +35,7 @@ require __DIR__ . '/includes/projects-data.php';
   <div class="wrap">
     <div class="case-head">
       <div>
-        <div class="case-idx"><b><?= sprintf('%02d', $i + 1) ?></b> / <?= sprintf('%02d', count($projects)) ?></div>
+        <div class="case-idx"><b><?= sprintf('%02d', $i + 1) ?></b> / <?= sprintf('%02d', count($projects) + array_sum($extra_cases)) ?></div>
         <h2 id="case-title-<?= e($p['slug']) ?>" lang="en"><?= e($p['name']) ?></h2>
         <div class="tags"><span class="tag acc"><?= e($p['tag']) ?></span></div>
       </div>
