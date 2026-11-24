@@ -3,16 +3,16 @@ const { test, expect } = require('@playwright/test');
 const AxeBuilder = require('@axe-core/playwright').default;
 
 const PAGES = [
-  { path: '/index.php', name: 'home' },
-  { path: '/services.php', name: 'services' },
-  { path: '/projects.php', name: 'projects' },
-  { path: '/about.php', name: 'about' },
-  { path: '/contact.php', name: 'contact' },
-  { path: '/articles.php', name: 'articles' },
-  { path: '/article.php?slug=whatsapp-chatbot', name: 'article' },
-  { path: '/terms.php', name: 'terms' },
-  { path: '/privacy.php', name: 'privacy' },
-  { path: '/accessibility.php', name: 'accessibility' },
+  { path: '/', name: 'home' },
+  { path: '/services', name: 'services' },
+  { path: '/projects', name: 'projects' },
+  { path: '/about', name: 'about' },
+  { path: '/contact', name: 'contact' },
+  { path: '/articles', name: 'articles' },
+  { path: '/articles/whatsapp-chatbot', name: 'article' },
+  { path: '/terms', name: 'terms' },
+  { path: '/privacy', name: 'privacy' },
+  { path: '/accessibility', name: 'accessibility' },
 ];
 const WA_NUMBER = '972526203423';
 
@@ -112,7 +112,7 @@ test.describe('every page', () => {
 
 test.describe('navigation', () => {
   test('current page is marked in the menu', async ({ page, isMobile }) => {
-    await page.goto('/services.php');
+    await page.goto('/services');
     const nav = isMobile ? page.locator('[data-mobile-nav]') : page.locator('[data-nav]');
     if (isMobile) await page.locator('[data-nav-toggle]').click();
     await expect(nav.locator('a[aria-current="page"]')).toHaveText(/שירותים/);
@@ -120,7 +120,7 @@ test.describe('navigation', () => {
 
   test('mobile menu opens, focuses, and closes with Escape', async ({ page, isMobile }) => {
     test.skip(!isMobile, 'mobile only');
-    await page.goto('/index.php');
+    await page.goto('/');
     const toggle = page.locator('[data-nav-toggle]');
     const menu = page.locator('[data-mobile-nav]');
     await expect(menu).toBeHidden();
@@ -143,14 +143,65 @@ test.describe('navigation', () => {
   });
 });
 
+test.describe('clean URLs', () => {
+  const OLD_TO_NEW = [
+    ['/index.php', '/'],
+    ['/services.php', '/services'],
+    ['/projects.php', '/projects'],
+    ['/articles.php', '/articles'],
+    ['/about.php', '/about'],
+    ['/contact.php', '/contact'],
+    ['/terms.php', '/terms'],
+    ['/privacy.php', '/privacy'],
+    ['/accessibility.php', '/accessibility'],
+    ['/article.php?slug=landing-page', '/articles/landing-page'],
+    ['/services/', '/services'],
+  ];
+  for (const [from, to] of OLD_TO_NEW) {
+    test(`${from} moves permanently to ${to}`, async ({ request }) => {
+      const res = await request.get(from, { maxRedirects: 0 });
+      expect(res.status()).toBe(301);
+      expect(new URL(res.headers()['location'], 'http://x').pathname).toBe(to);
+    });
+  }
+
+  test('sitemap.xml lists only clean URLs with dates, and robots.txt points to it', async ({ request }) => {
+    const xml = await (await request.get('/sitemap.xml')).text();
+    const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+    expect(locs.length).toBeGreaterThanOrEqual(15);
+    for (const loc of locs) expect(loc).toMatch(/^https:\/\/sdmarketing\.co\.il\/[a-z0-9\/-]*$/);
+    expect(locs).toContain('https://sdmarketing.co.il/articles/landing-page');
+    expect((xml.match(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/g) || []).length).toBe(locs.length);
+    // every sitemap URL is served (200) at its clean path
+    for (const loc of locs) {
+      const res = await request.get(new URL(loc).pathname, { maxRedirects: 0 });
+      expect(res.status(), loc).toBe(200);
+    }
+    const robots = await (await request.get('/robots.txt')).text();
+    expect(robots).toContain('Sitemap: https://sdmarketing.co.il/sitemap.xml');
+  });
+
+  test('every internal link on every page is clean (no .php, no ?slug=)', async ({ page }) => {
+    for (const path of ['/', '/services', '/projects', '/articles', '/articles/whatsapp-chatbot', '/about', '/contact', '/terms']) {
+      await page.goto(path);
+      const bad = await page.evaluate(() => [...document.querySelectorAll('a[href]')]
+        .map((a) => a.getAttribute('href'))
+        .filter((h) => !/^(https?:|mailto:|tel:|#)/.test(h) && (/\.php/.test(h) || /\?slug=/.test(h))));
+      expect(bad, path).toEqual([]);
+      const canonical = await page.locator('link[rel="canonical"]').getAttribute('href');
+      expect(canonical, path).not.toMatch(/\.php|\?slug=/);
+    }
+  });
+});
+
 test.describe('articles', () => {
   test('the list links to every article, and each article has its FAQ and structured data', async ({ page }) => {
-    await page.goto('/articles.php');
+    await page.goto('/articles');
     const cards = page.locator('.post-card a');
     await expect(cards).toHaveCount(6);
     const hrefs = await cards.evaluateAll((as) => as.map((a) => a.getAttribute('href')));
     for (const href of hrefs) {
-      const res = await page.goto('/' + href);
+      const res = await page.goto(href);
       expect(res.status()).toBe(200);
       await expect(page.locator('h1')).toBeVisible();
       await expect(page.locator('.post-body h2').first()).toBeVisible();
@@ -160,20 +211,19 @@ test.describe('articles', () => {
     }
   });
 
-  test('the mobile menu lists every article under Articles, with its image', async ({ page, isMobile }) => {
-    test.skip(!isMobile, 'mobile menu only');
-    await page.goto('/index.php');
-    await page.locator('[data-nav-toggle]').click();
-    const sub = page.locator('.mobile-nav .mn-sub a');
-    await expect(sub).toHaveCount(6);
-    await expect(sub.first().locator('img')).toBeVisible();
-    await sub.nth(2).click();
-    await expect(page).toHaveURL(/article\.php\?slug=/);
-    await expect(page.locator('.post-cover img')).toBeVisible();
+  test('the menu starts with Services, has no Home item, and Articles is a plain link', async ({ page, isMobile }) => {
+    await page.goto('/');
+    if (isMobile) await page.locator('[data-nav-toggle]').click();
+    const links = page.locator(isMobile ? '.mobile-nav > ul > li > a' : '[data-nav] a');
+    await expect(links).toHaveText([/שירותים/, /פרויקטים/, /מאמרים/, /אודות/, /צור קשר/]);
+    await expect(page.locator('.mobile-nav .mn-sub')).toHaveCount(0);
+    await links.nth(2).click();
+    await expect(page).toHaveURL(/\/articles$/);
+    await expect(page.locator('header a.logo')).toHaveAttribute('href', '/');
   });
 
   test('topic filters show only that topic, and each article names its author and date', async ({ page }) => {
-    await page.goto('/articles.php');
+    await page.goto('/articles');
     const visible = page.locator('.post-card:visible');
     await expect(visible).toHaveCount(6);
     await page.getByRole('button', { name: /אפליקציות/ }).click();
@@ -183,7 +233,7 @@ test.describe('articles', () => {
     await page.getByRole('button', { name: /הכל/ }).click();
     await expect(visible).toHaveCount(6);
 
-    await page.goto('/article.php?slug=landing-page');
+    await page.goto('/articles/landing-page');
     await expect(page.locator('.byline')).toContainText('שי דדון');
     await expect(page.locator('.byline time')).toHaveAttribute('datetime', /^\d{4}-\d{2}-\d{2}$/);
     await expect(page.locator('.author-box')).toContainText('SEO');
@@ -193,13 +243,13 @@ test.describe('articles', () => {
   });
 
   test('an unknown article returns 404', async ({ page }) => {
-    const res = await page.goto('/article.php?slug=does-not-exist');
+    const res = await page.goto('/articles/does-not-exist');
     expect(res.status()).toBe(404);
   });
 });
 
 test.describe('hero buttons', () => {
-  for (const path of ['/index.php', '/about.php', '/services.php', '/projects.php', '/contact.php']) {
+  for (const path of ['/', '/about', '/services', '/projects', '/contact']) {
     test(`${path}: every hero link is clickable (no decoration on top)`, async ({ page }) => {
       await page.goto(path);
       const blocked = await page.evaluate(() => [...document.querySelectorAll('main section:first-of-type a')]
@@ -218,29 +268,29 @@ test.describe('hero buttons', () => {
 
 test.describe('homepage', () => {
   test('five service areas link to the services page', async ({ page }) => {
-    await page.goto('/index.php');
+    await page.goto('/');
     const cards = page.locator('.svc-grid .svc');
     await expect(cards).toHaveCount(5);
     await expect(cards.first()).toContainText('אוטומציות לעסקים');
     await expect(page.locator('.svc-grid')).toContainText('SEO / קידום אורגני');
     await expect(page.locator('.svc-grid')).toContainText('קמפיינים ממומנים');
-    await expect(page.locator('a[href="services.php#automations"]')).toBeVisible();
-    await expect(page.locator('a[href="services.php#pwa"]')).toBeVisible();
-    await expect(page.locator('a[href="services.php#seo"]')).toBeVisible();
-    await expect(page.locator('a[href="services.php#campaigns"]')).toBeVisible();
+    await expect(page.locator('a[href="/services#automations"]')).toBeVisible();
+    await expect(page.locator('a[href="/services#pwa"]')).toBeVisible();
+    await expect(page.locator('a[href="/services#seo"]')).toBeVisible();
+    await expect(page.locator('a[href="/services#campaigns"]')).toBeVisible();
     await expect(page.getByRole('heading', { name: 'חמישה תחומים. מערכת אחת שעובדת יחד.' })).toBeVisible();
     await expect(page.locator('.svc-grid')).toContainText('לקוחות שמוצאים אתכם בגוגל');
-    await page.goto('/services.php');
+    await page.goto('/services');
     await expect(page.locator('#seo')).toContainText('מחקר מילות מפתח');
     await expect(page.locator('#seo')).toContainText('הדגמה להמחשה · ללא נתונים אמיתיים');
-    await expect(page.locator('#seo a[href="articles.php"]')).toBeVisible();
+    await expect(page.locator('#seo a[href="/articles"]')).toBeVisible();
     await expect(page.locator('#campaigns')).toContainText('Google Ads');
     await expect(page.locator('#campaigns')).toContainText('פייסבוק');
     await expect(page.locator('#websites')).toContainText('fisha.shop');
   });
 
   test('hero leads with the headline, one clear action, and real work', async ({ page }) => {
-    await page.goto('/index.php');
+    await page.goto('/');
     await expect(page.locator('h1')).toContainText('העסק שלך ממשיך לעבוד.');
     await expect(page.locator('.h3ro .btn-main')).toHaveText(/בואו נדבר על העסק שלכם/);
     await expect(page.locator('.h3-art img')).toHaveCount(3);
@@ -249,7 +299,7 @@ test.describe('homepage', () => {
   });
 
   test('faq lists every service and publishes FAQPage data', async ({ page }) => {
-    await page.goto('/index.php');
+    await page.goto('/');
     const faq = page.locator('.faq');
     await expect(faq.locator('h2')).toHaveText('שאלות שבעלי עסקים שואלים אותי');
     await expect(faq.locator('details')).toHaveCount(5);
@@ -271,29 +321,40 @@ test.describe('homepage', () => {
 });
 
 test.describe('projects', () => {
-  test('filters show and hide the right projects', async ({ page }) => {
-    await page.goto('/projects.php');
+  test('filters show and hide the right projects, including the Boardog bot', async ({ page }) => {
+    await page.goto('/projects');
     const fisha = page.locator('[data-showcase] [data-cat="web"]');
     const apps = page.locator('[data-showcase] [data-cat="pwa"]');
+    const bot = page.locator('#case-bot');
 
     await expect(fisha).toHaveCount(1);
     await expect(apps).toHaveCount(1);
+    await expect(bot).toHaveAttribute('data-cat', 'automations');
+    await expect(page.getByRole('button', { name: /הכל/ })).toContainText('3');
 
     await page.getByRole('button', { name: /אפליקציות PWA/ }).click();
     await expect(fisha).toBeHidden();
     await expect(apps).toBeVisible();
+    await expect(bot).toBeHidden();
 
     await page.getByRole('button', { name: /אתרים וחנויות/ }).click();
     await expect(fisha).toBeVisible();
     await expect(apps).toBeHidden();
+    await expect(bot).toBeHidden();
+
+    await page.getByRole('button', { name: /אוטומציות לעסקים/ }).click();
+    await expect(fisha).toBeHidden();
+    await expect(apps).toBeHidden();
+    await expect(bot).toBeVisible();
 
     await page.getByRole('button', { name: /הכל/ }).click();
     await expect(fisha).toBeVisible();
     await expect(apps).toBeVisible();
+    await expect(bot).toBeVisible();
   });
 
   test('whatsapp bot showcase renders', async ({ page }) => {
-    await page.goto('/projects.php');
+    await page.goto('/projects');
     const block = page.locator('#case-bot');
     await expect(block).toBeVisible();
     await expect(block.locator('h2')).toHaveText('Boardog');
@@ -315,7 +376,7 @@ test.describe('projects', () => {
 
 test.describe('contact form', () => {
   test('empty submit shows Hebrew errors and focuses the first field', async ({ page }) => {
-    await page.goto('/contact.php');
+    await page.goto('/contact');
     await page.getByRole('button', { name: 'שליחת הפנייה' }).click();
     await expect(page.locator('.field-error')).toHaveCount(3);
     await expect(page.locator('#f-name')).toBeFocused();
@@ -323,7 +384,7 @@ test.describe('contact form', () => {
   });
 
   test('bad email is caught; fixing a field clears its error', async ({ page }) => {
-    await page.goto('/contact.php');
+    await page.goto('/contact');
     await page.fill('#f-email', 'not-an-email');
     await page.locator('#f-email').blur();
     await expect(page.locator('#err-email')).toContainText('כתובת המייל');
@@ -332,14 +393,14 @@ test.describe('contact form', () => {
   });
 
   test('server rejects a forged submission', async ({ request }) => {
-    const res = await request.post('/contact.php', {
+    const res = await request.post('/contact', {
       form: { csrf: 'forged', name: 'בדיקה', phone: '0501234567', consent: '1' },
     });
     expect(await res.text()).toContain('פג תוקף הטופס');
   });
 
   test('valid submission reaches the mail step and keeps the data', async ({ page }) => {
-    await page.goto('/contact.php');
+    await page.goto('/contact');
     await page.waitForTimeout(3200); // the form ignores submissions faster than a human could make them
     await page.fill('#f-name', 'בדיקת מערכת');
     await page.fill('#f-phone', '050-1234567');
@@ -355,7 +416,7 @@ test.describe('contact form', () => {
   });
 
   test('thank-you screen', async ({ page }) => {
-    await page.goto('/contact.php?sent=1');
+    await page.goto('/contact?sent=1');
     await expect(page.locator('#sent h2')).toHaveText('ההודעה התקבלה. תודה.');
   });
 });

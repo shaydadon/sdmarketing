@@ -13,7 +13,7 @@ if (!$article) {
 $page_id        = 'articles';
 $page_title     = $article['meta_title'] . ' | SDmarketing';
 $page_desc      = $article['description'];
-$canonical_path = 'article.php?slug=' . rawurlencode($article['slug']);
+$canonical_path = 'articles/' . rawurlencode($article['slug']);
 $og_type        = 'article';
 $og_image       = $article['image'];
 require __DIR__ . '/includes/header.php';
@@ -39,7 +39,7 @@ $ld  = [
         '@type' => 'BreadcrumbList',
         'itemListElement' => [
             ['@type' => 'ListItem', 'position' => 1, 'name' => 'בית', 'item' => 'https://' . $site['domain'] . '/'],
-            ['@type' => 'ListItem', 'position' => 2, 'name' => 'מאמרים', 'item' => 'https://' . $site['domain'] . '/articles.php'],
+            ['@type' => 'ListItem', 'position' => 2, 'name' => 'מאמרים', 'item' => 'https://' . $site['domain'] . '/articles'],
             ['@type' => 'ListItem', 'position' => 3, 'name' => $article['title'], 'item' => $url],
         ],
     ],
@@ -63,12 +63,12 @@ $related = [$others[$i % count($others)], $others[($i + 1) % count($others)]];
 <section class="hero dark">
   <div class="glow" aria-hidden="true"></div>
   <div class="wrap p-hero sm post-hero">
-    <nav class="crumb" aria-label="מיקום בעמוד"><a href="index.php">בית</a> / <a href="articles.php">מאמרים</a> / <b><?= e($article['type']) ?></b></nav>
+    <nav class="crumb" aria-label="מיקום בעמוד"><a href="<?= url('') ?>">בית</a> / <a href="<?= url('articles') ?>">מאמרים</a> / <b><?= e($article['type']) ?></b></nav>
     <h1 id="page-title"><?= e($article['title']) ?></h1>
     <div class="byline">
-      <span class="by-photo"><img src="<?= e($author['photo']) ?>" alt="" width="1024" height="1024" decoding="async"></span>
+      <span class="by-photo"><img src="<?= e(url($author['photo'])) ?>" alt="" width="1024" height="1024" decoding="async"></span>
       <div>
-        <a class="by-name" href="<?= e($author['url']) ?>"><?= e($author['name']) ?></a>
+        <a class="by-name" href="<?= e(url($author['url'])) ?>"><?= e($author['name']) ?></a>
         <span class="by-role"><?= e($author['role']) ?></span>
         <span class="by-meta"><time datetime="<?= e($article['published']) ?>">פורסם ב-<?= e(he_date($article['published'])) ?></time><?php if ($article['updated'] !== $article['published']): ?> · <time datetime="<?= e($article['updated']) ?>">עודכן ב-<?= e(he_date($article['updated'])) ?></time><?php endif; ?> · <?= (int) $article['minutes'] ?> דקות קריאה</span>
       </div>
@@ -78,9 +78,9 @@ $related = [$others[$i % count($others)], $others[($i + 1) % count($others)]];
 
 <article class="post" aria-labelledby="page-title">
   <div class="wrap post-wrap">
-    <figure class="post-cover"><img src="<?= e($article['image']) ?>" alt="<?= e($article['image_alt']) ?>" width="1200" height="630" fetchpriority="high" decoding="async"></figure>
+    <figure class="post-cover"><img src="<?= e(url($article['image'])) ?>" alt="<?= e($article['image_alt']) ?>" width="1200" height="630" fetchpriority="high" decoding="async"></figure>
     <div class="post-body">
-      <?= $article['html'] ?>
+      <?= str_replace('{BASE}', $base, $article['html']) ?>
     </div>
 
     <?php if ($article['faq']): ?>
@@ -90,7 +90,7 @@ $related = [$others[$i % count($others)], $others[($i + 1) % count($others)]];
           <?php foreach ($article['faq'] as $n => $f): ?>
             <details>
               <summary id="pf-q-<?= $n ?>"><span><?= e($f['q']) ?></span></summary>
-              <div class="faq-a" role="region" aria-labelledby="pf-q-<?= $n ?>"><p><?= $f['a_html'] ?></p></div>
+              <div class="faq-a" role="region" aria-labelledby="pf-q-<?= $n ?>"><p><?= str_replace('{BASE}', $base, $f['a_html']) ?></p></div>
             </details>
           <?php endforeach; ?>
         </div>
@@ -98,17 +98,17 @@ $related = [$others[$i % count($others)], $others[($i + 1) % count($others)]];
     <?php endif; ?>
 
     <aside class="author-box" aria-label="על הכותב">
-      <img src="<?= e($author['photo']) ?>" alt="<?= e($author['name']) ?>" width="1024" height="1024" loading="lazy" decoding="async">
+      <img src="<?= e(url($author['photo'])) ?>" alt="<?= e($author['name']) ?>" width="1024" height="1024" loading="lazy" decoding="async">
       <div>
         <p class="ab-k">על הכותב</p>
         <p class="ab-n"><?= e($author['name']) ?>, מייסד SDmarketing</p>
         <p class="ab-b"><?= e($author['bio']) ?></p>
-        <a class="link" href="<?= e($author['url']) ?>">עוד על שי <?= icon('arrow') ?></a>
+        <a class="link" href="<?= e(url($author['url'])) ?>">עוד על שי <?= icon('arrow') ?></a>
       </div>
     </aside>
 
     <aside class="post-cta" aria-label="יצירת קשר">
-      <p><?= $article['cta_html'] ?></p>
+      <p><?= str_replace('{BASE}', $base, $article['cta_html']) ?></p>
       <a class="btn btn-main" href="<?= e(wa_link($site, 'היי שי, קראתי את המאמר "' . $article['title'] . '" ואשמח לדבר')) ?>" target="_blank" rel="noopener"><span>בואו נדבר על העסק שלכם</span><?= icon('arrow') ?></a>
     </aside>
 
@@ -116,10 +116,10 @@ $related = [$others[$i % count($others)], $others[($i + 1) % count($others)]];
       <h2>עוד מאמרים</h2>
       <ul>
         <?php foreach ($related as $r): ?>
-          <li><a href="article.php?slug=<?= e($r['slug']) ?>"><span class="pc-type"><?= e($r['type']) ?></span><b><?= e($r['title']) ?></b><?= icon('arrow') ?></a></li>
+          <li><a href="<?= e(url('articles/' . $r['slug'])) ?>"><span class="pc-type"><?= e($r['type']) ?></span><b><?= e($r['title']) ?></b><?= icon('arrow') ?></a></li>
         <?php endforeach; ?>
       </ul>
-      <a class="link" href="articles.php">לכל המאמרים <?= icon('arrow') ?></a>
+      <a class="link" href="<?= url('articles') ?>">לכל המאמרים <?= icon('arrow') ?></a>
     </nav>
   </div>
 </article>

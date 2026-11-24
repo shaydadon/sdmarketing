@@ -5,7 +5,7 @@
   <div class="glow" style="top:-100px;left:-200px" aria-hidden="true"></div>
   <div class="wrap p-hero sm legal">
     <nav class="crumb" aria-label="מיקום בעמוד">
-      <a href="index.php">בית</a> / <b><?= e($legal['title']) ?></b>
+      <a href="<?= url('') ?>">בית</a> / <b><?= e($legal['title']) ?></b>
     </nav>
     <h1 id="page-title"><?= e($legal['title']) ?></h1>
     <p class="lead"><?= e($legal['lead']) ?></p>
@@ -24,7 +24,7 @@
       </ol>
       <div class="legal-other">
         <?php foreach (['terms' => 'תקנון ותנאי שימוש', 'privacy' => 'מדיניות פרטיות', 'accessibility' => 'הצהרת נגישות'] as $k => $label): ?>
-          <?php if ($k !== $page_id): ?><a href="<?= $k ?>.php"><?= e($label) ?><?= icon('arrow') ?></a><?php endif; ?>
+          <?php if ($k !== $page_id): ?><a href="<?= e(url($k)) ?>"><?= e($label) ?><?= icon('arrow') ?></a><?php endif; ?>
         <?php endforeach; ?>
       </div>
     </nav>

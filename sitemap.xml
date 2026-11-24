@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://sdmarketing.co.il/</loc></url>
-  <url><loc>https://sdmarketing.co.il/services.php</loc></url>
-  <url><loc>https://sdmarketing.co.il/projects.php</loc></url>
-  <url><loc>https://sdmarketing.co.il/about.php</loc></url>
-  <url><loc>https://sdmarketing.co.il/articles.php</loc></url>
-  <url><loc>https://sdmarketing.co.il/contact.php</loc></url>
-  <url><loc>https://sdmarketing.co.il/terms.php</loc></url>
-  <url><loc>https://sdmarketing.co.il/privacy.php</loc></url>
-  <url><loc>https://sdmarketing.co.il/accessibility.php</loc></url>
-  <url><loc>https://sdmarketing.co.il/article.php?slug=whatsapp-chatbot</loc></url>
-  <url><loc>https://sdmarketing.co.il/article.php?slug=stop-losing-leads</loc></url>
-  <url><loc>https://sdmarketing.co.il/article.php?slug=small-business-automations</loc></url>
-  <url><loc>https://sdmarketing.co.il/article.php?slug=pwa-vs-app-store</loc></url>
-  <url><loc>https://sdmarketing.co.il/article.php?slug=landing-page</loc></url>
-  <url><loc>https://sdmarketing.co.il/article.php?slug=conversion-tracking</loc></url>
+  <url><loc>https://sdmarketing.co.il/</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://sdmarketing.co.il/services</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://sdmarketing.co.il/projects</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://sdmarketing.co.il/articles</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://sdmarketing.co.il/about</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://sdmarketing.co.il/contact</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://sdmarketing.co.il/terms</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://sdmarketing.co.il/privacy</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://sdmarketing.co.il/accessibility</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://sdmarketing.co.il/articles/whatsapp-chatbot</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://sdmarketing.co.il/articles/stop-losing-leads</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://sdmarketing.co.il/articles/small-business-automations</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://sdmarketing.co.il/articles/pwa-vs-app-store</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://sdmarketing.co.il/articles/landing-page</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://sdmarketing.co.il/articles/conversion-tracking</loc><lastmod>2026-11-24</lastmod></url>
 </urlset>

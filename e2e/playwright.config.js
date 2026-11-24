@@ -15,8 +15,9 @@ module.exports = defineConfig({
     trace: 'retain-on-failure',
   },
   webServer: {
-    command: `"${PHP}" -S localhost:${PORT} -t "${path.resolve(__dirname, '..')}"`,
-    url: `http://localhost:${PORT}/index.php`,
+    // router.php mirrors the clean-URL rules in /.htaccess, which the PHP dev server does not read.
+    command: `"${PHP}" -S localhost:${PORT} -t "${path.resolve(__dirname, '..')}" "${path.resolve(__dirname, 'router.php')}"`,
+    url: `http://localhost:${PORT}/`,
     reuseExistingServer: true,
     stdout: 'ignore',
     stderr: 'ignore',

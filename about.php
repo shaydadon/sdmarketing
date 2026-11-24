@@ -9,16 +9,16 @@ require __DIR__ . '/includes/header.php';
   <div class="glow" style="top:-100px;left:-200px" aria-hidden="true"></div>
   <div class="wrap about-hero">
     <div style="padding-bottom:90px">
-      <nav class="crumb" aria-label="מיקום בעמוד"><a href="index.php">בית</a> / <b>אודות</b></nav>
+      <nav class="crumb" aria-label="מיקום בעמוד"><a href="<?= url('') ?>">בית</a> / <b>אודות</b></nav>
       <h1 id="page-title">נעים מאוד,<span>אני שי דדון.</span></h1>
       <p class="lead">מפתח תוכנה עם יותר מ־15 שנות ניסיון, שבונה לעסקים את מה שמחבר בין הלקוח לבין המכירה: הבוט שעונה בוואטסאפ, האתר או האפליקציה שהלקוח נוחת בהם, הקמפיין שמביא אותו, והאוטומציה שדואגת שאף אחד לא ייפול באמצע.</p>
       <div class="ctas">
         <a class="btn btn-acc" href="<?= e(wa_link($site, 'היי, קראתי עליך באתר ואשמח לדבר')) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span>דברו איתי בוואטסאפ</span></a>
-        <a class="btn btn-ghost-d" href="projects.php">לעבודות שלי</a>
+        <a class="btn btn-ghost-d" href="<?= url('projects') ?>">לעבודות שלי</a>
       </div>
     </div>
     <div class="ph">
-      <img src="assets/img/founder.webp" alt="שי דדון, מייסד SDmarketing" width="1024" height="1024" decoding="async">
+      <img src="<?= url('assets/img/founder.webp') ?>" alt="שי דדון, מייסד SDmarketing" width="1024" height="1024" decoding="async">
       <div class="badge">המייסד של<br>SDmarketing</div>
     </div>
   </div>

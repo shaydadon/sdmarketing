@@ -5,7 +5,7 @@ $author = [
     'name'  => 'שי דדון',
     'role'  => 'מייסד SDmarketing · פיתוח, SEO, קמפיינים ואוטומציות',
     'photo' => 'assets/img/founder.webp',
-    'url'   => 'about.php',
+    'url'   => 'about',
     // Short bio for the "about the author" box at the end of each article.
     'bio'   => 'יותר מ-15 שנה כמפתח תוכנה, עם תואר B.Sc. במדעי המחשב. השלים קורס בשיווק דיגיטלי שכלל SEO וקמפיינים ממומנים, ועובד בשיווק דיגיטלי כבר שנתיים. את האתרים, האוטומציות והקמפיינים שהוא כותב עליהם, הוא בונה ומנהל בעצמו.',
     'job_title' => 'מפתח תוכנה ומשווק דיגיטלי',

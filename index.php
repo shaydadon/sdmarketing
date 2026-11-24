@@ -1,7 +1,7 @@
 <?php
 $page_id      = 'index';
-$page_title   = 'SDmarketing | צ׳אטבוט לוואטסאפ לעסקים, אוטומציות, בניית אתרים, קידום אורגני וקמפיינים';
-$page_desc    = 'SDmarketing בונה לעסקים צ׳אטבוט לוואטסאפ, אוטומציות לעסקים, בניית חנות אונליין, דף נחיתה, אתרי תדמית, אפליקציות PWA ללא צורך בחנות האפליקציות, קידום אורגני, וקמפיינים ממומנים בגוגל ובמטא.';
+$page_title   = 'צ׳אטבוט לוואטסאפ, אוטומציות ואתרים לעסקים | SDmarketing';
+$page_desc    = 'צ׳אטבוט לוואטסאפ, אוטומציות לעסקים, בניית אתרים וחנויות, אפליקציות PWA, קידום אורגני וקמפיינים ממומנים. הכל מחובר, ואדם אחד אחראי על כולו.';
 require __DIR__ . '/includes/header.php';
 require __DIR__ . '/includes/services-data.php';
 require __DIR__ . '/includes/projects-data.php';
@@ -20,10 +20,10 @@ require __DIR__ . '/includes/projects-data.php';
     <figure class="h3-art" aria-label="עבודות אמיתיות: החנות fisha.shop, האפליקציה Excerly והצ׳אטבוט Boardog">
       <div class="browser h3-b">
         <div class="bar"><i></i><i></i><i></i><u>fisha.shop</u></div>
-        <img src="assets/img/projects/fisha/tattoos-1.webp" alt="" width="1600" height="1000" decoding="async" fetchpriority="high">
+        <img src="<?= url('assets/img/projects/fisha/tattoos-1.webp') ?>" alt="" width="1600" height="1000" decoding="async" fetchpriority="high">
       </div>
-      <div class="device h3-p"><img src="assets/img/projects/excerly/session-m.webp" alt="" width="780" height="1688" decoding="async"></div>
-      <div class="device h3-bd"><img src="assets/img/projects/boardog/chat-end.webp" alt="" width="780" height="1690" decoding="async"></div>
+      <div class="device h3-p"><img src="<?= url('assets/img/projects/excerly/session-m.webp') ?>" alt="" width="780" height="1688" decoding="async"></div>
+      <div class="device h3-bd"><img src="<?= url('assets/img/projects/boardog/chat-end.webp') ?>" alt="" width="780" height="1690" decoding="async"></div>
       <ul class="h3-why" aria-label="מה הצ׳אטבוט Boardog פותר">
         <li><?= icon('check') ?><span><b>עונה תוך שניות</b>גם בשתיים בלילה</span></li>
         <li><?= icon('check') ?><span><b>אוסף את כל הפרטים</b>בלי טלפונים חוזרים</span></li>
@@ -61,7 +61,7 @@ $outcomes = [
 
     <div class="svc-grid">
       <?php foreach ($services as $i => $s): ?>
-        <a class="svc rv" href="services.php#<?= e($s['id']) ?>">
+        <a class="svc rv" href="<?= e(url('services#' . $s['id'])) ?>">
           <h3 class="svc-h"><span class="icon"><?= icon($s['icon']) ?></span><?= e($s['title']) ?></h3>
           <p class="d"><?= e($s['lead']) ?></p>
           <p class="out"><?= e($outcomes[$s['id']] ?? '') ?><?= icon('arrow') ?></p>
@@ -97,7 +97,7 @@ $outcomes = [
         <span class="eyebrow">עבודות אחרונות</span>
         <h2 class="sec" id="work-title">ההוכחה נמצאת באוויר.</h2>
       </div>
-      <a class="btn btn-ink" href="projects.php">לכל הפרויקטים<?= icon('arrow') ?></a>
+      <a class="btn btn-ink" href="<?= url('projects') ?>">לכל הפרויקטים<?= icon('arrow') ?></a>
     </div>
     <div class="proj-grid">
       <?php foreach ($projects as $p): ?>
@@ -105,14 +105,14 @@ $outcomes = [
           <?php if ($p['layout'] === 'phones'): ?>
             <div class="media media-ex">
               <?php foreach ($p['shots'] as $shot): ?>
-                <div class="mphone"><img src="<?= e($shot['src']) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" loading="lazy" decoding="async"></div>
+                <div class="mphone"><img src="<?= e(url($shot['src'])) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" loading="lazy" decoding="async"></div>
               <?php endforeach; ?>
             </div>
           <?php else: $shot = $p['shots'][0]; ?>
             <div class="media media-fisha">
               <div class="browser">
                 <div class="bar"><i></i><i></i><i></i><u></u></div>
-                <img src="<?= e($shot['src']) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" loading="lazy" decoding="async">
+                <img src="<?= e(url($shot['src'])) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" loading="lazy" decoding="async">
               </div>
             </div>
           <?php endif; ?>
@@ -129,7 +129,7 @@ $outcomes = [
 <section class="approach" aria-labelledby="about-title">
   <div class="wrap ap-grid">
     <div class="ap-photo rv">
-      <img src="assets/img/founder.webp" alt="שי דדון, מייסד SDmarketing" width="1024" height="1024" loading="lazy" decoding="async">
+      <img src="<?= url('assets/img/founder.webp') ?>" alt="שי דדון, מייסד SDmarketing" width="1024" height="1024" loading="lazy" decoding="async">
       <div class="cap"><b>שי דדון</b><span>מפתח תוכנה, B.Sc. מדעי המחשב, שיווק דיגיטלי</span></div>
     </div>
     <div>
@@ -145,7 +145,7 @@ $outcomes = [
         <div class="a"><h3>הדרך הרגילה</h3>שלושה ספקים, שלוש הצעות מחיר, ואתה מתווך ביניהם.</div>
         <div class="b"><h3>עם SDmarketing</h3>תוכנית אחת, מחיר אחד, איש קשר אחד.</div>
       </div>
-      <a class="link" href="about.php">הסיפור המלא <?= icon('arrow') ?></a>
+      <a class="link" href="<?= url('about') ?>">הסיפור המלא <?= icon('arrow') ?></a>
     </div>
   </div>
 </section>

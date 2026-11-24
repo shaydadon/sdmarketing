@@ -247,8 +247,6 @@ footer .about{max-width:360px;margin-top:18px}
 .chip.on i{color:var(--accent)}
 .case{padding:110px 0;border-bottom:1px solid var(--line)}
 .case-head{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end}
-.case-idx{font-family:var(--mono);font-size:14px;color:var(--mute);display:flex;gap:14px;align-items:center}
-.case-idx b{color:var(--ink);font-weight:600}
 .case h2{font-size:88px;font-weight:900;letter-spacing:-.04em;margin-top:18px;line-height:1}
 .case .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
 .case .desc{font-size:20px;color:#2e2d2b}
@@ -1274,7 +1272,7 @@ h1,h2,h3{text-wrap:balance}
 }
 @media (prefers-reduced-motion:reduce){.post-card a:hover,.post-next li a:hover{transform:none}}
 
-/* ================= v13: article images + articles in the mobile menu ================= */
+/* ================= v13: article images ================= */
 .post-card a{padding:0;overflow:hidden}
 .pc-img{display:block;width:100%;aspect-ratio:1200/630;object-fit:cover;background:var(--ink)}
 .post-card .pc-top{padding:22px 24px 0}
@@ -1283,13 +1281,6 @@ h1,h2,h3{text-wrap:balance}
 .post-card .pc-go{padding:22px 24px 26px}
 .post-cover{margin:0 0 40px;border-radius:20px;overflow:hidden;background:var(--ink);box-shadow:0 30px 60px -36px #0007}
 .post-cover img{display:block;width:100%;aspect-ratio:1200/630;object-fit:cover}
-.mobile-nav .mn-sub{list-style:none;margin:2px 0 10px;padding:0;display:grid;gap:8px}
-.mobile-nav .mn-sub li{animation:none}
-.mobile-nav .mn-sub a{display:flex;align-items:center;gap:12px;padding:6px 4px;border:0;font-family:var(--body);font-weight:500;font-size:15.5px;line-height:1.35;color:#d9d6cf}
-.mobile-nav .mn-sub img{width:68px;height:auto;aspect-ratio:1200/630;object-fit:cover;border-radius:8px;flex:none;box-shadow:0 0 0 1px #2a2a2a}
-.mobile-nav .mn-sub span{flex:1;min-width:0}
-.mobile-nav li:has(.mn-sub) > a{border-bottom:0}
-.mobile-nav li:has(.mn-sub){border-bottom:1px solid var(--line-d)}
 @media (max-width:800px){.post-cover{margin-bottom:28px;border-radius:16px}}
 
 /* ================= v14: author byline, author box, topic filters ================= */

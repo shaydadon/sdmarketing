@@ -38,6 +38,10 @@ $project_cats = [
     'all' => 'הכל',
     'web' => 'אתרים וחנויות',
     'pwa' => 'אפליקציות PWA',
+    'automations' => 'אוטומציות לעסקים',
 ];
+
+// Cases shown on the projects page that are not in $projects (the Boardog chatbot demo, includes/wa-demo.php).
+$extra_cases = ['automations' => 1];
 
 $projects_soon = 'בקרוב: דפי נחיתה ואתרי תדמית';

@@ -145,7 +145,7 @@ jobs:
                     --exclude 'README.md' --exclude 'PRODUCT.md' --exclude 'skills-lock.json'
                     --exclude '.gitignore' --exclude '.gitattributes' --exclude '.well-known/')
           if [ "$TARGET" = "live" ]; then
-            rsync -rlptzv "${EXCLUDES[@]}" --exclude 'dev/' --exclude 'robots.txt' -e "$SSH" ./ "$SSH_USER@$SSH_HOST:${{ steps.cfg.outputs.path }}/"
+            rsync -rlptzv "${EXCLUDES[@]}" --exclude 'dev/' -e "$SSH" ./ "$SSH_USER@$SSH_HOST:${{ steps.cfg.outputs.path }}/"
           else
             rsync -rlptzv --delete "${EXCLUDES[@]}" -e "$SSH" ./ "$SSH_USER@$SSH_HOST:${{ steps.cfg.outputs.path }}/"
           fi
@@ -154,7 +154,7 @@ jobs:
         if: steps.cfg.outputs.method != 'none'
         run: |
           URL="${{ steps.cfg.outputs.url }}"
-          for p in / /services.php /projects.php /about.php /contact.php; do
+          for p in / /services /projects /articles /about /contact /articles/whatsapp-chatbot; do
             code=$(curl -s -o /dev/null -w '%{http_code}' "$URL$p")
             echo "$code $URL$p"
             [ "$code" = "200" ] || { echo "::error::$URL$p returned $code"; exit 1; }

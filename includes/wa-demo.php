@@ -41,11 +41,10 @@ $wa_msgs = [
 ];
 $wa_n = count($wa_msgs);
 ?>
-<section class="case" id="case-bot" aria-labelledby="case-bot-title">
+<section class="case" id="case-bot" data-cat="automations" aria-labelledby="case-bot-title">
   <div class="wrap">
     <div class="case-head">
       <div>
-        <div class="case-idx"><b>03</b></div>
         <h2 id="case-bot-title" lang="en">Boardog</h2>
         <div class="tags"><span class="tag acc">אפליקציית צ׳אטבוט לבעלי פנסיונים</span></div>
       </div>
@@ -58,9 +57,9 @@ $wa_n = count($wa_msgs);
     </div>
 
     <div class="stage wad-stage">
-      <video class="wad-video" width="382" height="532" autoplay muted loop playsinline preload="auto" poster="assets/video/boardog-chat-poster.jpg">
-        <source src="assets/video/boardog-chat.webm" type="video/webm">
-        <source src="assets/video/boardog-chat.mp4" type="video/mp4">
+      <video class="wad-video" width="382" height="532" autoplay muted loop playsinline preload="auto" poster="<?= url('assets/video/boardog-chat-poster.jpg') ?>">
+        <source src="<?= url('assets/video/boardog-chat.webm') ?>" type="video/webm">
+        <source src="<?= url('assets/video/boardog-chat.mp4') ?>" type="video/mp4">
       </video>
       <div class="wad-phone" data-wa-demo>
         <div class="wad-top">

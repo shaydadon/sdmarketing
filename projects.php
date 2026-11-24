@@ -1,6 +1,6 @@
 <?php
 $page_id    = 'projects';
-$page_title = 'פרויקטים | SDmarketing | בניית חנות אונליין, אתרים ואפליקציות PWA';
+$page_title = 'פרויקטים: חנות אונליין, אפליקציית PWA וצ׳אטבוט | SDmarketing';
 $page_desc  = 'עבודות של SDmarketing: בניית חנות אונליין, אתרי תדמית ואפליקציית PWA ללא צורך בחנות האפליקציות, עם צילומי מסך אמיתיים.';
 require __DIR__ . '/includes/header.php';
 require __DIR__ . '/includes/projects-data.php';
@@ -9,7 +9,7 @@ require __DIR__ . '/includes/projects-data.php';
 <section class="hero dark">
   <div class="glow" style="top:-100px;left:-200px" aria-hidden="true"></div>
   <div class="wrap p-hero">
-    <nav class="crumb" aria-label="מיקום בעמוד"><a href="index.php">בית</a> / <b>פרויקטים</b></nav>
+    <nav class="crumb" aria-label="מיקום בעמוד"><a href="<?= url('') ?>">בית</a> / <b>פרויקטים</b></nav>
     <div class="row">
       <h1 id="page-title">לא מצגות.<span>דברים שעובדים באוויר.</span></h1>
     </div>
@@ -17,7 +17,9 @@ require __DIR__ . '/includes/projects-data.php';
       <p class="lead" style="margin:0;max-width:560px">חנויות, אתרים ואפליקציות שבניתי ושלקוחות משתמשים בהם עכשיו. אפשר להיכנס ולנסות בעצמכם.</p>
       <div class="filters" role="group" aria-label="סינון לפי סוג" data-filters>
         <?php foreach ($project_cats as $key => $label):
-          $count = $key === 'all' ? count($projects) : count(array_filter($projects, fn($p) => $p['cat'] === $key)); ?>
+          $count = $key === 'all'
+              ? count($projects) + array_sum($extra_cases)
+              : count(array_filter($projects, fn($p) => $p['cat'] === $key)) + ($extra_cases[$key] ?? 0); ?>
           <button type="button" class="chip<?= $key === 'all' ? ' on' : '' ?>" data-filter="<?= e($key) ?>" aria-pressed="<?= $key === 'all' ? 'true' : 'false' ?>">
             <?= e($label) ?> <i><?= $count ?></i>
           </button>
@@ -33,7 +35,6 @@ require __DIR__ . '/includes/projects-data.php';
   <div class="wrap">
     <div class="case-head">
       <div>
-        <div class="case-idx"><b><?= sprintf('%02d', $i + 1) ?></b> / <?= sprintf('%02d', count($projects)) ?></div>
         <h2 id="case-title-<?= e($p['slug']) ?>" lang="en"><?= e($p['name']) ?></h2>
         <div class="tags"><span class="tag acc"><?= e($p['tag']) ?></span></div>
       </div>
@@ -57,19 +58,19 @@ require __DIR__ . '/includes/projects-data.php';
       <div class="stage stage-fisha">
         <div class="browser main">
           <div class="bar"><i></i><i></i><i></i><u></u></div>
-          <img class="tall" src="assets/img/projects/fisha/originals-main.webp" alt="עמוד Originals בחנות fisha.shop" width="1600" height="1133" loading="lazy" decoding="async">
+          <img class="tall" src="<?= url('assets/img/projects/fisha/originals-main.webp') ?>" alt="עמוד Originals בחנות fisha.shop" width="1600" height="1133" loading="lazy" decoding="async">
         </div>
         <div class="side">
-          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="assets/img/projects/fisha/shop-hq-c.webp" alt="עמוד החנות fisha.shop" width="1600" height="929" loading="lazy" decoding="async"></div>
-          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="assets/img/projects/fisha/tattoos-2.webp" alt="Flash sheet בחנות fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
-          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="assets/img/projects/fisha/tattoos-1.webp" alt="עמוד הקעקועים של fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
+          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="<?= url('assets/img/projects/fisha/shop-hq-c.webp') ?>" alt="עמוד החנות fisha.shop" width="1600" height="929" loading="lazy" decoding="async"></div>
+          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="<?= url('assets/img/projects/fisha/tattoos-2.webp') ?>" alt="Flash sheet בחנות fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
+          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="<?= url('assets/img/projects/fisha/tattoos-1.webp') ?>" alt="עמוד הקעקועים של fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
         </div>
       </div>
     <?php else: $shot = $p['shots'][0]; ?>
       <div class="stage stage-one">
         <div class="browser">
           <div class="bar"><i></i><i></i><i></i><u></u></div>
-          <img src="<?= e($shot['src']) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" loading="lazy" decoding="async">
+          <img src="<?= e(url($shot['src'])) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" loading="lazy" decoding="async">
         </div>
       </div>
     <?php endif; ?>
@@ -88,7 +89,7 @@ require __DIR__ . '/includes/projects-data.php';
       </div>
       <div class="ctas">
         <a class="btn btn-acc" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span>דברו איתי בוואטסאפ</span></a>
-        <a class="btn btn-ghost-d" href="contact.php">לטופס יצירת קשר</a>
+        <a class="btn btn-ghost-d" href="<?= url('contact') ?>">לטופס יצירת קשר</a>
       </div>
     </div>
   </div>

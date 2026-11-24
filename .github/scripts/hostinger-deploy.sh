@@ -20,8 +20,8 @@ git ls-files \
   > /tmp/deploy-files.txt
 if [ "$TARGET" = "dev" ]; then
   printf 'User-agent: *\nDisallow: /\n' > robots.txt   # keep search engines off dev
-  echo robots.txt >> /tmp/deploy-files.txt
 fi
+echo robots.txt >> /tmp/deploy-files.txt               # live: the repo's robots.txt (points to the sitemap)
 echo "Uploading $(wc -l < /tmp/deploy-files.txt) files to $DOMAIN"
 
 creds=$(curl -sS --fail-with-body --retry 3 -X POST "$API/files/upload-urls" "${AUTH[@]}" \
