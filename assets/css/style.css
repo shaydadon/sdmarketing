@@ -179,7 +179,14 @@ h2.sec{font-size:60px;font-weight:900;margin:18px 0 0}
 .faq details[open] summary::after{content:"–"}
 .faq .faq-a{padding:0 22px 20px}
 .faq .faq-a p{margin:0;color:var(--mute);font-size:17px;line-height:1.65;max-width:68ch}
-.faq .faq-a a{color:var(--accent);border-bottom:1.5px solid var(--accent)}
+.faq .faq-a a{color:var(--accent-ink);border-bottom:1.5px solid var(--accent-ink)}
+.svc-block .more{margin-top:16px;font-size:16px}
+.svc-block .more a{color:var(--accent-ink);border-bottom:1.5px solid var(--accent-ink)}
+.lead a{border-bottom:1px solid currentColor}
+.soon-badge{display:inline-flex;align-items:center;margin-inline-start:6px;padding:1px 7px;border-radius:999px;background:var(--accent);color:var(--ink);font-style:normal;font-family:var(--display);font-weight:700;font-size:11px;line-height:1.4;vertical-align:middle}
+.visual.real.ex.wad-svc{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;padding:36px 24px 22px;min-height:0}
+.visual.real.ex.wad-svc .wad-video{width:min(260px,78%);height:auto;aspect-ratio:382/532;object-fit:contain;border-radius:28px;background:#000;box-shadow:0 28px 50px #0008}
+.visual.real.ex.wad-svc .note{position:static;margin-top:16px;align-self:flex-start}
 @media (max-width:800px){
   .faq{padding-bottom:72px}
   .faq summary{font-size:17px;padding:16px}
@@ -510,7 +517,8 @@ footer .about{max-width:360px;margin-top:18px}
   .events .ev:nth-child(2){transform:none}
   .events .ev{width:100%}
   .demo-tag{position:static;width:auto;margin-top:16px}
-  .ticker .wrap{height:auto;flex-wrap:wrap;gap:12px 22px;padding-top:20px;padding-bottom:20px;font-size:15px;justify-content:flex-start}
+  .ticker .wrap{display:grid;grid-template-columns:1fr 1fr;height:auto;gap:14px 18px;padding:18px 20px;font-size:15px;justify-items:stretch;align-items:center}
+  .ticker .wrap span{min-height:28px}
   .statement{padding:72px 0}
   .statement p{font-size:31px}
   h2.sec,.founder h2.sec{font-size:36px}
@@ -887,7 +895,7 @@ footer .logo small{color:#9A9893}
 
 /* WhatsApp bot showcase. Scoped so fisha and Excerly are unchanged. */
 #case-bot .wad-stage{display:flex;justify-content:center;align-items:flex-start;padding:36px 16px 32px;min-height:0}
-#case-bot .wad-video{width:min(280px,78%);height:auto;display:block;border-radius:28px;background:#000;box-shadow:0 30px 60px #000a}
+#case-bot .wad-video{width:min(280px,78%);height:auto;aspect-ratio:382/532;object-fit:contain;display:block;border-radius:28px;background:#000;box-shadow:0 30px 60px #000a}
 #case-bot .wad-phone{display:none;width:min(360px,100%);height:auto;max-height:min(560px,72dvh);background:#000;border-radius:36px;padding:8px;box-shadow:0 30px 60px #000a,0 0 0 1px #333;flex-direction:column}
 @media (prefers-reduced-motion:reduce){
   #case-bot .wad-video{display:none}
@@ -1107,11 +1115,7 @@ h1,h2,h3{text-wrap:balance}
 .services.lite .svc .svc-h .icon{width:40px;height:40px;border-radius:50%;flex:none}
 .services.lite .svc .svc-h .icon svg{width:19px;height:19px}
 
-/* Projects page: Boardog recording clipped to the phone (the file has other page content below it) */
-#case-bot .wad-clip{width:min(280px,78%);aspect-ratio:390/535;overflow:hidden;border-radius:28px 28px 0 0;box-shadow:0 30px 60px #000a}
-#case-bot .wad-clip .wad-video{width:100%;height:auto;border-radius:0;box-shadow:none}
 @media (max-width:800px){.p-hero h1,.p-hero.sm h1{font-size:44px}}
-@media (prefers-reduced-motion:reduce){#case-bot .wad-clip{display:none}}
 
 /* Mobile hero: the work image starts inside the first screen */
 @media (max-width:800px){
@@ -1194,3 +1198,11 @@ h1,h2,h3{text-wrap:balance}
 .steps-live .step.is-on .n{color:var(--accent);-webkit-text-stroke-color:var(--accent)}
 .steps-live .step.is-on::before{background:var(--accent);transform:scale(1.25)}
 @media (prefers-reduced-motion:reduce){.steps-live .step .n,.steps-live .step::before{transition:none}}
+
+/* Five service cards: one row of five on wide screens, then 2-up, then 1-up */
+.services.lite .svc-grid{grid-template-columns:repeat(5,1fr);gap:14px}
+.services.lite .svc{padding:28px 22px}
+.services.lite .svc .svc-h{font-size:21px}
+@media (max-width:1240px){.services.lite .svc-grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:1100px){.services.lite .svc-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:800px){.services.lite .svc-grid{grid-template-columns:1fr}}

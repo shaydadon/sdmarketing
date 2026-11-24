@@ -38,7 +38,7 @@ function logo_mark(): string
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&family=IBM+Plex+Sans+Hebrew:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=111">
+  <link rel="stylesheet" href="assets/css/style.css?v=112">
 </head>
 <body class="page-<?= e($page_id) ?>">
 <?php require __DIR__ . '/icons.php'; ?>
@@ -54,7 +54,7 @@ function logo_mark(): string
 
     <nav class="menu" aria-label="ניווט ראשי" data-nav>
       <?php foreach ($nav as $id => $item): ?>
-        <a href="<?= e($item['href']) ?>"<?= $id === $page_id ? ' class="on" aria-current="page"' : '' ?>><?= e($item['label']) ?></a>
+        <a href="<?= e($item['href']) ?>"<?= $id === $page_id ? ' class="on" aria-current="page"' : '' ?>><?= e($item['label']) ?><?php if (!empty($item['soon'])): ?><i class="soon-badge">בקרוב</i><?php endif; ?></a>
       <?php endforeach; ?>
     </nav>
 
@@ -71,7 +71,7 @@ function logo_mark(): string
   <div class="mobile-nav" id="mobile-nav" hidden data-mobile-nav>
     <ul>
       <?php foreach ($nav as $id => $item): ?>
-        <li><a href="<?= e($item['href']) ?>"<?= $id === $page_id ? ' aria-current="page"' : '' ?>><?= e($item['label']) ?><?= icon('arrow') ?></a></li>
+        <li><a href="<?= e($item['href']) ?>"<?= $id === $page_id ? ' aria-current="page"' : '' ?>><?= e($item['label']) ?><?php if (!empty($item['soon'])): ?><i class="soon-badge">בקרוב</i><?php endif; ?><?= icon('arrow') ?></a></li>
       <?php endforeach; ?>
     </ul>
     <a class="btn btn-acc mn-cta" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span>דברו איתי בוואטסאפ</span></a>

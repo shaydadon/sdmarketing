@@ -1,7 +1,7 @@
 <?php
 $page_id    = 'projects';
-$page_title = 'פרויקטים | SDmarketing | חנויות, אתרים ואפליקציות שעלו לאוויר';
-$page_desc  = 'עבודות של SDmarketing: חנות אונליין ואפליקציית PWA, עם צילומי מסך אמיתיים.';
+$page_title = 'פרויקטים | SDmarketing | בניית חנות אונליין, אתרים ואפליקציות PWA';
+$page_desc  = 'עבודות של SDmarketing: בניית חנות אונליין, אתרי תדמית ואפליקציית PWA ללא צורך בחנות האפליקציות, עם צילומי מסך אמיתיים.';
 require __DIR__ . '/includes/header.php';
 require __DIR__ . '/includes/projects-data.php';
 ?>
@@ -39,9 +39,6 @@ require __DIR__ . '/includes/projects-data.php';
       </div>
       <div>
         <p class="desc"><?= e($p['summary']) ?></p>
-        <div class="acts">
-          <a class="btn btn-ink" href="<?= e($p['url']) ?>" target="_blank" rel="noopener"><?= e($p['url_label']) ?><?= icon('external') ?></a>
-        </div>
       </div>
     </div>
 
@@ -52,7 +49,7 @@ require __DIR__ . '/includes/projects-data.php';
           ['assets/img/projects/excerly/workouts-m.webp', 'מסך האימונים באפליקציית Excerly'],
           ['assets/img/projects/excerly/session-m.webp', 'מסך אימון באפליקציית Excerly'],
           ['assets/img/projects/excerly/nutrition-m.webp', 'מסך התזונה באפליקציית Excerly'],
-        ] as $i => $shot): ?>
+        ] as $shot): ?>
           <div class="mphone"><img src="<?= e($shot[0]) ?>" alt="<?= e($shot[1]) ?>" width="780" height="1688" loading="lazy" decoding="async"></div>
         <?php endforeach; ?>
       </div>
@@ -63,15 +60,10 @@ require __DIR__ . '/includes/projects-data.php';
           <img class="tall" src="assets/img/projects/fisha/originals-main.webp" alt="עמוד Originals בחנות fisha.shop" width="1600" height="1133" loading="lazy" decoding="async">
         </div>
         <div class="side">
-          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="assets/img/projects/fisha/tattoos-1.webp" alt="עמוד הקעקועים של fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
+          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="assets/img/projects/fisha/shop-hq-c.webp" alt="עמוד החנות fisha.shop" width="1600" height="929" loading="lazy" decoding="async"></div>
           <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="assets/img/projects/fisha/tattoos-2.webp" alt="Flash sheet בחנות fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
-          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="assets/img/projects/fisha/shop-hq-c.webp" alt="עמוד החנות של fisha.shop" width="1600" height="929" loading="lazy" decoding="async"></div>
+          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="assets/img/projects/fisha/tattoos-1.webp" alt="עמוד הקעקועים של fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
         </div>
-      </div>
-      <div class="tat-strip">
-        <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="assets/img/projects/fisha/tattoos-3.webp" alt="עמוד קעקועים נוסף בחנות fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
-        <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="assets/img/projects/fisha/tattoos-4.webp" alt="עמוד קעקועים נוסף בחנות fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
-        <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="assets/img/projects/fisha/collectibles-dc.webp" alt="עמוד Collectibles בחנות fisha.shop" width="1440" height="836" loading="lazy" decoding="async"></div>
       </div>
     <?php else: $shot = $p['shots'][0]; ?>
       <div class="stage stage-one">
@@ -87,14 +79,12 @@ require __DIR__ . '/includes/projects-data.php';
 <?php require __DIR__ . '/includes/wa-demo.php'; ?>
 </div>
 
-<p class="soon wrap"><?= e($projects_soon) ?></p>
-
 <section class="next" style="padding-top:0">
   <div class="wrap">
     <div class="box">
       <div>
         <h2>הפרויקט הבא<br><span>יכול להיות שלך.</span></h2>
-        <p>חנות, אתר, אפליקציה או בוט? כל פרויקט כאן התחיל בהודעה אחת. ספרו לי מה אתם צריכים ואחזור עם הצעה.</p>
+        <p>חנות, אתר, אפליקציה, בוט, קידום אורגני או קמפיין ממומן? כל פרויקט כאן התחיל בהודעה אחת. ספרו לי מה אתם צריכים ואחזור עם הצעה.</p>
       </div>
       <div class="ctas">
         <a class="btn btn-acc" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span>דברו איתי בוואטסאפ</span></a>

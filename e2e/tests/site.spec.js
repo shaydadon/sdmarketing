@@ -8,6 +8,7 @@ const PAGES = [
   { path: '/projects.php', name: 'projects' },
   { path: '/about.php', name: 'about' },
   { path: '/contact.php', name: 'contact' },
+  { path: '/articles.php', name: 'articles' },
   { path: '/terms.php', name: 'terms' },
   { path: '/privacy.php', name: 'privacy' },
   { path: '/accessibility.php', name: 'accessibility' },
@@ -160,13 +161,26 @@ test.describe('hero buttons', () => {
 });
 
 test.describe('homepage', () => {
-  test('four service areas link to the services page', async ({ page }) => {
+  test('five service areas link to the services page', async ({ page }) => {
     await page.goto('/index.php');
     const cards = page.locator('.svc-grid .svc');
-    await expect(cards).toHaveCount(4);
+    await expect(cards).toHaveCount(5);
     await expect(cards.first()).toContainText('אוטומציות לעסקים');
+    await expect(page.locator('.svc-grid')).toContainText('SEO / קידום אורגני');
+    await expect(page.locator('.svc-grid')).toContainText('קמפיינים ממומנים');
     await expect(page.locator('a[href="services.php#automations"]')).toBeVisible();
     await expect(page.locator('a[href="services.php#pwa"]')).toBeVisible();
+    await expect(page.locator('a[href="services.php#seo"]')).toBeVisible();
+    await expect(page.locator('a[href="services.php#campaigns"]')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'חמישה תחומים. מערכת אחת שעובדת יחד.' })).toBeVisible();
+    await expect(page.locator('.svc-grid')).toContainText('לקוחות שמוצאים אתכם בגוגל');
+    await page.goto('/services.php');
+    await expect(page.locator('#seo')).toContainText('מחקר מילות מפתח');
+    await expect(page.locator('#seo')).toContainText('הדגמה להמחשה · ללא נתונים אמיתיים');
+    await expect(page.locator('#seo a[href="articles.php"]')).toBeVisible();
+    await expect(page.locator('#campaigns')).toContainText('Google Ads');
+    await expect(page.locator('#campaigns')).toContainText('פייסבוק');
+    await expect(page.locator('#websites')).toContainText('fisha.shop');
   });
 
   test('hero leads with the headline, one clear action, and real work', async ({ page }) => {
@@ -186,7 +200,8 @@ test.describe('homepage', () => {
     await expect(faq).toContainText('ללא צורך בחנות האפליקציות');
     await expect(faq).toContainText('fisha.shop');
     await expect(faq).toContainText('Excerly');
-    await expect(faq).toContainText('מאיפה מתחילים');
+    await expect(faq).toContainText('יש לי דף נחיתה, אבל הוא לא מביא פניות או לידים?');
+    await expect(faq).not.toContainText('פנסיון');
     await expect(faq).not.toContainText('קלעי');
     const ld = await page.locator('script[type="application/ld+json"]').textContent();
     const data = JSON.parse(ld);
@@ -235,6 +250,7 @@ test.describe('projects', () => {
     const video = block.locator('video.wad-video');
     await expect(video).toBeVisible();
     await expect(video.locator('source[src$="boardog-chat.mp4"]')).toHaveCount(1);
+    await expect.poll(() => video.evaluate((node) => (node.videoWidth && node.videoHeight) ? `${node.videoWidth}x${node.videoHeight}` : '')).toBe('382x532');
     await expect(block.locator('[data-wa-log] .wad-msg')).not.toHaveCount(0);
     await expect(block).not.toContainText('Claude');
     await expect(block).not.toContainText('AI (Claude)');

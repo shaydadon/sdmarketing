@@ -8,14 +8,14 @@
           <?= logo_mark() ?>
           <span class="lt"><b>SD</b><small>marketing</small></span>
         </a>
-        <p class="about">אוטומציות, אתרים, אפליקציות ושיווק דיגיטלי לעסקים. מתוכנן, בנוי ומנוהל על ידי אדם אחד.</p>
+        <p class="about">אוטומציות, אתרים, אפליקציות, קידום אורגני וקמפיינים ממומנים לעסקים. מתוכנן, בנוי ומנוהל על ידי אדם אחד.</p>
       </div>
 
       <nav aria-label="ניווט בתחתית">
         <h2>ניווט</h2>
         <ul>
           <?php foreach ($nav as $item): ?>
-            <li><a href="<?= e($item['href']) ?>"><?= e($item['label']) ?></a></li>
+            <li><a href="<?= e($item['href']) ?>"><?= e($item['label']) ?><?php if (!empty($item['soon'])): ?><i class="soon-badge">בקרוב</i><?php endif; ?></a></li>
           <?php endforeach; ?>
         </ul>
       </nav>
