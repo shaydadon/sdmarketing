@@ -10,10 +10,15 @@ $site = [
 
     // Legal pages (terms / privacy / accessibility)
     'owner'         => 'שי דדון',
-    'business_type' => '[עוסק פטור / עוסק מורשה]', // TODO
-    'business_id'   => '[מספר עוסק]',              // TODO
-    'city'          => '[עיר]',                    // TODO: business address city
-    'legal_updated' => '11.10.2026',
+    // Business registration. Empty for now: the legal pages then name the owner only.
+    // Once registered, fill these in (e.g. 'עוסק פטור' / 'Exempt dealer', the number, the city)
+    // and the terms and privacy pages add them by themselves.
+    'business_type'    => '',
+    'business_type_en' => '',
+    'business_id'      => '',
+    'city'             => '',
+    'city_en'          => '',
+    'legal_updated' => '24.11.2026',
 ];
 
 // Language: Hebrew (RTL) is the main site at the root; English (LTR) lives under /en/.

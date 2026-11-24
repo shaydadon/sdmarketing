@@ -9,6 +9,7 @@ require __DIR__ . '/includes/header.php';
 $o    = e($site['owner']);
 $bt   = e($site['business_type']);
 $bid  = e($site['business_id']);
+$reg  = ($bt && $bid) ? ", {$bt} מספר {$bid}" : '';   // only once registered (includes/config.php)
 $dom  = e($site['domain']);
 $mail = e($site['email']);
 
@@ -17,7 +18,7 @@ $legal = [
     'lead'  => 'איזה מידע נאסף כשאתם משתמשים באתר, למה הוא נחוץ, איך הוא נשמר, ומה הזכויות שלכם.',
     'sections' => [
         ['who', 'מי אחראי על המידע', <<<HTML
-<p>האתר <span dir="ltr">{$dom}</span> מופעל על ידי {$o}, {$bt} מספר {$bid}, תחת השם SDmarketing. {$o} הוא האחראי על המידע הנאסף באתר (בעל מאגר המידע).</p>
+<p>האתר <span dir="ltr">{$dom}</span> מופעל על ידי {$o}{$reg}, תחת השם SDmarketing. {$o} הוא האחראי על המידע הנאסף באתר (בעל מאגר המידע).</p>
 <p>מדיניות זו נכתבה בהתאם לחוק הגנת הפרטיות, התשמ"א-1981 ולתקנות שהותקנו מכוחו.</p>
 HTML],
         ['what', 'איזה מידע נאסף', <<<HTML
@@ -75,15 +76,13 @@ HTML],
 
 if ($is_en) {
     $o   = 'Shay Dadon';
-    $bt  = '[business type]';     // TODO, like the Hebrew placeholders in includes/config.php
-    $bid = '[business number]';
-    $city = '[city]';
+    $reg = ($site['business_type_en'] && $site['business_id']) ? ', ' . e($site['business_type_en']) . ' no. ' . e($site['business_id']) : '';
     $legal = [
         'title' => 'Privacy policy',
         'lead'  => 'What information is collected when you use the site, why it is needed, how it is kept, and what your rights are.',
         'sections' => [
             ['who', 'Who is responsible for the information', <<<HTML
-<p>The website {$dom} is operated by {$o}, {$bt} number {$bid}, trading as SDmarketing. {$o} is responsible for the information collected on the site (the database owner).</p>
+<p>The website {$dom} is operated by {$o}{$reg}, trading as SDmarketing. {$o} is responsible for the information collected on the site (the database owner).</p>
 <p>This policy follows the Israeli Privacy Protection Law, 5741-1981, and the regulations made under it. This English text is a translation; if it differs from the Hebrew version, the Hebrew version prevails.</p>
 HTML],
             ['what', 'What information is collected', <<<HTML

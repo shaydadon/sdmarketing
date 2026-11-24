@@ -14,13 +14,16 @@ $mail = e($site['email']);
 $u_privacy = e(lurl('privacy'));
 $u_contact = e(lurl('contact'));
 $city = e($site['city']);
+// Registration details appear only once they are filled in (includes/config.php)
+$reg   = ($bt && $bid) ? ", {$bt} מספר {$bid}" : '';
+$court = $city ? "לבתי המשפט המוסמכים במחוז שבו נמצא העסק ({$city})" : 'לבתי המשפט המוסמכים בישראל';
 
 $legal = [
     'title' => 'תקנון ותנאי שימוש',
     'lead'  => 'הכללים לשימוש באתר ובמידע שמופיע בו. כתוב בשפה פשוטה ככל האפשר. ובכל זאת, כדאי לקרוא.',
     'sections' => [
         ['general', 'כללי', <<<HTML
-<p>אתר <span dir="ltr">{$dom}</span> ("<b>האתר</b>") מופעל על ידי {$o}, {$bt} מספר {$bid}, הפועל תחת השם SDmarketing ("<b>SDmarketing</b>", "<b>אנחנו</b>").</p>
+<p>אתר <span dir="ltr">{$dom}</span> ("<b>האתר</b>") מופעל על ידי {$o}{$reg}, הפועל תחת השם SDmarketing ("<b>SDmarketing</b>", "<b>אנחנו</b>").</p>
 <p>השימוש באתר, בכל דרך, מהווה הסכמה לתנאים אלה. אם אינך מסכים/ה להם, אנא הימנע/י משימוש באתר.</p>
 <p>התקנון מנוסח בלשון זכר מטעמי נוחות בלבד, והוא מתייחס לכל המגדרים באופן שווה.</p>
 HTML],
@@ -55,7 +58,7 @@ HTML],
 <p>אנו רשאים לעדכן תקנון זה מעת לעת. הנוסח המחייב הוא הנוסח המפורסם באתר בעת השימוש, ותאריך העדכון האחרון מופיע בראש העמוד.</p>
 HTML],
         ['law', 'דין וסמכות שיפוט', <<<HTML
-<p>על תקנון זה ועל השימוש באתר יחולו דיני מדינת ישראל בלבד. סמכות השיפוט הייחודית בכל עניין הנוגע לאתר נתונה לבתי המשפט המוסמכים במחוז שבו נמצא העסק ({$city}).</p>
+<p>על תקנון זה ועל השימוש באתר יחולו דיני מדינת ישראל בלבד. סמכות השיפוט הייחודית בכל עניין הנוגע לאתר נתונה {$court}.</p>
 HTML],
         ['contact', 'יצירת קשר', <<<HTML
 <p>לשאלות בנוגע לתקנון: {$o}, במייל <a href="mailto:{$mail}" dir="ltr">{$mail}</a>, או דרך <a href="{$u_contact}">עמוד יצירת הקשר</a>.</p>
@@ -65,15 +68,14 @@ HTML],
 
 if ($is_en) {
     $o   = 'Shay Dadon';
-    $bt  = '[business type]';     // TODO, like the Hebrew placeholders in includes/config.php
-    $bid = '[business number]';
-    $city = '[city]';
+    $reg   = ($site['business_type_en'] && $site['business_id']) ? ', ' . e($site['business_type_en']) . ' no. ' . e($site['business_id']) : '';
+    $court = $site['city_en'] ? 'The competent courts in the district where the business is located (' . e($site['city_en']) . ')' : 'The competent courts of the State of Israel';
     $legal = [
         'title' => 'Terms of use',
         'lead'  => 'The rules for using this website and the information on it, written in plain language wherever possible. Still, it’s worth a read.',
         'sections' => [
             ['general', 'General', <<<HTML
-<p>The website {$dom} (the "<b>Site</b>") is operated by {$o}, {$bt} number {$bid}, trading as SDmarketing ("<b>SDmarketing</b>", "<b>we</b>").</p>
+<p>The website {$dom} (the "<b>Site</b>") is operated by {$o}{$reg}, trading as SDmarketing ("<b>SDmarketing</b>", "<b>we</b>").</p>
 <p>Using the Site in any way means you accept these terms. If you do not accept them, please do not use the Site.</p>
 <p>This English version is provided for convenience. If it differs from the Hebrew version, the Hebrew version prevails.</p>
 HTML],
@@ -108,7 +110,7 @@ HTML],
 <p>We may update these terms from time to time. The binding version is the one published on the Site when you use it, and the date of the last update is shown at the top of the page.</p>
 HTML],
             ['law', 'Governing law and jurisdiction', <<<HTML
-<p>These terms and the use of the Site are governed by the laws of the State of Israel only. The competent courts in the district where the business is located ({$city}) have exclusive jurisdiction over any matter related to the Site.</p>
+<p>These terms and the use of the Site are governed by the laws of the State of Israel only. {$court} have exclusive jurisdiction over any matter related to the Site.</p>
 HTML],
             ['contact', 'Contact', <<<HTML
 <p>Questions about these terms: {$o}, by email at <a href="mailto:{$mail}">{$mail}</a>, or through the <a href="{$u_contact}">contact page</a>.</p>
