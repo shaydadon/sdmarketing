@@ -1,22 +1,48 @@
 <?php
 $page_id    = 'articles';
-$page_title = 'מאמרים | SDmarketing | שיווק דיגיטלי, אתרים ואוטומציות לעסקים';
-$page_desc  = 'מאמרים של SDmarketing על צ׳אטבוט לוואטסאפ לעסקים, אוטומציות, בניית אתרים וקמפיינים. בקרוב.';
-$noindex    = true;
+$page_title = 'מאמרים ומדריכים | SDmarketing | צ׳אטבוט לוואטסאפ, אוטומציות, אתרים וקמפיינים';
+$page_desc  = 'מדריכים ומאמרים קצרים לבעלי עסקים: צ׳אטבוט לוואטסאפ, איך לא לאבד לידים, אוטומציות לעסקים, אפליקציית PWA, דף נחיתה ומעקב המרות.';
 require __DIR__ . '/includes/header.php';
+require __DIR__ . '/includes/articles-data.php';
+require __DIR__ . '/includes/articles-meta.php';
 ?>
 
 <section class="hero dark">
   <div class="glow" aria-hidden="true"></div>
   <div class="wrap p-hero sm">
     <nav class="crumb" aria-label="מיקום בעמוד"><a href="index.php">בית</a> / <b>מאמרים</b></nav>
-    <h1 id="page-title">מאמרים בקרוב.</h1>
-    <p class="lead">כאן יעלו מדריכים קצרים על <a href="services.php#seo">קידום אורגני</a>, צ׳אטבוט לוואטסאפ לעסקים, אוטומציות לעסקים, בניית אתרים ודפי נחיתה, וקמפיינים ממומנים.</p>
-    <div class="ctas">
-      <a class="btn btn-acc" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span>דברו איתי בוואטסאפ</span></a>
-      <a class="btn btn-ghost-d" href="services.php">לשירותים<?= icon('arrow') ?></a>
+    <h1 id="page-title">מאמרים ומדריכים.<span>קצר, מעשי, בלי מילים מיותרות.</span></h1>
+    <p class="lead">איך לא לאבד פניות, מה לעשות עם הוואטסאפ, מתי אפליקציה שווה את זה, ואיך יודעים מה באמת עובד בפרסום. כל מאמר נקרא בכמה דקות.</p>
+    <div class="filters" role="group" aria-label="סינון לפי נושא" data-filters>
+      <?php foreach ($article_topics as $key => $label):
+        $count = $key === 'all' ? count($articles) : count(array_filter($articles, fn($a) => $a['topic'] === $key));
+        if (!$count) continue; ?>
+        <button type="button" class="chip<?= $key === 'all' ? ' on' : '' ?>" data-filter="<?= e($key) ?>" aria-pressed="<?= $key === 'all' ? 'true' : 'false' ?>"><?= e($label) ?> <i><?= $count ?></i></button>
+      <?php endforeach; ?>
     </div>
   </div>
 </section>
 
-<?php require __DIR__ . '/includes/footer.php'; ?>
+<section class="posts" aria-labelledby="page-title">
+  <div class="wrap">
+    <ul class="post-grid" data-showcase>
+      <?php foreach ($articles as $i => $a): ?>
+        <li class="post-card rv" data-cat="<?= e($a['topic']) ?>">
+          <a href="article.php?slug=<?= e($a['slug']) ?>">
+            <img class="pc-img" src="<?= e($a['image']) ?>" alt="<?= e($a['image_alt']) ?>" width="1200" height="630" <?= $i < 3 ? 'fetchpriority="high"' : 'loading="lazy"' ?> decoding="async">
+            <span class="pc-top"><span class="pc-type"><?= e($a['type']) ?></span><span class="pc-min"><?= (int) $a['minutes'] ?> דקות קריאה</span></span>
+            <h2><?= e($a['title']) ?></h2>
+            <p><?= e($a['description']) ?></p>
+            <span class="pc-go">לקריאה<?= icon('arrow') ?></span>
+          </a>
+        </li>
+      <?php endforeach; ?>
+    </ul>
+  </div>
+</section>
+
+<?php
+$cta_title = "יש לכם שאלה\nשלא מופיעה כאן?";
+$cta_text  = 'שלחו הודעה קצרה על העסק. אחזור עם רעיון אחד שאפשר להתחיל ממנו, בלי התחייבות.';
+require __DIR__ . '/includes/cta.php';
+require __DIR__ . '/includes/footer.php';

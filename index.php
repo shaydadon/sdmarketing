@@ -8,55 +8,29 @@ require __DIR__ . '/includes/projects-data.php';
 
 ?>
 
-<section class="hero dark">
-  <div class="glow" aria-hidden="true"></div>
-  <div class="wrap hero-grid">
-    <div>
-      <span class="eyebrow">אוטומציות · אתרים · PWA · קידום · קמפיינים</span>
-      <h1 id="hero-title">העסק שלך ממשיך לעבוד.<span class="l2">גם כשאתה לא.</span></h1>
-      <p class="lead">צ׳אטבוט לוואטסאפ לעסקים, אוטומציות, בניית אתרים, קידום אורגני וקמפיינים ממומנים שמחוברים זה לזה, כדי שכל פנייה תקבל מענה וכל ליד יגיע למקום הנכון.</p>
-      <div class="ctas">
-        <a class="btn btn-acc" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span>דברו איתי בוואטסאפ</span></a>
-        <a class="btn btn-ghost-d" href="projects.php">לעבודות שלי<?= icon('arrow') ?></a>
-      </div>
-      <div class="meta">
-        <div><b>אדם אחד</b><span>מהקמפיין ועד הבוט</span></div>
-        <div><b>הכל בכתב</b><span>תוכנית ומחיר לפני שמתחילים</span></div>
-        <div><b>בוואטסאפ</b><span>בלי טפסים ובלי כרטיסים</span></div>
-      </div>
+<section class="h3ro" aria-labelledby="hero-title">
+  <div class="wrap h3-grid">
+    <div class="h3-text hero-in">
+      <span class="eyebrow">שי דדון · טכנולוגיה, אוטומציות ושיווק</span>
+      <h1 id="hero-title"><span class="l1">העסק שלך ממשיך לעבוד.</span><span class="l2">גם כשאתה לא.</span></h1>
+      <p class="lead">אתרים חכמים, אוטומציות ופתרונות דיגיטליים שמתחברים לעסק שלך, וחוסכים לך זמן, עבודה וכאב ראש.</p>
+      <a class="btn btn-main" href="<?= e(wa_link($site, 'היי שי, אשמח לדבר על העסק שלי')) ?>" target="_blank" rel="noopener"><span>בואו נדבר על העסק שלכם</span><?= icon('arrow') ?></a>
+      <p class="offer">הודעה קצרה בוואטסאפ מספיקה. אחזור עם רעיון אחד שאפשר להתחיל ממנו, בלי התחייבות.</p>
     </div>
-
-    <figure class="demo" data-demo>
-      <div class="phone">
-        <div class="scr">
-          <div class="chat-h"><span class="av">ד</span><div><b>המספרה של דנה</b><span>מחובר/ת</span></div></div>
-          <div class="chat-b">
-            <div class="msg out">היי, אפשר לקבוע תור לתספורת מחר?<span class="t">09:41</span></div>
-            <div class="msg in">בטח! מחר פנוי ב־10:00 או ב־13:30. מה מתאים לך?<div class="slots"><i>10:00</i><i class="on">13:30</i></div><span class="t">09:41</span></div>
-            <div class="msg out">13:30 מעולה<span class="t">09:42</span></div>
-            <div class="msg in">קבעתי! מחר 13:30. שלחתי אישור למייל ואזכיר לך בבוקר.<span class="t">09:42</span></div>
-          </div>
-          <div class="chat-in">הקלידו הודעה…</div>
-        </div>
+    <figure class="h3-art" aria-label="עבודות אמיתיות: החנות fisha.shop, האפליקציה Excerly והצ׳אטבוט Boardog">
+      <div class="browser h3-b">
+        <div class="bar"><i></i><i></i><i></i><u>fisha.shop</u></div>
+        <img src="assets/img/projects/fisha/tattoos-1.webp" alt="" width="1600" height="1000" decoding="async" fetchpriority="high">
       </div>
-      <div class="events">
-        <div class="ev"><span class="ic"><?= icon('calendar') ?></span><div><b>התור נכנס ליומן</b><span>Google Calendar</span></div><span class="ok"><?= icon('check') ?></span></div>
-        <div class="ev"><span class="ic"><?= icon('database') ?></span><div><b>לקוחה חדשה נשמרה</b><span>CRM</span></div><span class="ok"><?= icon('check') ?></span></div>
-        <div class="ev"><span class="ic"><?= icon('mail') ?></span><div><b>מייל אישור נשלח</b><span>אוטומציית מייל</span></div><span class="ok"><?= icon('check') ?></span></div>
-      </div>
-      <figcaption class="demo-tag">הדגמה להמחשה</figcaption>
+      <div class="device h3-p"><img src="assets/img/projects/excerly/session-m.webp" alt="" width="780" height="1688" decoding="async"></div>
+      <div class="device h3-bd"><img src="assets/img/projects/boardog/chat-end.webp" alt="" width="780" height="1690" decoding="async"></div>
+      <ul class="h3-why" aria-label="מה הצ׳אטבוט Boardog פותר">
+        <li><?= icon('check') ?><span><b>עונה תוך שניות</b>גם בשתיים בלילה</span></li>
+        <li><?= icon('check') ?><span><b>אוסף את כל הפרטים</b>בלי טלפונים חוזרים</span></li>
+        <li><?= icon('check') ?><span><b>קובע פגישה לבד</b>ושולח סיכום מסודר</span></li>
+      </ul>
+      <figcaption class="h3-cap">עבודות אמיתיות: <b lang="en">fisha.shop</b> · <b lang="en">Excerly</b> · <b lang="en">Boardog</b></figcaption>
     </figure>
-  </div>
-  <div class="ticker">
-    <div class="wrap">
-      <span>צ'אטבוטים לוואטסאפ</span>
-      <span>אוטומציות מייל</span>
-      <span>חיבור בין מערכות</span>
-      <span>אתרים וחנויות</span>
-      <span>אפליקציות PWA</span>
-      <span>קידום אורגני</span>
-      <span>קמפיינים ממומנים</span>
-    </div>
   </div>
 </section>
 
@@ -67,41 +41,34 @@ require __DIR__ . '/includes/projects-data.php';
   </div>
 </section>
 
-<section class="services" aria-labelledby="services-title">
+<?php
+$outcomes = [
+    'automations' => 'פחות עבודה ידנית. יותר זמן לעסק.',
+    'websites'    => 'אתר שמביא פניות, לא רק נראה טוב.',
+    'pwa'         => 'האפליקציה שלך, במסך הבית של הלקוח.',
+    'seo'         => 'לקוחות שמוצאים אתכם בגוגל, בלי לשלם על כל קליק.',
+    'campaigns'   => 'יודעים מה מביא לקוחות, ומפסיקים לשלם על מה שלא.',
+];
+?>
+<section class="services lite" aria-labelledby="services-title">
   <div class="wrap">
     <div class="sec-head">
       <div>
         <span class="eyebrow">מה אני בונה</span>
-        <h2 class="sec" id="services-title">חמישה תחומים.<br>מערכת אחת שעובדת יחד.</h2>
+        <h2 class="sec" id="services-title">חמישה תחומים. מערכת אחת שעובדת יחד.</h2>
       </div>
-      <p class="lead">הבוט שעונה ללקוחות, האתר שהוא יושב עליו, הקידום האורגני והקמפיין הממומן שמביאים אליו תנועה. כשאותו אדם בונה את כולם, הם מדברים זה עם זה.</p>
     </div>
 
     <div class="svc-grid">
       <?php foreach ($services as $i => $s): ?>
-        <article class="svc<?= $i === 0 ? ' feat' : '' ?>">
-          <span class="num"><?= sprintf('%02d', $i + 1) ?></span>
-          <span class="icon"><?= icon($s['icon']) ?></span>
-          <h3><?= e($s['title']) ?></h3>
+        <a class="svc rv" href="services.php#<?= e($s['id']) ?>">
+          <h3 class="svc-h"><span class="icon"><?= icon($s['icon']) ?></span><?= e($s['title']) ?></h3>
           <p class="d"><?= e($s['lead']) ?></p>
-          <ul>
-            <?php foreach ($s['items'] as $item): ?><li><?= e($item) ?></li><?php endforeach; ?>
-          </ul>
-          <a class="link" href="services.php#<?= e($s['id']) ?>"><span>לפרטים על <?= e($s['title']) ?></span><?= icon('arrow') ?></a>
-        </article>
+          <p class="out"><?= e($outcomes[$s['id']] ?? '') ?><?= icon('arrow') ?></p>
+        </a>
       <?php endforeach; ?>
     </div>
 
-    <div class="flow">
-      <span class="lbl">ככה זה מתחבר</span>
-      <span class="st"><i>1</i>הודעה נכנסת</span>
-      <span class="ln"></span>
-      <span class="st"><i>2</i>הבוט מסנן</span>
-      <span class="ln"></span>
-      <span class="st"><i>3</i>ליד ב־CRM</span>
-      <span class="ln"></span>
-      <span class="st last"><i>4</i>מייל המשך</span>
-    </div>
   </div>
 </section>
 
@@ -145,7 +112,7 @@ require __DIR__ . '/includes/projects-data.php';
             <div class="media media-fisha">
               <div class="browser">
                 <div class="bar"><i></i><i></i><i></i><u></u></div>
-                <img src="<?= e($shot['src']) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" decoding="async">
+                <img src="<?= e($shot['src']) ?>" alt="<?= e($shot['alt']) ?>" width="<?= (int) $shot['w'] ?>" height="<?= (int) $shot['h'] ?>" loading="lazy" decoding="async">
               </div>
             </div>
           <?php endif; ?>
@@ -159,27 +126,26 @@ require __DIR__ . '/includes/projects-data.php';
   </div>
 </section>
 
-<section class="founder" aria-labelledby="about-title">
-  <div class="wrap f-grid">
-    <div class="f-photo">
-      <div class="sq" aria-hidden="true"></div>
+<section class="approach" aria-labelledby="about-title">
+  <div class="wrap ap-grid">
+    <div class="ap-photo rv">
       <img src="assets/img/founder.webp" alt="שי דדון, מייסד SDmarketing" width="1024" height="1024" loading="lazy" decoding="async">
-      <div class="cap"><b>שי דדון</b><span>מייסד SDmarketing</span></div>
+      <div class="cap"><b>שי דדון</b><span>מפתח תוכנה, B.Sc. מדעי המחשב, שיווק דיגיטלי</span></div>
     </div>
     <div>
-      <span class="eyebrow">מי עומד מאחורי זה</span>
-      <h2 class="sec" id="about-title">מפתח, משווק ואיש אוטומציות.<br><span class="acc">באותו אדם.</span></h2>
-      <p class="body">רוב העסקים עובדים עם מתכנת אחד, משווק אחר ומישהו שלישי ש"מחבר את הוואטסאפ". כל העברה ביניהם היא עוד מקום שבו דברים נופלים. אחרי יותר מ־15 שנה כמפתח תוכנה, קורס בשיווק ושנתיים של עבודה בשיווק דיגיטלי, ב־SDmarketing אני מתכנן, בונה ומנהל את כל השרשרת בעצמי: מהקמפיין, דרך האתר ועד הבוט שעונה ללקוח בשתיים בלילה.</p>
-      <div class="creds">
-        <div><b class="ltr">15+</b><span>שנות ניסיון כמפתח תוכנה</span></div>
-        <div><b class="ltr">B.Sc.</b><span>תואר במדעי המחשב</span></div>
-        <div><b>שנתיים</b><span>בשיווק דיגיטלי, אחרי קורס שיווק</span></div>
-      </div>
+      <span class="eyebrow">למה אני</span>
+      <h2 class="sec" id="about-title"><span class="count" data-count="15">15</span> שנות ניסיון בטכנולוגיה.<span class="acc">גישה אחת פשוטה: קודם מבינים את הבעיה.</span></h2>
+      <p class="lead">אני לא מתחיל מקוד, עיצוב או מערכת חדשה. אני מתחיל מהשאלה מה לא עובד בעסק שלך, ואיך אפשר לשנות את זה.</p>
+      <ol class="qs">
+        <li class="rv"><span>01</span><div><b>איפה העסק מאבד פניות?</b>הודעה שלא נענתה, ליד שלא חזרו אליו, עגלה שננטשה.</div></li>
+        <li class="rv"><span>02</span><div><b>מה חוזר על עצמו כל יום?</b>כל מה שמישהו עושה ידנית שוב ושוב יכול לרוץ לבד.</div></li>
+        <li class="rv"><span>03</span><div><b>מה הצעד הקטן שיחזיר הכי הרבה?</b>מתחילים ממנו, מודדים, ורק אז מוסיפים את הבא.</div></li>
+      </ol>
       <div class="vs">
         <div class="a"><h3>הדרך הרגילה</h3>שלושה ספקים, שלוש הצעות מחיר, ואתה מתווך ביניהם.</div>
         <div class="b"><h3>עם SDmarketing</h3>תוכנית אחת, מחיר אחד, איש קשר אחד.</div>
       </div>
-      <a class="link" href="about.php" style="margin-top:32px">עוד עליי <?= icon('arrow') ?></a>
+      <a class="link" href="about.php">הסיפור המלא <?= icon('arrow') ?></a>
     </div>
   </div>
 </section>

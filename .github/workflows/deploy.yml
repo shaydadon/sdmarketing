@@ -141,7 +141,7 @@ jobs:
         run: |
           trap 'echo "::error::SSH upload failed. If the log shows /sbin/nologin, SSH Access is off in hPanel - turn it on, or add the HOSTINGER_API_TOKEN secret to deploy without SSH."' ERR
           SSH="ssh -p ${SSH_PORT:-65002}"
-          EXCLUDES=(--exclude '.git/' --exclude '.github/' --exclude '.claude/' --exclude 'e2e/'
+          EXCLUDES=(--exclude '.git/' --exclude '.github/' --exclude '.claude/' --exclude 'e2e/' --exclude 'content/'
                     --exclude 'README.md' --exclude 'PRODUCT.md' --exclude 'skills-lock.json'
                     --exclude '.gitignore' --exclude '.gitattributes' --exclude '.well-known/')
           if [ "$TARGET" = "live" ]; then

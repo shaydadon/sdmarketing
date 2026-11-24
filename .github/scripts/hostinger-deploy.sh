@@ -16,7 +16,7 @@ AUTH=(-H "Authorization: Bearer ${HOSTINGER_API_TOKEN}")
 
 # Only the site's own files are sent. Tooling, tests and notes stay in the repo.
 git ls-files \
-  | grep -vE '^(e2e/|\.github/|\.claude/|\.well-known/|dev/|README\.md$|PRODUCT\.md$|skills-lock\.json$|\.gitignore$|\.gitattributes$|robots\.txt$)' \
+  | grep -vE '^(e2e/|content/|\.github/|\.claude/|\.well-known/|dev/|README\.md$|PRODUCT\.md$|skills-lock\.json$|\.gitignore$|\.gitattributes$|robots\.txt$)' \
   > /tmp/deploy-files.txt
 if [ "$TARGET" = "dev" ]; then
   printf 'User-agent: *\nDisallow: /\n' > robots.txt   # keep search engines off dev

@@ -156,7 +156,7 @@
     const video = wa.closest('#case-bot')?.querySelector('.wad-video');
     if (video) {
       video.addEventListener('error', () => {
-        video.hidden = true;
+        (video.closest('.wad-clip') || video).hidden = true;
         wa.style.display = 'flex';
         showAll();
       });
@@ -203,6 +203,67 @@
         }
       };
       loop();
+    }
+  }
+
+  // Scroll reveal for elements marked .rv (home page). Skipped entirely when motion is reduced.
+  const rvs = document.querySelectorAll('.rv');
+  if (rvs.length && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('rv-on');
+    const rio = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('in'); rio.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    rvs.forEach((el) => rio.observe(el));
+  }
+
+  // Count-up for numbers marked data-count, once, when they scroll into view.
+  const counts = document.querySelectorAll('[data-count]');
+  if (counts.length && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const cio = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (!en.isIntersecting) return;
+        cio.unobserve(en.target);
+        const el = en.target; const end = +el.dataset.count; const t0 = performance.now(); const dur = 1400;
+        const tick = (t) => { const k = Math.min(1, (t - t0) / dur); el.textContent = Math.round(end * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(tick); };
+        el.textContent = '0'; requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.6 });
+    counts.forEach((el) => cio.observe(el));
+  }
+
+  // Work process: the step in view lights up as the visitor scrolls.
+  // Only when the steps are stacked (mobile): the step nearest the middle of the screen lights up.
+  const stepList = document.querySelector('.steps');
+  if (stepList) {
+    const steps = [...stepList.querySelectorAll('.step')];
+    if (steps.length > 1) {
+      let current = -1;
+      const setOn = (i) => {
+        if (i === current) return;
+        current = i;
+        steps.forEach((s, j) => s.classList.toggle('is-on', j === i));
+      };
+      const update = () => {
+        const mid = innerHeight / 2;
+        const stacked = steps[1].getBoundingClientRect().top > steps[0].getBoundingClientRect().top + 10;
+        // Side by side (desktop) all four steps are visible at once: keep the first one lit, no scroll effect.
+        stepList.classList.toggle('steps-live', stacked);
+        if (!stacked) { current = -1; steps.forEach((s) => s.classList.remove('is-on')); return; }
+        {
+          let best = 0;
+          let bestD = Infinity;
+          steps.forEach((s, j) => {
+            const r = s.getBoundingClientRect();
+            const d = Math.abs(r.top + Math.min(r.height, 140) / 2 - mid);
+            if (d < bestD) { bestD = d; best = j; }
+          });
+          setOn(best);
+        }
+      };
+      let raf = 0;
+      addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; update(); }); }, { passive: true });
+      addEventListener('resize', update);
+      update();
     }
   }
 })();
