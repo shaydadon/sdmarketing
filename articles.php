@@ -21,6 +21,7 @@ require __DIR__ . '/includes/articles-data.php';
       <?php foreach ($articles as $i => $a): ?>
         <li class="post-card rv">
           <a href="article.php?slug=<?= e($a['slug']) ?>">
+            <img class="pc-img" src="<?= e($a['image']) ?>" alt="<?= e($a['image_alt']) ?>" width="1200" height="630" <?= $i < 3 ? 'fetchpriority="high"' : 'loading="lazy"' ?> decoding="async">
             <span class="pc-top"><span class="pc-type"><?= e($a['type']) ?></span><span class="pc-min"><?= (int) $a['minutes'] ?> דקות קריאה</span></span>
             <h2><?= e($a['title']) ?></h2>
             <p><?= e($a['description']) ?></p>

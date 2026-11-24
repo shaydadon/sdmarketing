@@ -114,6 +114,8 @@ def parse(path, slugs):
         'keyword': meta['primary_keyword'],
         'type': meta.get('type', ''),
         'service': meta.get('service_link', ''),
+        'image': f"assets/img/articles/{meta['slug']}.webp",
+        'image_alt': meta.get('image_alt', ''),
         'minutes': max(2, round(words / 170)),
         'html': blocks_to_html(lines, slugs),
         'faq': faq,
@@ -147,6 +149,15 @@ def main():
         fh.write('$articles = ' + php_val(arts, 0) + ';\n')
         fh.write('$articles_by_slug = array_column($articles, null, \'slug\');\n')
     print(f'wrote {OUT}: {len(arts)} articles: ' + ', '.join(a["slug"] for a in arts))
+    # sitemap.xml: the site's pages plus every article
+    pages = ['', 'services.php', 'projects.php', 'about.php', 'articles.php', 'contact.php', 'terms.php', 'privacy.php', 'accessibility.php']
+    urls = [f'https://sdmarketing.co.il/{p}' for p in pages] + [f'https://sdmarketing.co.il/article.php?slug={a["slug"]}' for a in arts]
+    with open(os.path.join(ROOT, 'sitemap.xml'), 'w', encoding='utf-8') as fh:
+        fh.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
+        for u in urls:
+            fh.write(f'  <url><loc>{html.escape(u)}</loc></url>\n')
+        fh.write('</urlset>\n')
+    print(f'wrote sitemap.xml: {len(urls)} urls')
 
 
 if __name__ == '__main__':

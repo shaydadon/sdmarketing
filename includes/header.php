@@ -31,14 +31,14 @@ function logo_mark(): string
   <meta property="og:title" content="<?= e($page_title) ?>">
   <?php if ($page_desc): ?><meta property="og:description" content="<?= e($page_desc) ?>"><?php endif; ?>
   <meta property="og:url" content="<?= e($canonical) ?>">
-  <meta property="og:image" content="https://<?= e($site['domain']) ?>/assets/img/founder.jpg">
+  <meta property="og:image" content="https://<?= e($site['domain']) ?>/<?= e($og_image ?? 'assets/img/founder.jpg') ?>">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" content="#0A0A0A">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&family=IBM+Plex+Sans+Hebrew:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=120">
+  <link rel="stylesheet" href="assets/css/style.css?v=130">
 </head>
 <body class="page-<?= e($page_id) ?>">
 <?php require __DIR__ . '/icons.php'; ?>
@@ -68,10 +68,19 @@ function logo_mark(): string
     </button>
   </div>
 
+  <?php if (!isset($articles)) { require __DIR__ . '/articles-data.php'; } ?>
   <div class="mobile-nav" id="mobile-nav" hidden data-mobile-nav>
     <ul>
       <?php foreach ($nav as $id => $item): ?>
-        <li><a href="<?= e($item['href']) ?>"<?= $id === $page_id ? ' aria-current="page"' : '' ?>><?= e($item['label']) ?><?php if (!empty($item['soon'])): ?><i class="soon-badge">בקרוב</i><?php endif; ?><?= icon('arrow') ?></a></li>
+        <li><a href="<?= e($item['href']) ?>"<?= $id === $page_id ? ' aria-current="page"' : '' ?>><?= e($item['label']) ?><?php if (!empty($item['soon'])): ?><i class="soon-badge">בקרוב</i><?php endif; ?><?= icon('arrow') ?></a>
+          <?php if ($id === 'articles'): ?>
+            <ul class="mn-sub" aria-label="מאמרים">
+              <?php foreach ($articles as $art): ?>
+                <li><a href="article.php?slug=<?= e($art['slug']) ?>"><img src="<?= e($art['image']) ?>" alt="" width="1200" height="630" loading="lazy" decoding="async"><span><?= e($art['title']) ?></span></a></li>
+              <?php endforeach; ?>
+            </ul>
+          <?php endif; ?>
+        </li>
       <?php endforeach; ?>
     </ul>
     <a class="btn btn-acc mn-cta" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span>דברו איתי בוואטסאפ</span></a>

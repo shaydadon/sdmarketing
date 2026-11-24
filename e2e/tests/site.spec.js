@@ -160,6 +160,18 @@ test.describe('articles', () => {
     }
   });
 
+  test('the mobile menu lists every article under Articles, with its image', async ({ page, isMobile }) => {
+    test.skip(!isMobile, 'mobile menu only');
+    await page.goto('/index.php');
+    await page.locator('[data-nav-toggle]').click();
+    const sub = page.locator('.mobile-nav .mn-sub a');
+    await expect(sub).toHaveCount(6);
+    await expect(sub.first().locator('img')).toBeVisible();
+    await sub.nth(2).click();
+    await expect(page).toHaveURL(/article\.php\?slug=/);
+    await expect(page.locator('.post-cover img')).toBeVisible();
+  });
+
   test('an unknown article returns 404', async ({ page }) => {
     const res = await page.goto('/article.php?slug=does-not-exist');
     expect(res.status()).toBe(404);

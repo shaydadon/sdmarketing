@@ -14,6 +14,7 @@ $page_title     = $article['meta_title'] . ' | SDmarketing';
 $page_desc      = $article['description'];
 $canonical_path = 'article.php?slug=' . rawurlencode($article['slug']);
 $og_type        = 'article';
+$og_image       = $article['image'];
 require __DIR__ . '/includes/header.php';
 
 $url = 'https://' . $site['domain'] . '/' . $canonical_path;
@@ -28,6 +29,7 @@ $ld  = [
         'author' => ['@type' => 'Person', 'name' => 'שי דדון', 'url' => 'https://' . $site['domain'] . '/about.php'],
         'publisher' => ['@type' => 'Organization', 'name' => 'SDmarketing', 'url' => 'https://' . $site['domain'] . '/'],
         'keywords' => $article['keyword'],
+        'image' => 'https://' . $site['domain'] . '/' . $article['image'],
     ],
     [
         '@context' => 'https://schema.org',
@@ -66,6 +68,7 @@ $related = [$others[$i % count($others)], $others[($i + 1) % count($others)]];
 
 <article class="post" aria-labelledby="page-title">
   <div class="wrap post-wrap">
+    <figure class="post-cover"><img src="<?= e($article['image']) ?>" alt="<?= e($article['image_alt']) ?>" width="1200" height="630" fetchpriority="high" decoding="async"></figure>
     <div class="post-body">
       <?= $article['html'] ?>
     </div>
