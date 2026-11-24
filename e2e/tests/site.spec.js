@@ -9,6 +9,7 @@ const PAGES = [
   { path: '/about.php', name: 'about' },
   { path: '/contact.php', name: 'contact' },
   { path: '/articles.php', name: 'articles' },
+  { path: '/article.php?slug=whatsapp-chatbot', name: 'article' },
   { path: '/terms.php', name: 'terms' },
   { path: '/privacy.php', name: 'privacy' },
   { path: '/accessibility.php', name: 'accessibility' },
@@ -49,7 +50,7 @@ test.describe('every page', () => {
       await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
       await expect(page).toHaveTitle(/SDmarketing/);
       await expect(page.locator('h1')).toHaveCount(1);
-      if (p.name !== 'home' && p.name !== 'projects') await expect(page.locator('body')).not.toContainText('Boardog');
+      if (!['home', 'projects', 'article'].includes(p.name)) await expect(page.locator('body')).not.toContainText('Boardog');
       await expect(page.locator('body')).not.toContainText('10+');
       await expect(page.locator('body')).not.toContainText('יותר מעשר');
       await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /.{20,}/);
@@ -139,6 +140,29 @@ test.describe('navigation', () => {
       expect(links.length, p.path).toBeGreaterThan(0);
       for (const href of links) expect(href).toContain(`wa.me/${WA_NUMBER}?text=`);
     }
+  });
+});
+
+test.describe('articles', () => {
+  test('the list links to every article, and each article has its FAQ and structured data', async ({ page }) => {
+    await page.goto('/articles.php');
+    const cards = page.locator('.post-card a');
+    await expect(cards).toHaveCount(6);
+    const hrefs = await cards.evaluateAll((as) => as.map((a) => a.getAttribute('href')));
+    for (const href of hrefs) {
+      const res = await page.goto('/' + href);
+      expect(res.status()).toBe(200);
+      await expect(page.locator('h1')).toBeVisible();
+      await expect(page.locator('.post-body h2').first()).toBeVisible();
+      const types = await page.locator('script[type="application/ld+json"]').evaluateAll((ss) => ss.map((x) => JSON.parse(x.textContent)['@type']));
+      expect(types).toEqual(expect.arrayContaining(['Article', 'BreadcrumbList', 'FAQPage']));
+      await expect(page.locator('body')).not.toContainText('—');
+    }
+  });
+
+  test('an unknown article returns 404', async ({ page }) => {
+    const res = await page.goto('/article.php?slug=does-not-exist');
+    expect(res.status()).toBe(404);
   });
 });
 

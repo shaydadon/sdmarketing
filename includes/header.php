@@ -18,14 +18,14 @@ function logo_mark(): string
   <?php if ($page_desc): ?><meta name="description" content="<?= e($page_desc) ?>"><?php endif; ?>
   <?php
   $page_file = basename($_SERVER['SCRIPT_NAME'] ?? 'index.php');
-  $canonical = 'https://' . $site['domain'] . '/' . ($page_file === 'index.php' ? '' : $page_file);
+  $canonical = 'https://' . $site['domain'] . '/' . ($canonical_path ?? ($page_file === 'index.php' ? '' : $page_file));
   ?>
   <?php if (!empty($noindex) || $is_dev): ?>
   <meta name="robots" content="noindex">
   <?php else: ?>
   <link rel="canonical" href="<?= e($canonical) ?>">
   <?php endif; ?>
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="<?= e($og_type ?? 'website') ?>">
   <meta property="og:locale" content="he_IL">
   <meta property="og:site_name" content="SDmarketing">
   <meta property="og:title" content="<?= e($page_title) ?>">
@@ -38,7 +38,7 @@ function logo_mark(): string
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&family=IBM+Plex+Sans+Hebrew:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=112">
+  <link rel="stylesheet" href="assets/css/style.css?v=120">
 </head>
 <body class="page-<?= e($page_id) ?>">
 <?php require __DIR__ . '/icons.php'; ?>
