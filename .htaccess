@@ -14,6 +14,14 @@ Options -MultiViews
 RewriteEngine On
 RewriteBase /
 
+# One host: www.sdmarketing.co.il -> sdmarketing.co.il (the host already sends http to https).
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
+# Leftover WordPress addresses -> the home page (?p=, ?page_id=, ?cat=).
+RewriteCond %{QUERY_STRING} (^|&)(p|page_id|cat)=\d+ [NC]
+RewriteRule ^(index\.php)?$ /? [R=301,L]
+
 # Old addresses -> clean ones, permanently (301), so shared links and Google keep working.
 # Only for what the browser asked for (THE_REQUEST), so the internal rewrites below never loop,
 # and only for GET/HEAD: a 301 would drop a form's POST data.
@@ -39,6 +47,17 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^([a-z]+)$ $1.php [L]
+
+# The dev copy lives in public_html/dev for dev.sdmarketing.co.il. Under the main domain it would
+# be a second copy of the site, so send it to its own host. (On the dev host the path never starts with /dev.)
+RedirectMatch 301 ^/dev/(.*)$ https://dev.sdmarketing.co.il/$1
+RedirectMatch 301 ^/dev$ https://dev.sdmarketing.co.il/
+
+# The old WordPress install is gone from the site: tell crawlers these addresses are permanently removed.
+RedirectMatch 410 ^/(wp-admin|wp-includes|wp-content)(/.*)?$
+RedirectMatch 410 ^/(wp-login|xmlrpc|wp-cron|wp-comments-post|wp-signup|wp-activate|wp-trackback|wp-links-opml|wp-mail|wp-load|wp-settings|wp-config|wp-blog-header|default)\.php$
+RedirectMatch 410 ^/(readme\.html|license\.txt|wp-config-sample\.php)$
+RedirectMatch 410 ^/(feed|comments/feed|wp-json)(/.*)?$
 
 # Keep project notes and tooling private
 <FilesMatch "^(PRODUCT\.md|skills-lock\.json)$">

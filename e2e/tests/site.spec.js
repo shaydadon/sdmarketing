@@ -165,6 +165,22 @@ test.describe('clean URLs', () => {
     });
   }
 
+  test('sitemap.xml lists only clean URLs with dates, and robots.txt points to it', async ({ request }) => {
+    const xml = await (await request.get('/sitemap.xml')).text();
+    const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
+    expect(locs.length).toBeGreaterThanOrEqual(15);
+    for (const loc of locs) expect(loc).toMatch(/^https:\/\/sdmarketing\.co\.il\/[a-z0-9\/-]*$/);
+    expect(locs).toContain('https://sdmarketing.co.il/articles/landing-page');
+    expect((xml.match(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/g) || []).length).toBe(locs.length);
+    // every sitemap URL is served (200) at its clean path
+    for (const loc of locs) {
+      const res = await request.get(new URL(loc).pathname, { maxRedirects: 0 });
+      expect(res.status(), loc).toBe(200);
+    }
+    const robots = await (await request.get('/robots.txt')).text();
+    expect(robots).toContain('Sitemap: https://sdmarketing.co.il/sitemap.xml');
+  });
+
   test('every internal link on every page is clean (no .php, no ?slug=)', async ({ page }) => {
     for (const path of ['/', '/services', '/projects', '/articles', '/articles/whatsapp-chatbot', '/about', '/contact', '/terms']) {
       await page.goto(path);

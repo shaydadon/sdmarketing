@@ -116,7 +116,7 @@ def parse(path, slugs):
         'description': meta['meta_description'],
         'keyword': meta['primary_keyword'],
         'type': meta.get('type', ''),
-        'service': meta.get('service_link', ''),
+        'service': re.sub(r'\.php(?=#|$)', '', meta.get('service_link', '')),
         'topic': meta.get('topic', ''),
         'published': meta.get('published', ''),
         'updated': meta.get('updated', meta.get('published', '')),
@@ -155,15 +155,19 @@ def main():
         fh.write('$articles = ' + php_val(arts, 0) + ';\n')
         fh.write('$articles_by_slug = array_column($articles, null, \'slug\');\n')
     print(f'wrote {OUT}: {len(arts)} articles: ' + ', '.join(a["slug"] for a in arts))
-    # sitemap.xml: the site's pages plus every article
+    # sitemap.xml: the site's pages plus every article, clean URLs, with last-modified dates
+    import datetime
+    today = datetime.date.today().isoformat()
     pages = ['', 'services', 'projects', 'articles', 'about', 'contact', 'terms', 'privacy', 'accessibility']
-    urls = [f'https://sdmarketing.co.il/{p}' for p in pages] + [f'https://sdmarketing.co.il/articles/{a["slug"]}' for a in arts]
+    newest = max((a['updated'] or a['published'] or today) for a in arts)
+    entries = [(f'https://sdmarketing.co.il/{p}', newest if p == 'articles' else today) for p in pages]
+    entries += [(f'https://sdmarketing.co.il/articles/{a["slug"]}', a['updated'] or a['published'] or today) for a in arts]
     with open(os.path.join(ROOT, 'sitemap.xml'), 'w', encoding='utf-8') as fh:
         fh.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
-        for u in urls:
-            fh.write(f'  <url><loc>{html.escape(u)}</loc></url>\n')
+        for u, mod in entries:
+            fh.write(f'  <url><loc>{html.escape(u)}</loc><lastmod>{mod}</lastmod></url>\n')
         fh.write('</urlset>\n')
-    print(f'wrote sitemap.xml: {len(urls)} urls')
+    print(f'wrote sitemap.xml: {len(entries)} urls')
 
 
 if __name__ == '__main__':

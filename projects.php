@@ -35,7 +35,6 @@ require __DIR__ . '/includes/projects-data.php';
   <div class="wrap">
     <div class="case-head">
       <div>
-        <div class="case-idx"><b><?= sprintf('%02d', $i + 1) ?></b> / <?= sprintf('%02d', count($projects) + array_sum($extra_cases)) ?></div>
         <h2 id="case-title-<?= e($p['slug']) ?>" lang="en"><?= e($p['name']) ?></h2>
         <div class="tags"><span class="tag acc"><?= e($p['tag']) ?></span></div>
       </div>

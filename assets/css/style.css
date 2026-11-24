@@ -247,8 +247,6 @@ footer .about{max-width:360px;margin-top:18px}
 .chip.on i{color:var(--accent)}
 .case{padding:110px 0;border-bottom:1px solid var(--line)}
 .case-head{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end}
-.case-idx{font-family:var(--mono);font-size:14px;color:var(--mute);display:flex;gap:14px;align-items:center}
-.case-idx b{color:var(--ink);font-weight:600}
 .case h2{font-size:88px;font-weight:900;letter-spacing:-.04em;margin-top:18px;line-height:1}
 .case .tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
 .case .desc{font-size:20px;color:#2e2d2b}

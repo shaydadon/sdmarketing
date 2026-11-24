@@ -145,7 +145,7 @@ jobs:
                     --exclude 'README.md' --exclude 'PRODUCT.md' --exclude 'skills-lock.json'
                     --exclude '.gitignore' --exclude '.gitattributes' --exclude '.well-known/')
           if [ "$TARGET" = "live" ]; then
-            rsync -rlptzv "${EXCLUDES[@]}" --exclude 'dev/' --exclude 'robots.txt' -e "$SSH" ./ "$SSH_USER@$SSH_HOST:${{ steps.cfg.outputs.path }}/"
+            rsync -rlptzv "${EXCLUDES[@]}" --exclude 'dev/' -e "$SSH" ./ "$SSH_USER@$SSH_HOST:${{ steps.cfg.outputs.path }}/"
           else
             rsync -rlptzv --delete "${EXCLUDES[@]}" -e "$SSH" ./ "$SSH_USER@$SSH_HOST:${{ steps.cfg.outputs.path }}/"
           fi
