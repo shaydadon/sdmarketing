@@ -132,27 +132,26 @@ $outcomes = [
   </div>
 </section>
 
-<section class="founder" aria-labelledby="about-title">
-  <div class="wrap f-grid">
-    <div class="f-photo">
-      <div class="sq" aria-hidden="true"></div>
+<section class="approach" aria-labelledby="about-title">
+  <div class="wrap ap-grid">
+    <div class="ap-photo rv">
       <img src="assets/img/founder.webp" alt="שי דדון, מייסד SDmarketing" width="1024" height="1024" loading="lazy" decoding="async">
-      <div class="cap"><b>שי דדון</b><span>מייסד SDmarketing</span></div>
+      <div class="cap"><b>שי דדון</b><span>מפתח תוכנה, B.Sc. מדעי המחשב, שיווק דיגיטלי</span></div>
     </div>
     <div>
-      <span class="eyebrow">מי עומד מאחורי זה</span>
-      <h2 class="sec" id="about-title">מפתח, משווק ואיש אוטומציות.<br><span class="acc">באותו אדם.</span></h2>
-      <p class="body">רוב העסקים עובדים עם מתכנת אחד, משווק אחר ומישהו שלישי ש"מחבר את הוואטסאפ". כל העברה ביניהם היא עוד מקום שבו דברים נופלים. אחרי יותר מ־15 שנה כמפתח תוכנה, קורס בשיווק ושנתיים של עבודה בשיווק דיגיטלי, ב־SDmarketing אני מתכנן, בונה ומנהל את כל השרשרת בעצמי: מהקמפיין, דרך האתר ועד הבוט שעונה ללקוח בשתיים בלילה.</p>
-      <div class="creds">
-        <div><b class="ltr">15+</b><span>שנות ניסיון כמפתח תוכנה</span></div>
-        <div><b class="ltr">B.Sc.</b><span>תואר במדעי המחשב</span></div>
-        <div><b>שנתיים</b><span>בשיווק דיגיטלי, אחרי קורס שיווק</span></div>
-      </div>
+      <span class="eyebrow">למה אני</span>
+      <h2 class="sec" id="about-title"><span class="count" data-count="15">15</span> שנות ניסיון בטכנולוגיה.<span class="acc">גישה אחת פשוטה: קודם מבינים את הבעיה.</span></h2>
+      <p class="lead">אני לא מתחיל מקוד, עיצוב או מערכת חדשה. אני מתחיל מהשאלה מה לא עובד בעסק שלך, ואיך אפשר לשנות את זה.</p>
+      <ol class="qs">
+        <li class="rv"><span>01</span><div><b>איפה העסק מאבד פניות?</b>הודעה שלא נענתה, ליד שלא חזרו אליו, עגלה שננטשה.</div></li>
+        <li class="rv"><span>02</span><div><b>מה חוזר על עצמו כל יום?</b>כל מה שמישהו עושה ידנית שוב ושוב יכול לרוץ לבד.</div></li>
+        <li class="rv"><span>03</span><div><b>מה הצעד הקטן שיחזיר הכי הרבה?</b>מתחילים ממנו, מודדים, ורק אז מוסיפים את הבא.</div></li>
+      </ol>
       <div class="vs">
         <div class="a"><h3>הדרך הרגילה</h3>שלושה ספקים, שלוש הצעות מחיר, ואתה מתווך ביניהם.</div>
         <div class="b"><h3>עם SDmarketing</h3>תוכנית אחת, מחיר אחד, איש קשר אחד.</div>
       </div>
-      <a class="link" href="about.php" style="margin-top:32px">עוד עליי <?= icon('arrow') ?></a>
+      <a class="link" href="about.php">הסיפור המלא <?= icon('arrow') ?></a>
     </div>
   </div>
 </section>

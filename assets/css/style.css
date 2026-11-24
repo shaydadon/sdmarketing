@@ -1043,3 +1043,34 @@ footer .logo small{color:#9A9893}
   .services.lite .svc-grid{grid-template-columns:1fr}
   .services.lite .svc{min-height:0;padding:24px 22px}
 }
+
+/* Why me: dark section, round portrait with name beside it, three questions, comparison */
+.approach{background:var(--ink);color:#fff;padding:130px 0}
+.approach .eyebrow{color:var(--mute-d)}
+.ap-grid{display:grid;grid-template-columns:1fr;gap:36px;max-width:860px}
+.ap-photo{display:flex;align-items:center;gap:20px}
+.ap-photo img{width:112px;aspect-ratio:1;border-radius:50%;object-fit:cover;filter:grayscale(1) contrast(1.08);box-shadow:0 0 0 3px var(--ink),0 0 0 4.5px var(--accent)}
+.ap-photo .cap b{font-family:var(--display);font-size:24px;font-weight:700;display:block}
+.ap-photo .cap span{font-size:15px;color:var(--mute-d)}
+.approach h2.sec{font-size:44px;font-weight:800;line-height:1.12;max-width:680px}
+.approach h2.sec .acc{display:block;margin-top:6px;color:var(--accent-2)}
+.count{font-variant-numeric:tabular-nums}
+.approach .lead{color:#c9c7c1;max-width:600px}
+.qs{list-style:none;margin-top:40px;border-top:1px solid var(--line-d)}
+.qs li{display:flex;gap:22px;padding:24px 0;border-bottom:1px solid var(--line-d);font-size:17px;color:var(--mute-d)}
+.qs li > span{font-family:var(--mono);font-size:15px;color:var(--accent-2);padding-top:4px}
+.qs b{display:block;font-family:var(--display);font-weight:700;font-size:23px;color:#fff;margin-bottom:6px;line-height:1.25}
+.rv-on .qs .rv:nth-child(2){transition-delay:.08s}.rv-on .qs .rv:nth-child(3){transition-delay:.16s}
+.approach .vs .a{border-color:#444;color:var(--mute-d)}
+.approach .vs .b{background:var(--paper);color:var(--ink)}
+.approach .vs .b h3{color:var(--accent-ink)}
+.approach .link{color:#fff;margin-top:32px}
+@media (max-width:800px){
+  .approach{padding:84px 0}
+  .ap-grid{gap:28px}
+  .ap-photo img{width:88px}
+  .ap-photo .cap b{font-size:21px}
+  .approach h2.sec{font-size:30px}
+  .qs b{font-size:20px}
+  .qs li{gap:14px}
+}
