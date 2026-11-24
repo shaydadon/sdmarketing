@@ -168,7 +168,7 @@ test.describe('homepage', () => {
     await expect(faq).toContainText('ללא צורך בחנות האפליקציות');
     await expect(faq).toContainText('fisha.shop');
     await expect(faq).toContainText('Excerly');
-    await expect(faq).toContainText('Boardog');
+    await expect(faq).toContainText('מאיפה מתחילים');
     await expect(faq).not.toContainText('קלעי');
     const ld = await page.locator('script[type="application/ld+json"]').textContent();
     const data = JSON.parse(ld);

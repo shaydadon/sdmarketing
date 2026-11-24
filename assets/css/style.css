@@ -1137,3 +1137,29 @@ h1,h2,h3{text-wrap:balance}
 .page-index .mobile-nav a svg{color:var(--accent)}
 /* Closing CTA on mobile: no decorative ring behind the heading and text */
 @media (max-width:800px){.cta .ring{display:none}}
+
+/* ================= v6 ================= */
+/* Mobile menu: large, calm links; current page marked with a dot; WhatsApp at the bottom */
+.mobile-nav li a{padding:18px 4px;font-size:24px;font-weight:700;letter-spacing:-.01em}
+.mobile-nav li a svg{width:18px;height:18px;opacity:.35;transition:transform .25s ease,opacity .25s ease}
+.mobile-nav li a:active svg,.mobile-nav li a:hover svg{opacity:1;transform:translateX(-4px)}
+.mobile-nav li:last-child a{border-bottom:0}
+.mobile-nav li a[aria-current="page"]{justify-content:flex-start;gap:12px}
+.mobile-nav li a[aria-current="page"]::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+.mobile-nav li a[aria-current="page"] svg{margin-inline-start:auto}
+.mobile-nav .mn-cta{display:flex;width:100%;justify-content:center;margin-top:18px;height:56px}
+.mobile-nav .mn-cta svg{color:var(--accent)}
+.page-index .mobile-nav .mn-cta{background:var(--ink);color:#fff}
+@keyframes mn-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.mobile-nav:not([hidden]) li,.mobile-nav:not([hidden]) .mn-cta{animation:mn-in .45s cubic-bezier(.2,.7,.2,1) both}
+.mobile-nav li:nth-child(2){animation-delay:.04s}.mobile-nav li:nth-child(3){animation-delay:.08s}.mobile-nav li:nth-child(4){animation-delay:.12s}.mobile-nav li:nth-child(5){animation-delay:.16s}
+.mobile-nav .mn-cta{animation-delay:.2s}
+@media (max-width:800px){.mobile-nav:not([hidden]){padding:6px 20px 22px}}
+@media (min-width:801px){.mobile-nav .mn-cta{display:none}}
+@media (prefers-reduced-motion:reduce){.mobile-nav li,.mobile-nav .mn-cta{animation:none!important}}
+
+/* Closing CTA: the rings in the signal yellow */
+.cta .ring{border:1.5px solid #F5B301;box-shadow:0 0 0 56px #FDE7A6,0 0 0 57.5px #F5B301}
+@media (max-width:800px){
+  .cta .ring{display:block;width:150px;height:150px;top:-50px;inset-inline-end:-50px;box-shadow:0 0 0 26px #FDE7A6,0 0 0 27.5px #F5B301}
+}
