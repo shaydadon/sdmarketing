@@ -1118,3 +1118,14 @@ h1,h2,h3{text-wrap:balance}
 #case-bot .wad-clip .wad-video{width:100%;height:auto;border-radius:0;box-shadow:none}
 @media (max-width:800px){.p-hero h1,.p-hero.sm h1{font-size:44px}}
 @media (prefers-reduced-motion:reduce){#case-bot .wad-clip{display:none}}
+
+/* Mobile hero: the work image starts inside the first screen */
+@media (max-width:800px){
+  .h3ro{padding:8px 0 64px}
+  .h3ro .eyebrow{font-size:13px}
+  .h3ro h1{font-size:34px;margin-top:12px;line-height:1.08}
+  .h3ro .lead{font-size:17px;margin-top:14px;line-height:1.55}
+  .h3ro .btn-main{height:54px;margin-top:22px;font-size:17px}
+  .h3ro .offer{display:none}
+  .h3-grid{gap:30px}
+}
