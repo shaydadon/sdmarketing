@@ -1,6 +1,6 @@
 <?php
 $page_id    = 'projects';
-$page_title = 'פרויקטים | SDmarketing | בניית חנות אונליין, אתרים ואפליקציות PWA';
+$page_title = 'פרויקטים: חנות אונליין, אפליקציית PWA וצ׳אטבוט | SDmarketing';
 $page_desc  = 'עבודות של SDmarketing: בניית חנות אונליין, אתרי תדמית ואפליקציית PWA ללא צורך בחנות האפליקציות, עם צילומי מסך אמיתיים.';
 require __DIR__ . '/includes/header.php';
 require __DIR__ . '/includes/projects-data.php';

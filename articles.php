@@ -1,6 +1,6 @@
 <?php
 $page_id    = 'articles';
-$page_title = 'מאמרים ומדריכים | SDmarketing | צ׳אטבוט לוואטסאפ, אוטומציות, אתרים וקמפיינים';
+$page_title = 'מאמרים ומדריכים לבעלי עסקים | SDmarketing';
 $page_desc  = 'מדריכים ומאמרים קצרים לבעלי עסקים: צ׳אטבוט לוואטסאפ, איך לא לאבד לידים, אוטומציות לעסקים, אפליקציית PWA, דף נחיתה ומעקב המרות.';
 require __DIR__ . '/includes/header.php';
 require __DIR__ . '/includes/articles-data.php';

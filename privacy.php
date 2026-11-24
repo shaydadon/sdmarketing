@@ -1,7 +1,7 @@
 <?php
 $page_id      = 'privacy';
 $page_title   = 'מדיניות פרטיות | SDmarketing';
-$page_desc    = 'איזה מידע SDmarketing אוסף באתר, למה, איך הוא נשמר, ומה הזכויות שלך.';
+$page_desc    = 'מדיניות הפרטיות של SDmarketing: איזה מידע נאסף באתר ובטופס יצירת הקשר, למה הוא משמש, איך הוא נשמר, ומה הזכויות שלכם.';
 $header_theme = 'dark';
 require __DIR__ . '/includes/header.php';
 

@@ -1,7 +1,7 @@
 <?php
 $page_id      = 'terms';
 $page_title   = 'תקנון ותנאי שימוש | SDmarketing';
-$page_desc    = 'תנאי השימוש באתר SDmarketing ובשירותים המוצגים בו.';
+$page_desc    = 'תנאי השימוש באתר SDmarketing: המידע באתר, פרויקטים ודוגמאות, פניות ויצירת קשר, קניין רוחני ואחריות.';
 $header_theme = 'dark';
 require __DIR__ . '/includes/header.php';
 
