@@ -33,7 +33,7 @@ $site['legal_updated_display'] = ($is_en && $d) ? $d->format('F j, Y') : $site['
 unset($d);
 
 if ($is_en) {
-    $site['wa_text'] = "Hi, I found you on the website and I'd like to hear more";
+    $site['wa_text'] = 'Hi, I found you through your website and would like to know more';
     $site['phone_display'] = '+972-52-620-3423';
 } else {
     $site['phone_display'] = $site['phone'];

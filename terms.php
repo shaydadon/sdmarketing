@@ -70,12 +70,12 @@ if ($is_en) {
     $city = '[city]';
     $legal = [
         'title' => 'Terms of use',
-        'lead'  => 'The rules for using this website and the information on it, in language as plain as possible. Still worth reading.',
+        'lead'  => 'The rules for using this website and the information on it, written in plain language wherever possible. Still, it’s worth a read.',
         'sections' => [
             ['general', 'General', <<<HTML
 <p>The website {$dom} (the "<b>Site</b>") is operated by {$o}, {$bt} number {$bid}, trading as SDmarketing ("<b>SDmarketing</b>", "<b>we</b>").</p>
 <p>Using the Site in any way means you accept these terms. If you do not accept them, please do not use the Site.</p>
-<p>This English text is a translation for convenience. If it differs from the Hebrew version, the Hebrew version prevails.</p>
+<p>This English version is provided for convenience. If it differs from the Hebrew version, the Hebrew version prevails.</p>
 HTML],
             ['site-content', 'Information on the Site', <<<HTML
 <p>The Site gives general information about SDmarketing’s services: business automations, WhatsApp chatbots, websites and online stores, PWA apps, SEO and paid campaigns.</p>

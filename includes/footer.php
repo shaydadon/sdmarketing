@@ -8,7 +8,7 @@
           <?= logo_mark() ?>
           <span class="lt"><b>SD</b><small>marketing</small></span>
         </a>
-        <p class="about"><?= tr('אוטומציות, אתרים, אפליקציות, קידום אורגני וקמפיינים ממומנים לעסקים. מתוכנן, בנוי ומנוהל על ידי אדם אחד.', 'Automations, websites, apps, SEO and paid campaigns for businesses. Planned, built and run by one person.') ?></p>
+        <p class="about"><?= tr('אוטומציות, אתרים, אפליקציות, קידום אורגני וקמפיינים ממומנים לעסקים. מתוכנן, בנוי ומנוהל על ידי אדם אחד.', 'WhatsApp chatbots, business automation, websites, apps, SEO and paid ads. Planned, built and managed by one person.') ?></p>
       </div>
 
       <nav aria-label="<?= tr('ניווט בתחתית', 'Footer') ?>">

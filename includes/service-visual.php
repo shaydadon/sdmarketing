@@ -8,7 +8,7 @@ function service_visual(string $id): void
           <source src="<?= url('assets/video/boardog-chat.webm') ?>" type="video/webm">
           <source src="<?= url('assets/video/boardog-chat.mp4') ?>" type="video/mp4">
         </video>
-        <span class="note"><?= tr('הדגמה: צ׳אטבוט לוואטסאפ לעסקים', 'Demo: a WhatsApp chatbot for business (in Hebrew)') ?></span>
+        <span class="note"><?= tr('הדגמה: צ׳אטבוט לוואטסאפ לעסקים', 'Demo: a WhatsApp chatbot in action (conversation in Hebrew)') ?></span>
       </div>
     <?php elseif ($id === 'websites'): ?>
       <div class="visual real">
@@ -22,13 +22,13 @@ function service_visual(string $id): void
     <?php elseif ($id === 'seo'): ?>
       <div class="visual">
         <div class="vrep">
-          <p class="rep-title"><?= tr('תוכנית קידום · הדגמה', 'SEO plan · demo') ?></p>
-          <div class="rw"><span><?= tr('מילת מפתח', 'Keyword') ?></span><div class="bar2" role="img" aria-label="<?= tr('הדגמה: מילת מפתח ראשית, בלי נתון אמיתי', 'Demo: main keyword, no real data') ?>"><i style="width:72%"></i></div></div>
-          <div class="rw"><span><?= tr('מאמר לאתר', 'Article') ?></span><div class="bar2" role="img" aria-label="<?= tr('הדגמה: מאמר לאתר, בלי נתון אמיתי', 'Demo: site article, no real data') ?>"><i style="width:54%"></i></div></div>
+          <p class="rep-title"><?= tr('תוכנית קידום · הדגמה', 'SEO plan · Demo') ?></p>
+          <div class="rw"><span><?= tr('מילת מפתח', 'Keyword research') ?></span><div class="bar2" role="img" aria-label="<?= tr('הדגמה: מילת מפתח ראשית, בלי נתון אמיתי', 'Demo: main keyword, no real data') ?>"><i style="width:72%"></i></div></div>
+          <div class="rw"><span><?= tr('מאמר לאתר', 'Content') ?></span><div class="bar2" role="img" aria-label="<?= tr('הדגמה: מאמר לאתר, בלי נתון אמיתי', 'Demo: site article, no real data') ?>"><i style="width:54%"></i></div></div>
           <div class="rw"><span><?= tr('SEO טכני', 'Technical SEO') ?></span><div class="bar2" role="img" aria-label="<?= tr('הדגמה: בדיקת מהירות ומובייל, בלי נתון אמיתי', 'Demo: speed and mobile check, no real data') ?>"><i class="a" style="width:40%"></i></div></div>
-          <div class="ft"><span><?= tr('השלב הבא', 'Next step') ?></span><span class="acc"><?= tr('מאמר לעמוד השירות', 'Article for the service page') ?></span></div>
+          <div class="ft"><span><?= tr('השלב הבא', 'Next step') ?></span><span class="acc"><?= tr('מאמר לעמוד השירות', 'Service page article') ?></span></div>
         </div>
-        <span class="note"><?= tr('הדגמה להמחשה · ללא נתונים אמיתיים', 'Illustration only · no real data') ?></span>
+        <span class="note"><?= tr('הדגמה להמחשה · ללא נתונים אמיתיים', 'Illustration only · No real data') ?></span>
       </div>
     <?php elseif ($id === 'pwa'): ?>
       <div class="visual real ex">
@@ -39,13 +39,13 @@ function service_visual(string $id): void
     <?php elseif ($id === 'campaigns'): ?>
       <div class="visual">
         <div class="vrep">
-          <p class="rep-title"><?= tr('קמפיינים ממומנים · הדגמה', 'Paid campaigns · demo') ?></p>
+          <p class="rep-title"><?= tr('קמפיינים ממומנים · הדגמה', 'Paid ads · Demo') ?></p>
           <div class="rw"><span>Google Ads</span><div class="bar2" role="img" aria-label="<?= tr('הדגמה: Google Ads, העמודה הארוכה, בלי נתון אמיתי', 'Demo: Google Ads, the longest bar, no real data') ?>"><i class="a" style="width:78%"></i></div></div>
           <div class="rw"><span><?= tr('פייסבוק', 'Facebook') ?></span><div class="bar2" role="img" aria-label="<?= tr('הדגמה: קמפיין פייסבוק, עמודה בינונית, בלי נתון אמיתי', 'Demo: Facebook campaign, a medium bar, no real data') ?>"><i style="width:52%"></i></div></div>
           <div class="rw"><span><?= tr('אינסטגרם', 'Instagram') ?></span><div class="bar2" role="img" aria-label="<?= tr('הדגמה: קמפיין אינסטגרם, העמודה הקצרה, בלי נתון אמיתי', 'Demo: Instagram campaign, the shortest bar, no real data') ?>"><i style="width:34%"></i></div></div>
           <div class="ft"><span><?= tr('מה בודקים', 'What we measure') ?></span><span class="acc"><?= tr('פניות, לא לייקים', 'Leads, not likes') ?></span></div>
         </div>
-        <span class="note"><?= tr('הדגמה להמחשה · ללא נתונים אמיתיים', 'Illustration only · no real data') ?></span>
+        <span class="note"><?= tr('הדגמה להמחשה · ללא נתונים אמיתיים', 'Illustration only · No real data') ?></span>
       </div>
     <?php endif;
 }

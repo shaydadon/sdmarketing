@@ -16,7 +16,7 @@ require __DIR__ . '/includes/header.php';
   <div class="wrap p-hero sm not-found">
     <p class="not-found-code" aria-hidden="true" dir="ltr">404</p>
     <h1 id="page-title"><?= tr('העמוד הזה לא קיים. <span>אבל העסק שלך כן.</span>', 'This page doesn’t exist. <span>Your business does.</span>') ?></h1>
-    <p class="lead"><?= tr('ייתכן שהקישור שבור או שהעמוד הועבר. אפשר להמשיך מכאן:', 'The link may be broken, or the page has moved. You can carry on from here:') ?></p>
+    <p class="lead"><?= tr('ייתכן שהקישור שבור או שהעמוד הועבר. אפשר להמשיך מכאן:', 'The link may be broken, or the page may have moved. Try one of these instead:') ?></p>
     <ul class="not-found-links">
       <li><a href="<?= lurl('') ?>"><?= tr('בית', 'Home') ?><?= icon('arrow') ?></a></li>
       <?php foreach ($nav as $item): ?>

@@ -5,8 +5,8 @@ $projects = [
         'slug'      => 'fisha',
         'name'      => 'fisha.shop',
         'cat'       => 'web',
-        'tag'       => 'Online store / E-commerce',
-        'summary'   => 'An example of an online store. It sells for real: design, development, order management and payments.',
+        'tag'       => 'E-commerce store',
+        'summary'   => 'A live online store that takes real orders: design, development, order management and secure checkout.',
         'url'       => 'https://fisha.shop',
         'url_label' => 'Visit the live site',
         'layout'    => 'browser',
@@ -18,8 +18,8 @@ $projects = [
         'slug'      => 'excerly',
         'name'      => 'Excerly',
         'cat'       => 'pwa',
-        'tag'       => 'PWA app',
-        'summary'   => 'An example of a web app. Built so you can install it from the browser, and it opens like an app.',
+        'tag'       => 'Progressive web app (PWA)',
+        'summary'   => 'A web app that installs straight from the browser and feels just like a native app.',
         'url'       => 'https://shaydadon.github.io/Excerly/',
         'url_label' => 'Open the app',
         'layout'    => 'phones',
@@ -32,9 +32,9 @@ $projects = [
 
 $project_cats = [
     'all' => 'All',
-    'web' => 'Sites and stores',
+    'web' => 'Websites & stores',
     'pwa' => 'PWA apps',
-    'automations' => 'Automations',
+    'automations' => 'Automation',
 ];
 
 $extra_cases = ['automations' => 1];

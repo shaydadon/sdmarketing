@@ -44,40 +44,40 @@ if ($is_en) {
     $wa_msgs = [
         ['c', 'Hi'],
         ['b', 'Welcome to Jerry’s Dog Boarding! So glad you reached out 🐾 What’s your name?'],
-        ['c', 'Hi, nice to meet you, I’m Yafa from Rehovot'],
+        ['c', 'Hi, nice to meet you! I’m Yafa from Rehovot'],
         ['b', 'Lovely to meet you, Yafa! What’s your dog’s name?'],
         ['c', 'My dog’s name is Joy'],
-        ['b', 'Joy, what a sweet name! Which dates are you looking to book for her?'],
+        ['b', 'Joy, what a lovely name! Which dates would you like to book for her?'],
         ['c', 'December 12 to 30'],
-        ['b', 'Great, we have room on those dates! Is Joy male or female?'],
-        ['c', 'Female'],
-        ['b', 'Female, perfect. And what breed is she?'],
-        ['c', 'Mixed'],
+        ['b', 'Great news, we have space on those dates! Is Joy a boy or a girl?'],
+        ['c', 'A girl'],
+        ['b', 'Lovely. And what breed is she?'],
+        ['c', 'A mix'],
         ['b', 'Nice. And how old is Joy?'],
-        ['c', '9'],
-        ['b', 'Got it. And her size: small, medium or large?'],
+        ['c', 'She’s 9'],
+        ['b', 'Got it. Is she small, medium or large?'],
         ['c', 'Small'],
-        ['b', 'Lovely, that fits us perfectly. Is she spayed?'],
+        ['b', 'Perfect, she’ll fit right in. Is she spayed?'],
         ['c', 'Yes'],
         ['b', 'Are her vaccinations up to date?'],
         ['c', 'Yes'],
-        ['b', 'And is she on a current flea and tick treatment?'],
+        ['b', 'And is she on flea and tick prevention?'],
         ['c', 'Of course'],
         ['b', 'Does she have any allergies?'],
         ['c', 'No'],
-        ['b', 'Great. Anything about her health or regular medication we should know?'],
-        ['c', 'No, just diet food'],
-        ['b', 'Okay, I’m noting that she eats diet food. How does she get along with other dogs?'],
-        ['c', 'Really well, no problems'],
+        ['b', 'Great. Does she have any health issues or take any regular medication?'],
+        ['c', 'No, she’s just on a special diet'],
+        ['b', 'Okay, I’ll note the special diet. How does she get along with other dogs?'],
+        ['c', 'Really well, no issues at all'],
         ['b', 'Good to hear! Has she ever shown any aggression?'],
-        ['c', 'Never'],
-        ['b', 'Great. And roughly, what does her daily routine at home look like?'],
-        ['c', '3 walks a day, lots of play and running around'],
-        ['b', 'Sounds like Joy is a fun, energetic girl! Let’s set up a meet and greet. I have Tuesday 11/24 at 4:00 or 6:00 PM, Wednesday 11/25 at 4:00 or 6:00 PM, or Thursday 11/26 at 4:00 or 6:00 PM. What works for you?'],
+        ['c', 'Never, not once'],
+        ['b', 'Great. And what does her daily routine look like at home?'],
+        ['c', 'Three walks a day and lots of playtime'],
+        ['b', 'Sounds like Joy is a fun, energetic girl! Let’s set up a meet and greet. I have openings on Tuesday 11/24, Wednesday 11/25 and Thursday 11/26, each at 4:00 or 6:00 PM. Which works best for you?'],
         ['c', 'Tuesday works'],
-        ['b', 'What time suits you, 4:00 or 6:00 PM?'],
-        ['c', '4 is good'],
-        ['b', 'Great, your meet and greet is booked for Tuesday 11/24 at 4:00 PM. We’ll reserve the boarding dates after the meeting, once we’ve met Joy and seen that everything goes well. See you both soon, have a lovely day! 🐾'],
+        ['b', 'Which time suits you better, 4:00 or 6:00 PM?'],
+        ['c', '4 works'],
+        ['b', 'You’re all set! Your meet and greet is booked for Tuesday 11/24 at 4:00 PM. We’ll confirm Joy’s boarding dates after we’ve met her and made sure she’s comfortable. See you both soon, and have a wonderful day! 🐾'],
         ['card', ''],
     ];
 }
@@ -88,12 +88,12 @@ $wa_n = count($wa_msgs);
     <div class="case-head">
       <div>
         <h2 id="case-bot-title" lang="en">Boardog</h2>
-        <div class="tags"><span class="tag acc"><?= tr('אפליקציית צ׳אטבוט לבעלי פנסיונים', 'Chatbot app for dog boarding businesses') ?></span></div>
+        <div class="tags"><span class="tag acc"><?= tr('אפליקציית צ׳אטבוט לבעלי פנסיונים', 'WhatsApp chatbot for dog boarding businesses') ?></span></div>
       </div>
       <div>
-        <p class="desc"><?= tr('דוגמה לצ׳אטבוט לוואטסאפ שמקבל פנייה, אוסף את הפרטים וקובע פגישה לבד.', 'An example of a WhatsApp chatbot that takes an inquiry, collects the details and books a meeting on its own.') ?></p>
+        <p class="desc"><?= tr('דוגמה לצ׳אטבוט לוואטסאפ שמקבל פנייה, אוסף את הפרטים וקובע פגישה לבד.', 'A WhatsApp chatbot that handles a new inquiry, collects every detail and books the meeting on its own.') ?></p>
         <div class="acts">
-          <a class="btn btn-ink" href="<?= e(wa_link($site, tr('היי, אשמח לשמוע על צ׳אטבוט לוואטסאפ', "Hi, I'd like to hear about a WhatsApp chatbot"))) ?>" target="_blank" rel="noopener"><?= tr('לשיחה על בוט', 'Talk to me about a bot') ?><?= icon('external') ?></a>
+          <a class="btn btn-ink" href="<?= e(wa_link($site, tr('היי, אשמח לשמוע על צ׳אטבוט לוואטסאפ', 'Hi, I’d like to learn more about a WhatsApp chatbot for my business'))) ?>" target="_blank" rel="noopener"><?= tr('לשיחה על בוט', 'Ask me about a chatbot') ?><?= icon('external') ?></a>
         </div>
       </div>
     </div>
@@ -127,10 +127,10 @@ $wa_n = count($wa_msgs);
                 <div class="wad-sum">
                   <?php if ($is_en): ?>
                   <b>📋 Intake summary</b>
-                  <p>Joy · female · 9 · small · mixed</p>
-                  <p>Allergies: none</p>
-                  <p>Requested dates: 12/12/2026–12/30/2026</p>
-                  <p>Meet and greet: Tuesday 11/24, 4:00 PM</p>
+                  <p>Joy · Female · 9 yrs · Small · Mixed breed</p>
+                  <p>Allergies: None</p>
+                  <p>Requested dates: Dec 12–30, 2026</p>
+                  <p>Meet and greet: Tue 11/24, 4:00 PM</p>
                   <?php else: ?>
                   <b>📋 סיכום קליטה</b>
                   <p>ג׳וי · נקבה · 9 · קטנה · מעורבת</p>

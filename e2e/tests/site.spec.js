@@ -483,7 +483,7 @@ test.describe('english version', () => {
     await page.goto('/services');
     await page.locator('header .lang-switch').click();
     await expect(page).toHaveURL(/\/en\/services$/);
-    await expect(page.locator('h1')).toContainText('Everything your business needs');
+    await expect(page.locator('h1')).toContainText('Everything your business needs to sell more online');
     await page.locator('header .lang-switch').click();
     await expect(page).toHaveURL(/\/services$/);
     await expect(page).not.toHaveURL(/\/en\//);
@@ -534,7 +534,7 @@ test.describe('english version', () => {
     await expect(page.locator('.field-error')).toHaveCount(3);
     await expect(page.locator('#err-name')).toContainText('Please enter your name');
     await page.goto('/en/contact?sent=1');
-    await expect(page.locator('#sent h2')).toHaveText('Message received. Thank you.');
+    await expect(page.locator('#sent h2')).toHaveText('Thanks! Your message has been received.');
   });
 
   test('the English chatbot demo plays the conversation in English', async ({ page }) => {

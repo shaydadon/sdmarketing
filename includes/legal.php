@@ -38,8 +38,8 @@
       <?php endforeach; ?>
 
       <aside class="legal-contact">
-        <h2><?= tr('שאלות? כתבו לי.', 'Questions? Write to me.') ?></h2>
-        <p><?= tr('על כל שאלה בנוגע למסמך הזה אפשר לפנות אליי ישירות.', 'For any question about this document, you can reach me directly.') ?></p>
+        <h2><?= tr('שאלות? כתבו לי.', 'Questions? Get in touch.') ?></h2>
+        <p><?= tr('על כל שאלה בנוגע למסמך הזה אפשר לפנות אליי ישירות.', 'If you have any questions about this document, feel free to contact me directly.') ?></p>
         <div class="legal-contact-links">
           <a class="btn btn-ink" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span><?= tr('וואטסאפ', 'WhatsApp') ?></span></a>
           <a class="btn btn-ghost" href="mailto:<?= e($site['email']) ?>"><?= icon('mail') ?><span dir="ltr"><?= e($site['email']) ?></span></a>
