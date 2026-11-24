@@ -160,3 +160,22 @@ jobs:
             [ "$code" = "200" ] || { echo "::error::$URL$p returned $code"; exit 1; }
           done
           echo "Deployed to $URL" >> "$GITHUB_STEP_SUMMARY"
+
+      # Tell Bing, Yandex and the other IndexNow engines about every URL in the sitemap (live only).
+      # The key is public by design: it is the <key>.txt file at the site root that proves the site is ours.
+      # A failure here never fails the deploy; the sitemap and robots.txt still reach every engine.
+      - name: Notify IndexNow
+        if: steps.cfg.outputs.method != 'none' && env.TARGET == 'live'
+        run: |
+          KEYFILE=$(ls | grep -E '^[0-9a-f]{32}\.txt$' | head -1)
+          [ -n "$KEYFILE" ] || { echo "::warning::No IndexNow key file at the repo root - skipping."; exit 0; }
+          KEY=${KEYFILE%.txt}
+          HOST=sdmarketing.co.il
+          URLS=$(grep -oE '<loc>[^<]+</loc>' sitemap.xml | sed -E 's#</?loc>##g' | jq -R . | jq -s -c .)
+          BODY=$(jq -n -c --arg host "$HOST" --arg key "$KEY" --arg loc "https://$HOST/$KEYFILE" --argjson urls "$URLS" \
+            '{host:$host,key:$key,keyLocation:$loc,urlList:$urls}')
+          code=$(curl -s -o /tmp/indexnow.txt -w '%{http_code}' -X POST https://api.indexnow.org/indexnow \
+            -H 'Content-Type: application/json; charset=utf-8' -d "$BODY")
+          echo "IndexNow: HTTP $code for $(echo "$URLS" | jq length) URLs"; cat /tmp/indexnow.txt; echo
+          echo "IndexNow: HTTP $code" >> "$GITHUB_STEP_SUMMARY"
+          case "$code" in 200|202) ;; *) echo "::warning::IndexNow answered $code" ;; esac
