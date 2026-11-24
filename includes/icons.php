@@ -2,7 +2,7 @@
 // Inline SVG sprite. Use with icon('name').
 function icon(string $name, string $class = 'glyph'): string
 {
-    return '<svg class="' . $class . '" aria-hidden="true" focusable="false"><use href="#i-' . $name . '"/></svg>';
+    return '<svg class="' . $class . ' i-' . $name . '" aria-hidden="true" focusable="false"><use href="#i-' . $name . '"/></svg>';
 }
 ?>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">

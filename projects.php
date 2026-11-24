@@ -1,7 +1,8 @@
 <?php
+require_once __DIR__ . '/includes/config.php';
 $page_id    = 'projects';
-$page_title = 'פרויקטים: חנות אונליין, אפליקציית PWA וצ׳אטבוט | SDmarketing';
-$page_desc  = 'עבודות של SDmarketing: בניית חנות אונליין, אתרי תדמית ואפליקציית PWA ללא צורך בחנות האפליקציות, עם צילומי מסך אמיתיים.';
+$page_title = tr('פרויקטים: חנות אונליין, אפליקציית PWA וצ׳אטבוט | SDmarketing', 'Projects: Online Store, PWA App and Chatbot | SDmarketing');
+$page_desc  = tr('עבודות של SDmarketing: בניית חנות אונליין, אתרי תדמית ואפליקציית PWA ללא צורך בחנות האפליקציות, עם צילומי מסך אמיתיים.', 'Work by SDmarketing: an online store, a PWA app that needs no app store, and a WhatsApp chatbot, shown with real screenshots.');
 require __DIR__ . '/includes/header.php';
 require __DIR__ . '/includes/projects-data.php';
 ?>
@@ -9,13 +10,13 @@ require __DIR__ . '/includes/projects-data.php';
 <section class="hero dark">
   <div class="glow" style="top:-100px;left:-200px" aria-hidden="true"></div>
   <div class="wrap p-hero">
-    <nav class="crumb" aria-label="מיקום בעמוד"><a href="<?= url('') ?>">בית</a> / <b>פרויקטים</b></nav>
+    <nav class="crumb" aria-label="<?= tr('מיקום בעמוד', 'Breadcrumb') ?>"><a href="<?= lurl('') ?>"><?= tr('בית', 'Home') ?></a> / <b><?= tr('פרויקטים', 'Projects') ?></b></nav>
     <div class="row">
-      <h1 id="page-title">לא מצגות.<span>דברים שעובדים באוויר.</span></h1>
+      <h1 id="page-title"><?= tr('לא מצגות.<span>דברים שעובדים באוויר.</span>', 'Not slide decks.<span>Things that are live.</span>') ?></h1>
     </div>
     <div class="row" style="align-items:center;margin-top:36px">
-      <p class="lead" style="margin:0;max-width:560px">חנויות, אתרים ואפליקציות שבניתי ושלקוחות משתמשים בהם עכשיו. אפשר להיכנס ולנסות בעצמכם.</p>
-      <div class="filters" role="group" aria-label="סינון לפי סוג" data-filters>
+      <p class="lead" style="margin:0;max-width:560px"><?= tr('חנויות, אתרים ואפליקציות שבניתי ושלקוחות משתמשים בהם עכשיו. אפשר להיכנס ולנסות בעצמכם.', 'Stores, sites and apps I built that customers use right now. Go in and try them yourself.') ?></p>
+      <div class="filters" role="group" aria-label="<?= tr('סינון לפי סוג', 'Filter by type') ?>" data-filters>
         <?php foreach ($project_cats as $key => $label):
           $count = $key === 'all'
               ? count($projects) + array_sum($extra_cases)
@@ -46,24 +47,24 @@ require __DIR__ . '/includes/projects-data.php';
     <?php if ($p['slug'] === 'excerly'): ?>
       <div class="stage stage-ex-nice">
         <?php foreach ([
-          ['assets/img/projects/excerly/home-m.webp', 'מסך היום באפליקציית Excerly'],
-          ['assets/img/projects/excerly/workouts-m.webp', 'מסך האימונים באפליקציית Excerly'],
-          ['assets/img/projects/excerly/session-m.webp', 'מסך אימון באפליקציית Excerly'],
-          ['assets/img/projects/excerly/nutrition-m.webp', 'מסך התזונה באפליקציית Excerly'],
+          ['assets/img/projects/excerly/home-m.webp', tr('מסך היום באפליקציית Excerly', 'The Today screen in the Excerly app')],
+          ['assets/img/projects/excerly/workouts-m.webp', tr('מסך האימונים באפליקציית Excerly', 'The Workouts screen in the Excerly app')],
+          ['assets/img/projects/excerly/session-m.webp', tr('מסך אימון באפליקציית Excerly', 'A workout session in the Excerly app')],
+          ['assets/img/projects/excerly/nutrition-m.webp', tr('מסך התזונה באפליקציית Excerly', 'The Nutrition screen in the Excerly app')],
         ] as $shot): ?>
-          <div class="mphone"><img src="<?= e($shot[0]) ?>" alt="<?= e($shot[1]) ?>" width="780" height="1688" loading="lazy" decoding="async"></div>
+          <div class="mphone"><img src="<?= e(url($shot[0])) ?>" alt="<?= e($shot[1]) ?>" width="780" height="1688" loading="lazy" decoding="async"></div>
         <?php endforeach; ?>
       </div>
     <?php elseif ($p['slug'] === 'fisha'): ?>
       <div class="stage stage-fisha">
         <div class="browser main">
           <div class="bar"><i></i><i></i><i></i><u></u></div>
-          <img class="tall" src="<?= url('assets/img/projects/fisha/originals-main.webp') ?>" alt="עמוד Originals בחנות fisha.shop" width="1600" height="1133" loading="lazy" decoding="async">
+          <img class="tall" src="<?= url('assets/img/projects/fisha/originals-main.webp') ?>" alt="<?= tr('עמוד Originals בחנות fisha.shop', 'The Originals page on fisha.shop') ?>" width="1600" height="1133" loading="lazy" decoding="async">
         </div>
         <div class="side">
-          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="<?= url('assets/img/projects/fisha/shop-hq-c.webp') ?>" alt="עמוד החנות fisha.shop" width="1600" height="929" loading="lazy" decoding="async"></div>
-          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="<?= url('assets/img/projects/fisha/tattoos-2.webp') ?>" alt="Flash sheet בחנות fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
-          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="<?= url('assets/img/projects/fisha/tattoos-1.webp') ?>" alt="עמוד הקעקועים של fisha.shop" width="1600" height="1000" loading="lazy" decoding="async"></div>
+          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="<?= url('assets/img/projects/fisha/shop-hq-c.webp') ?>" alt="<?= tr('עמוד החנות fisha.shop', 'The fisha.shop shop page') ?>" width="1600" height="929" loading="lazy" decoding="async"></div>
+          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="<?= url('assets/img/projects/fisha/tattoos-2.webp') ?>" alt="<?= tr('Flash sheet בחנות fisha.shop', 'A flash sheet on fisha.shop') ?>" width="1600" height="1000" loading="lazy" decoding="async"></div>
+          <div class="browser"><div class="bar"><i></i><i></i><i></i><u></u></div><img src="<?= url('assets/img/projects/fisha/tattoos-1.webp') ?>" alt="<?= tr('עמוד הקעקועים של fisha.shop', 'The tattoos page on fisha.shop') ?>" width="1600" height="1000" loading="lazy" decoding="async"></div>
         </div>
       </div>
     <?php else: $shot = $p['shots'][0]; ?>
@@ -84,12 +85,12 @@ require __DIR__ . '/includes/projects-data.php';
   <div class="wrap">
     <div class="box">
       <div>
-        <h2>הפרויקט הבא<br><span>יכול להיות שלך.</span></h2>
-        <p>חנות, אתר, אפליקציה, בוט, קידום אורגני או קמפיין ממומן? כל פרויקט כאן התחיל בהודעה אחת. ספרו לי מה אתם צריכים ואחזור עם הצעה.</p>
+        <h2><?= tr('הפרויקט הבא<br><span>יכול להיות שלך.</span>', 'The next project<br><span>could be yours.</span>') ?></h2>
+        <p><?= tr('חנות, אתר, אפליקציה, בוט, קידום אורגני או קמפיין ממומן? כל פרויקט כאן התחיל בהודעה אחת. ספרו לי מה אתם צריכים ואחזור עם הצעה.', 'A store, a site, an app, a bot, SEO or a paid campaign? Every project here started with one message. Tell me what you need and I’ll come back with a proposal.') ?></p>
       </div>
       <div class="ctas">
-        <a class="btn btn-acc" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span>דברו איתי בוואטסאפ</span></a>
-        <a class="btn btn-ghost-d" href="<?= url('contact') ?>">לטופס יצירת קשר</a>
+        <a class="btn btn-acc" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener"><?= icon('whatsapp') ?><span><?= tr('דברו איתי בוואטסאפ', 'Chat on WhatsApp') ?></span></a>
+        <a class="btn btn-ghost-d" href="<?= lurl('contact') ?>"><?= tr('לטופס יצירת קשר', 'Use the contact form') ?></a>
       </div>
     </div>
   </div>

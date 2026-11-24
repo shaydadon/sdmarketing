@@ -13,7 +13,17 @@ const PAGES = [
   { path: '/terms', name: 'terms' },
   { path: '/privacy', name: 'privacy' },
   { path: '/accessibility', name: 'accessibility' },
+  // English (LTR) versions under /en/
+  { path: '/en/', name: 'en-home', en: true },
+  { path: '/en/services', name: 'en-services', en: true },
+  { path: '/en/projects', name: 'en-projects', en: true },
+  { path: '/en/about', name: 'en-about', en: true },
+  { path: '/en/contact', name: 'en-contact', en: true },
+  { path: '/en/terms', name: 'en-terms', en: true },
+  { path: '/en/privacy', name: 'en-privacy', en: true },
+  { path: '/en/accessibility', name: 'en-accessibility', en: true },
 ];
+const EN_PAGES = PAGES.filter((p) => p.en);
 const WA_NUMBER = '972526203423';
 
 /** Collect console errors and failed requests while a page is open. */
@@ -46,11 +56,11 @@ test.describe('every page', () => {
       const res = await page.goto(p.path);
       expect(res?.status()).toBe(200);
 
-      await expect(page.locator('html')).toHaveAttribute('lang', 'he');
-      await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+      await expect(page.locator('html')).toHaveAttribute('lang', p.en ? 'en' : 'he');
+      await expect(page.locator('html')).toHaveAttribute('dir', p.en ? 'ltr' : 'rtl');
       await expect(page).toHaveTitle(/SDmarketing/);
       await expect(page.locator('h1')).toHaveCount(1);
-      if (!['home', 'projects', 'article'].includes(p.name)) await expect(page.locator('body')).not.toContainText('Boardog');
+      if (!['home', 'projects', 'article', 'en-home', 'en-projects'].includes(p.name)) await expect(page.locator('body')).not.toContainText('Boardog');
       await expect(page.locator('body')).not.toContainText('10+');
       await expect(page.locator('body')).not.toContainText('יותר מעשר');
       await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /.{20,}/);
@@ -224,7 +234,7 @@ test.describe('articles', () => {
   test('the menu starts with Services, has no Home item, and Articles is a plain link', async ({ page, isMobile }) => {
     await page.goto('/');
     if (isMobile) await page.locator('[data-nav-toggle]').click();
-    const links = page.locator(isMobile ? '.mobile-nav > ul > li > a' : '[data-nav] a');
+    const links = page.locator(isMobile ? '.mobile-nav > ul > li:not(.mn-lang) > a' : '[data-nav] a');
     await expect(links).toHaveText([/שירותים/, /פרויקטים/, /מאמרים/, /אודות/, /צור קשר/]);
     await expect(page.locator('.mobile-nav .mn-sub')).toHaveCount(0);
     await links.nth(2).click();
@@ -428,5 +438,110 @@ test.describe('contact form', () => {
   test('thank-you screen', async ({ page }) => {
     await page.goto('/contact?sent=1');
     await expect(page.locator('#sent h2')).toHaveText('ההודעה התקבלה. תודה.');
+  });
+});
+
+test.describe('english version', () => {
+  test('every English page is fully in English: no Hebrew left in the visible text or labels', async ({ page }) => {
+    for (const p of EN_PAGES) {
+      await page.goto(p.path);
+      const hebrew = await page.evaluate(() => {
+        const he = /[֐-׿]/;
+        const skip = (el) => el.closest('.lang-switch, .mn-lang');
+        const out = [];
+        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+        while (walker.nextNode()) {
+          const n = walker.currentNode;
+          if (he.test(n.textContent) && !skip(n.parentElement) && !n.parentElement.closest('script, style')) out.push(n.textContent.trim());
+        }
+        document.querySelectorAll('[alt], [aria-label], [placeholder], [title]').forEach((el) => {
+          if (skip(el)) return;
+          for (const a of ['alt', 'aria-label', 'placeholder', 'title']) if (he.test(el.getAttribute(a) || '')) out.push(`${a}: ${el.getAttribute(a)}`);
+        });
+        if (he.test(document.title) || he.test(document.querySelector('meta[name="description"]')?.content || '')) out.push('title/description');
+        return out;
+      });
+      expect(hebrew, `${p.path}\n${hebrew.join('\n')}`).toEqual([]);
+    }
+  });
+
+  test('each page links to its twin with reciprocal hreflang, and the canonical is its own address', async ({ page }) => {
+    for (const p of EN_PAGES) {
+      const twin = p.path.replace(/^\/en\//, '/');
+      for (const [path, self] of [[p.path, p.path], [twin, twin]]) {
+        await page.goto(path);
+        await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://sdmarketing.co.il${self}`);
+        await expect(page.locator('link[hreflang="he"]')).toHaveAttribute('href', `https://sdmarketing.co.il${twin}`);
+        await expect(page.locator('link[hreflang="en"]')).toHaveAttribute('href', `https://sdmarketing.co.il${p.path}`);
+        await expect(page.locator('link[hreflang="x-default"]')).toHaveAttribute('href', `https://sdmarketing.co.il${twin}`);
+      }
+    }
+  });
+
+  test('the language switcher opens the same page in the other language, and back', async ({ page, isMobile }) => {
+    test.skip(isMobile, 'the header switcher is the same on mobile; checked on desktop');
+    await page.goto('/services');
+    await page.locator('header .lang-switch').click();
+    await expect(page).toHaveURL(/\/en\/services$/);
+    await expect(page.locator('h1')).toContainText('Everything your business needs');
+    await page.locator('header .lang-switch').click();
+    await expect(page).toHaveURL(/\/services$/);
+    await expect(page).not.toHaveURL(/\/en\//);
+    // Hebrew-only pages (articles) switch to the English home page, and claim no English twin
+    await page.goto('/articles/whatsapp-chatbot');
+    await expect(page.locator('link[hreflang]')).toHaveCount(0);
+    await expect(page.locator('header .lang-switch')).toHaveAttribute('href', '/en/');
+  });
+
+  test('the English menu has Services, Projects, About, Contact, and every link stays in English', async ({ page, isMobile }) => {
+    await page.goto('/en/');
+    if (isMobile) await page.locator('[data-nav-toggle]').click();
+    const links = page.locator(isMobile ? '.mobile-nav > ul > li:not(.mn-lang) > a' : '[data-nav] a');
+    await expect(links).toHaveText([/Services/, /Projects/, /About/, /Contact/]);
+    await expect(page.locator('header a.logo')).toHaveAttribute('href', '/en/');
+    for (const p of EN_PAGES) {
+      await page.goto(p.path);
+      const hrefs = await page.evaluate(() => [...document.querySelectorAll('main a[href^="/"], header a[href^="/"], footer a[href^="/"]')]
+        .filter((a) => !a.closest('.lang-switch, .mn-lang')).map((a) => a.getAttribute('href')));
+      const hebrewLinks = hrefs.filter((h) => !h.startsWith('/en/') && !h.startsWith('/assets/'));
+      expect(hebrewLinks, `${p.path} links to Hebrew pages`).toEqual([]);
+    }
+  });
+
+  test('English addresses are clean: /en and .php forms redirect permanently', async ({ request }) => {
+    for (const [from, to] of [['/en', '/en/'], ['/en/index.php', '/en/'], ['/en/services.php', '/en/services'], ['/en/contact.php?x=1', '/en/contact?x=1']]) {
+      const res = await request.get(from, { maxRedirects: 0 });
+      expect(res.status(), from).toBe(301);
+      expect(new URL(res.headers().location, 'http://localhost').pathname + (new URL(res.headers().location, 'http://localhost').search), from).toBe(to);
+    }
+    const missing = await request.get('/en/nothing-here');
+    expect(missing.status()).toBe(404);
+    expect(await missing.text()).toContain('This page doesn’t exist');
+  });
+
+  test('the sitemap lists every English page with its Hebrew alternate', async ({ request }) => {
+    const xml = await (await request.get('/sitemap.xml')).text();
+    for (const p of EN_PAGES) {
+      expect(xml, p.path).toContain(`<loc>https://sdmarketing.co.il${p.path}</loc>`);
+      expect(xml).toContain(`hreflang="en" href="https://sdmarketing.co.il${p.path}"`);
+    }
+  });
+
+  test('the English contact form shows English errors and posts back to /en/contact', async ({ page }) => {
+    await page.goto('/en/contact');
+    await expect(page.locator('form[data-contact-form]')).toHaveAttribute('action', '/en/contact');
+    await page.getByRole('button', { name: 'Send message' }).click();
+    await expect(page.locator('.field-error')).toHaveCount(3);
+    await expect(page.locator('#err-name')).toContainText('Please enter your name');
+    await page.goto('/en/contact?sent=1');
+    await expect(page.locator('#sent h2')).toHaveText('Message received. Thank you.');
+  });
+
+  test('the English chatbot demo plays the conversation in English', async ({ page }) => {
+    await page.goto('/en/projects');
+    const block = page.locator('#case-bot');
+    await expect(block.locator('video')).toHaveCount(0);
+    await expect(block.locator('[data-wa-demo]')).toBeVisible();
+    await expect(block.locator('[data-wa-log]')).toContainText('Welcome to Jerry’s Dog Boarding', { timeout: 15000 });
   });
 });

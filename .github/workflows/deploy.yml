@@ -154,7 +154,7 @@ jobs:
         if: steps.cfg.outputs.method != 'none'
         run: |
           URL="${{ steps.cfg.outputs.url }}"
-          for p in / /services /projects /articles /about /contact /articles/whatsapp-chatbot; do
+          for p in / /services /projects /articles /about /contact /articles/whatsapp-chatbot /en/ /en/services /en/projects /en/contact; do
             code=$(curl -s -o /dev/null -w '%{http_code}' "$URL$p")
             echo "$code $URL$p"
             [ "$code" = "200" ] || { echo "::error::$URL$p returned $code"; exit 1; }

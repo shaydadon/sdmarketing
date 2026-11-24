@@ -11,6 +11,7 @@ if (!$article) {
 }
 
 $page_id        = 'articles';
+$translated     = false;   // Hebrew only
 $page_title     = $article['meta_title'] . ' | SDmarketing';
 $page_desc      = $article['description'];
 $canonical_path = 'articles/' . rawurlencode($article['slug']);

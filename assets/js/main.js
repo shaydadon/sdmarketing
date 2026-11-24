@@ -57,11 +57,18 @@
 
   const form = document.querySelector('[data-contact-form]');
   if (form) {
+    const en = document.documentElement.lang === 'en';
+    const msg = {
+      name: en ? 'Please enter your name.' : 'כתבו את השם שלכם.',
+      phone: en ? 'That phone number doesn’t look right. For example: +972 50 123 4567' : 'מספר הטלפון לא נראה תקין. לדוגמה: 050-1234567',
+      email: en ? 'That email address doesn’t look right.' : 'כתובת המייל לא נראית תקינה.',
+      consent: en ? 'Please accept the privacy policy so I can get back to you.' : 'כדי שנוכל לחזור אליכם יש לאשר את מדיניות הפרטיות.',
+    };
     const rules = {
-      name: (v) => (v.trim().length >= 2 ? '' : 'כתבו את השם שלכם.'),
-      phone: (v) => { const d = v.replace(/\D/g, ''); return d.length >= 9 && d.length <= 13 ? '' : 'מספר הטלפון לא נראה תקין. לדוגמה: 050-1234567'; },
-      email: (v) => (!v.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? '' : 'כתובת המייל לא נראית תקינה.'),
-      consent: (_, el) => (el.checked ? '' : 'כדי שנוכל לחזור אליכם יש לאשר את מדיניות הפרטיות.'),
+      name: (v) => (v.trim().length >= 2 ? '' : msg.name),
+      phone: (v) => { const d = v.replace(/\D/g, ''); return d.length >= 9 && d.length <= 13 ? '' : msg.phone; },
+      email: (v) => (!v.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? '' : msg.email),
+      consent: (_, el) => (el.checked ? '' : msg.consent),
     };
     const showError = (el, msg) => {
       const id = `err-${el.name}`;

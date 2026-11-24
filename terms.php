@@ -1,7 +1,8 @@
 <?php
+require_once __DIR__ . '/includes/config.php';
 $page_id      = 'terms';
-$page_title   = 'תקנון ותנאי שימוש | SDmarketing';
-$page_desc    = 'תנאי השימוש באתר SDmarketing: המידע באתר, פרויקטים ודוגמאות, פניות ויצירת קשר, קניין רוחני ואחריות.';
+$page_title   = tr('תקנון ותנאי שימוש | SDmarketing', 'Terms of Use | SDmarketing');
+$page_desc    = tr('תנאי השימוש באתר SDmarketing: המידע באתר, פרויקטים ודוגמאות, פניות ויצירת קשר, קניין רוחני ואחריות.', 'The terms of use of the SDmarketing website: the information on the site, projects and examples, inquiries, intellectual property and liability.');
 $header_theme = 'dark';
 require __DIR__ . '/includes/header.php';
 
@@ -10,8 +11,8 @@ $bt  = e($site['business_type']);
 $bid = e($site['business_id']);
 $dom = e($site['domain']);
 $mail = e($site['email']);
-$u_privacy = e(url('privacy'));
-$u_contact = e(url('contact'));
+$u_privacy = e(lurl('privacy'));
+$u_contact = e(lurl('contact'));
 $city = e($site['city']);
 
 $legal = [
@@ -61,6 +62,60 @@ HTML],
 HTML],
     ],
 ];
+
+if ($is_en) {
+    $o   = 'Shay Dadon';
+    $bt  = '[business type]';     // TODO, like the Hebrew placeholders in includes/config.php
+    $bid = '[business number]';
+    $city = '[city]';
+    $legal = [
+        'title' => 'Terms of use',
+        'lead'  => 'The rules for using this website and the information on it, in language as plain as possible. Still worth reading.',
+        'sections' => [
+            ['general', 'General', <<<HTML
+<p>The website {$dom} (the "<b>Site</b>") is operated by {$o}, {$bt} number {$bid}, trading as SDmarketing ("<b>SDmarketing</b>", "<b>we</b>").</p>
+<p>Using the Site in any way means you accept these terms. If you do not accept them, please do not use the Site.</p>
+<p>This English text is a translation for convenience. If it differs from the Hebrew version, the Hebrew version prevails.</p>
+HTML],
+            ['site-content', 'Information on the Site', <<<HTML
+<p>The Site gives general information about SDmarketing’s services: business automations, WhatsApp chatbots, websites and online stores, PWA apps, SEO and paid campaigns.</p>
+<p>Nothing on the Site is a binding offer, a price quote or a promise of a specific result. The scope, price and timeline of each project are set in a separate quote or written agreement, which takes precedence over anything on the Site.</p>
+<p>We try to keep the information accurate and up to date, but it may contain errors, and we may update it at any time without notice.</p>
+HTML],
+            ['projects', 'Projects and examples', <<<HTML
+<p>The projects on the projects page are real work, and their screenshots are real. A live project may look slightly different today than in the screenshot.</p>
+<p>The demos on the Site (the WhatsApp conversation, the automation diagram and the ad report) are marked as illustrations and do not show a real customer, conversation or data.</p>
+<p>Clients’ trademarks and brand names belong to their owners and are shown with their permission or as a record of work done.</p>
+HTML],
+            ['contact-form', 'Inquiries and contact', <<<HTML
+<p>Sending an inquiry through the contact form, WhatsApp, phone or email does not create an engagement or obligation for anyone. It lets us get back to you and see whether we are a fit.</p>
+<p>Please give correct and complete details. Do not send offensive or illegal content through the Site, or sensitive information the inquiry does not need.</p>
+<p>The details you send are handled under the <a href="{$u_privacy}">privacy policy</a>.</p>
+HTML],
+            ['ip', 'Intellectual property', <<<HTML
+<p>All rights in the Site, including its design, text, logo, graphics, code and structure, belong to SDmarketing or to the rights holders who allowed their use.</p>
+<p>Do not copy, reproduce, distribute, publish or commercially use content from the Site without prior written permission. Sharing links to the Site’s pages is fine.</p>
+<p>Rights in work built for clients are set out in the agreement for that project.</p>
+HTML],
+            ['links', 'Links and third-party services', <<<HTML
+<p>The Site links to third-party sites and services such as WhatsApp, client websites and Google Fonts. We have no control over their content, availability or privacy policies, and your use of them is subject to their terms.</p>
+HTML],
+            ['liability', 'Liability', <<<HTML
+<p>The Site is provided "as is". We do not promise that it will run without interruptions or faults, or that it is immune to unauthorized access.</p>
+<p>To the fullest extent the law allows, SDmarketing is not liable for any direct or indirect damage caused by using the Site or relying on its information. Liability for paid project work is set out in the agreement with the client.</p>
+HTML],
+            ['changes', 'Changes to these terms', <<<HTML
+<p>We may update these terms from time to time. The binding version is the one published on the Site when you use it, and the date of the last update is shown at the top of the page.</p>
+HTML],
+            ['law', 'Governing law and jurisdiction', <<<HTML
+<p>These terms and the use of the Site are governed by the laws of the State of Israel only. The competent courts in the district where the business is located ({$city}) have exclusive jurisdiction over any matter related to the Site.</p>
+HTML],
+            ['contact', 'Contact', <<<HTML
+<p>Questions about these terms: {$o}, by email at <a href="mailto:{$mail}">{$mail}</a>, or through the <a href="{$u_contact}">contact page</a>.</p>
+HTML],
+        ],
+    ];
+}
 
 require __DIR__ . '/includes/legal.php';
 require __DIR__ . '/includes/footer.php';

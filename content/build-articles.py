@@ -5,7 +5,7 @@ Run from the repo root:  python3 content/build-articles.py
 Only the Markdown the articles use is supported: ## headings, paragraphs, **bold**,
 [links](url), "- " and "1. " lists, | tables |, a "## שאלות נפוצות" block of
 **question?** / answer pairs, and a closing call to action after the last "---".
-Links to another article's slug (e.g. "whatsapp-chatbot") become article.php?slug=...
+Links to another article's slug (e.g. "whatsapp-chatbot") become /articles/<slug>.
 """
 import glob, html, json, os, re
 
@@ -158,14 +158,22 @@ def main():
     # sitemap.xml: the site's pages plus every article, clean URLs, with last-modified dates
     import datetime
     today = datetime.date.today().isoformat()
+    site = 'https://sdmarketing.co.il/'
     pages = ['', 'services', 'projects', 'articles', 'about', 'contact', 'terms', 'privacy', 'accessibility']
+    # Pages that also exist in English under /en/ (en/<page>.php). Each pair lists both languages as alternates.
+    english = [p for p in pages if os.path.exists(os.path.join(ROOT, 'en', (p or 'index') + '.php'))]
     newest = max((a['updated'] or a['published'] or today) for a in arts)
-    entries = [(f'https://sdmarketing.co.il/{p}', newest if p == 'articles' else today) for p in pages]
-    entries += [(f'https://sdmarketing.co.il/articles/{a["slug"]}', a['updated'] or a['published'] or today) for a in arts]
+    entries = [(site + p, newest if p == 'articles' else today, p in english and p) for p in pages]
+    entries += [(site + 'en/' + p, today, p) for p in english]
+    entries += [(f'{site}articles/{a["slug"]}', a['updated'] or a['published'] or today, False) for a in arts]
     with open(os.path.join(ROOT, 'sitemap.xml'), 'w', encoding='utf-8') as fh:
-        fh.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
-        for u, mod in entries:
-            fh.write(f'  <url><loc>{html.escape(u)}</loc><lastmod>{mod}</lastmod></url>\n')
+        fh.write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n')
+        for u, mod, pair in entries:
+            alt = ''
+            if pair is not False:
+                alt = ''.join(f'<xhtml:link rel="alternate" hreflang="{l}" href="{html.escape(h)}"/>'
+                              for l, h in (('he', site + pair), ('en', site + 'en/' + pair), ('x-default', site + pair)))
+            fh.write(f'  <url><loc>{html.escape(u)}</loc><lastmod>{mod}</lastmod>{alt}</url>\n')
         fh.write('</urlset>\n')
     print(f'wrote sitemap.xml: {len(entries)} urls')
 
