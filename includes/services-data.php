@@ -1,4 +1,5 @@
 <?php
+if (($GLOBALS['lang'] ?? 'he') === 'en') { require __DIR__ . '/en/services-data.php'; return; }
 // Shared service content. The homepage uses id/icon/title/lead/items; services.php uses the rest.
 $services = [
     [

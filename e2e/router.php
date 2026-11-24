@@ -32,6 +32,15 @@ if ($get && $uri === '/article.php' && preg_match('/^slug=([a-z0-9-]+)$/', $qs, 
 if ($get && preg_match('#^/(' . $pages . ')\.php$#', $uri, $m)) {
     redirect('/' . $m[1] . ($qs !== '' ? '?' . $qs : ''));
 }
+if ($get && $uri === '/en/index.php') {
+    redirect('/en/' . ($qs !== '' ? '?' . $qs : ''));
+}
+if ($get && preg_match('#^/en/(services|projects|about|contact|terms|privacy|accessibility)\.php$#', $uri, $m)) {
+    redirect('/en/' . $m[1] . ($qs !== '' ? '?' . $qs : ''));
+}
+if ($get && $uri === '/en') {
+    redirect('/en/');   // Apache adds the slash to a directory (DirectorySlash)
+}
 if ($get && $uri !== '/' && str_ends_with($uri, '/') && !is_dir($root . $uri)) {
     redirect(rtrim($uri, '/'));
 }
@@ -43,6 +52,12 @@ if (preg_match('#^/articles/([a-z0-9-]+)$#', $uri, $m)) {
 }
 if (preg_match('#^/([a-z]+)$#', $uri, $m) && is_file("$root/{$m[1]}.php")) {
     serve($m[1] . '.php', $root);
+}
+if (preg_match('#^/en/([a-z]+)$#', $uri, $m) && is_file("$root/en/{$m[1]}.php")) {
+    serve('en/' . $m[1] . '.php', $root);
+}
+if ($uri === '/en/') {
+    serve('en/index.php', $root);
 }
 if ($uri === '/') {
     serve('index.php', $root);

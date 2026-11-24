@@ -16,7 +16,36 @@ $site = [
     'legal_updated' => '11.10.2026',
 ];
 
-$nav = [
+// Language: Hebrew (RTL) is the main site at the root; English (LTR) lives under /en/.
+// An /en/ page sets $lang = 'en' and loads the same template as its Hebrew twin; tr() picks the wording.
+$lang = $GLOBALS['lang'] = (($lang ?? 'he') === 'en') ? 'en' : 'he';
+$is_en = $lang === 'en';
+
+/** Hebrew or English copy for the current page. Both arguments are trusted literals (may hold HTML). */
+function tr(string $he, string $en): string
+{
+    return ($GLOBALS['lang'] ?? 'he') === 'en' ? $en : $he;
+}
+
+// Legal pages show the update date as written in Hebrew (day.month.year), and in English as "October 11, 2026".
+$d = DateTime::createFromFormat('!d.m.Y', $site['legal_updated']);
+$site['legal_updated_display'] = ($is_en && $d) ? $d->format('F j, Y') : $site['legal_updated'];
+unset($d);
+
+if ($is_en) {
+    $site['wa_text'] = 'Hi, I found you through your website and would like to know more';
+    $site['phone_display'] = '+972-52-620-3423';
+} else {
+    $site['phone_display'] = $site['phone'];
+}
+
+$nav = $is_en ? [
+    // English has no articles yet, so no Articles item.
+    'services' => ['href' => 'services', 'label' => 'Services'],
+    'projects' => ['href' => 'projects', 'label' => 'Projects'],
+    'about'    => ['href' => 'about',    'label' => 'About'],
+    'contact'  => ['href' => 'contact',  'label' => 'Contact'],
+] : [
     // Order by importance; the logo links home, so there is no 'Home' item.
     'services' => ['href' => 'services', 'label' => 'שירותים'],
     'projects' => ['href' => 'projects', 'label' => 'פרויקטים'],
@@ -29,12 +58,19 @@ $nav = [
 // Clean URLs (see .htaccess): pages are /services, /projects, ..., articles are /articles/<slug>.
 // Every internal link and asset is written from the site root, so it works from /articles/<slug> too,
 // and from a copy of the site in a sub-folder (the root is the folder the PHP script runs from).
-$base = $GLOBALS['base'] = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/')), '/') . '/';
+// The /en/ pages run from the en/ folder, so the site root is one level up from them.
+$base = $GLOBALS['base'] = preg_replace('#/en$#', '', rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/')), '/')) . '/';
 
 /** Root-relative URL for a clean path: url('') is home, url('services#seo'), url('articles/landing-page'), url('assets/...'). */
 function url(string $path = ''): string
 {
     return ($GLOBALS['base'] ?? '/') . ltrim($path, '/');
+}
+
+/** Like url(), for a page in the current language: lurl('services') is /services or /en/services. */
+function lurl(string $path = ''): string
+{
+    return url((($GLOBALS['lang'] ?? 'he') === 'en' ? 'en/' : '') . ltrim($path, '/'));
 }
 
 $is_dev = str_starts_with(strtolower($_SERVER['HTTP_HOST'] ?? ''), 'dev.');

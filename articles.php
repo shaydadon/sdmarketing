@@ -1,5 +1,6 @@
 <?php
 $page_id    = 'articles';
+$translated = false;   // Hebrew only: the language switcher goes to the English home page
 $page_title = 'מאמרים ומדריכים לבעלי עסקים | SDmarketing';
 $page_desc  = 'מדריכים ומאמרים קצרים לבעלי עסקים: צ׳אטבוט לוואטסאפ, איך לא לאבד לידים, אוטומציות לעסקים, אפליקציית PWA, דף נחיתה ומעקב המרות.';
 require __DIR__ . '/includes/header.php';

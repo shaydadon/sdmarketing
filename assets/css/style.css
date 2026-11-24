@@ -1306,3 +1306,44 @@ h1,h2,h3{text-wrap:balance}
   .author-box{flex-direction:column;gap:14px;padding:22px 20px}
   .author-box img{width:72px;height:72px}
 }
+
+/* ===== v15: language switcher + English (LTR) ===== */
+.nav{gap:14px}
+.nav .menu{margin-inline:auto}
+.lang-switch{display:grid;place-items:center;flex:none;min-width:42px;height:42px;padding:0 10px;border:1px solid #3a3a3a;border-radius:999px;color:#fff;font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.04em;transition:border-color .2s ease,color .2s ease}
+.lang-switch:hover,.lang-switch:focus-visible{border-color:var(--accent);color:var(--accent-2)}
+.mobile-nav li.mn-lang a{font-size:18px;color:var(--mute-d)}
+@media (max-width:800px){
+  .nav{gap:10px}
+  .lang-switch{margin-inline-start:auto;min-width:40px;height:40px}
+}
+/* Arrows point "forward": left in Hebrew, right in English. The scale composes with each hover nudge, so those flip too. */
+[dir="ltr"] .i-arrow{scale:-1 1}
+[dir="ltr"] .btn .arr{transform:none}
+[dir="ltr"] .cline b.ltr,[dir="ltr"] input.inp.ltr{text-align:left}
+[dir="ltr"] .msg .t{text-align:right}
+[dir="ltr"] .events .ev:nth-child(2){transform:translateX(22px)}
+@media (max-width:800px){[dir="ltr"] .events .ev:nth-child(2){transform:none}}
+[dir="ltr"] #case-bot .wad-b.wad-enter{animation-name:wad-in-c}
+[dir="ltr"] #case-bot .wad-c.wad-enter{animation-name:wad-in-b}
+/* Latin type sits a little tighter than Hebrew at the same size */
+[lang="en"] h1,[lang="en"] h2.sec{letter-spacing:-.025em}
+/* The English hero line is longer than the Hebrew one: let it wrap instead of widening the text column */
+[lang="en"] .h3ro h1 .l1{white-space:normal;text-wrap:balance}
+[lang="en"] .h3-grid>*{min-width:0}
+/* Phones: logo, language, WhatsApp and menu must fit in one row. The WhatsApp button becomes an icon
+   (its label stays for screen readers); the floating WhatsApp button is on every page anyway. */
+@media (max-width:480px){
+  .nav .nav-wa{width:40px;padding:0;justify-content:center;gap:0}
+  .nav .nav-wa .nav-wa-short{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+}
+/* English: the WhatsApp button sits bottom right, where LTR sites usually put it */
+[dir="ltr"] .wa-float{inset-inline-start:auto;inset-inline-end:28px}
+@media (max-width:800px){[dir="ltr"] .wa-float{inset-inline-end:20px}}
+/* English projects page: no Hebrew video, the chat itself plays in English */
+[lang="en"] #case-bot .wad-phone{display:flex}
+/* English labels are longer: chips keep one line and the row wraps; the About heading is sized to stay on two lines */
+.chip{white-space:nowrap}
+[lang="en"] .p-hero .filters{flex-wrap:wrap;justify-content:flex-end}
+[lang="en"] .about-hero h1{font-size:80px;line-height:1}
+@media (max-width:800px){[lang="en"] .about-hero h1{font-size:42px}[lang="en"] .p-hero .filters{justify-content:flex-start}}

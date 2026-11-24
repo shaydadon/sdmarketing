@@ -1,4 +1,5 @@
 <?php
+if (($GLOBALS['lang'] ?? 'he') === 'en') { require __DIR__ . '/en/projects-data.php'; return; }
 // Portfolio examples. To add one, append an item:
 //   layout "browser" for a site or store, "phones" for an app.
 //   cat: web, pwa, landing, brochure.
