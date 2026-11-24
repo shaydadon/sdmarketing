@@ -230,4 +230,44 @@
     }, { threshold: 0.6 });
     counts.forEach((el) => cio.observe(el));
   }
+
+  // Work process: the step in view lights up as the visitor scrolls.
+  // Stacked (mobile): the step nearest the middle of the screen. Side by side (desktop): by scroll progress through the section.
+  const stepList = document.querySelector('.steps');
+  if (stepList) {
+    const steps = [...stepList.querySelectorAll('.step')];
+    if (steps.length > 1) {
+      stepList.classList.add('steps-live');
+      let current = -1;
+      const setOn = (i) => {
+        if (i === current) return;
+        current = i;
+        steps.forEach((s, j) => s.classList.toggle('is-on', j === i));
+      };
+      const update = () => {
+        const mid = innerHeight / 2;
+        const stacked = steps[1].getBoundingClientRect().top > steps[0].getBoundingClientRect().top + 10;
+        if (stacked) {
+          let best = 0;
+          let bestD = Infinity;
+          steps.forEach((s, j) => {
+            const r = s.getBoundingClientRect();
+            const d = Math.abs(r.top + Math.min(r.height, 140) / 2 - mid);
+            if (d < bestD) { bestD = d; best = j; }
+          });
+          setOn(best);
+        } else {
+          const r = stepList.closest('section').getBoundingClientRect();
+          const start = innerHeight * 0.75;
+          const end = innerHeight * 0.15;
+          const p = Math.min(1, Math.max(0, (start - r.top) / (start - end + r.height * 0.5)));
+          setOn(Math.min(steps.length - 1, Math.floor(p * steps.length)));
+        }
+      };
+      let raf = 0;
+      addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; update(); }); }, { passive: true });
+      addEventListener('resize', update);
+      update();
+    }
+  }
 })();

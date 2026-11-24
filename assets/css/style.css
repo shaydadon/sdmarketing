@@ -1186,3 +1186,11 @@ h1,h2,h3{text-wrap:balance}
 
 /* v10: the solution line of the problem statement in terracotta (large text, 3.7:1 on paper) */
 .statement h2 em{color:var(--accent-big)}
+
+/* v11: the work-process step in view lights up in terracotta; the others stay gray.
+   JS adds .steps-live to the list and .is-on to the active step. Without JS the first step stays lit. */
+.steps-live .step .n{color:#8A8A8A;-webkit-text-stroke-color:#8A8A8A;transition:color .45s ease,-webkit-text-stroke-color .45s ease}
+.steps-live .step::before{background:var(--ink);transition:background .45s ease,transform .45s ease}
+.steps-live .step.is-on .n{color:var(--accent);-webkit-text-stroke-color:var(--accent)}
+.steps-live .step.is-on::before{background:var(--accent);transform:scale(1.25)}
+@media (prefers-reduced-motion:reduce){.steps-live .step .n,.steps-live .step::before{transition:none}}
