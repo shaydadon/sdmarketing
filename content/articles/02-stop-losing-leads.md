@@ -7,6 +7,8 @@ secondary_keywords: מעקב לידים, מענה מהיר ללידים, ניה�
 type: מדריך
 service_link: services.php#automations
 image_alt: איך לא לאבד לידים: פנייה מוואטסאפ ומהאתר מקבלת מענה תוך דקה ונשמרת בטבלה
+topic: automations
+published: 2026-11-24
 ---
 
 # איך לא לאבד לידים: מדריך קצר לעסקים קטנים

@@ -7,6 +7,8 @@ secondary_keywords: אוטומציה לעסק קטן, אוטומציות מיי�
 type: מדריך
 service_link: services.php#automations
 image_alt: אוטומציות לעסקים: טופס באתר נשמר ב-CRM, נשלחת תזכורת לפגישה ומייל המשך
+topic: automations
+published: 2026-11-24
 ---
 
 # אוטומציות לעסקים קטנים: 5 תהליכים שכדאי שירוצו לבד

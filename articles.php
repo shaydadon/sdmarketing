@@ -4,6 +4,7 @@ $page_title = 'מאמרים ומדריכים | SDmarketing | צ׳אטבוט לו
 $page_desc  = 'מדריכים ומאמרים קצרים לבעלי עסקים: צ׳אטבוט לוואטסאפ, איך לא לאבד לידים, אוטומציות לעסקים, אפליקציית PWA, דף נחיתה ומעקב המרות.';
 require __DIR__ . '/includes/header.php';
 require __DIR__ . '/includes/articles-data.php';
+require __DIR__ . '/includes/articles-meta.php';
 ?>
 
 <section class="hero dark">
@@ -12,14 +13,21 @@ require __DIR__ . '/includes/articles-data.php';
     <nav class="crumb" aria-label="מיקום בעמוד"><a href="index.php">בית</a> / <b>מאמרים</b></nav>
     <h1 id="page-title">מאמרים ומדריכים.<span>קצר, מעשי, בלי מילים מיותרות.</span></h1>
     <p class="lead">איך לא לאבד פניות, מה לעשות עם הוואטסאפ, מתי אפליקציה שווה את זה, ואיך יודעים מה באמת עובד בפרסום. כל מאמר נקרא בכמה דקות.</p>
+    <div class="filters" role="group" aria-label="סינון לפי נושא" data-filters>
+      <?php foreach ($article_topics as $key => $label):
+        $count = $key === 'all' ? count($articles) : count(array_filter($articles, fn($a) => $a['topic'] === $key));
+        if (!$count) continue; ?>
+        <button type="button" class="chip<?= $key === 'all' ? ' on' : '' ?>" data-filter="<?= e($key) ?>" aria-pressed="<?= $key === 'all' ? 'true' : 'false' ?>"><?= e($label) ?> <i><?= $count ?></i></button>
+      <?php endforeach; ?>
+    </div>
   </div>
 </section>
 
 <section class="posts" aria-labelledby="page-title">
   <div class="wrap">
-    <ul class="post-grid">
+    <ul class="post-grid" data-showcase>
       <?php foreach ($articles as $i => $a): ?>
-        <li class="post-card rv">
+        <li class="post-card rv" data-cat="<?= e($a['topic']) ?>">
           <a href="article.php?slug=<?= e($a['slug']) ?>">
             <img class="pc-img" src="<?= e($a['image']) ?>" alt="<?= e($a['image_alt']) ?>" width="1200" height="630" <?= $i < 3 ? 'fetchpriority="high"' : 'loading="lazy"' ?> decoding="async">
             <span class="pc-top"><span class="pc-type"><?= e($a['type']) ?></span><span class="pc-min"><?= (int) $a['minutes'] ?> דקות קריאה</span></span>

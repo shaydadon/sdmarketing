@@ -7,6 +7,8 @@ secondary_keywords: בניית דף נחיתה, דף נחיתה לקמפיין, 
 type: מדריך
 service_link: services.php#websites
 image_alt: דף נחיתה עם טופס קצר להשארת פרטים
+topic: websites
+published: 2026-11-24
 ---
 
 # דף נחיתה שמביא פניות: 7 דברים שחייבים להיות בו

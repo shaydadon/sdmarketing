@@ -7,6 +7,8 @@ secondary_keywords: בוט לוואטסאפ לעסק, מענה אוטומטי ב
 type: בעיה ופתרון
 service_link: services.php#automations
 image_alt: צ׳אטבוט לוואטסאפ בטלפון: הבוט קבע פגישה ושמר ליד חדש
+topic: automations
+published: 2026-11-24
 ---
 
 # צ׳אטבוט לוואטסאפ לעסק: מתי הוא שווה את זה ומה הוא יודע לעשות

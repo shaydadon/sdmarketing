@@ -172,6 +172,26 @@ test.describe('articles', () => {
     await expect(page.locator('.post-cover img')).toBeVisible();
   });
 
+  test('topic filters show only that topic, and each article names its author and date', async ({ page }) => {
+    await page.goto('/articles.php');
+    const visible = page.locator('.post-card:visible');
+    await expect(visible).toHaveCount(6);
+    await page.getByRole('button', { name: /אפליקציות/ }).click();
+    await expect(visible).toHaveCount(1);
+    await page.getByRole('button', { name: /אוטומציות/ }).click();
+    await expect(visible).toHaveCount(3);
+    await page.getByRole('button', { name: /הכל/ }).click();
+    await expect(visible).toHaveCount(6);
+
+    await page.goto('/article.php?slug=landing-page');
+    await expect(page.locator('.byline')).toContainText('שי דדון');
+    await expect(page.locator('.byline time')).toHaveAttribute('datetime', /^\d{4}-\d{2}-\d{2}$/);
+    await expect(page.locator('.author-box')).toContainText('SEO');
+    const art = await page.locator('script[type="application/ld+json"]').evaluateAll((ss) => ss.map((x) => JSON.parse(x.textContent)).find((d) => d['@type'] === 'Article'));
+    expect(art.author.name).toBe('שי דדון');
+    expect(art.datePublished).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+  });
+
   test('an unknown article returns 404', async ({ page }) => {
     const res = await page.goto('/article.php?slug=does-not-exist');
     expect(res.status()).toBe(404);

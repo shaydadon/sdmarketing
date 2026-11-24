@@ -1291,3 +1291,27 @@ h1,h2,h3{text-wrap:balance}
 .mobile-nav li:has(.mn-sub) > a{border-bottom:0}
 .mobile-nav li:has(.mn-sub){border-bottom:1px solid var(--line-d)}
 @media (max-width:800px){.post-cover{margin-bottom:28px;border-radius:16px}}
+
+/* ================= v14: author byline, author box, topic filters ================= */
+.page-articles .filters{flex-wrap:wrap;margin-top:34px}
+.byline{display:flex;align-items:center;gap:14px;margin-top:26px}
+.by-photo{flex:none}
+.by-photo img{width:52px;height:52px;border-radius:50%;object-fit:cover;filter:grayscale(1) contrast(1.06);box-shadow:0 0 0 2px var(--ink),0 0 0 3.5px var(--accent)}
+.byline > div{display:flex;flex-direction:column;line-height:1.35}
+.by-name{color:#fff;font-family:var(--display);font-weight:700;font-size:17px}
+.by-name:hover{color:var(--accent-2)}
+.by-role{font-size:14px;color:#c9c6bf}
+.by-meta{font-size:13.5px;color:var(--mute-d);margin-top:2px}
+.author-box{display:flex;gap:20px;align-items:flex-start;margin-top:56px;padding:26px 28px;background:#fff;border:1px solid var(--line);border-radius:20px}
+.author-box img{width:84px;height:84px;border-radius:50%;object-fit:cover;flex:none;filter:grayscale(1) contrast(1.06);box-shadow:0 0 0 3px #fff,0 0 0 4.5px var(--accent)}
+.ab-k{font-family:var(--display);font-weight:700;font-size:13px;color:var(--accent-ink)}
+.ab-n{font-family:var(--display);font-weight:800;font-size:20px;margin-top:2px;color:var(--ink)}
+.ab-b{font-size:16px;line-height:1.65;color:#4a4845;margin-top:8px}
+.author-box .link{margin-top:12px}
+.post-meta{display:none}
+@media (max-width:800px){
+  .page-articles .filters{gap:8px}
+  .page-articles .chip{height:40px;padding:0 14px;font-size:14px}
+  .author-box{flex-direction:column;gap:14px;padding:22px 20px}
+  .author-box img{width:72px;height:72px}
+}

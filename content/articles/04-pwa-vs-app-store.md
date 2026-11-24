@@ -7,6 +7,8 @@ secondary_keywords: אפליקציה לעסק, פיתוח אפליקציה לע�
 type: מדריך השוואה
 service_link: services.php#pwa
 image_alt: אפליקציית PWA בשני טלפונים: מותקנת למסך הבית בלי חנות האפליקציות
+topic: pwa
+published: 2026-11-24
 ---
 
 # אפליקציית PWA או אפליקציה בחנות: מה מתאים לעסק שלך?

@@ -7,6 +7,8 @@ secondary_keywords: ניהול קמפיינים, קמפיין בגוגל לעס�
 type: בעיה ופתרון
 service_link: services.php#campaigns
 image_alt: דוח מעקב המרות: פניות לפי מקור, גוגל, אינסטגרם, פייסבוק ואורגני
+topic: campaigns
+published: 2026-11-24
 ---
 
 # מעקב המרות: איך לדעת מה באמת מביא פניות מהפרסום

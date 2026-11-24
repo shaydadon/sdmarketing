@@ -1,6 +1,7 @@
 <?php
 require __DIR__ . '/includes/config.php';
 require __DIR__ . '/includes/articles-data.php';
+require __DIR__ . '/includes/articles-meta.php';
 
 $slug    = (string) ($_GET['slug'] ?? '');
 $article = $articles_by_slug[$slug] ?? null;
@@ -26,7 +27,9 @@ $ld  = [
         'description' => $article['description'],
         'inLanguage' => 'he',
         'mainEntityOfPage' => $url,
-        'author' => ['@type' => 'Person', 'name' => 'שי דדון', 'url' => 'https://' . $site['domain'] . '/about.php'],
+        'author' => ['@type' => 'Person', 'name' => $author['name'], 'jobTitle' => $author['job_title'], 'url' => 'https://' . $site['domain'] . '/' . $author['url'], 'image' => 'https://' . $site['domain'] . '/' . $author['photo']],
+        'datePublished' => $article['published'],
+        'dateModified' => $article['updated'],
         'publisher' => ['@type' => 'Organization', 'name' => 'SDmarketing', 'url' => 'https://' . $site['domain'] . '/'],
         'keywords' => $article['keyword'],
         'image' => 'https://' . $site['domain'] . '/' . $article['image'],
@@ -62,7 +65,14 @@ $related = [$others[$i % count($others)], $others[($i + 1) % count($others)]];
   <div class="wrap p-hero sm post-hero">
     <nav class="crumb" aria-label="מיקום בעמוד"><a href="index.php">בית</a> / <a href="articles.php">מאמרים</a> / <b><?= e($article['type']) ?></b></nav>
     <h1 id="page-title"><?= e($article['title']) ?></h1>
-    <p class="post-meta"><span>שי דדון</span><span><?= (int) $article['minutes'] ?> דקות קריאה</span></p>
+    <div class="byline">
+      <span class="by-photo"><img src="<?= e($author['photo']) ?>" alt="" width="1024" height="1024" decoding="async"></span>
+      <div>
+        <a class="by-name" href="<?= e($author['url']) ?>"><?= e($author['name']) ?></a>
+        <span class="by-role"><?= e($author['role']) ?></span>
+        <span class="by-meta"><time datetime="<?= e($article['published']) ?>">פורסם ב-<?= e(he_date($article['published'])) ?></time><?php if ($article['updated'] !== $article['published']): ?> · <time datetime="<?= e($article['updated']) ?>">עודכן ב-<?= e(he_date($article['updated'])) ?></time><?php endif; ?> · <?= (int) $article['minutes'] ?> דקות קריאה</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -86,6 +96,16 @@ $related = [$others[$i % count($others)], $others[($i + 1) % count($others)]];
         </div>
       </section>
     <?php endif; ?>
+
+    <aside class="author-box" aria-label="על הכותב">
+      <img src="<?= e($author['photo']) ?>" alt="<?= e($author['name']) ?>" width="1024" height="1024" loading="lazy" decoding="async">
+      <div>
+        <p class="ab-k">על הכותב</p>
+        <p class="ab-n"><?= e($author['name']) ?>, מייסד SDmarketing</p>
+        <p class="ab-b"><?= e($author['bio']) ?></p>
+        <a class="link" href="<?= e($author['url']) ?>">עוד על שי <?= icon('arrow') ?></a>
+      </div>
+    </aside>
 
     <aside class="post-cta" aria-label="יצירת קשר">
       <p><?= $article['cta_html'] ?></p>
