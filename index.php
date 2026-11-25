@@ -98,11 +98,11 @@ require __DIR__ . '/includes/projects-data.php';
       <a class="btn btn-ink" href="<?= lurl('projects') ?>"><?= tr('לכל הפרויקטים', 'View all projects') ?><?= icon('arrow') ?></a>
     </div>
     <?php
-    // The home page also shows the Boardog chatbot demo (on the projects page it is its own section, includes/wa-demo.php).
+    // The home page also shows the Boardog WhatsApp chatbot (on the projects page it is its own section, includes/wa-demo.php).
     $home_projects = $projects;
     $home_projects[] = [
         'name'    => 'Boardog',
-        'tag'     => tr('צ׳אטבוט לוואטסאפ · הדגמה', 'WhatsApp chatbot · Demo'),
+        'tag'     => tr('צ׳אטבוט לוואטסאפ', 'WhatsApp chatbot'),
         'summary' => tr('צ׳אטבוט לוואטסאפ שמקבל פנייה, אוסף את הפרטים וקובע פגישה לבד.', 'A WhatsApp chatbot that handles a new inquiry, collects the details and books the meeting on its own.'),
         'layout'  => 'phones',
         'shots'   => [
