@@ -1546,3 +1546,12 @@ footer ul a,.f-bot nav a{display:inline-flex;align-items:center;min-height:44px}
   .jstep .s{white-space:normal;border-radius:12px;font-size:16px}
 }
 @media (min-width:801px) and (max-width:999px){.jsteps{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* v22: the CTA circle on desktop matches phones: a thick yellow ring inside a thick light-gray ring with a hairline edge.
+   Same proportions as the 300px phone circle (border 50, halo 60), scaled 1.4x, tucked into the corner clear of the contact details. */
+@media (min-width:801px){
+  .cta .ring{width:420px;height:420px;border:70px solid #F5B301;box-shadow:0 0 0 84px #F5F4F0,0 0 0 85px var(--line);top:-190px;inset-inline-end:-190px}
+}
+@media (min-width:801px) and (max-width:1439px){
+  .cta .ring{width:360px;height:360px;border-width:60px;box-shadow:0 0 0 72px #F5F4F0,0 0 0 73px var(--line);top:-180px;inset-inline-end:-180px}
+}
