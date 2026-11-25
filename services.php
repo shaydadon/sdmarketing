@@ -49,6 +49,7 @@ require __DIR__ . '/includes/service-visual.php';
         <?php endforeach; ?>
       </div>
       <div class="examples"><b><?= tr('דוגמאות:', 'Typical projects:') ?></b><?php foreach ($s['cases'] as $c): ?><span class="ex-chip"><?= e($c) ?></span><?php endforeach; ?></div>
+      <?php if (!empty($s['guide'])): ?><a class="link svc-guide" href="<?= e(lurl($s['guide']['href'])) ?>"><?= e($s['guide']['label']) ?> <?= icon('arrow') ?></a><?php endif; ?>
     </div>
     <?php if (!$alt) service_visual($s['id']); ?>
   </div>

@@ -35,7 +35,10 @@ if ($get && preg_match('#^/(' . $pages . ')\.php$#', $uri, $m)) {
 if ($get && $uri === '/en/index.php') {
     redirect('/en/' . ($qs !== '' ? '?' . $qs : ''));
 }
-if ($get && preg_match('#^/en/(services|projects|about|contact|terms|privacy|accessibility)\.php$#', $uri, $m)) {
+if ($get && $uri === '/en/article.php' && preg_match('/^slug=([a-z0-9-]+)$/', $qs, $m)) {
+    redirect('/en/articles/' . $m[1]);
+}
+if ($get && preg_match('#^/en/(services|projects|articles|about|contact|terms|privacy|accessibility)\.php$#', $uri, $m)) {
     redirect('/en/' . $m[1] . ($qs !== '' ? '?' . $qs : ''));
 }
 if ($get && $uri === '/en') {
@@ -49,6 +52,10 @@ if ($get && $uri !== '/' && str_ends_with($uri, '/') && !is_dir($root . $uri)) {
 if (preg_match('#^/articles/([a-z0-9-]+)$#', $uri, $m)) {
     $_GET['slug'] = $m[1];
     serve('article.php', $root);
+}
+if (preg_match('#^/en/articles/([a-z0-9-]+)$#', $uri, $m)) {
+    $_GET['slug'] = $m[1];
+    serve('en/article.php', $root);
 }
 if (preg_match('#^/([a-z]+)$#', $uri, $m) && is_file("$root/{$m[1]}.php")) {
     serve($m[1] . '.php', $root);

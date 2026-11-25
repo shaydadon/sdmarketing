@@ -10,6 +10,7 @@ const PAGES = [
   { path: '/contact', name: 'contact' },
   { path: '/articles', name: 'articles' },
   { path: '/articles/whatsapp-chatbot', name: 'article' },
+  { path: '/articles/seo-for-small-business', name: 'article-seo' },
   { path: '/terms', name: 'terms' },
   { path: '/privacy', name: 'privacy' },
   { path: '/accessibility', name: 'accessibility' },
@@ -17,6 +18,8 @@ const PAGES = [
   { path: '/en/', name: 'en-home', en: true },
   { path: '/en/services', name: 'en-services', en: true },
   { path: '/en/projects', name: 'en-projects', en: true },
+  { path: '/en/articles', name: 'en-articles', en: true },
+  { path: '/en/articles/seo-for-small-business', name: 'en-article', en: true },
   { path: '/en/about', name: 'en-about', en: true },
   { path: '/en/contact', name: 'en-contact', en: true },
   { path: '/en/terms', name: 'en-terms', en: true },
@@ -218,7 +221,7 @@ test.describe('articles', () => {
   test('the list links to every article, and each article has its FAQ and structured data', async ({ page }) => {
     await page.goto('/articles');
     const cards = page.locator('.post-card a');
-    await expect(cards).toHaveCount(6);
+    await expect(cards).toHaveCount(7);
     const hrefs = await cards.evaluateAll((as) => as.map((a) => a.getAttribute('href')));
     for (const href of hrefs) {
       const res = await page.goto(href);
@@ -245,13 +248,15 @@ test.describe('articles', () => {
   test('topic filters show only that topic, and each article names its author and date', async ({ page }) => {
     await page.goto('/articles');
     const visible = page.locator('.post-card:visible');
-    await expect(visible).toHaveCount(6);
+    await expect(visible).toHaveCount(7);
+    await page.getByRole('button', { name: /קידום אורגני/ }).click();
+    await expect(visible).toHaveCount(1);
     await page.getByRole('button', { name: /אפליקציות/ }).click();
     await expect(visible).toHaveCount(1);
     await page.getByRole('button', { name: /אוטומציות/ }).click();
     await expect(visible).toHaveCount(3);
     await page.getByRole('button', { name: /הכל/ }).click();
-    await expect(visible).toHaveCount(6);
+    await expect(visible).toHaveCount(7);
 
     await page.goto('/articles/landing-page');
     await expect(page.locator('.byline')).toContainText('שי דדון');
@@ -492,11 +497,11 @@ test.describe('english version', () => {
     await expect(page.locator('header .lang-switch')).toHaveAttribute('href', '/en/');
   });
 
-  test('the English menu has Services, Projects, About, Contact, and every link stays in English', async ({ page, isMobile }) => {
+  test('the English menu has Services, Projects, Articles, About, Contact, and every link stays in English', async ({ page, isMobile }) => {
     await page.goto('/en/');
     if (isMobile) await page.locator('[data-nav-toggle]').click();
     const links = page.locator(isMobile ? '.mobile-nav > ul > li:not(.mn-lang) > a' : '[data-nav] a');
-    await expect(links).toHaveText([/Services/, /Projects/, /About/, /Contact/]);
+    await expect(links).toHaveText([/Services/, /Projects/, /Articles/, /About/, /Contact/]);
     await expect(page.locator('header a.logo')).toHaveAttribute('href', '/en/');
     for (const p of EN_PAGES) {
       await page.goto(p.path);
@@ -561,7 +566,7 @@ test.describe('site review fixes', () => {
     }
   });
 
-  test('the Hebrew home page shows the 3 latest guides; English (no articles yet) does not', async ({ page }) => {
+  test('the Hebrew home page shows the 3 latest guides; English (one guide so far) does not', async ({ page }) => {
     await page.goto('/');
     const posts = page.locator('.home-posts .hp-card');
     await expect(posts).toHaveCount(3);
@@ -603,5 +608,68 @@ test.describe('site review fixes', () => {
       const box = await page.locator(sel).first().boundingBox();
       expect(box?.height, sel).toBeGreaterThanOrEqual(44);
     }
+  });
+});
+
+test.describe('SEO guide and English articles', () => {
+  test('the SEO guide exists in both languages, linked by hreflang and the language switcher', async ({ page }) => {
+    const he = 'https://sdmarketing.co.il/articles/seo-for-small-business';
+    const en = 'https://sdmarketing.co.il/en/articles/seo-for-small-business';
+    for (const [path, lang, canonical, switchTo] of [
+      ['/articles/seo-for-small-business', 'he', he, '/en/articles/seo-for-small-business'],
+      ['/en/articles/seo-for-small-business', 'en', en, '/articles/seo-for-small-business'],
+    ]) {
+      await page.goto(path);
+      await expect(page.locator('html')).toHaveAttribute('lang', lang);
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', canonical);
+      await expect(page.locator('link[hreflang="he"]')).toHaveAttribute('href', he);
+      await expect(page.locator('link[hreflang="en"]')).toHaveAttribute('href', en);
+      await expect(page.locator('.lang-switch')).toHaveAttribute('href', switchTo);
+      await expect(page.locator('.post-toc li')).toHaveCount(await page.locator('.post-body h2').count() + 1);
+      // sources section links to Google's own documentation
+      expect(await page.locator('.post-body a[href^="https://developers.google.com/search/docs"]').count()).toBeGreaterThanOrEqual(5);
+      const ld = await page.locator('script[type="application/ld+json"]').allTextContents();
+      expect(ld.some((t) => t.includes('"@type":"Article"') && t.includes(`"inLanguage":"${lang}"`))).toBe(true);
+      expect(ld.some((t) => t.includes('"@type":"FAQPage"'))).toBe(true);
+    }
+  });
+
+  test('a Hebrew-only article has no hreflang and no English twin', async ({ page, request }) => {
+    await page.goto('/articles/landing-page');
+    await expect(page.locator('link[hreflang]')).toHaveCount(0);
+    await expect(page.locator('.lang-switch')).toHaveAttribute('href', '/en/');
+    expect((await request.get('/en/articles/landing-page')).status()).toBe(404);
+  });
+
+  test('English has an Articles page in the nav, with English links only', async ({ page }) => {
+    await page.goto('/en/');
+    await expect(page.locator('[data-nav] a[href="/en/articles"]')).toHaveText('Articles');
+    await page.goto('/en/articles');
+    const hrefs = await page.locator('.post-card a').evaluateAll((as) => as.map((a) => a.getAttribute('href')));
+    expect(hrefs.length).toBeGreaterThan(0);
+    for (const h of hrefs) expect(h).toMatch(/^\/en\/articles\/[a-z0-9-]+$/);
+    await page.goto(hrefs[0]);
+    for (const h of await page.locator('.post-body a[href^="/"]').evaluateAll((as) => as.map((a) => a.getAttribute('href')))) {
+      expect(h).toMatch(/^\/en\//);
+    }
+  });
+
+  test('old English article addresses redirect to clean ones', async ({ request }) => {
+    for (const [from, to] of [['/en/article.php?slug=seo-for-small-business', '/en/articles/seo-for-small-business'], ['/en/articles.php', '/en/articles']]) {
+      const r = await request.get(from, { maxRedirects: 0 });
+      expect(r.status()).toBe(301);
+      expect(new URL(r.headers()['location'], 'http://x').pathname).toBe(to);
+    }
+  });
+
+  test('the SEO service links to the guide in both languages, and the sitemap pairs them', async ({ page, request }) => {
+    for (const [path, href] of [['/services', '/articles/seo-for-small-business'], ['/en/services', '/en/articles/seo-for-small-business']]) {
+      await page.goto(path);
+      await expect(page.locator(`#seo .svc-guide[href="${href}"]`)).toHaveCount(1);
+    }
+    const xml = await (await request.get('/sitemap.xml')).text();
+    expect(xml).toContain('<loc>https://sdmarketing.co.il/en/articles/seo-for-small-business</loc>');
+    expect(xml).toContain('<loc>https://sdmarketing.co.il/en/articles</loc>');
+    expect(xml).toMatch(/<loc>https:\/\/sdmarketing\.co\.il\/articles\/seo-for-small-business<\/loc>[^\n]*hreflang="en" href="https:\/\/sdmarketing\.co\.il\/en\/articles\/seo-for-small-business"/);
   });
 });

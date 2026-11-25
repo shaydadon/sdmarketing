@@ -43,8 +43,12 @@ RewriteCond %{THE_REQUEST} \s/+en/index\.php[\s?] [NC]
 RewriteRule ^en/index\.php$ /en/ [R=301,L]
 
 RewriteCond %{REQUEST_METHOD} ^(GET|HEAD)$
-RewriteCond %{THE_REQUEST} \s/+en/(services|projects|about|contact|terms|privacy|accessibility)\.php[\s?] [NC]
+RewriteCond %{THE_REQUEST} \s/+en/(services|projects|articles|about|contact|terms|privacy|accessibility)\.php[\s?] [NC]
 RewriteRule ^en/[a-z]+\.php$ /en/%1 [R=301,L]
+
+RewriteCond %{REQUEST_METHOD} ^(GET|HEAD)$
+RewriteCond %{THE_REQUEST} \s/+en/article\.php\?slug=([a-z0-9-]+)[\s&] [NC]
+RewriteRule ^en/article\.php$ /en/articles/%1? [R=301,L]
 
 # Trailing slash -> none (one address per page)
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -52,6 +56,7 @@ RewriteRule ^(.+)/$ /$1 [R=301,L]
 
 # Clean address -> the PHP file that serves it
 RewriteRule ^articles/([a-z0-9-]+)$ article.php?slug=$1 [L,QSA]
+RewriteRule ^en/articles/([a-z0-9-]+)$ en/article.php?slug=$1 [L,QSA]
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^en/([a-z]+)$ en/$1.php [L]
 RewriteCond %{REQUEST_FILENAME} !-f

@@ -76,6 +76,7 @@ $services = [
             ['title' => 'Technical SEO', 'text' => 'Site speed, mobile usability, headings and a structure that both Google and visitors can follow.'],
         ],
         'cases'    => ['Keyword research', 'Content for a service page', 'Site structure cleanup', 'Page speed optimization'],
+        'guide'    => ['href' => 'articles/seo-for-small-business', 'label' => 'Read the guide: small business SEO'],
         'wa_text'  => 'Hi, I’d like to learn more about SEO for my website',
     ],
     [

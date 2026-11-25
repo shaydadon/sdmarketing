@@ -151,9 +151,11 @@ require __DIR__ . '/includes/projects-data.php';
 </section>
 
 <?php if (!$is_en):
-  // Latest guides (Hebrew only: the articles have no English version yet)
+  // Latest guides, newest first (Hebrew only: most articles have no English version yet)
   require __DIR__ . '/includes/articles-data.php';
-  $latest = array_slice($articles, 0, 3); ?>
+  $latest = $articles;
+  usort($latest, fn($a, $b) => strcmp($b['published'], $a['published']));
+  $latest = array_slice($latest, 0, 3); ?>
 <section class="home-posts" aria-labelledby="posts-title">
   <div class="wrap">
     <div class="sec-head">

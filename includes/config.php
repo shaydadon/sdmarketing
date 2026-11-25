@@ -45,9 +45,9 @@ if ($is_en) {
 }
 
 $nav = $is_en ? [
-    // English has no articles yet, so no Articles item.
     'services' => ['href' => 'services', 'label' => 'Services'],
     'projects' => ['href' => 'projects', 'label' => 'Projects'],
+    'articles' => ['href' => 'articles', 'label' => 'Articles'],
     'about'    => ['href' => 'about',    'label' => 'About'],
     'contact'  => ['href' => 'contact',  'label' => 'Contact'],
 ] : [
