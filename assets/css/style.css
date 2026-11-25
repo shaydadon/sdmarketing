@@ -1492,3 +1492,9 @@ footer ul a,.f-bot nav a{display:inline-flex;align-items:center;min-height:44px}
 
 /* Desktop: projects alternate sides (an app card in an even position keeps its media on the start side) */
 @media (min-width:801px){.proj.big.rev.flip{flex-direction:row}}
+
+/* v19: every page title (H1) matches the home page H1: 58px on desktop, 34px on phones, weight 800. */
+.hero h1,.p-hero h1,.p-hero.sm h1,.p-hero.legal h1,.post-hero h1,.about-hero h1,[lang="en"] .about-hero h1{font-size:58px;font-weight:800;line-height:1.06;letter-spacing:-.03em}
+@media (max-width:800px){
+  .hero h1,.p-hero h1,.p-hero.sm h1,.p-hero.legal h1,.post-hero h1,.about-hero h1,[lang="en"] .about-hero h1{font-size:34px;line-height:1.08}
+}
