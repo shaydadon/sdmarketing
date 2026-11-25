@@ -97,9 +97,23 @@ require __DIR__ . '/includes/projects-data.php';
       </div>
       <a class="btn btn-ink" href="<?= lurl('projects') ?>"><?= tr('לכל הפרויקטים', 'View all projects') ?><?= icon('arrow') ?></a>
     </div>
-    <div class="proj-grid">
-      <?php foreach ($projects as $p): ?>
-        <article class="proj big<?= $p['layout'] === 'phones' ? ' rev' : '' ?>">
+    <?php
+    // The home page also shows the Boardog chatbot demo (on the projects page it is its own section, includes/wa-demo.php).
+    $home_projects = $projects;
+    $home_projects[] = [
+        'name'    => 'Boardog',
+        'tag'     => tr('צ׳אטבוט לוואטסאפ · הדגמה', 'WhatsApp chatbot · Demo'),
+        'summary' => tr('צ׳אטבוט לוואטסאפ שמקבל פנייה, אוסף את הפרטים וקובע פגישה לבד.', 'A WhatsApp chatbot that handles a new inquiry, collects the details and books the meeting on its own.'),
+        'layout'  => 'phones',
+        'shots'   => [
+            ['src' => 'assets/img/projects/boardog/chat-top.webp', 'alt' => tr('תחילת שיחה עם הצ׳אטבוט Boardog בוואטסאפ', 'The start of a WhatsApp conversation with the Boardog chatbot'), 'w' => 780, 'h' => 1690],
+            ['src' => 'assets/img/projects/boardog/chat-end.webp', 'alt' => tr('הצ׳אטבוט Boardog קובע פגישה ושולח סיכום', 'The Boardog chatbot books a meeting and sends a summary'), 'w' => 780, 'h' => 1690],
+        ],
+    ];
+    ?>
+    <div class="proj-grid" data-carousel id="home-projects" tabindex="0" role="region" aria-label="<?= tr('פרויקטים, אפשר לגלול הצידה', 'Projects, scrollable') ?>">
+      <?php foreach ($home_projects as $n => $p): ?>
+        <article class="proj big<?= $p['layout'] === 'phones' ? ' rev' : '' ?><?= $n % 2 === 0 && $p['layout'] === 'phones' ? ' flip' : '' ?>">
           <?php if ($p['layout'] === 'phones'): ?>
             <div class="media media-ex">
               <?php foreach ($p['shots'] as $shot): ?>
@@ -121,6 +135,11 @@ require __DIR__ . '/includes/projects-data.php';
         </article>
       <?php endforeach; ?>
     </div>
+    <div class="proj-dots" role="group" aria-label="<?= tr('מעבר בין הפרויקטים', 'Move between projects') ?>" data-carousel-dots="home-projects">
+      <?php foreach ($home_projects as $i => $p): ?>
+        <button type="button" aria-controls="home-projects" aria-label="<?= e(tr('פרויקט ' . ($i + 1) . ' מתוך ' . count($home_projects) . ': ', 'Project ' . ($i + 1) . ' of ' . count($home_projects) . ': ') . $p['name']) ?>"<?= $i === 0 ? ' aria-current="true"' : '' ?>></button>
+      <?php endforeach; ?>
+    </div>
   </div>
 </section>
 
@@ -128,7 +147,7 @@ require __DIR__ . '/includes/projects-data.php';
   <div class="wrap ap-grid">
     <div class="ap-photo rv">
       <img src="<?= url('assets/img/founder.webp') ?>" alt="<?= tr('שי דדון, מייסד SDmarketing', 'Shay Dadon, founder of SDmarketing') ?>" width="1024" height="1024" loading="lazy" decoding="async">
-      <div class="cap"><b><?= tr('שי דדון', 'Shay Dadon') ?></b><span><?= tr('מפתח תוכנה, B.Sc. מדעי המחשב, שיווק דיגיטלי', 'Software developer · B.Sc. Computer Science · Digital marketing') ?></span></div>
+      <div class="cap"><b><?= tr('שי דדון', 'Shay Dadon') ?></b><span><?= tr('מפתח תוכנה, B.Sc. מדעי המחשב, שיווק&nbsp;דיגיטלי', 'Software developer · B.Sc. Computer Science · Digital marketing') ?></span></div>
     </div>
     <div>
       <span class="eyebrow"><?= tr('למה אני', 'Why work with me') ?></span>

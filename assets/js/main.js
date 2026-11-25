@@ -238,6 +238,32 @@
     counts.forEach((el) => cio.observe(el));
   }
 
+  // Home projects carousel (phones): the dots show which project is in view and jump to a project on tap.
+  document.querySelectorAll('[data-carousel-dots]').forEach((dotsBox) => {
+    const track = document.getElementById(dotsBox.dataset.carouselDots);
+    if (!track) return;
+    const cards = [...track.children];
+    const dots = [...dotsBox.querySelectorAll('button')];
+    const setCurrent = (i) => dots.forEach((d, j) => (j === i ? d.setAttribute('aria-current', 'true') : d.removeAttribute('aria-current')));
+    const nearest = () => {
+      const box = track.getBoundingClientRect();
+      const mid = box.left + box.width / 2;
+      let best = 0, bestD = Infinity;
+      cards.forEach((c, j) => { const r = c.getBoundingClientRect(); const d = Math.abs(r.left + r.width / 2 - mid); if (d < bestD) { bestD = d; best = j; } });
+      return best;
+    };
+    let raf = 0;
+    track.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; setCurrent(nearest()); }); }, { passive: true });
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    dots.forEach((d, j) => d.addEventListener('click', () => {
+      const c = cards[j];
+      const box = track.getBoundingClientRect();
+      const r = c.getBoundingClientRect();
+      track.scrollBy({ left: r.left + r.width / 2 - (box.left + box.width / 2), behavior: reduce ? 'auto' : 'smooth' });
+      setCurrent(j);
+    }));
+  });
+
   // Work process: the step in view lights up as the visitor scrolls.
   // Only when the steps are stacked (mobile): the step nearest the middle of the screen lights up.
   const stepList = document.querySelector('.steps');

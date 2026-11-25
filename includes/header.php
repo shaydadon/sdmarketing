@@ -49,16 +49,12 @@ $switch_href = $is_en ? url($translated ? $page_path : '') : url('en/' . ($trans
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&family=IBM+Plex+Sans+Hebrew:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="<?= url('assets/css/style.css?v=171') ?>">
+  <link rel="stylesheet" href="<?= url('assets/css/style.css?v=172') ?>">
 </head>
-<?php
-// Staging only: ?v=b turns on design variant B (a shorter home page on phones), to compare side by side with the current one.
-$variant_b = $is_dev && ($_GET['v'] ?? '') === 'b';
-?>
-<body class="page-<?= e($page_id) ?><?= $variant_b ? ' v-b' : '' ?>">
+<body class="page-<?= e($page_id) ?>">
 <?php require __DIR__ . '/icons.php'; ?>
 <a class="skip-link" href="#main"><?= tr('דילוג לתוכן', 'Skip to content') ?></a>
-<?php if ($is_dev): ?><div class="env-badge" role="note"><?= tr('סביבת פיתוח', 'Staging') ?><?= $variant_b ? tr(' · גרסה B', ' · Variant B') : '' ?></div><?php endif; ?>
+<?php if ($is_dev): ?><div class="env-badge" role="note"><?= tr('סביבת פיתוח', 'Staging') ?></div><?php endif; ?>
 
 <header class="topbar" data-header>
   <div class="wrap nav">

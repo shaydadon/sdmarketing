@@ -1425,53 +1425,70 @@ footer ul a,.f-bot nav a{display:inline-flex;align-items:center;min-height:44px}
 .svc-guide{margin-top:24px;min-height:44px}
 
 /* ---------------------------------------------------------------------------
-   Variant B (staging only, ?v=b): a shorter home page on phones. Same sections and copy, denser layouts.
+   v18: a shorter home page on phones (was variant B). Same sections and copy, denser layouts.
+   Scoped to .page-index so the other pages keep their own layouts.
    --------------------------------------------------------------------------- */
 @media (max-width:800px){
   /* Services: one compact row per service (icon + title, one-line description); the whole card is the link */
-  .v-b .services.lite .svc-grid{gap:10px}
-  .v-b .services.lite .svc{position:relative;padding:16px 18px;min-height:0}
-  .v-b .services.lite .svc h3{display:flex;align-items:center;gap:12px;margin-top:0;font-size:19px;padding-inline-end:28px}
-  .v-b .services.lite .svc .icon{width:40px;height:40px;border-radius:10px;flex:none}
-  .v-b .services.lite .svc .icon svg{width:19px;height:19px}
-  .v-b .services.lite .svc p.d{font-size:15px;margin-top:6px;line-height:1.45}
-  .v-b .services.lite .svc .out{position:absolute;top:26px;inset-inline-end:18px;margin:0;padding:0;border:0;font-size:0;line-height:0}
-  .v-b .services.lite .svc .out svg{width:18px;height:18px}
+  .page-index .services.lite .svc-grid{gap:10px}
+  .page-index .services.lite .svc{position:relative;padding:16px 18px;min-height:0}
+  .page-index .services.lite .svc h3{display:flex;align-items:center;gap:12px;margin-top:0;font-size:19px;padding-inline-end:28px}
+  .page-index .services.lite .svc .icon{width:40px;height:40px;border-radius:10px;flex:none}
+  .page-index .services.lite .svc .icon svg{width:19px;height:19px}
+  .page-index .services.lite .svc p.d{font-size:15px;margin-top:6px;line-height:1.45}
+  .page-index .services.lite .svc .out{position:absolute;top:26px;inset-inline-end:18px;margin:0;padding:0;border:0;font-size:0;line-height:0}
+  .page-index .services.lite .svc .out svg{width:18px;height:18px}
 
   /* Process: smaller step numbers, tighter steps */
-  .v-b .process{padding:60px 0}
-  .v-b .steps{margin-top:26px}
-  .v-b .step,.v-b .step:first-child{padding-bottom:22px}
-  .v-b .step .n{font-size:34px}
-  .v-b .step h3,.v-b .step h4{font-size:20px;margin-top:6px}
-  .v-b .step p{margin-top:6px;font-size:15px}
+  .page-index .process{padding:60px 0}
+  .page-index .steps{margin-top:26px}
+  .page-index .step,.page-index .step:first-child{padding-bottom:22px}
+  .page-index .step .n{font-size:34px}
+  .page-index .step h3,.page-index .step h4{font-size:20px;margin-top:6px}
+  .page-index .step p{margin-top:6px;font-size:15px}
 
   /* Projects: swipe between them; the next card peeks in from the side */
-  .v-b .work{padding:60px 0}
-  .v-b .proj-grid{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-20px;padding:2px 20px 8px;scrollbar-width:none;overscroll-behavior-x:contain}
-  .v-b .proj-grid::-webkit-scrollbar{display:none}
-  .v-b .proj,.v-b .proj.big{flex:0 0 84%;scroll-snap-align:center}
-  .v-b .proj.big .media-fisha,.v-b .proj.big.rev .media-ex{height:210px}
-  .v-b .proj.big.rev .media-ex .mphone{width:92px}
-  .v-b .proj.big .body{padding:18px 18px 20px;gap:8px}
-  .v-b .proj.big h3{font-size:24px}
-  .v-b .proj p{font-size:15px}
+  .page-index .work{padding:60px 0}
+  .page-index .proj-grid{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-20px;padding:2px 20px 8px;scrollbar-width:none;overscroll-behavior-x:contain}
+  .page-index .proj-grid::-webkit-scrollbar{display:none}
+  .page-index .proj,.page-index .proj.big{flex:0 0 84%;scroll-snap-align:center}
+  .page-index .proj.big .media-fisha,.page-index .proj.big.rev .media-ex{height:210px}
+  .page-index .proj.big.rev .media-ex .mphone{width:92px}
+  .page-index .proj.big .body{padding:18px 18px 20px;gap:8px}
+  .page-index .proj.big h3{font-size:24px}
+  .page-index .proj p{font-size:15px}
 
   /* Why me: smaller portrait, tighter questions */
-  .v-b .approach{padding:64px 0}
-  .v-b .ap-grid{gap:24px}
-  .v-b .ap-photo img{width:76px}
-  .v-b .ap-photo .cap b{font-size:20px}
-  .v-b .approach h2.sec{font-size:32px}
-  .v-b .qs{margin-top:24px}
-  .v-b .qs li{padding:16px 0;font-size:15.5px}
-  .v-b .qs b{font-size:18px;margin-bottom:4px}
+  .page-index .approach{padding:64px 0}
+  .page-index .ap-grid{gap:24px}
+  .page-index .ap-photo img{width:76px}
+  .page-index .ap-photo .cap b{font-size:20px}
+  .page-index .approach h2.sec{font-size:32px}
+  .page-index .qs{margin-top:24px}
+  .page-index .qs li{padding:16px 0;font-size:15.5px}
+  .page-index .qs b{font-size:18px;margin-bottom:4px}
 
   /* Guides: one compact row per article (thumbnail beside the title) */
-  .v-b .home-posts{padding:60px 0}
-  .v-b .hp-grid{gap:10px;margin-top:26px}
-  .v-b .hp-card{display:grid;grid-template-columns:104px 1fr;grid-template-rows:auto auto;column-gap:14px;align-content:center;padding:10px;border-radius:14px}
-  .v-b .hp-card img{grid-row:1 / 3;width:104px;height:78px;aspect-ratio:auto;border-radius:10px}
-  .v-b .hp-meta{padding:0;font-size:13px;align-self:end}
-  .v-b .hp-card h3{padding:2px 0 0;font-size:16px;line-height:1.35;align-self:start}
+  .page-index .home-posts{padding:60px 0}
+  .page-index .hp-grid{gap:10px;margin-top:26px}
+  .page-index .hp-card{display:grid;grid-template-columns:104px 1fr;grid-template-rows:auto auto;column-gap:14px;align-content:center;padding:10px;border-radius:14px}
+  .page-index .hp-card img{grid-row:1 / 3;width:104px;height:78px;aspect-ratio:auto;border-radius:10px}
+  .page-index .hp-meta{padding:0;font-size:13px;align-self:end}
+  .page-index .hp-card h3{padding:2px 0 0;font-size:16px;line-height:1.35;align-self:start}
 }
+
+/* Projects carousel dots (phones only): one per project, the current one is wider and terracotta */
+.proj-dots{display:none}
+@media (max-width:800px){
+  .proj-dots{display:flex;justify-content:center;gap:2px;margin-top:8px}
+  .proj-dots button{width:32px;height:44px;display:grid;place-items:center;background:none;border:0;padding:0;cursor:pointer}
+  .proj-dots button::before{content:"";width:8px;height:8px;border-radius:99px;background:#C9C6BF;transition:width .25s ease,background .25s ease}
+  .proj-dots button[aria-current="true"]::before{width:22px;background:var(--accent)}
+  .proj-dots button:focus-visible{outline:2px solid var(--accent);outline-offset:-6px;border-radius:10px}
+  .page-index .ap-photo .cap span{font-size:13.5px;line-height:1.4;display:block}
+}
+@media (prefers-reduced-motion:reduce){.proj-dots button::before{transition:none}}
+
+/* Desktop: projects alternate sides (an app card in an even position keeps its media on the start side) */
+@media (min-width:801px){.proj.big.rev.flip{flex-direction:row}}
+.proj-grid[data-carousel]:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:12px}
