@@ -1423,3 +1423,55 @@ footer ul a,.f-bot nav a{display:inline-flex;align-items:center;min-height:44px}
 
 /* v17: link from a service to its guide */
 .svc-guide{margin-top:24px;min-height:44px}
+
+/* ---------------------------------------------------------------------------
+   Variant B (staging only, ?v=b): a shorter home page on phones. Same sections and copy, denser layouts.
+   --------------------------------------------------------------------------- */
+@media (max-width:800px){
+  /* Services: one compact row per service (icon + title, one-line description); the whole card is the link */
+  .v-b .services.lite .svc-grid{gap:10px}
+  .v-b .services.lite .svc{position:relative;padding:16px 18px;min-height:0}
+  .v-b .services.lite .svc h3{display:flex;align-items:center;gap:12px;margin-top:0;font-size:19px;padding-inline-end:28px}
+  .v-b .services.lite .svc .icon{width:40px;height:40px;border-radius:10px;flex:none}
+  .v-b .services.lite .svc .icon svg{width:19px;height:19px}
+  .v-b .services.lite .svc p.d{font-size:15px;margin-top:6px;line-height:1.45}
+  .v-b .services.lite .svc .out{position:absolute;top:26px;inset-inline-end:18px;margin:0;padding:0;border:0;font-size:0;line-height:0}
+  .v-b .services.lite .svc .out svg{width:18px;height:18px}
+
+  /* Process: smaller step numbers, tighter steps */
+  .v-b .process{padding:60px 0}
+  .v-b .steps{margin-top:26px}
+  .v-b .step,.v-b .step:first-child{padding-bottom:22px}
+  .v-b .step .n{font-size:34px}
+  .v-b .step h3,.v-b .step h4{font-size:20px;margin-top:6px}
+  .v-b .step p{margin-top:6px;font-size:15px}
+
+  /* Projects: swipe between them; the next card peeks in from the side */
+  .v-b .work{padding:60px 0}
+  .v-b .proj-grid{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-20px;padding:2px 20px 8px;scrollbar-width:none;overscroll-behavior-x:contain}
+  .v-b .proj-grid::-webkit-scrollbar{display:none}
+  .v-b .proj,.v-b .proj.big{flex:0 0 84%;scroll-snap-align:center}
+  .v-b .proj.big .media-fisha,.v-b .proj.big.rev .media-ex{height:210px}
+  .v-b .proj.big.rev .media-ex .mphone{width:92px}
+  .v-b .proj.big .body{padding:18px 18px 20px;gap:8px}
+  .v-b .proj.big h3{font-size:24px}
+  .v-b .proj p{font-size:15px}
+
+  /* Why me: smaller portrait, tighter questions */
+  .v-b .approach{padding:64px 0}
+  .v-b .ap-grid{gap:24px}
+  .v-b .ap-photo img{width:76px}
+  .v-b .ap-photo .cap b{font-size:20px}
+  .v-b .approach h2.sec{font-size:32px}
+  .v-b .qs{margin-top:24px}
+  .v-b .qs li{padding:16px 0;font-size:15.5px}
+  .v-b .qs b{font-size:18px;margin-bottom:4px}
+
+  /* Guides: one compact row per article (thumbnail beside the title) */
+  .v-b .home-posts{padding:60px 0}
+  .v-b .hp-grid{gap:10px;margin-top:26px}
+  .v-b .hp-card{display:grid;grid-template-columns:104px 1fr;grid-template-rows:auto auto;column-gap:14px;align-content:center;padding:10px;border-radius:14px}
+  .v-b .hp-card img{grid-row:1 / 3;width:104px;height:78px;aspect-ratio:auto;border-radius:10px}
+  .v-b .hp-meta{padding:0;font-size:13px;align-self:end}
+  .v-b .hp-card h3{padding:2px 0 0;font-size:16px;line-height:1.35;align-self:start}
+}
