@@ -97,23 +97,10 @@ require __DIR__ . '/includes/projects-data.php';
       </div>
       <a class="btn btn-ink" href="<?= lurl('projects') ?>"><?= tr('לכל הפרויקטים', 'View all projects') ?><?= icon('arrow') ?></a>
     </div>
-    <?php
-    // The home page also shows the Boardog chatbot demo (on the projects page it is its own section, includes/wa-demo.php).
-    $home_projects = $projects;
-    $home_projects[] = [
-        'name'    => 'Boardog',
-        'tag'     => tr('צ׳אטבוט לוואטסאפ · הדגמה', 'WhatsApp chatbot · Demo'),
-        'summary' => tr('צ׳אטבוט לוואטסאפ שמקבל פנייה, אוסף את הפרטים וקובע פגישה לבד.', 'A WhatsApp chatbot that handles a new inquiry, collects the details and books the meeting on its own.'),
-        'layout'  => 'phones',
-        'shots'   => [
-            ['src' => 'assets/img/projects/boardog/chat-top.webp', 'alt' => tr('תחילת שיחה עם הצ׳אטבוט Boardog בוואטסאפ', 'The start of a WhatsApp conversation with the Boardog chatbot'), 'w' => 780, 'h' => 1690],
-            ['src' => 'assets/img/projects/boardog/chat-end.webp', 'alt' => tr('הצ׳אטבוט Boardog קובע פגישה ושולח סיכום', 'The Boardog chatbot books a meeting and sends a summary'), 'w' => 780, 'h' => 1690],
-        ],
-    ];
-    ?>
-    <div class="proj-grid" data-carousel id="home-projects" tabindex="0" role="region" aria-label="<?= tr('פרויקטים, אפשר לגלול הצידה', 'Projects, scrollable') ?>">
+    <?php $home_projects = $projects; ?>
+    <div class="proj-grid" data-carousel id="home-projects" data-carousel-label="<?= tr('פרויקטים, אפשר לגלול הצידה', 'Projects, scrollable') ?>">
       <?php foreach ($home_projects as $n => $p): ?>
-        <article class="proj big<?= $p['layout'] === 'phones' ? ' rev' : '' ?><?= $n % 2 === 0 && $p['layout'] === 'phones' ? ' flip' : '' ?>">
+        <article class="proj big<?= $p['layout'] === 'phones' ? ' rev' : '' ?>">
           <?php if ($p['layout'] === 'phones'): ?>
             <div class="media media-ex">
               <?php foreach ($p['shots'] as $shot): ?>

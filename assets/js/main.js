@@ -252,6 +252,16 @@
       cards.forEach((c, j) => { const r = c.getBoundingClientRect(); const d = Math.abs(r.left + r.width / 2 - mid); if (d < bestD) { bestD = d; best = j; } });
       return best;
     };
+    // Only a strip that actually scrolls (phones) becomes a keyboard-focusable region; on desktop the grid stays plain.
+    const setFocusable = () => {
+      if (track.scrollWidth > track.clientWidth + 1) {
+        track.tabIndex = 0; track.setAttribute('role', 'region'); track.setAttribute('aria-label', track.dataset.carouselLabel || '');
+      } else {
+        track.removeAttribute('tabindex'); track.removeAttribute('role'); track.removeAttribute('aria-label');
+      }
+    };
+    setFocusable();
+    addEventListener('resize', setFocusable);
     let raf = 0;
     track.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; setCurrent(nearest()); }); }, { passive: true });
     const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;

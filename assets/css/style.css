@@ -1488,7 +1488,4 @@ footer ul a,.f-bot nav a{display:inline-flex;align-items:center;min-height:44px}
   .page-index .ap-photo .cap span{font-size:13.5px;line-height:1.4;display:block}
 }
 @media (prefers-reduced-motion:reduce){.proj-dots button::before{transition:none}}
-
-/* Desktop: projects alternate sides (an app card in an even position keeps its media on the start side) */
-@media (min-width:801px){.proj.big.rev.flip{flex-direction:row}}
 .proj-grid[data-carousel]:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:12px}
