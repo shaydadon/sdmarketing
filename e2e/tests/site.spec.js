@@ -10,6 +10,7 @@ const PAGES = [
   { path: '/contact', name: 'contact' },
   { path: '/articles', name: 'articles' },
   { path: '/articles/whatsapp-chatbot', name: 'article' },
+  { path: '/articles/seo-for-small-business', name: 'article-seo' },
   { path: '/terms', name: 'terms' },
   { path: '/privacy', name: 'privacy' },
   { path: '/accessibility', name: 'accessibility' },
@@ -17,6 +18,8 @@ const PAGES = [
   { path: '/en/', name: 'en-home', en: true },
   { path: '/en/services', name: 'en-services', en: true },
   { path: '/en/projects', name: 'en-projects', en: true },
+  { path: '/en/articles', name: 'en-articles', en: true },
+  { path: '/en/articles/seo-for-small-business', name: 'en-article', en: true },
   { path: '/en/about', name: 'en-about', en: true },
   { path: '/en/contact', name: 'en-contact', en: true },
   { path: '/en/terms', name: 'en-terms', en: true },
@@ -60,7 +63,7 @@ test.describe('every page', () => {
       await expect(page.locator('html')).toHaveAttribute('dir', p.en ? 'ltr' : 'rtl');
       await expect(page).toHaveTitle(/SDmarketing/);
       await expect(page.locator('h1')).toHaveCount(1);
-      if (!['home', 'projects', 'article', 'en-home', 'en-projects'].includes(p.name)) await expect(page.locator('body')).not.toContainText('Boardog');
+      if (!['home', 'projects', 'services', 'article', 'en-home', 'en-projects', 'en-services'].includes(p.name)) await expect(page.locator('body')).not.toContainText('Boardog');
       await expect(page.locator('body')).not.toContainText('10+');
       await expect(page.locator('body')).not.toContainText('יותר מעשר');
       await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /.{20,}/);
@@ -218,7 +221,7 @@ test.describe('articles', () => {
   test('the list links to every article, and each article has its FAQ and structured data', async ({ page }) => {
     await page.goto('/articles');
     const cards = page.locator('.post-card a');
-    await expect(cards).toHaveCount(6);
+    await expect(cards).toHaveCount(7);
     const hrefs = await cards.evaluateAll((as) => as.map((a) => a.getAttribute('href')));
     for (const href of hrefs) {
       const res = await page.goto(href);
@@ -245,13 +248,15 @@ test.describe('articles', () => {
   test('topic filters show only that topic, and each article names its author and date', async ({ page }) => {
     await page.goto('/articles');
     const visible = page.locator('.post-card:visible');
-    await expect(visible).toHaveCount(6);
+    await expect(visible).toHaveCount(7);
+    await page.getByRole('button', { name: /קידום אורגני/ }).click();
+    await expect(visible).toHaveCount(1);
     await page.getByRole('button', { name: /אפליקציות/ }).click();
     await expect(visible).toHaveCount(1);
     await page.getByRole('button', { name: /אוטומציות/ }).click();
     await expect(visible).toHaveCount(3);
     await page.getByRole('button', { name: /הכל/ }).click();
-    await expect(visible).toHaveCount(6);
+    await expect(visible).toHaveCount(7);
 
     await page.goto('/articles/landing-page');
     await expect(page.locator('.byline')).toContainText('שי דדון');
@@ -298,12 +303,11 @@ test.describe('homepage', () => {
     await expect(page.locator('a[href="/services#pwa"]')).toBeVisible();
     await expect(page.locator('a[href="/services#seo"]')).toBeVisible();
     await expect(page.locator('a[href="/services#campaigns"]')).toBeVisible();
-    await expect(page.getByRole('heading', { name: 'חמישה תחומים. מערכת אחת שעובדת יחד.' })).toBeVisible();
-    await expect(page.locator('.svc-grid')).toContainText('לקוחות שמוצאים אתכם בגוגל');
+    await expect(page.getByRole('heading', { name: 'חמישה שירותים שבנויים לעבוד יחד.' })).toBeVisible();
     await page.goto('/services');
     await expect(page.locator('#seo')).toContainText('מחקר מילות מפתח');
     await expect(page.locator('#seo')).toContainText('הדגמה להמחשה · ללא נתונים אמיתיים');
-    await expect(page.locator('#seo a[href="/articles"]')).toBeVisible();
+    await expect(page.locator('#seo')).not.toContainText('יעלו בעמוד המאמרים');
     await expect(page.locator('#campaigns')).toContainText('Google Ads');
     await expect(page.locator('#campaigns')).toContainText('פייסבוק');
     await expect(page.locator('#websites')).toContainText('fisha.shop');
@@ -311,11 +315,11 @@ test.describe('homepage', () => {
 
   test('hero leads with the headline, one clear action, and real work', async ({ page }) => {
     await page.goto('/');
-    await expect(page.locator('h1')).toContainText('העסק שלך ממשיך לעבוד.');
+    await expect(page.locator('h1')).toContainText('העסק שלכם ממשיך לעבוד.');
     await expect(page.locator('.h3ro .btn-main')).toHaveText(/בואו נדבר על העסק שלכם/);
     await expect(page.locator('.h3-art img')).toHaveCount(3);
     await expect(page.locator('.h3-why li')).toHaveCount(3);
-    await expect(page.locator('.services.lite .svc .out').first()).toContainText('פחות עבודה ידנית');
+    await expect(page.locator('.services.lite .svc .out').first()).toContainText('לפרטים על השירות');
   });
 
   test('faq lists every service and publishes FAQPage data', async ({ page }) => {
@@ -378,7 +382,8 @@ test.describe('projects', () => {
     const block = page.locator('#case-bot');
     await expect(block).toBeVisible();
     await expect(block.locator('h2')).toHaveText('Boardog');
-    await expect(block).toContainText('אפליקציית צ׳אטבוט לבעלי פנסיונים');
+    await expect(block).toContainText('צ׳אטבוט וואטסאפ לבעלי פנסיונים');
+    await expect(block).not.toContainText('דוגמה');
     await expect(block).not.toContainText('צילום מסך אמיתי');
     await expect(block).toContainText('הפנסיון של ג׳רי');
     await expect(block).toContainText('מחובר/ת');
@@ -493,11 +498,11 @@ test.describe('english version', () => {
     await expect(page.locator('header .lang-switch')).toHaveAttribute('href', '/en/');
   });
 
-  test('the English menu has Services, Projects, About, Contact, and every link stays in English', async ({ page, isMobile }) => {
+  test('the English menu has Services, Projects, Articles, About, Contact, and every link stays in English', async ({ page, isMobile }) => {
     await page.goto('/en/');
     if (isMobile) await page.locator('[data-nav-toggle]').click();
     const links = page.locator(isMobile ? '.mobile-nav > ul > li:not(.mn-lang) > a' : '[data-nav] a');
-    await expect(links).toHaveText([/Services/, /Projects/, /About/, /Contact/]);
+    await expect(links).toHaveText([/Services/, /Projects/, /Articles/, /About/, /Contact/]);
     await expect(page.locator('header a.logo')).toHaveAttribute('href', '/en/');
     for (const p of EN_PAGES) {
       await page.goto(p.path);
@@ -543,5 +548,129 @@ test.describe('english version', () => {
     await expect(block.locator('video')).toHaveCount(0);
     await expect(block.locator('[data-wa-demo]')).toBeVisible();
     await expect(block.locator('[data-wa-log]')).toContainText('Welcome to Jerry’s Dog Boarding', { timeout: 15000 });
+  });
+});
+
+test.describe('site review fixes', () => {
+  test('services open with a 5-card overview that jumps to each service, with no numbered labels', async ({ page }) => {
+    for (const [path, fit] of [['/services', 'מתאים ל'], ['/en/services', 'Good for']]) {
+      await page.goto(path);
+      const cards = page.locator('.svo-grid .svo');
+      await expect(cards).toHaveCount(5);
+      await expect(cards.first()).toContainText(fit);
+      for (const id of ['automations', 'websites', 'pwa', 'seo', 'campaigns']) {
+        await expect(page.locator(`.svo[href="#${id}"]`)).toHaveCount(1);
+        await expect(page.locator(`#${id}`)).toHaveCount(1);
+      }
+      await expect(page.locator('body')).not.toContainText('01 ·');
+      await expect(page.locator('.svc-block .tagline')).toHaveCount(0);
+    }
+  });
+
+  test('the Hebrew home page shows the 3 latest guides; English (one guide so far) does not', async ({ page }) => {
+    await page.goto('/');
+    const posts = page.locator('.home-posts .hp-card');
+    await expect(posts).toHaveCount(3);
+    await expect(page.locator('.home-posts a[href="/articles"]')).toBeVisible();
+    await posts.first().click();
+    await expect(page).toHaveURL(/\/articles\/[a-z0-9-]+$/);
+    await page.goto('/en/');
+    await expect(page.locator('.home-posts')).toHaveCount(0);
+  });
+
+  test('every article has a table of contents whose links land on real headings', async ({ page }) => {
+    await page.goto('/articles');
+    const hrefs = await page.locator('.post-card a').evaluateAll((as) => as.map((a) => a.getAttribute('href')));
+    for (const href of hrefs) {
+      await page.goto(href);
+      const links = page.locator('.post-toc a');
+      expect(await links.count(), href).toBeGreaterThanOrEqual(3);
+      for (const id of await links.evaluateAll((as) => as.map((a) => a.getAttribute('href').slice(1)))) {
+        await expect(page.locator(`[id="${id}"]`), `${href} #${id}`).toHaveCount(1);
+      }
+    }
+  });
+
+  test('copy: no repeated stock lines, and one form of address', async ({ page }) => {
+    for (const path of ['/', '/services', '/about', '/projects']) {
+      await page.goto(path);
+      const text = await page.locator('main').innerText();
+      expect((text.match(/בלי הפתעות/g) || []).length, path).toBe(0);
+      expect(text, path).not.toContain('ההוכחה נמצאת באוויר');
+      expect(text, path).not.toContain('בלי טפסים');
+      expect(text, path).not.toMatch(/העסק שלך|כשאתה /);
+    }
+  });
+
+  test('phones: header buttons, footer links and breadcrumbs are at least 44px tall', async ({ page, isMobile }) => {
+    test.skip(!isMobile, 'touch targets are a phone concern');
+    await page.goto('/services');
+    for (const sel of ['.nav-toggle', '.lang-switch', '.nav .nav-wa', '.crumb a', 'footer ul a']) {
+      const box = await page.locator(sel).first().boundingBox();
+      expect(box?.height, sel).toBeGreaterThanOrEqual(44);
+    }
+  });
+});
+
+test.describe('SEO guide and English articles', () => {
+  test('the SEO guide exists in both languages, linked by hreflang and the language switcher', async ({ page }) => {
+    const he = 'https://sdmarketing.co.il/articles/seo-for-small-business';
+    const en = 'https://sdmarketing.co.il/en/articles/seo-for-small-business';
+    for (const [path, lang, canonical, switchTo] of [
+      ['/articles/seo-for-small-business', 'he', he, '/en/articles/seo-for-small-business'],
+      ['/en/articles/seo-for-small-business', 'en', en, '/articles/seo-for-small-business'],
+    ]) {
+      await page.goto(path);
+      await expect(page.locator('html')).toHaveAttribute('lang', lang);
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', canonical);
+      await expect(page.locator('link[hreflang="he"]')).toHaveAttribute('href', he);
+      await expect(page.locator('link[hreflang="en"]')).toHaveAttribute('href', en);
+      await expect(page.locator('.lang-switch')).toHaveAttribute('href', switchTo);
+      await expect(page.locator('.post-toc li')).toHaveCount(await page.locator('.post-body h2').count() + 1);
+      // sources section links to Google's own documentation
+      expect(await page.locator('.post-body a[href^="https://developers.google.com/search/docs"]').count()).toBeGreaterThanOrEqual(5);
+      const ld = await page.locator('script[type="application/ld+json"]').allTextContents();
+      expect(ld.some((t) => t.includes('"@type":"Article"') && t.includes(`"inLanguage":"${lang}"`))).toBe(true);
+      expect(ld.some((t) => t.includes('"@type":"FAQPage"'))).toBe(true);
+    }
+  });
+
+  test('a Hebrew-only article has no hreflang and no English twin', async ({ page, request }) => {
+    await page.goto('/articles/landing-page');
+    await expect(page.locator('link[hreflang]')).toHaveCount(0);
+    await expect(page.locator('.lang-switch')).toHaveAttribute('href', '/en/');
+    expect((await request.get('/en/articles/landing-page')).status()).toBe(404);
+  });
+
+  test('English has an Articles page in the nav, with English links only', async ({ page }) => {
+    await page.goto('/en/');
+    await expect(page.locator('[data-nav] a[href="/en/articles"]')).toHaveText('Articles');
+    await page.goto('/en/articles');
+    const hrefs = await page.locator('.post-card a').evaluateAll((as) => as.map((a) => a.getAttribute('href')));
+    expect(hrefs.length).toBeGreaterThan(0);
+    for (const h of hrefs) expect(h).toMatch(/^\/en\/articles\/[a-z0-9-]+$/);
+    await page.goto(hrefs[0]);
+    for (const h of await page.locator('.post-body a[href^="/"]').evaluateAll((as) => as.map((a) => a.getAttribute('href')))) {
+      expect(h).toMatch(/^\/en\//);
+    }
+  });
+
+  test('old English article addresses redirect to clean ones', async ({ request }) => {
+    for (const [from, to] of [['/en/article.php?slug=seo-for-small-business', '/en/articles/seo-for-small-business'], ['/en/articles.php', '/en/articles']]) {
+      const r = await request.get(from, { maxRedirects: 0 });
+      expect(r.status()).toBe(301);
+      expect(new URL(r.headers()['location'], 'http://x').pathname).toBe(to);
+    }
+  });
+
+  test('the SEO service links to the guide in both languages, and the sitemap pairs them', async ({ page, request }) => {
+    for (const [path, href] of [['/services', '/articles/seo-for-small-business'], ['/en/services', '/en/articles/seo-for-small-business']]) {
+      await page.goto(path);
+      await expect(page.locator(`#seo .svc-guide[href="${href}"]`)).toHaveCount(1);
+    }
+    const xml = await (await request.get('/sitemap.xml')).text();
+    expect(xml).toContain('<loc>https://sdmarketing.co.il/en/articles/seo-for-small-business</loc>');
+    expect(xml).toContain('<loc>https://sdmarketing.co.il/en/articles</loc>');
+    expect(xml).toMatch(/<loc>https:\/\/sdmarketing\.co\.il\/articles\/seo-for-small-business<\/loc>[^\n]*hreflang="en" href="https:\/\/sdmarketing\.co\.il\/en\/articles\/seo-for-small-business"/);
   });
 });

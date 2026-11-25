@@ -10,7 +10,8 @@ $services = [
         'items'    => ['WhatsApp chatbots that answer, qualify leads and book appointments', 'Email automation: welcome sequences, reminders, abandoned carts', 'Marketing automation and lead follow-up', 'Integrations between your CRM, forms, calendar and spreadsheets'],
         'headline' => 'Less manual work.',
         'headline_accent' => 'No lead left behind.',
-        'intro'    => 'Most businesses lose customers in the gap between “someone reached out” and “someone got back to them.” Automation closes that gap: every customer gets an instant reply, their details land in the right place, and the follow-up happens without anyone having to remember it.',
+        'intro'    => 'Automation makes sure every customer gets an instant reply, their details land in the right place, and the follow-up happens without anyone having to remember it.',
+        'fit'      => 'Businesses that get a lot of inquiries',
         'features' => [
             ['title' => 'WhatsApp chatbots', 'text' => 'Answers common questions, collects details, books appointments and hands off to a real person when needed, 24/7.'],
             ['title' => 'Email automation', 'text' => 'Welcome sequences, appointment reminders, quote follow-ups and abandoned cart emails.'],
@@ -29,6 +30,7 @@ $services = [
         'headline' => 'A website that works for your business,',
         'headline_accent' => 'not a digital business card.',
         'intro'    => 'Every site starts with one question: what should visitors do here? Get in touch, book or buy. The design, copy and performance are built around that action, and the site is connected to your automations and conversion tracking from day one.',
+        'fit'      => 'Anyone running ads or selling online',
         'features' => [
             ['title' => 'Landing pages', 'text' => 'One page, one message, one call to action. Connected to WhatsApp and your CRM.'],
             ['title' => 'Business websites', 'text' => 'Explain what you do, showcase your work and turn visitors into conversations.'],
@@ -46,7 +48,8 @@ $services = [
         'items'    => ['Your icon on your customers’ home screens', 'Works offline', 'Push notifications', 'One codebase for Android, iPhone and desktop'],
         'headline' => 'A real app,',
         'headline_accent' => 'no app store required.',
-        'intro'    => 'A progressive web app (PWA) installs from the browser in one tap and behaves like a native app: a home screen icon, full screen, push notifications and offline access. One codebase runs on Android, iPhone and desktop. That’s how Excerly was built.',
+        'intro'    => 'A progressive web app (PWA) installs from the browser in one tap and behaves like a native app: a home screen icon, full screen, push notifications and offline access. One codebase runs on Android, iPhone and desktop. That’s how Excerly, an AI-powered fitness and nutrition app, was built.',
+        'fit'      => 'Loyalty programs, ordering and team tools',
         'features' => [
             ['title' => 'One-tap install', 'text' => 'No app store, no review process and no waiting for updates to be approved.'],
             ['title' => 'Push notifications', 'text' => 'Reminders, updates and offers delivered straight to your customers’ phones.'],
@@ -65,6 +68,7 @@ $services = [
         'headline' => 'Get found on Google',
         'headline_accent' => 'when customers search for you.',
         'intro'    => 'SEO is built steadily and with intent. First we identify the searches that bring in customers, then we create content that answers them, and we make sure your site is fast, mobile-friendly and well structured.',
+        'fit'      => 'Businesses that want customers from Google',
         'features' => [
             ['title' => 'Keyword research', 'text' => 'The exact phrases people type when looking for your service, and which ones to target first.'],
             ['title' => 'SEO content', 'text' => 'Articles that each answer one question, in your customers’ own words, linked to the rest of your site.'],
@@ -72,6 +76,7 @@ $services = [
             ['title' => 'Technical SEO', 'text' => 'Site speed, mobile usability, headings and a structure that both Google and visitors can follow.'],
         ],
         'cases'    => ['Keyword research', 'Content for a service page', 'Site structure cleanup', 'Page speed optimization'],
+        'guide'    => ['href' => 'articles/seo-for-small-business', 'label' => 'Read the guide: small business SEO'],
         'wa_text'  => 'Hi, I’d like to learn more about SEO for my website',
     ],
     [
@@ -83,6 +88,7 @@ $services = [
         'headline' => 'Your ad spend',
         'headline_accent' => 'should prove its worth.',
         'intro'    => 'Effective PPC management starts with measurement. Before increasing the budget, we make sure every lead is tracked, then we scale what drives results and cut what doesn’t.',
+        'fit'      => 'Advertisers unsure what works',
         'features' => [
             ['title' => 'Google Ads', 'text' => 'Search and display campaigns that reach people already looking for your service.'],
             ['title' => 'Facebook and Instagram', 'text' => 'Meta campaigns built around the right audience and the right message.'],

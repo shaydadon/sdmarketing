@@ -42,6 +42,6 @@
 
 <aside aria-label="<?= tr('יצירת קשר מהירה', 'Quick contact') ?>"><a class="wa-float" href="<?= e(wa_link($site)) ?>" target="_blank" rel="noopener" aria-label="<?= tr('דברו איתי בוואטסאפ', 'Chat on WhatsApp') ?>"><?= icon('whatsapp') ?></a></aside>
 
-<script src="<?= url('assets/js/main.js?v=120') ?>" defer></script>
+<script src="<?= url('assets/js/main.js?v=122') ?>" defer></script>
 </body>
 </html>

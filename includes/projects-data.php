@@ -11,7 +11,7 @@ $projects = [
         'name'      => 'fisha.shop',
         'cat'       => 'web',
         'tag'       => 'חנות אונליין / E-commerce',
-        'summary'   => 'דוגמה לחנות אונליין. החנות מוכרת בפועל: עיצוב, פיתוח, וניהול הזמנות וסליקה.',
+        'summary'   => 'חנות אונליין שמוכרת בפועל: עיצוב, פיתוח, ניהול הזמנות וסליקה.',
         'url'       => 'https://fisha.shop',
         'url_label' => 'לאתר החי',
         'layout'    => 'browser',
@@ -24,7 +24,7 @@ $projects = [
         'name'      => 'Excerly',
         'cat'       => 'pwa',
         'tag'       => 'אפליקציית PWA',
-        'summary'   => 'דוגמה לאפליקציית ווב. נבנתה כך שאפשר להתקין אותה מהדפדפן, והיא נפתחת כמו אפליקציה.',
+        'summary'   => 'אפליקציית כושר ותזונה מבוססת AI, שמתקינים מהדפדפן ונפתחת כמו אפליקציה.',
         'url'       => 'https://shaydadon.github.io/Excerly/',
         'url_label' => 'לאפליקציה',
         'layout'    => 'phones',
@@ -42,7 +42,7 @@ $project_cats = [
     'automations' => 'אוטומציות לעסקים',
 ];
 
-// Cases shown on the projects page that are not in $projects (the Boardog chatbot demo, includes/wa-demo.php).
+// Cases shown on the projects page that are not in $projects (the Boardog WhatsApp chatbot, includes/wa-demo.php).
 $extra_cases = ['automations' => 1];
 
 $projects_soon = 'בקרוב: דפי נחיתה ואתרי תדמית';

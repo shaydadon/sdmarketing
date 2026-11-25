@@ -1347,3 +1347,187 @@ h1,h2,h3{text-wrap:balance}
 [lang="en"] .p-hero .filters{flex-wrap:wrap;justify-content:flex-end}
 [lang="en"] .about-hero h1{font-size:80px;line-height:1}
 @media (max-width:800px){[lang="en"] .about-hero h1{font-size:42px}[lang="en"] .p-hero .filters{justify-content:flex-start}}
+
+/* ===== v16: site review fixes (UI UX Pro Max + Humanize) ===== */
+/* Services at a glance: replaces the numbered jump chips */
+.svc-overview{background:var(--ink);padding:0 0 90px}
+.svo-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.svo{display:flex;flex-direction:column;gap:10px;background:#151515;border:1px solid #2A2A2A;border-radius:18px;padding:22px;color:#fff;min-height:44px;transition:border-color .2s ease,transform .2s ease}
+.svo:hover,.svo:focus-visible{border-color:var(--accent);transform:translateY(-2px)}
+.svo.on{border-color:var(--accent)}
+.svo-ic{width:44px;height:44px;border-radius:12px;background:#222;display:grid;place-items:center;color:var(--accent-2)}
+.svo-ic svg{width:22px;height:22px}
+.svo-t{font-family:var(--display);font-weight:800;font-size:20px;line-height:1.2}
+.svo-d{font-size:15px;color:#c9c6bf;line-height:1.5}
+.svo-f{margin-top:auto;padding-top:12px;border-top:1px solid #2A2A2A;font-family:var(--display);font-weight:700;font-size:15px;color:var(--accent-2)}
+.svo-f small{display:block;font-weight:600;font-size:13px;color:var(--mute-d);margin-bottom:2px}
+.svo-go{display:inline-flex;align-items:center;gap:8px;font-family:var(--display);font-weight:700;font-size:15px}
+.svo-go svg{width:16px;height:16px;transition:transform .2s ease}
+.svo:hover .svo-go svg{transform:translateX(-4px)}
+.svc-block h2{margin-top:0}
+@media (max-width:1100px){.svo-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.svc-overview{padding-bottom:56px}.svo-grid{grid-template-columns:1fr}.svo{padding:18px}}
+
+/* Latest guides on the home page */
+.home-posts{padding:110px 0}
+.hp-grid{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:44px}
+.hp-card{display:flex;flex-direction:column;height:100%;background:var(--white);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:border-color .2s ease,transform .2s ease}
+.hp-card:hover,.hp-card:focus-visible{border-color:var(--accent);transform:translateY(-3px)}
+.hp-card img{width:100%;aspect-ratio:1200/630;object-fit:cover}
+.hp-meta{padding:18px 20px 0;font-family:var(--display);font-weight:700;font-size:14px;color:var(--accent-ink)}
+.hp-card h3{padding:8px 20px 22px;font-size:21px;font-weight:800;line-height:1.3;letter-spacing:-.01em}
+@media (max-width:900px){.home-posts{padding:72px 0}.hp-grid{grid-template-columns:1fr;gap:16px}}
+
+/* Article table of contents */
+.post-toc{margin:36px 0 8px;padding:24px 28px;background:var(--white);border:1px solid var(--line);border-radius:18px}
+.post-toc h2{font-family:var(--display);font-size:16px;font-weight:800;letter-spacing:0;color:var(--mute)}
+.post-toc ul{list-style:none;margin-top:6px;display:grid}
+.post-toc li+li{border-top:1px solid var(--line)}
+.post-toc a{display:inline-block;padding:9px 0;min-height:44px;font-size:17px;font-weight:500;color:var(--ink);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:4px}
+.post-toc a:hover{text-decoration-color:var(--accent)}
+.post-body h2,.post-faq h2{scroll-margin-top:100px}
+
+/* Touch targets: at least 44x44 on phones (WCAG 2.5.5 / UI UX Pro Max touch rules) */
+.nav-toggle,.lang-switch{min-width:44px;height:44px}
+@media (max-width:480px){.nav .nav-wa{width:44px;height:44px}}
+footer ul{gap:0}
+footer ul a,.f-bot nav a{display:inline-flex;align-items:center;min-height:44px}
+.f-bot nav{gap:4px 24px;flex-wrap:wrap}
+.crumb{font-size:14px}
+.crumb a{padding:12px 8px;margin:-12px -8px}
+.chip{min-height:44px}
+@media (max-width:800px){.chip{height:44px}.crumb{font-size:14px}}
+.svc-pick span{height:44px}
+.by-name{display:inline-flex;align-items:center;min-height:44px}
+.post-author a,.post-more a,.link{min-height:44px;align-items:center}
+.cta .contact-list a{min-height:44px}
+/* Minimum text sizes (captions >= 13px) */
+.visual .note{font-size:13px}
+@media (max-width:800px){.visual .note{font-size:12.5px}}
+@media (max-width:1100px){.h3-why b{font-size:13px}}
+.cta .contact-list small{font-size:13px}
+.logo{min-height:44px}
+/* Phones: the overview is a compact 2-column index, the full detail follows below */
+@media (max-width:640px){
+  .svo-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .svo{padding:14px;gap:6px;border-radius:14px}
+  .svo-ic{width:36px;height:36px;border-radius:10px}
+  .svo-t{font-size:16px}
+  .svo-d,.svo-go{display:none}
+  .svo-f{padding-top:8px;font-size:13px}
+  .svo-f small{font-size:12px}
+  .svo:last-child{grid-column:span 2}
+}
+/* Align the "good for" rows across the overview cards (desktop) */
+@media (min-width:641px){.svo-grid{grid-template-rows:auto}.svo{display:grid;grid-template-rows:auto auto 1fr auto auto;align-content:start}.svo-f{margin-top:0;min-height:5.6em}}
+
+/* v17: link from a service to its guide */
+.svc-guide{margin-top:24px;min-height:44px}
+
+/* ---------------------------------------------------------------------------
+   v18: a shorter home page on phones (was variant B). Same sections and copy, denser layouts.
+   Scoped to .page-index so the other pages keep their own layouts.
+   --------------------------------------------------------------------------- */
+@media (max-width:800px){
+  /* Services: one compact row per service (icon + title, one-line description); the whole card is the link */
+  .page-index .services.lite .svc-grid{gap:10px}
+  .page-index .services.lite .svc{position:relative;padding:16px 18px;min-height:0}
+  .page-index .services.lite .svc h3{display:flex;align-items:center;gap:12px;margin-top:0;font-size:19px;padding-inline-end:28px}
+  .page-index .services.lite .svc .icon{width:40px;height:40px;border-radius:10px;flex:none}
+  .page-index .services.lite .svc .icon svg{width:19px;height:19px}
+  .page-index .services.lite .svc p.d{font-size:15px;margin-top:6px;line-height:1.45}
+  .page-index .services.lite .svc .out{position:absolute;top:26px;inset-inline-end:18px;margin:0;padding:0;border:0;font-size:0;line-height:0}
+  .page-index .services.lite .svc .out svg{width:18px;height:18px}
+
+  /* Process: smaller step numbers, tighter steps */
+  .page-index .process{padding:60px 0}
+  .page-index .steps{margin-top:26px}
+  .page-index .step,.page-index .step:first-child{padding-bottom:22px}
+  .page-index .step .n{font-size:34px}
+  .page-index .step h3,.page-index .step h4{font-size:20px;margin-top:6px}
+  .page-index .step p{margin-top:6px;font-size:15px}
+
+  /* Projects: swipe between them; the next card peeks in from the side */
+  .page-index .work{padding:60px 0}
+  .page-index .proj-grid{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-20px;padding:2px 20px 8px;scrollbar-width:none;overscroll-behavior-x:contain}
+  .page-index .proj-grid::-webkit-scrollbar{display:none}
+  .page-index .proj,.page-index .proj.big{flex:0 0 84%;scroll-snap-align:center}
+  .page-index .proj.big .media-fisha,.page-index .proj.big.rev .media-ex{height:210px}
+  .page-index .proj.big.rev .media-ex .mphone{width:92px}
+  .page-index .proj.big .body{padding:18px 18px 20px;gap:8px}
+  .page-index .proj.big h3{font-size:24px}
+  .page-index .proj p{font-size:15px}
+
+  /* Why me: smaller portrait, tighter questions */
+  .page-index .approach{padding:64px 0}
+  .page-index .ap-grid{gap:24px}
+  .page-index .ap-photo img{width:76px}
+  .page-index .ap-photo .cap b{font-size:20px}
+  .page-index .approach h2.sec{font-size:32px}
+  .page-index .qs{margin-top:24px}
+  .page-index .qs li{padding:16px 0;font-size:15.5px}
+  .page-index .qs b{font-size:18px;margin-bottom:4px}
+
+  /* Guides: one compact row per article (thumbnail beside the title) */
+  .page-index .home-posts{padding:60px 0}
+  .page-index .hp-grid{gap:10px;margin-top:26px}
+  .page-index .hp-card{display:grid;grid-template-columns:104px 1fr;grid-template-rows:auto auto;column-gap:14px;align-content:center;padding:10px;border-radius:14px}
+  .page-index .hp-card img{grid-row:1 / 3;width:104px;height:78px;aspect-ratio:auto;border-radius:10px}
+  .page-index .hp-meta{padding:0;font-size:13px;align-self:end}
+  .page-index .hp-card h3{padding:2px 0 0;font-size:16px;line-height:1.35;align-self:start}
+}
+
+/* Projects carousel dots (phones only): one per project, the current one is wider and terracotta */
+.proj-dots{display:none}
+@media (max-width:800px){
+  .proj-dots{display:flex;justify-content:center;gap:2px;margin-top:8px}
+  .proj-dots button{width:32px;height:44px;display:grid;place-items:center;background:none;border:0;padding:0;cursor:pointer}
+  .proj-dots button::before{content:"";width:8px;height:8px;border-radius:99px;background:#C9C6BF;transition:width .25s ease,background .25s ease}
+  .proj-dots button[aria-current="true"]::before{width:22px;background:var(--accent)}
+  .proj-dots button:focus-visible{outline:2px solid var(--accent);outline-offset:-6px;border-radius:10px}
+  .page-index .ap-photo .cap span{font-size:13.5px;line-height:1.4;display:block}
+}
+@media (prefers-reduced-motion:reduce){.proj-dots button::before{transition:none}}
+.proj-grid[data-carousel]:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:12px}
+
+/* Desktop: projects alternate sides (an app card in an even position keeps its media on the start side) */
+@media (min-width:801px){.proj.big.rev.flip{flex-direction:row}}
+
+/* v19: every page title (H1) matches the home page H1: 58px on desktop, 34px on phones, weight 800. */
+.hero h1,.p-hero h1,.p-hero.sm h1,.p-hero.legal h1,.post-hero h1,.about-hero h1,[lang="en"] .about-hero h1{font-size:58px;font-weight:800;line-height:1.06;letter-spacing:-.03em}
+@media (max-width:800px){
+  .hero h1,.p-hero h1,.p-hero.sm h1,.p-hero.legal h1,.post-hero h1,.about-hero h1,[lang="en"] .about-hero h1{font-size:34px;line-height:1.08}
+}
+
+/* v20: one type scale across the site, taken from the home page.
+   H1 58/34 (v19) · section H2 60/36 · project names 44/24 · card titles 21-26 · lead 20/17 · body text 16-17 · article text 18/17 */
+.p-hero .lead,.about-hero .lead,.hero .lead{font-size:20px}
+.svc-block h2,.next .box h2{font-size:60px;font-weight:900}
+.svc-block .intro{font-size:17px}
+.feat-grid .feat h3{font-size:21px}
+.feat-grid .feat p,.jstep p{font-size:16px}
+.jstep h3{font-size:26px}
+.case-head h2{font-size:44px;font-weight:800}
+.case-head .desc,.next .box p{font-size:17px}
+.about-page .split p:not(.hl),.split > div > p:not(.hl):not(.intro){font-size:17px}
+.cmp .col h3{font-size:26px}
+.rule h3{font-size:26px}
+.rule p{font-size:16px}
+.post-card h2{font-size:21px}
+.post-body{font-size:18px}
+.post-body p:first-child{font-size:19px}
+@media (max-width:800px){
+  .p-hero .lead,.about-hero .lead,.hero .lead{font-size:17px}
+  .svc-block h2,.next .box h2{font-size:36px}
+  .svc-block .intro{font-size:16px}
+  .feat-grid .feat h3{font-size:19px}
+  .feat-grid .feat p,.jstep p{font-size:15px}
+  .jstep h3,.cmp .col h3,.rule h3{font-size:20px}
+  .case-head h2{font-size:24px}
+  .case-head .desc,.next .box p{font-size:16px}
+  .split > div > p:not(.hl):not(.intro){font-size:16px}
+  .rule p{font-size:15px}
+  .post-card h2{font-size:19px}
+  .post-body{font-size:17px}
+  .post-body p:first-child{font-size:18px}
+}

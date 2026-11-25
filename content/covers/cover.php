@@ -4,13 +4,14 @@
 // Open: /content/covers/cover.php?slug=whatsapp-chatbot
 require __DIR__ . '/../../includes/icons.php';
 $slug = $_GET['slug'] ?? 'whatsapp-chatbot';
+$en = ($_GET['lang'] ?? 'he') === 'en';   // English covers: assets/img/articles/en/<slug>.webp
 $A = '../../assets/img/';
 function card(string $ic, string $title, string $sub, string $cls = '', string $style = ''): string
 {
     return '<div class="card ' . $cls . '" style="' . $style . '"><span class="ic">' . icon($ic) . '</span><div><b>' . $title . '</b><small>' . $sub . '</small></div></div>';
 }
 ?><!doctype html>
-<html lang="he" dir="rtl">
+<html lang="<?= $en ? 'en' : 'he' ?>" dir="<?= $en ? 'ltr' : 'rtl' ?>">
 <head>
 <meta charset="utf-8">
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@500;700;800&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
@@ -21,11 +22,11 @@ function card(string $ic, string $title, string $sub, string $cls = '', string $
   .stage{position:relative;width:1200px;height:630px;overflow:hidden;isolation:isolate}
   .stage::before{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(#ffffff0c 1px,transparent 1px),linear-gradient(90deg,#ffffff0c 1px,transparent 1px);background-size:60px 60px;mask-image:radial-gradient(ellipse at 50% 55%,#000 25%,transparent 78%)}
   .stage::after{content:"";position:absolute;z-index:-1;width:900px;height:900px;left:50%;top:60%;transform:translate(-50%,-50%);background:radial-gradient(circle,#C8864F38,transparent 60%)}
-  .brand{position:absolute;bottom:34px;right:44px;display:flex;align-items:center;gap:10px;color:#fff;font-weight:800;font-size:22px;letter-spacing:-.02em}
+  .brand{position:absolute;bottom:34px;inset-inline-start:44px;display:flex;align-items:center;gap:10px;color:#fff;font-weight:800;font-size:22px;letter-spacing:-.02em}
   .brand .mk{width:34px;height:34px;border:1.5px solid var(--accent);border-radius:8px;display:grid;place-items:center}
   .brand .mk svg{width:20px;height:20px;color:var(--accent)}
   .brand small{font-weight:500;color:#9A9893;font-size:22px}
-  .tag{position:absolute;top:36px;right:44px;font:500 15px 'IBM Plex Mono',monospace;color:#9A9893;letter-spacing:.06em}
+  .tag{position:absolute;top:36px;inset-inline-start:44px;font:500 15px 'IBM Plex Mono',monospace;color:#9A9893;letter-spacing:.06em}
   svg.glyph{width:100%;height:100%}
   .device{position:absolute;background:#0b0b0b;border-radius:44px;padding:9px;box-shadow:0 0 0 2px #3a3a3a,0 0 0 4px #1c1c1c,0 0 0 5.5px #4a4a4a,0 50px 80px -20px #000}
   .device img{display:block;width:100%;border-radius:36px;aspect-ratio:780/1690;object-fit:cover;object-position:top}
@@ -64,6 +65,18 @@ function card(string $ic, string $title, string $sub, string $cls = '', string $
   .form .go{height:48px;border-radius:99px;background:var(--accent);margin-top:16px;display:grid;place-items:center;font-weight:800;font-size:17px;color:var(--ink)}
   .chip{position:absolute;background:#fff;border-radius:99px;padding:12px 20px;font-weight:800;font-size:17px;color:var(--ink);display:flex;align-items:center;gap:10px;box-shadow:0 24px 40px -18px #000}
   .chip .ic{width:28px;height:28px;border-radius:50%;background:var(--accent);padding:6px;color:var(--ink)}
+  .serp{position:absolute;background:#fff;border-radius:22px;padding:22px 26px 26px;box-shadow:0 50px 90px -30px #000;width:560px}
+  .serp .q{display:flex;align-items:center;gap:12px;height:50px;border:1.5px solid #E2E0DA;border-radius:99px;padding:0 20px;font-weight:700;font-size:18px;color:var(--ink)}
+  .serp .q svg{width:22px;height:22px;color:#8a8883;flex:none}
+  .serp .res{margin-top:20px;padding:16px 18px;border-radius:16px;background:#FBF6F1;box-shadow:inset 0 0 0 1.5px #C8864F66}
+  .serp .site{font:500 14px 'IBM Plex Mono',monospace;color:#66645F;direction:ltr;text-align:start}
+  .serp .t{font-weight:800;font-size:21px;color:#7A4E2A;margin-top:4px;line-height:1.3}
+  .serp .d{font-size:15px;color:#55534e;margin-top:6px;line-height:1.45}
+  .serp .ghost{margin-top:16px;padding:0 18px}
+  .serp .ghost i{display:block;height:12px;border-radius:99px;background:#ECEAE4;margin-top:10px}
+  .gsc{position:absolute;background:#1b1b1b;border-radius:20px;padding:20px 22px;width:300px;box-shadow:0 0 0 1px #2f2f2f,0 40px 70px -25px #000;color:#fff}
+  .gsc b{font-weight:800;font-size:17px}.gsc small{display:block;color:#9A9893;font-size:14px;margin-top:2px}
+  .gsc svg.ln{display:block;width:100%;height:90px;margin-top:14px}
 </style>
 </head>
 <body>
@@ -113,6 +126,18 @@ function card(string $ic, string $title, string $sub, string $cls = '', string $
   </div>
   <span class="chip" style="left:880px;top:420px"><span class="ic"><?= icon('chart') ?></span>מה מביא לקוחות</span>
   <span class="demo" style="left:360px;top:470px">הדגמה להמחשה</span>
+<?php elseif ($slug === 'seo-for-small-business'): ?>
+  <span class="tag">SEO</span>
+  <div class="serp" style="<?= $en ? 'left:110px' : 'left:530px' ?>;top:96px">
+    <div class="q"><?= icon('search') ?><?= $en ? 'plumber near me' : 'חשמלאי בחולון' ?></div>
+    <div class="res"><div class="site"><?= $en ? 'yourbusiness.com' : 'yourbusiness.co.il' ?> › services</div><div class="t"><?= $en ? 'Emergency Plumber · Same-Day Service' : 'חשמלאי מוסמך בחולון · מגיע עוד היום' ?></div><div class="d"><?= $en ? 'Licensed plumber serving your area. Call or message us on WhatsApp.' : 'חשמלאי מוסמך באזור חולון ובת ים. התקשרו או שלחו הודעה בוואטסאפ.' ?></div></div>
+    <div class="ghost"><i style="width:40%"></i><i style="width:85%"></i><i style="width:70%"></i></div>
+  </div>
+  <div class="gsc" style="<?= $en ? 'left:740px' : 'left:150px' ?>;top:150px"><b><?= $en ? 'Clicks from Google' : 'קליקים מגוגל' ?></b><small><?= $en ? 'Last 6 months' : '6 חודשים אחרונים' ?></small>
+    <svg class="ln" viewBox="0 0 260 90" preserveAspectRatio="none" aria-hidden="true"><polyline points="0,82 40,78 80,72 120,64 160,50 200,38 260,14" fill="none" stroke="#C8864F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><polyline points="0,86 40,84 80,82 120,78 160,72 200,66 260,56" fill="none" stroke="#555" stroke-width="3" stroke-linecap="round"/></svg>
+  </div>
+  <span class="chip" style="<?= $en ? 'left:760px' : 'left:170px' ?>;top:400px"><span class="ic"><?= icon('check') ?></span>Core Web Vitals</span>
+  <span class="demo" style="<?= $en ? 'left:740px' : 'left:150px' ?>;top:470px"><?= $en ? 'Illustration' : 'הדגמה להמחשה' ?></span>
 <?php endif; ?>
 </div>
 </body>

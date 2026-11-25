@@ -31,7 +31,7 @@ One person who connects automation, development and marketing end-to-end: the ch
 
 ## Evidence on Hand
 - Founder portrait: assets/img/founder.webp (shown in grayscale).
-- Projects: fisha.shop (e-commerce, https://fisha.shop) and Excerly (PWA, https://shaydadon.github.io/Excerly/). Real screenshots only.
+- Projects: fisha.shop (e-commerce, https://fisha.shop) Excerly (AI-powered fitness and nutrition PWA, https://shaydadon.github.io/Excerly/) and Boardog (WhatsApp chatbot for dog boarding businesses). Real screenshots only.
 - No testimonials, client counts or metrics — do not fabricate. Illustrative visuals are labelled "הדגמה להמחשה".
 - Founder: Shay Dadon (שי דדון) — 15+ years as a software developer, B.Sc. in Computer Science, completed a marketing course, 2 years in digital marketing.
 - Phone/WhatsApp 052-620-3423, email shay@sdmarketing.co.il.

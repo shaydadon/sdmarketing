@@ -1,7 +1,7 @@
 <?php
 // Closing call-to-action. Optional before include: $cta_title, $cta_text, $cta_contacts.
-$cta_title    = $cta_title ?? tr("מה אפשר להפוך\nלאוטומטי אצלך?", "What could your business\nrun on autopilot?");
-$cta_text     = $cta_text  ?? tr('שלחו הודעה קצרה על העסק. אחזור עם רעיון אחד שאפשר להתחיל ממנו, בלי התחייבות.', 'Send a short message about your business. I’ll reply with one concrete idea you can start with, no strings attached.');
+$cta_title    = $cta_title ?? tr("מה אפשר להפוך\nלאוטומטי אצלכם?", "What could your business\nrun on autopilot?");
+$cta_text     = $cta_text  ?? tr('ספרו לי בהודעה קצרה מה העסק עושה ומה הייתם רוצים לשפר.', 'Tell me in a short message what your business does and what you’d like to improve.');
 $cta_contacts = $cta_contacts ?? false;
 ?>
 <section class="cta" aria-labelledby="cta-title">

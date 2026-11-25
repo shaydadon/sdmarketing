@@ -13,19 +13,19 @@ require __DIR__ . '/includes/projects-data.php';
   <div class="wrap h3-grid">
     <div class="h3-text hero-in">
       <span class="eyebrow"><?= tr('שי דדון · טכנולוגיה, אוטומציות ושיווק', 'Shay Dadon · Developer, automation & marketing') ?></span>
-      <h1 id="hero-title"><?= tr('<span class="l1">העסק שלך ממשיך לעבוד.</span><span class="l2">גם כשאתה לא.</span>', '<span class="l1">Your business keeps working.</span><span class="l2">Even when you’re not.</span>') ?></h1>
-      <p class="lead"><?= tr('אתרים חכמים, אוטומציות ופתרונות דיגיטליים שמתחברים לעסק שלך, וחוסכים לך זמן, עבודה וכאב ראש.', 'Smart websites, automations and digital tools that plug straight into your business, saving you time, effort and hassle.') ?></p>
+      <h1 id="hero-title"><?= tr('<span class="l1">העסק שלכם ממשיך לעבוד.</span><span class="l2">גם כשאתם לא.</span>', '<span class="l1">Your business keeps working.</span><span class="l2">Even when you’re not.</span>') ?></h1>
+      <p class="lead"><?= tr('אתרים, אוטומציות וכלים דיגיטליים שמתחברים למערכות של העסק שלכם וחוסכים לכם זמן ועבודה.', 'Websites, automations and digital tools that connect to the systems your business already uses and save you time and work.') ?></p>
       <a class="btn btn-main" href="<?= e(wa_link($site, tr('היי שי, אשמח לדבר על העסק שלי', "Hi Shay, I'd like to talk about my business"))) ?>" target="_blank" rel="noopener"><span><?= tr('בואו נדבר על העסק שלכם', 'Let’s talk about your business') ?></span><?= icon('arrow') ?></a>
       <p class="offer"><?= tr('הודעה קצרה בוואטסאפ מספיקה. אחזור עם רעיון אחד שאפשר להתחיל ממנו, בלי התחייבות.', 'A quick WhatsApp message is all it takes. I’ll reply with one concrete idea you can start with, no strings attached.') ?></p>
     </div>
-    <figure class="h3-art" aria-label="<?= tr('עבודות אמיתיות: החנות fisha.shop, האפליקציה Excerly והצ׳אטבוט Boardog', 'Live projects: the fisha.shop online store, the Excerly app and the Boardog chatbot') ?>">
+    <figure class="h3-art" aria-label="<?= tr('עבודות אמיתיות: החנות fisha.shop, אפליקציית הכושר והתזונה Excerly וצ׳אטבוט הוואטסאפ Boardog', 'Live projects: the fisha.shop online store, the Excerly AI fitness and nutrition app and the Boardog WhatsApp chatbot') ?>">
       <div class="browser h3-b">
         <div class="bar"><i></i><i></i><i></i><u>fisha.shop</u></div>
         <img src="<?= url('assets/img/projects/fisha/tattoos-1.webp') ?>" alt="" width="1600" height="1000" decoding="async" fetchpriority="high">
       </div>
       <div class="device h3-p"><img src="<?= url('assets/img/projects/excerly/session-m.webp') ?>" alt="" width="780" height="1688" decoding="async"></div>
       <div class="device h3-bd"><img src="<?= url('assets/img/projects/boardog/chat-end.webp') ?>" alt="" width="780" height="1690" decoding="async"></div>
-      <ul class="h3-why" aria-label="<?= tr('מה הצ׳אטבוט Boardog פותר', 'What the Boardog chatbot solves') ?>">
+      <ul class="h3-why" aria-label="<?= tr('מה צ׳אטבוט הוואטסאפ Boardog פותר', 'What the Boardog WhatsApp chatbot solves') ?>">
         <li><?= icon('check') ?><span><?= tr('<b>עונה תוך שניות</b>גם בשתיים בלילה', '<b>Replies in seconds</b>even at 2 a.m.') ?></span></li>
         <li><?= icon('check') ?><span><?= tr('<b>אוסף את כל הפרטים</b>בלי טלפונים חוזרים', '<b>Captures every detail</b>no phone tag') ?></span></li>
         <li><?= icon('check') ?><span><?= tr('<b>קובע פגישה לבד</b>ושולח סיכום מסודר', '<b>Books the meeting</b>and sends a tidy summary') ?></span></li>
@@ -38,31 +38,16 @@ require __DIR__ . '/includes/projects-data.php';
 <section class="statement" aria-labelledby="problem-title">
   <div class="wrap">
     <span class="eyebrow"><?= tr('הבעיה', 'The problem') ?></span>
-    <h2 id="problem-title"><?= tr('רוב העסקים מאבדים לקוחות בפער שבין <mark>"מישהו פנה"</mark> ל<mark>"מישהו חזר אליו"</mark>. <em>אני בונה את המערכת שסוגרת את הפער הזה.</em>', 'Most businesses lose customers in the gap between <mark>“someone reached out”</mark> and <mark>“someone got back to them.”</mark> <em>I build the system that closes that gap.</em>') ?></h2>
+    <h2 id="problem-title"><?= tr('עסקים רבים מאבדים לקוחות בפער שבין <mark>"מישהו פנה"</mark> ל<mark>"מישהו חזר אליו"</mark>. <em>אני בונה את המערכת שסוגרת את הפער הזה.</em>', 'Many businesses lose customers in the gap between <mark>“someone reached out”</mark> and <mark>“someone got back to them.”</mark> <em>I build the system that closes that gap.</em>') ?></h2>
   </div>
 </section>
 
-<?php
-$outcomes = $is_en ? [
-    'automations' => 'Less busywork. More time to run your business.',
-    'websites'    => 'A website that generates leads, not just compliments.',
-    'pwa'         => 'Your app, right on your customers’ home screens.',
-    'seo'         => 'Customers who find you on Google, without paying for every click.',
-    'campaigns'   => 'Know exactly what brings in customers, and stop paying for what doesn’t.',
-] : [
-    'automations' => 'פחות עבודה ידנית. יותר זמן לעסק.',
-    'websites'    => 'אתר שמביא פניות, לא רק נראה טוב.',
-    'pwa'         => 'האפליקציה שלך, במסך הבית של הלקוח.',
-    'seo'         => 'לקוחות שמוצאים אתכם בגוגל, בלי לשלם על כל קליק.',
-    'campaigns'   => 'יודעים מה מביא לקוחות, ומפסיקים לשלם על מה שלא.',
-];
-?>
 <section class="services lite" aria-labelledby="services-title">
   <div class="wrap">
     <div class="sec-head">
       <div>
         <span class="eyebrow"><?= tr('מה אני בונה', 'What I build') ?></span>
-        <h2 class="sec" id="services-title"><?= tr('חמישה תחומים. מערכת אחת שעובדת יחד.', 'Five services. One system that works together.') ?></h2>
+        <h2 class="sec" id="services-title"><?= tr('חמישה שירותים שבנויים לעבוד יחד.', 'Five services built to work together.') ?></h2>
       </div>
     </div>
 
@@ -71,7 +56,7 @@ $outcomes = $is_en ? [
         <a class="svc rv" href="<?= e(lurl('services#' . $s['id'])) ?>">
           <h3 class="svc-h"><span class="icon"><?= icon($s['icon']) ?></span><?= e($s['title']) ?></h3>
           <p class="d"><?= e($s['lead']) ?></p>
-          <p class="out"><?= e($outcomes[$s['id']] ?? '') ?><?= icon('arrow') ?></p>
+          <p class="out"><?= tr('לפרטים על השירות', 'More about this service') ?><?= icon('arrow') ?></p>
         </a>
       <?php endforeach; ?>
     </div>
@@ -86,7 +71,6 @@ $outcomes = $is_en ? [
         <span class="eyebrow"><?= tr('תהליך עבודה', 'How it works') ?></span>
         <h2 class="sec" id="process-title"><?= tr('מהשיחה הראשונה<br>ועד שזה <span class="acc">רץ לבד.</span>', 'From the first call<br>to <span class="acc">running on autopilot.</span>') ?></h2>
       </div>
-      <p class="lead"><?= tr('בלי הפתעות באמצע: יודעים מה בונים, באיזה סדר, כמה זה עולה ומתי זה עולה לאוויר.', 'No surprises: before anything is built, you know the scope, the order, the cost and the launch date.') ?></p>
     </div>
     <div class="steps">
       <?php if ($is_en): ?>
@@ -109,13 +93,27 @@ $outcomes = $is_en ? [
     <div class="sec-head">
       <div>
         <span class="eyebrow"><?= tr('עבודות אחרונות', 'Recent work') ?></span>
-        <h2 class="sec" id="work-title"><?= tr('ההוכחה נמצאת באוויר.', 'The proof is live.') ?></h2>
+        <h2 class="sec" id="work-title"><?= tr('פרויקטים שאפשר להיכנס אליהם עכשיו.', 'Projects you can open and try today.') ?></h2>
       </div>
       <a class="btn btn-ink" href="<?= lurl('projects') ?>"><?= tr('לכל הפרויקטים', 'View all projects') ?><?= icon('arrow') ?></a>
     </div>
-    <div class="proj-grid">
-      <?php foreach ($projects as $p): ?>
-        <article class="proj big<?= $p['layout'] === 'phones' ? ' rev' : '' ?>">
+    <?php
+    // The home page also shows the Boardog WhatsApp chatbot (on the projects page it is its own section, includes/wa-demo.php).
+    $home_projects = $projects;
+    $home_projects[] = [
+        'name'    => 'Boardog',
+        'tag'     => tr('צ׳אטבוט וואטסאפ לבעלי פנסיונים', 'WhatsApp chatbot for dog boarding businesses'),
+        'summary' => tr('צ׳אטבוט לוואטסאפ שמקבל פנייה, אוסף את הפרטים וקובע פגישה לבד.', 'A WhatsApp chatbot that handles a new inquiry, collects the details and books the meeting on its own.'),
+        'layout'  => 'phones',
+        'shots'   => [
+            ['src' => 'assets/img/projects/boardog/chat-top.webp', 'alt' => tr('תחילת שיחה עם הצ׳אטבוט Boardog בוואטסאפ', 'The start of a WhatsApp conversation with the Boardog chatbot'), 'w' => 780, 'h' => 1690],
+            ['src' => 'assets/img/projects/boardog/chat-end.webp', 'alt' => tr('הצ׳אטבוט Boardog קובע פגישה ושולח סיכום', 'The Boardog chatbot books a meeting and sends a summary'), 'w' => 780, 'h' => 1690],
+        ],
+    ];
+    ?>
+    <div class="proj-grid" data-carousel id="home-projects" data-carousel-label="<?= tr('פרויקטים, אפשר לגלול הצידה', 'Projects, scrollable') ?>">
+      <?php foreach ($home_projects as $n => $p): ?>
+        <article class="proj big<?= $p['layout'] === 'phones' ? ' rev' : '' ?><?= $n % 2 === 0 && $p['layout'] === 'phones' ? ' flip' : '' ?>">
           <?php if ($p['layout'] === 'phones'): ?>
             <div class="media media-ex">
               <?php foreach ($p['shots'] as $shot): ?>
@@ -137,6 +135,11 @@ $outcomes = $is_en ? [
         </article>
       <?php endforeach; ?>
     </div>
+    <div class="proj-dots" role="group" aria-label="<?= tr('מעבר בין הפרויקטים', 'Move between projects') ?>" data-carousel-dots="home-projects">
+      <?php foreach ($home_projects as $i => $p): ?>
+        <button type="button" aria-controls="home-projects" aria-label="<?= e(tr('פרויקט ' . ($i + 1) . ' מתוך ' . count($home_projects) . ': ', 'Project ' . ($i + 1) . ' of ' . count($home_projects) . ': ') . $p['name']) ?>"<?= $i === 0 ? ' aria-current="true"' : '' ?>></button>
+      <?php endforeach; ?>
+    </div>
   </div>
 </section>
 
@@ -144,12 +147,12 @@ $outcomes = $is_en ? [
   <div class="wrap ap-grid">
     <div class="ap-photo rv">
       <img src="<?= url('assets/img/founder.webp') ?>" alt="<?= tr('שי דדון, מייסד SDmarketing', 'Shay Dadon, founder of SDmarketing') ?>" width="1024" height="1024" loading="lazy" decoding="async">
-      <div class="cap"><b><?= tr('שי דדון', 'Shay Dadon') ?></b><span><?= tr('מפתח תוכנה, B.Sc. מדעי המחשב, שיווק דיגיטלי', 'Software developer · B.Sc. Computer Science · Digital marketing') ?></span></div>
+      <div class="cap"><b><?= tr('שי דדון', 'Shay Dadon') ?></b><span><?= tr('מפתח תוכנה, B.Sc. מדעי המחשב, שיווק&nbsp;דיגיטלי', 'Software developer · B.Sc. Computer Science · Digital marketing') ?></span></div>
     </div>
     <div>
       <span class="eyebrow"><?= tr('למה אני', 'Why work with me') ?></span>
-      <h2 class="sec" id="about-title"><?= tr('<span class="count" data-count="15">15</span> שנות ניסיון בטכנולוגיה.<span class="acc">גישה אחת פשוטה: קודם מבינים את הבעיה.</span>', '<span class="count" data-count="15">15</span> years in tech.<span class="acc">One simple approach: understand the problem first.</span>') ?></h2>
-      <p class="lead"><?= tr('אני לא מתחיל מקוד, עיצוב או מערכת חדשה. אני מתחיל מהשאלה מה לא עובד בעסק שלך, ואיך אפשר לשנות את זה.', 'I don’t start with code, design or a shiny new tool. I start by asking what isn’t working in your business, and how to fix it.') ?></p>
+      <h2 class="sec" id="about-title"><?= tr('<span class="count" data-count="15">15</span>+ שנות ניסיון בטכנולוגיה.<span class="acc">קודם מבינים את הבעיה.</span>', '<span class="count" data-count="15">15</span>+ years in tech.<span class="acc">The problem comes first.</span>') ?></h2>
+      <p class="lead"><?= tr('רק אחרי שברור מה לא עובד בעסק שלכם, אני בוחר קוד, עיצוב או מערכת.', 'Only once it’s clear what isn’t working in your business do I choose the code, the design or the tools.') ?></p>
       <ol class="qs">
         <?php if ($is_en): ?>
         <li class="rv"><span>01</span><div><b>Where are you losing leads?</b>An unanswered message, a lead nobody followed up on, an abandoned cart.</div></li>
@@ -161,14 +164,38 @@ $outcomes = $is_en ? [
         <li class="rv"><span>03</span><div><b>מה הצעד הקטן שיחזיר הכי הרבה?</b>מתחילים ממנו, מודדים, ורק אז מוסיפים את הבא.</div></li>
         <?php endif; ?>
       </ol>
-      <div class="vs">
-        <div class="a"><h3><?= tr('הדרך הרגילה', 'The usual way') ?></h3><?= tr('שלושה ספקים, שלוש הצעות מחיר, ואתה מתווך ביניהם.', 'Three vendors, three quotes, and you’re left coordinating them all.') ?></div>
-        <div class="b"><h3><?= tr('עם SDmarketing', 'With SDmarketing') ?></h3><?= tr('תוכנית אחת, מחיר אחד, איש קשר אחד.', 'One plan, one price, one point of contact.') ?></div>
-      </div>
       <a class="link" href="<?= lurl('about') ?>"><?= tr('הסיפור המלא', 'Read my story') ?> <?= icon('arrow') ?></a>
     </div>
   </div>
 </section>
+
+<?php if (!$is_en):
+  // Latest guides, newest first (Hebrew only: most articles have no English version yet)
+  require __DIR__ . '/includes/articles-data.php';
+  $latest = $articles;
+  usort($latest, fn($a, $b) => strcmp($b['published'], $a['published']));
+  $latest = array_slice($latest, 0, 3); ?>
+<section class="home-posts" aria-labelledby="posts-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">מהבלוג</span>
+        <h2 class="sec" id="posts-title">מדריכים קצרים לבעלי עסקים</h2>
+      </div>
+      <a class="btn btn-ink" href="<?= url('articles') ?>">לכל המאמרים<?= icon('arrow') ?></a>
+    </div>
+    <ul class="hp-grid">
+      <?php foreach ($latest as $a): ?>
+        <li class="rv"><a class="hp-card" href="<?= e(url('articles/' . $a['slug'])) ?>">
+          <img src="<?= e(url($a['image'])) ?>" alt="" width="1200" height="630" loading="lazy" decoding="async">
+          <span class="hp-meta"><?= e($a['type']) ?> · <?= (int) $a['minutes'] ?> דקות קריאה</span>
+          <h3><?= e($a['title']) ?></h3>
+        </a></li>
+      <?php endforeach; ?>
+    </ul>
+  </div>
+</section>
+<?php endif; ?>
 
 <?php
 $faq = $is_en ? [
@@ -182,7 +209,7 @@ $faq = $is_en ? [
     ],
     [
         'q' => 'I want an app for my customers, without going through the App Store.',
-        'a' => 'A progressive web app (PWA) installs straight from the browser, no app store required, and opens from an icon on the home screen. One codebase runs on Android, iPhone and desktop. That’s how Excerly was built.',
+        'a' => 'A progressive web app (PWA) installs straight from the browser, no app store required, and opens from an icon on the home screen. One codebase runs on Android, iPhone and desktop. That’s how Excerly, an AI-powered fitness and nutrition app, was built.',
     ],
     [
         'q' => 'I’m paying for ads, but I can’t tell what actually brings in leads.',
@@ -203,7 +230,7 @@ $faq = $is_en ? [
     ],
     [
         'q' => 'אני רוצה אפליקציה ללקוחות, בלי לעבור דרך חנות האפליקציות?',
-        'a' => 'אפליקציית PWA מתקינים ישר מהדפדפן, ללא צורך בחנות האפליקציות, והיא נפתחת עם אייקון במסך הבית. אותו קוד רץ על אנדרואיד, על אייפון ועל מחשב. כך נבנתה Excerly.',
+        'a' => 'אפליקציית PWA מתקינים ישר מהדפדפן, ללא צורך בחנות האפליקציות, והיא נפתחת עם אייקון במסך הבית. אותו קוד רץ על אנדרואיד, על אייפון ועל מחשב. כך נבנתה Excerly, אפליקציית כושר ותזונה מבוססת AI.',
     ],
     [
         'q' => 'אני משלם על פרסום ולא ברור לי מה באמת מביא פניות?',
