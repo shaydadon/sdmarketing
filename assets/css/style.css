@@ -1498,3 +1498,36 @@ footer ul a,.f-bot nav a{display:inline-flex;align-items:center;min-height:44px}
 @media (max-width:800px){
   .hero h1,.p-hero h1,.p-hero.sm h1,.p-hero.legal h1,.post-hero h1,.about-hero h1,[lang="en"] .about-hero h1{font-size:34px;line-height:1.08}
 }
+
+/* v20: one type scale across the site, taken from the home page.
+   H1 58/34 (v19) · section H2 60/36 · project names 44/24 · card titles 21-26 · lead 20/17 · body text 16-17 · article text 18/17 */
+.p-hero .lead,.about-hero .lead,.hero .lead{font-size:20px}
+.svc-block h2,.next .box h2{font-size:60px;font-weight:900}
+.svc-block .intro{font-size:17px}
+.feat-grid .feat h3{font-size:21px}
+.feat-grid .feat p,.jstep p{font-size:16px}
+.jstep h3{font-size:26px}
+.case-head h2{font-size:44px;font-weight:800}
+.case-head .desc,.next .box p{font-size:17px}
+.about-page .split p:not(.hl),.split > div > p:not(.hl):not(.intro){font-size:17px}
+.cmp .col h3{font-size:26px}
+.rule h3{font-size:26px}
+.rule p{font-size:16px}
+.post-card h2{font-size:21px}
+.post-body{font-size:18px}
+.post-body p:first-child{font-size:19px}
+@media (max-width:800px){
+  .p-hero .lead,.about-hero .lead,.hero .lead{font-size:17px}
+  .svc-block h2,.next .box h2{font-size:36px}
+  .svc-block .intro{font-size:16px}
+  .feat-grid .feat h3{font-size:19px}
+  .feat-grid .feat p,.jstep p{font-size:15px}
+  .jstep h3,.cmp .col h3,.rule h3{font-size:20px}
+  .case-head h2{font-size:24px}
+  .case-head .desc,.next .box p{font-size:16px}
+  .split > div > p:not(.hl):not(.intro){font-size:16px}
+  .rule p{font-size:15px}
+  .post-card h2{font-size:19px}
+  .post-body{font-size:17px}
+  .post-body p:first-child{font-size:18px}
+}
