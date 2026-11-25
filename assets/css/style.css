@@ -1531,3 +1531,18 @@ footer ul a,.f-bot nav a{display:inline-flex;align-items:center;min-height:44px}
   .post-body{font-size:17px}
   .post-body p:first-child{font-size:18px}
 }
+
+/* v21: services journey cards (desktop): the service tag stays on one line and sits at the bottom of every card,
+   below the text and never on top of it. */
+@media (min-width:801px){
+  .jsteps{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .jstep{display:flex;flex-direction:column}
+  .jstep p{margin-bottom:18px}
+  .jstep .s{align-self:flex-start;margin-top:auto;white-space:nowrap;font-size:17px;line-height:1.3;padding:6px 14px}
+}
+/* Narrow desktops: a long tag may wrap; it becomes a rounded box instead of a stretched pill */
+@media (min-width:801px) and (max-width:1279px){
+  .jstep{padding:24px 18px}
+  .jstep .s{white-space:normal;border-radius:12px;font-size:16px}
+}
+@media (min-width:801px) and (max-width:999px){.jsteps{grid-template-columns:repeat(3,minmax(0,1fr))}}
