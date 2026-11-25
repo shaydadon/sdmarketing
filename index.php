@@ -18,14 +18,14 @@ require __DIR__ . '/includes/projects-data.php';
       <a class="btn btn-main" href="<?= e(wa_link($site, tr('היי שי, אשמח לדבר על העסק שלי', "Hi Shay, I'd like to talk about my business"))) ?>" target="_blank" rel="noopener"><span><?= tr('בואו נדבר על העסק שלכם', 'Let’s talk about your business') ?></span><?= icon('arrow') ?></a>
       <p class="offer"><?= tr('הודעה קצרה בוואטסאפ מספיקה. אחזור עם רעיון אחד שאפשר להתחיל ממנו, בלי התחייבות.', 'A quick WhatsApp message is all it takes. I’ll reply with one concrete idea you can start with, no strings attached.') ?></p>
     </div>
-    <figure class="h3-art" aria-label="<?= tr('עבודות אמיתיות: החנות fisha.shop, האפליקציה Excerly והצ׳אטבוט Boardog', 'Live projects: the fisha.shop online store, the Excerly app and the Boardog chatbot') ?>">
+    <figure class="h3-art" aria-label="<?= tr('עבודות אמיתיות: החנות fisha.shop, אפליקציית הכושר והתזונה Excerly וצ׳אטבוט הוואטסאפ Boardog', 'Live projects: the fisha.shop online store, the Excerly AI fitness and nutrition app and the Boardog WhatsApp chatbot') ?>">
       <div class="browser h3-b">
         <div class="bar"><i></i><i></i><i></i><u>fisha.shop</u></div>
         <img src="<?= url('assets/img/projects/fisha/tattoos-1.webp') ?>" alt="" width="1600" height="1000" decoding="async" fetchpriority="high">
       </div>
       <div class="device h3-p"><img src="<?= url('assets/img/projects/excerly/session-m.webp') ?>" alt="" width="780" height="1688" decoding="async"></div>
       <div class="device h3-bd"><img src="<?= url('assets/img/projects/boardog/chat-end.webp') ?>" alt="" width="780" height="1690" decoding="async"></div>
-      <ul class="h3-why" aria-label="<?= tr('מה הצ׳אטבוט Boardog פותר', 'What the Boardog chatbot solves') ?>">
+      <ul class="h3-why" aria-label="<?= tr('מה צ׳אטבוט הוואטסאפ Boardog פותר', 'What the Boardog WhatsApp chatbot solves') ?>">
         <li><?= icon('check') ?><span><?= tr('<b>עונה תוך שניות</b>גם בשתיים בלילה', '<b>Replies in seconds</b>even at 2 a.m.') ?></span></li>
         <li><?= icon('check') ?><span><?= tr('<b>אוסף את כל הפרטים</b>בלי טלפונים חוזרים', '<b>Captures every detail</b>no phone tag') ?></span></li>
         <li><?= icon('check') ?><span><?= tr('<b>קובע פגישה לבד</b>ושולח סיכום מסודר', '<b>Books the meeting</b>and sends a tidy summary') ?></span></li>
@@ -102,7 +102,7 @@ require __DIR__ . '/includes/projects-data.php';
     $home_projects = $projects;
     $home_projects[] = [
         'name'    => 'Boardog',
-        'tag'     => tr('צ׳אטבוט לוואטסאפ', 'WhatsApp chatbot'),
+        'tag'     => tr('צ׳אטבוט וואטסאפ לבעלי פנסיונים', 'WhatsApp chatbot for dog boarding businesses'),
         'summary' => tr('צ׳אטבוט לוואטסאפ שמקבל פנייה, אוסף את הפרטים וקובע פגישה לבד.', 'A WhatsApp chatbot that handles a new inquiry, collects the details and books the meeting on its own.'),
         'layout'  => 'phones',
         'shots'   => [
@@ -209,7 +209,7 @@ $faq = $is_en ? [
     ],
     [
         'q' => 'I want an app for my customers, without going through the App Store.',
-        'a' => 'A progressive web app (PWA) installs straight from the browser, no app store required, and opens from an icon on the home screen. One codebase runs on Android, iPhone and desktop. That’s how Excerly was built.',
+        'a' => 'A progressive web app (PWA) installs straight from the browser, no app store required, and opens from an icon on the home screen. One codebase runs on Android, iPhone and desktop. That’s how Excerly, an AI-powered fitness and nutrition app, was built.',
     ],
     [
         'q' => 'I’m paying for ads, but I can’t tell what actually brings in leads.',
@@ -230,7 +230,7 @@ $faq = $is_en ? [
     ],
     [
         'q' => 'אני רוצה אפליקציה ללקוחות, בלי לעבור דרך חנות האפליקציות?',
-        'a' => 'אפליקציית PWA מתקינים ישר מהדפדפן, ללא צורך בחנות האפליקציות, והיא נפתחת עם אייקון במסך הבית. אותו קוד רץ על אנדרואיד, על אייפון ועל מחשב. כך נבנתה Excerly.',
+        'a' => 'אפליקציית PWA מתקינים ישר מהדפדפן, ללא צורך בחנות האפליקציות, והיא נפתחת עם אייקון במסך הבית. אותו קוד רץ על אנדרואיד, על אייפון ועל מחשב. כך נבנתה Excerly, אפליקציית כושר ותזונה מבוססת AI.',
     ],
     [
         'q' => 'אני משלם על פרסום ולא ברור לי מה באמת מביא פניות?',

@@ -38,7 +38,7 @@ HTML],
         ['limits', 'מגבלות ידועות', <<<HTML
 <p>למרות המאמצים, ייתכן שחלקים מסוימים באתר עדיין אינם נגישים במלואם. בפרט:</p>
 <ul>
-  <li>צילומי המסך בעמוד הפרויקטים הם צילומים אמיתיים, והתוכן שלהם מתואר גם בטקסט שלצידם. הדגמות אחרות (שיחת הוואטסאפ, תרשים האוטומציה ודוח הפרסום) מסומנות "הדגמה להמחשה".</li>
+  <li>צילומי המסך בעמוד הפרויקטים הם צילומים אמיתיים, והתוכן שלהם מתואר גם בטקסט שלצידם. הדגמות אחרות (תרשים האוטומציה ודוח הפרסום) מסומנות "הדגמה להמחשה".</li>
   <li>אתרים חיצוניים שאליהם מקשר האתר (כגון אתרי לקוחות ווואטסאפ) אינם באחריותנו, ורמת הנגישות שלהם עשויה להשתנות.</li>
 </ul>
 <p>אם נתקלתם בבעיה, נשמח שתספרו לנו, ונטפל בה בהקדם.</p>
@@ -87,7 +87,7 @@ HTML],
             ['limits', 'Known limitations', <<<HTML
 <p>Despite our efforts, some parts of the site may not be fully accessible yet. In particular:</p>
 <ul>
-  <li>The screenshots on the projects page are real, and their content is also described in the text next to them. Other demos (the WhatsApp conversation, the automation diagram and the ad report) are marked as illustrations.</li>
+  <li>The screenshots on the projects page are real, and their content is also described in the text next to them. Other demos (the automation diagram and the ad report) are marked as illustrations.</li>
   <li>Some demos and screenshots show Hebrew content.</li>
   <li>External sites the site links to (such as client sites and WhatsApp) are not under our control, and their accessibility may vary.</li>
 </ul>

@@ -24,7 +24,7 @@ $projects = [
         'name'      => 'Excerly',
         'cat'       => 'pwa',
         'tag'       => 'אפליקציית PWA',
-        'summary'   => 'אפליקציית כושר ותזונה שמתקינים מהדפדפן ונפתחת כמו אפליקציה.',
+        'summary'   => 'אפליקציית כושר ותזונה מבוססת AI, שמתקינים מהדפדפן ונפתחת כמו אפליקציה.',
         'url'       => 'https://shaydadon.github.io/Excerly/',
         'url_label' => 'לאפליקציה',
         'layout'    => 'phones',
@@ -42,7 +42,7 @@ $project_cats = [
     'automations' => 'אוטומציות לעסקים',
 ];
 
-// Cases shown on the projects page that are not in $projects (the Boardog chatbot demo, includes/wa-demo.php).
+// Cases shown on the projects page that are not in $projects (the Boardog WhatsApp chatbot, includes/wa-demo.php).
 $extra_cases = ['automations' => 1];
 
 $projects_soon = 'בקרוב: דפי נחיתה ואתרי תדמית';

@@ -8,7 +8,7 @@ function service_visual(string $id): void
           <source src="<?= url('assets/video/boardog-chat.webm') ?>" type="video/webm">
           <source src="<?= url('assets/video/boardog-chat.mp4') ?>" type="video/mp4">
         </video>
-        <span class="note"><?= tr('הדגמה: צ׳אטבוט לוואטסאפ לעסקים', 'Demo: a WhatsApp chatbot in action (conversation in Hebrew)') ?></span>
+        <span class="note"><?= tr('Boardog · צ׳אטבוט וואטסאפ לבעלי פנסיונים', 'Boardog · WhatsApp chatbot for dog boarding businesses (conversation in Hebrew)') ?></span>
       </div>
     <?php elseif ($id === 'websites'): ?>
       <div class="visual real">
@@ -34,7 +34,7 @@ function service_visual(string $id): void
       <div class="visual real ex">
         <div class="mphone"><img src="<?= url('assets/img/projects/excerly/home-m.webp') ?>" alt="<?= tr('צילום מסך של האפליקציה Excerly', 'Screenshot of the Excerly app') ?>" width="780" height="1688" loading="lazy" decoding="async"></div>
         <div class="mphone"><img src="<?= url('assets/img/projects/excerly/workouts-m.webp') ?>" alt="<?= tr('צילום מסך נוסף של האפליקציה Excerly', 'Another screenshot of the Excerly app') ?>" width="780" height="1688" loading="lazy" decoding="async"></div>
-        <span class="note"><?= tr('צילום מסך אמיתי', 'Real screenshot') ?> · Excerly</span>
+        <span class="note"><?= tr('צילום מסך אמיתי', 'Real screenshot') ?> · Excerly · <?= tr('כושר ותזונה מבוססת AI', 'AI fitness and nutrition') ?></span>
       </div>
     <?php elseif ($id === 'campaigns'): ?>
       <div class="visual">

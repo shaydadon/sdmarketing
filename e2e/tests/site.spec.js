@@ -63,7 +63,7 @@ test.describe('every page', () => {
       await expect(page.locator('html')).toHaveAttribute('dir', p.en ? 'ltr' : 'rtl');
       await expect(page).toHaveTitle(/SDmarketing/);
       await expect(page.locator('h1')).toHaveCount(1);
-      if (!['home', 'projects', 'article', 'en-home', 'en-projects'].includes(p.name)) await expect(page.locator('body')).not.toContainText('Boardog');
+      if (!['home', 'projects', 'services', 'article', 'en-home', 'en-projects', 'en-services'].includes(p.name)) await expect(page.locator('body')).not.toContainText('Boardog');
       await expect(page.locator('body')).not.toContainText('10+');
       await expect(page.locator('body')).not.toContainText('יותר מעשר');
       await expect(page.locator('meta[name="description"]')).toHaveAttribute('content', /.{20,}/);
@@ -382,7 +382,8 @@ test.describe('projects', () => {
     const block = page.locator('#case-bot');
     await expect(block).toBeVisible();
     await expect(block.locator('h2')).toHaveText('Boardog');
-    await expect(block).toContainText('אפליקציית צ׳אטבוט לבעלי פנסיונים');
+    await expect(block).toContainText('צ׳אטבוט וואטסאפ לבעלי פנסיונים');
+    await expect(block).not.toContainText('דוגמה');
     await expect(block).not.toContainText('צילום מסך אמיתי');
     await expect(block).toContainText('הפנסיון של ג׳רי');
     await expect(block).toContainText('מחובר/ת');

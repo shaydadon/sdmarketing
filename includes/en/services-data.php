@@ -48,7 +48,7 @@ $services = [
         'items'    => ['Your icon on your customers’ home screens', 'Works offline', 'Push notifications', 'One codebase for Android, iPhone and desktop'],
         'headline' => 'A real app,',
         'headline_accent' => 'no app store required.',
-        'intro'    => 'A progressive web app (PWA) installs from the browser in one tap and behaves like a native app: a home screen icon, full screen, push notifications and offline access. One codebase runs on Android, iPhone and desktop. That’s how Excerly was built.',
+        'intro'    => 'A progressive web app (PWA) installs from the browser in one tap and behaves like a native app: a home screen icon, full screen, push notifications and offline access. One codebase runs on Android, iPhone and desktop. That’s how Excerly, an AI-powered fitness and nutrition app, was built.',
         'fit'      => 'Loyalty programs, ordering and team tools',
         'features' => [
             ['title' => 'One-tap install', 'text' => 'No app store, no review process and no waiting for updates to be approved.'],

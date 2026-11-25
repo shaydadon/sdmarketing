@@ -1,5 +1,5 @@
 <?php
-// Illustrative WhatsApp bot. Rendered only on the projects page, after Excerly.
+// The Boardog WhatsApp chatbot for dog boarding businesses. Rendered only on the projects page, after Excerly.
 $wa_msgs = [
     ['c', 'היי'],
     ['b', 'ברוכים הבאים לפנסיון של ג׳רי! איזה כיף שפנית אלינו 🐾 איך קוראים לך?'],
@@ -88,10 +88,10 @@ $wa_n = count($wa_msgs);
     <div class="case-head">
       <div>
         <h2 id="case-bot-title" lang="en">Boardog</h2>
-        <div class="tags"><span class="tag acc"><?= tr('אפליקציית צ׳אטבוט לבעלי פנסיונים', 'WhatsApp chatbot for dog boarding businesses') ?></span></div>
+        <div class="tags"><span class="tag acc"><?= tr('צ׳אטבוט וואטסאפ לבעלי פנסיונים', 'WhatsApp chatbot for dog boarding businesses') ?></span></div>
       </div>
       <div>
-        <p class="desc"><?= tr('דוגמה לצ׳אטבוט לוואטסאפ שמקבל פנייה, אוסף את הפרטים וקובע פגישה לבד.', 'A WhatsApp chatbot that handles a new inquiry, collects every detail and books the meeting on its own.') ?></p>
+        <p class="desc"><?= tr('צ׳אטבוט וואטסאפ לבעלי פנסיונים שמקבל פנייה, אוסף את הפרטים וקובע פגישה לבד.', 'A WhatsApp chatbot that handles a new inquiry, collects every detail and books the meeting on its own.') ?></p>
         <div class="acts">
           <a class="btn btn-ink" href="<?= e(wa_link($site, tr('היי, אשמח לשמוע על צ׳אטבוט לוואטסאפ', 'Hi, I’d like to learn more about a WhatsApp chatbot for my business'))) ?>" target="_blank" rel="noopener"><?= tr('לשיחה על בוט', 'Ask me about a chatbot') ?><?= icon('external') ?></a>
         </div>
