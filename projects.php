@@ -28,11 +28,11 @@ require __DIR__ . '/includes/case-details.php';
     <div class="case-head">
       <div>
         <h2 id="case-title-<?= e($p['slug']) ?>" lang="en"><?= e($p['name']) ?></h2>
-        <div class="tags"><span class="tag acc"><?= e($p['tag']) ?></span></div>
+        <div class="tags"><span class="tag acc"><?= e($p['tag']) ?></span><?php if (!empty($p['kind'])): ?><span class="tag"><?= e($p['kind']) ?></span><?php endif; ?></div>
       </div>
       <div>
         <p class="desc"><?= e($p['summary']) ?></p>
-        <?php case_details($p['challenge'], $p['built'], '<a class="btn btn-ink" href="' . e($p['url']) . '" target="_blank" rel="noopener">' . e($p['url_label']) . icon('external') . '</a>', $p['service']); ?>
+        <?php case_details($p['challenge'], $p['built'], !empty($p['show_link']) ? '<a class="btn btn-ink" href="' . e($p['url']) . '" target="_blank" rel="noopener">' . e($p['url_label']) . icon('external') . '</a>' : '', $p['service']); ?>
       </div>
     </div>
 

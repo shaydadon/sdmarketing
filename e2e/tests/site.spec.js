@@ -347,13 +347,17 @@ test.describe('homepage', () => {
 
 test.describe('projects', () => {
   test('each project is a short case study: challenge, what was built, a live link and its service', async ({ page }) => {
-    for (const [path, live, svc] of [['/projects', 'לאתר החי', '/services#websites'], ['/en/projects', 'Visit the live site', '/en/services#websites']]) {
+    for (const [path, svc] of [['/projects', '/services#websites'], ['/en/projects', '/en/services#websites']]) {
       await page.goto(path);
       await expect(page.locator('[data-filters]')).toHaveCount(0);
       await expect(page.locator('.case')).toHaveCount(3);
       await expect(page.locator('.case .cs')).toHaveCount(3);
-      for (const id of ['#case-fisha', '#case-excerly', '#case-bot']) await expect(page.locator(`${id} .cs li`)).toHaveCount(3);
-      await expect(page.locator('#case-fisha .acts a[href="https://dev.fisha.shop/shop-2/"]')).toContainText(live);
+      await expect(page.locator('#case-fisha .cs li')).toHaveCount(4);   // includes the Fisha Studio back office
+      for (const id of ['#case-excerly', '#case-bot']) await expect(page.locator(`${id} .cs li`)).toHaveCount(3);
+      // fisha: no link until its new design is live; each project says whose it is
+      await expect(page.locator('#case-fisha .acts a[href*="fisha.shop"]')).toHaveCount(0);
+      await expect(page.locator('#case-fisha .tags .tag')).toHaveCount(2);
+      await expect(page.locator('#case-excerly .tags .tag')).toHaveCount(2);
       await expect(page.locator('#case-excerly .acts a[href="https://shaydadon.github.io/Excerly/"]')).toHaveCount(1);
       await expect(page.locator(`#case-fisha .acts a[href="${svc}"]`)).toHaveCount(1);
       await expect(page.locator('#case-bot .acts a[href*="wa.me"]')).toHaveCount(1);
