@@ -274,6 +274,15 @@
     }));
   });
 
+  // Sideways-scrolling strips (phones): keyboard-focusable regions only while they actually scroll.
+  document.querySelectorAll('[data-scroll-region]').forEach((el) => {
+    const set = () => {
+      if (el.scrollWidth > el.clientWidth + 1) { el.tabIndex = 0; el.setAttribute('role', 'region'); el.setAttribute('aria-label', el.dataset.scrollRegion); }
+      else { el.removeAttribute('tabindex'); el.removeAttribute('role'); el.removeAttribute('aria-label'); }
+    };
+    set(); addEventListener('resize', set);
+  });
+
   // Work process: the step in view lights up as the visitor scrolls.
   // Only when the steps are stacked (mobile): the step nearest the middle of the screen lights up.
   const stepList = document.querySelector('.steps');

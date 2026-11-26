@@ -9,6 +9,9 @@ $projects = [
         'summary'   => 'A live online store that takes real orders: design, development, order management and secure checkout.',
         'url'       => 'https://fisha.shop',
         'url_label' => 'Visit the live site',
+        'challenge' => 'Bring products, original artwork and tattoo designs together in one store that sells online.',
+        'built'     => ['A catalog filtered by type, size and price', 'Shopping cart and secure checkout', 'Order management'],
+        'service'   => ['websites', 'See web development'],
         'layout'    => 'browser',
         'shots'     => [
             ['src' => 'assets/img/projects/fisha/shop-hq-c.webp', 'alt' => 'Screenshot of the fisha.shop store', 'w' => 1600, 'h' => 929, 'chrome' => 'fisha.shop'],
@@ -22,6 +25,9 @@ $projects = [
         'summary'   => 'An AI-powered fitness and nutrition app that installs straight from the browser and feels just like a native app.',
         'url'       => 'https://shaydadon.github.io/Excerly/',
         'url_label' => 'Open the app',
+        'challenge' => 'Keep workouts and nutrition in one place on the phone, without downloading anything from an app store.',
+        'built'     => ['A daily screen with today’s workout and meals', 'A workout library and guided sessions', 'AI-powered nutrition tracking'],
+        'service'   => ['pwa', 'See PWA apps'],
         'layout'    => 'phones',
         'shots'     => [
             ['src' => 'assets/img/projects/excerly/home-m.webp', 'alt' => 'Screenshot of the Excerly app', 'w' => 780, 'h' => 1688],

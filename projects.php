@@ -5,6 +5,7 @@ $page_title = tr('פרויקטים: חנות אונליין, אפליקציית 
 $page_desc  = tr('עבודות של SDmarketing: בניית חנות אונליין, אתרי תדמית ואפליקציית PWA ללא צורך בחנות האפליקציות, עם צילומי מסך אמיתיים.', 'Real work by SDmarketing: an e-commerce store, a progressive web app that installs without an app store, and a WhatsApp chatbot that books appointments.');
 require __DIR__ . '/includes/header.php';
 require __DIR__ . '/includes/projects-data.php';
+require __DIR__ . '/includes/case-details.php';
 ?>
 
 <section class="hero dark">
@@ -16,16 +17,6 @@ require __DIR__ . '/includes/projects-data.php';
     </div>
     <div class="row" style="align-items:center;margin-top:36px">
       <p class="lead" style="margin:0;max-width:560px"><?= tr('חנויות, אתרים ואפליקציות שבניתי. אפשר להיכנס ולנסות בעצמכם.', 'Online stores, websites and apps I’ve built. Open them and try them yourself.') ?></p>
-      <div class="filters" role="group" aria-label="<?= tr('סינון לפי סוג', 'Filter by type') ?>" data-filters>
-        <?php foreach ($project_cats as $key => $label):
-          $count = $key === 'all'
-              ? count($projects) + array_sum($extra_cases)
-              : count(array_filter($projects, fn($p) => $p['cat'] === $key)) + ($extra_cases[$key] ?? 0); ?>
-          <button type="button" class="chip<?= $key === 'all' ? ' on' : '' ?>" data-filter="<?= e($key) ?>" aria-pressed="<?= $key === 'all' ? 'true' : 'false' ?>">
-            <?= e($label) ?> <i><?= $count ?></i>
-          </button>
-        <?php endforeach; ?>
-      </div>
     </div>
   </div>
 </section>
@@ -41,11 +32,12 @@ require __DIR__ . '/includes/projects-data.php';
       </div>
       <div>
         <p class="desc"><?= e($p['summary']) ?></p>
+        <?php case_details($p['challenge'], $p['built'], '<a class="btn btn-ink" href="' . e($p['url']) . '" target="_blank" rel="noopener">' . e($p['url_label']) . icon('external') . '</a>', $p['service']); ?>
       </div>
     </div>
 
     <?php if ($p['slug'] === 'excerly'): ?>
-      <div class="stage stage-ex-nice">
+      <div class="stage stage-ex-nice" data-scroll-region="<?= tr('צילומי מסך של Excerly, אפשר לגלול הצידה', 'Excerly screenshots, scrollable') ?>">
         <?php foreach ([
           ['assets/img/projects/excerly/home-m.webp', tr('מסך היום באפליקציית Excerly', 'The Today screen in the Excerly app')],
           ['assets/img/projects/excerly/workouts-m.webp', tr('מסך האימונים באפליקציית Excerly', 'The Workouts screen in the Excerly app')],

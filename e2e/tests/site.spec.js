@@ -346,36 +346,18 @@ test.describe('homepage', () => {
 });
 
 test.describe('projects', () => {
-  test('filters show and hide the right projects, including the Boardog bot', async ({ page }) => {
-    await page.goto('/projects');
-    const fisha = page.locator('[data-showcase] [data-cat="web"]');
-    const apps = page.locator('[data-showcase] [data-cat="pwa"]');
-    const bot = page.locator('#case-bot');
-
-    await expect(fisha).toHaveCount(1);
-    await expect(apps).toHaveCount(1);
-    await expect(bot).toHaveAttribute('data-cat', 'automations');
-    await expect(page.getByRole('button', { name: /הכל/ })).toContainText('3');
-
-    await page.getByRole('button', { name: /אפליקציות PWA/ }).click();
-    await expect(fisha).toBeHidden();
-    await expect(apps).toBeVisible();
-    await expect(bot).toBeHidden();
-
-    await page.getByRole('button', { name: /אתרים וחנויות/ }).click();
-    await expect(fisha).toBeVisible();
-    await expect(apps).toBeHidden();
-    await expect(bot).toBeHidden();
-
-    await page.getByRole('button', { name: /אוטומציות לעסקים/ }).click();
-    await expect(fisha).toBeHidden();
-    await expect(apps).toBeHidden();
-    await expect(bot).toBeVisible();
-
-    await page.getByRole('button', { name: /הכל/ }).click();
-    await expect(fisha).toBeVisible();
-    await expect(apps).toBeVisible();
-    await expect(bot).toBeVisible();
+  test('each project is a short case study: challenge, what was built, a live link and its service', async ({ page }) => {
+    for (const [path, live, svc] of [['/projects', 'לאתר החי', '/services#websites'], ['/en/projects', 'Visit the live site', '/en/services#websites']]) {
+      await page.goto(path);
+      await expect(page.locator('[data-filters]')).toHaveCount(0);
+      await expect(page.locator('.case')).toHaveCount(3);
+      await expect(page.locator('.case .cs')).toHaveCount(3);
+      for (const id of ['#case-fisha', '#case-excerly', '#case-bot']) await expect(page.locator(`${id} .cs li`)).toHaveCount(3);
+      await expect(page.locator('#case-fisha .acts a[href="https://fisha.shop"]')).toContainText(live);
+      await expect(page.locator('#case-excerly .acts a[href="https://shaydadon.github.io/Excerly/"]')).toHaveCount(1);
+      await expect(page.locator(`#case-fisha .acts a[href="${svc}"]`)).toHaveCount(1);
+      await expect(page.locator('#case-bot .acts a[href*="wa.me"]')).toHaveCount(1);
+    }
   });
 
   test('whatsapp bot showcase renders', async ({ page }) => {
