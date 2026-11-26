@@ -83,6 +83,8 @@ require __DIR__ . '/includes/service-visual.php';
   </div>
 </section>
 
+<?php require __DIR__ . '/includes/faq.php'; ?>
+
 <?php
 $cta_title = tr("לא בטוחים\nמאיפה להתחיל?", "Not sure\nwhere to start?");
 require __DIR__ . '/includes/cta.php';

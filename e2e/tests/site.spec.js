@@ -318,12 +318,13 @@ test.describe('homepage', () => {
     await expect(page.locator('h1')).toContainText('העסק שלכם ממשיך לעבוד.');
     await expect(page.locator('.h3ro .btn-main')).toHaveText(/בואו נדבר על העסק שלכם/);
     await expect(page.locator('.h3-art img')).toHaveCount(3);
-    await expect(page.locator('.h3-why li')).toHaveCount(3);
-    await expect(page.locator('.services.lite .svc .out').first()).toContainText('לפרטים על השירות');
+    // A calm first screen: no overlay labels on the images, and one short line under the button
+    await expect(page.locator('.h3-why')).toHaveCount(0);
+    await expect(page.locator('.h3ro .offer')).toHaveText('הודעה קצרה בוואטסאפ, ואחזור אליכם עם רעיון ראשון.');
   });
 
-  test('faq lists every service and publishes FAQPage data', async ({ page }) => {
-    await page.goto('/');
+  test('faq lists every service and publishes FAQPage data (on the services page)', async ({ page }) => {
+    await page.goto('/services');
     const faq = page.locator('.faq');
     await expect(faq.locator('h2')).toHaveText('שאלות שבעלי עסקים שואלים אותי');
     await expect(faq.locator('details')).toHaveCount(5);
@@ -333,8 +334,8 @@ test.describe('homepage', () => {
     await expect(faq).toContainText('יש לי דף נחיתה, אבל הוא לא מביא פניות או לידים?');
     await expect(faq).not.toContainText('פנסיון');
     await expect(faq).not.toContainText('קלעי');
-    const ld = await page.locator('script[type="application/ld+json"]').textContent();
-    const data = JSON.parse(ld);
+    const lds = await page.locator('script[type="application/ld+json"]').allTextContents();
+    const data = lds.map((t) => JSON.parse(t)).find((d) => d['@type'] === 'FAQPage');
     expect(data['@type']).toBe('FAQPage');
     expect(data.mainEntity).toHaveLength(5);
     const first = faq.locator('details').first();
@@ -567,15 +568,14 @@ test.describe('site review fixes', () => {
     }
   });
 
-  test('the Hebrew home page shows the 3 latest guides; English (one guide so far) does not', async ({ page }) => {
-    await page.goto('/');
-    const posts = page.locator('.home-posts .hp-card');
-    await expect(posts).toHaveCount(3);
-    await expect(page.locator('.home-posts a[href="/articles"]')).toBeVisible();
-    await posts.first().click();
-    await expect(page).toHaveURL(/\/articles\/[a-z0-9-]+$/);
-    await page.goto('/en/');
-    await expect(page.locator('.home-posts')).toHaveCount(0);
+  test('the home page shows only the essentials, in order: hero, services, projects, process, about, contact', async ({ page }) => {
+    for (const path of ['/', '/en/']) {
+      await page.goto(path);
+      const order = await page.evaluate(() => [...document.querySelectorAll('body > section, main > section')].map((s) => s.className.split(' ')[0]));
+      expect(order).toEqual(['h3ro', 'services', 'work', 'process', 'approach', 'cta']);
+      await expect(page.locator('.psteps li')).toHaveCount(4);
+      await expect(page.locator('.home-posts, .faq, .statement, .qs')).toHaveCount(0);
+    }
   });
 
   test('every article has a table of contents whose links land on real headings', async ({ page }) => {

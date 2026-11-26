@@ -1555,3 +1555,40 @@ footer ul a,.f-bot nav a{display:inline-flex;align-items:center;min-height:44px}
 @media (min-width:801px) and (max-width:1439px){
   .cta .ring{width:360px;height:360px;border-width:60px;box-shadow:0 0 0 72px #F5F4F0,0 0 0 73px var(--line);top:-180px;inset-inline-end:-180px}
 }
+
+/* v23: short home page. Work process as four one-line steps on paper (the full version is on the about page). */
+.process.lite{background:var(--paper);color:var(--ink);padding:100px 0}
+.process.lite .eyebrow{color:var(--mute)}
+.process.lite h2.sec .acc{color:var(--accent-ink)}
+.psteps{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:44px;padding:0}
+.psteps li{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px 22px;display:flex;flex-direction:column;gap:8px}
+.psteps .pn{font-family:var(--mono);font-weight:700;font-size:16px;color:var(--accent-ink)}
+.psteps b{font-family:var(--display);font-weight:800;font-size:21px;line-height:1.25}
+.psteps .pd{font-size:16px;color:var(--mute);line-height:1.5}
+@media (max-width:1000px){.psteps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:800px){
+  .process.lite{padding:60px 0}
+  .psteps{grid-template-columns:minmax(0,1fr);gap:10px;margin-top:26px}
+  .psteps li{display:grid;grid-template-columns:auto 1fr;column-gap:14px;row-gap:2px;padding:16px 18px;align-items:baseline}
+  .psteps .pn{grid-row:span 2}
+  .psteps b{font-size:18px}
+  .psteps .pd{font-size:15px}
+}
+/* Desktop home: the three projects side by side as equal cards (was three full-width rows). */
+@media (min-width:801px){
+  .page-index .proj-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+  .page-index .proj.big,.page-index .proj.big.rev,.page-index .proj.big.rev.flip{grid-column:auto;flex-direction:column}
+  .page-index .proj.big .media,.page-index .proj.big .media-fisha,.page-index .proj.big.rev .media-ex{flex:none;height:250px;min-height:0}
+  .page-index .proj.big .media-fisha{padding:28px 22px 0}
+  .page-index .proj.big .media-fisha .browser{width:100%}
+  .page-index .proj.big.rev .media-ex{padding-top:24px;gap:12px;align-items:flex-start}
+  .page-index .proj.big.rev .media-ex .mphone{width:118px;border-radius:20px;padding:4px}
+  .page-index .proj.big.rev .media-ex .mphone img{border-radius:16px}
+  .page-index .proj.big .body{padding:22px 24px 26px;justify-content:flex-start;flex:1}
+  .page-index .proj.big h3{font-size:28px}
+  .page-index .proj p{font-size:16px}
+}
+@media (min-width:801px){
+  .page-index .services.lite .svc{min-height:0}
+  .page-index .services.lite .svc .out{border-top:0;padding-top:16px;justify-content:flex-end}
+}
