@@ -106,32 +106,6 @@ require __DIR__ . '/includes/projects-data.php';
   </div>
 </section>
 
-<section class="process lite" aria-labelledby="process-title">
-  <div class="wrap">
-    <div class="sec-head">
-      <div>
-        <span class="eyebrow"><?= tr('תהליך עבודה', 'How it works') ?></span>
-        <h2 class="sec" id="process-title"><?= tr('מהשיחה הראשונה<br>ועד <span class="acc">שזה רץ לבד.</span>', 'From the first call<br>to <span class="acc">running on its own.</span>') ?></h2>
-      </div>
-    </div>
-    <ol class="psteps">
-      <?php foreach ($is_en ? [
-          ['Discovery call', 'Where your business loses time and customers.'],
-          ['Written plan', 'Scope, price and launch date.'],
-          ['Build and connect', 'Linked to the tools you already use.'],
-          ['Measure and improve', 'We track the numbers and refine.'],
-      ] : [
-          ['שיחת היכרות', 'איפה העסק מאבד זמן ולקוחות.'],
-          ['תוכנית כתובה', 'מה בונים, מחיר ותאריך עלייה.'],
-          ['בנייה וחיבור', 'מתחבר למערכות שכבר יש לכם.'],
-          ['מדידה ושיפור', 'עוקבים אחרי המספרים ומשפרים.'],
-      ] as $n => [$t, $d]): ?>
-        <li><span class="pn"><?= sprintf('%02d', $n + 1) ?></span><b><?= e($t) ?></b><span class="pd"><?= e($d) ?></span></li>
-      <?php endforeach; ?>
-    </ol>
-  </div>
-</section>
-
 <section class="approach" aria-labelledby="about-title">
   <div class="wrap ap-grid">
     <div class="ap-photo rv">

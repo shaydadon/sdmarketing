@@ -85,6 +85,30 @@ require __DIR__ . '/includes/service-visual.php';
 
 <?php require __DIR__ . '/includes/faq.php'; ?>
 
+<section class="process dark" aria-labelledby="process-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow"><?= tr('תהליך עבודה', 'How it works') ?></span>
+        <h2 class="sec" id="process-title"><?= tr('מהשיחה הראשונה<br>ועד שזה <span class="acc">רץ לבד.</span>', 'From the first call<br>to <span class="acc">running on autopilot.</span>') ?></h2>
+      </div>
+    </div>
+    <div class="steps">
+      <?php if ($is_en): ?>
+      <div class="step"><div class="n">01</div><h3>Discovery call</h3><p>We map how your business runs today, where time is wasted and where leads slip through the cracks.</p></div>
+      <div class="step"><div class="n">02</div><h3>Plan and proposal</h3><p>A written plan covering the scope, the order of work, the cost and the launch date.</p></div>
+      <div class="step"><div class="n">03</div><h3>Build and integrate</h3><p>I build it, connect it to the tools you already use and test it with real customers before launch.</p></div>
+      <div class="step"><div class="n">04</div><h3>Support and optimize</h3><p>I track the numbers, refine what works and add the next step.</p></div>
+      <?php else: ?>
+      <div class="step"><div class="n">01</div><h3>שיחת היכרות</h3><p>מבינים איך העסק עובד היום, איפה הולך זמן ואיפה הולכים לאיבוד לקוחות.</p></div>
+      <div class="step"><div class="n">02</div><h3>אפיון ותוכנית</h3><p>תוכנית כתובה: מה בונים, באיזה סדר, כמה זה עולה ומתי זה עולה לאוויר.</p></div>
+      <div class="step"><div class="n">03</div><h3>בנייה והטמעה</h3><p>בונים, מחברים למערכות הקיימות ובודקים עם לקוחות אמיתיים לפני שמשחררים.</p></div>
+      <div class="step"><div class="n">04</div><h3>ליווי ושיפור</h3><p>עוקבים אחרי הנתונים, משפרים את מה שאפשר ומוסיפים את הצעד הבא.</p></div>
+      <?php endif; ?>
+    </div>
+  </div>
+</section>
+
 <?php
 $cta_title = tr("לא בטוחים\nמאיפה להתחיל?", "Not sure\nwhere to start?");
 require __DIR__ . '/includes/cta.php';

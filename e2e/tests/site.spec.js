@@ -568,13 +568,33 @@ test.describe('site review fixes', () => {
     }
   });
 
-  test('the home page shows only the essentials, in order: hero, services, projects, process, about, contact', async ({ page }) => {
+  test('the home page shows only the essentials, in order: hero, services, projects, about, contact', async ({ page }) => {
     for (const path of ['/', '/en/']) {
       await page.goto(path);
       const order = await page.evaluate(() => [...document.querySelectorAll('body > section, main > section')].map((s) => s.className.split(' ')[0]));
-      expect(order).toEqual(['h3ro', 'services', 'work', 'process', 'approach', 'cta']);
-      await expect(page.locator('.psteps li')).toHaveCount(4);
-      await expect(page.locator('.home-posts, .faq, .statement, .qs')).toHaveCount(0);
+      expect(order).toEqual(['h3ro', 'services', 'work', 'approach', 'cta']);
+      await expect(page.locator('.home-posts, .faq, .statement, .qs, .process')).toHaveCount(0);
+    }
+  });
+
+  test('the services page ends with the FAQ and the full work process, then the contact section', async ({ page }) => {
+    for (const path of ['/services', '/en/services']) {
+      await page.goto(path);
+      const order = await page.evaluate(() => [...document.querySelectorAll('main > section')].map((s) => s.className.split(' ')[0]));
+      expect(order.slice(-4)).toEqual(['journey', 'faq', 'process', 'cta']);
+      await expect(page.locator('.process .step')).toHaveCount(4);
+    }
+  });
+
+  test('the contact page has four practical questions with FAQPage data, in both languages', async ({ page }) => {
+    for (const [path, first] of [['/contact', 'לא בטוחים איזה שירות'], ['/en/contact', 'I’m not sure which service']]) {
+      await page.goto(path);
+      const faq = page.locator('.contact-faq');
+      await expect(faq.locator('details')).toHaveCount(4);
+      await expect(faq.locator('summary').first()).toContainText(first);
+      const lds = await page.locator('script[type="application/ld+json"]').allTextContents();
+      const data = lds.map((t) => JSON.parse(t)).find((d) => d['@type'] === 'FAQPage');
+      expect(data.mainEntity).toHaveLength(4);
     }
   });
 
