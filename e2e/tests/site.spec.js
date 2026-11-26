@@ -353,7 +353,7 @@ test.describe('projects', () => {
       await expect(page.locator('.case')).toHaveCount(3);
       await expect(page.locator('.case .cs')).toHaveCount(3);
       for (const id of ['#case-fisha', '#case-excerly', '#case-bot']) await expect(page.locator(`${id} .cs li`)).toHaveCount(3);
-      await expect(page.locator('#case-fisha .acts a[href="https://fisha.shop"]')).toContainText(live);
+      await expect(page.locator('#case-fisha .acts a[href="https://dev.fisha.shop/shop-2/"]')).toContainText(live);
       await expect(page.locator('#case-excerly .acts a[href="https://shaydadon.github.io/Excerly/"]')).toHaveCount(1);
       await expect(page.locator(`#case-fisha .acts a[href="${svc}"]`)).toHaveCount(1);
       await expect(page.locator('#case-bot .acts a[href*="wa.me"]')).toHaveCount(1);

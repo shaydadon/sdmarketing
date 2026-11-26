@@ -66,7 +66,7 @@ $faq_ld = [
               $html = e($item['a']);
               $html = str_replace(
                   'fisha.shop',
-                  '<a href="https://fisha.shop" target="_blank" rel="noopener">fisha.shop</a>',
+                  '<a href="https://dev.fisha.shop/shop-2/" target="_blank" rel="noopener">fisha.shop</a>',
                   $html
               );
               $html = str_replace(
