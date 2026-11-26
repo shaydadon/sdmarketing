@@ -1555,3 +1555,42 @@ footer ul a,.f-bot nav a{display:inline-flex;align-items:center;min-height:44px}
 @media (min-width:801px) and (max-width:1439px){
   .cta .ring{width:360px;height:360px;border-width:60px;box-shadow:0 0 0 72px #F5F4F0,0 0 0 73px var(--line);top:-180px;inset-inline-end:-180px}
 }
+
+/* Desktop home: the three projects side by side as equal cards (was three full-width rows). */
+@media (min-width:801px){
+  .page-index .proj-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+  .page-index .proj.big,.page-index .proj.big.rev,.page-index .proj.big.rev.flip{grid-column:auto;flex-direction:column}
+  .page-index .proj.big .media,.page-index .proj.big .media-fisha,.page-index .proj.big.rev .media-ex{flex:none;height:250px;min-height:0}
+  .page-index .proj.big .media-fisha{padding:28px 22px 0}
+  .page-index .proj.big .media-fisha .browser{width:100%}
+  .page-index .proj.big.rev .media-ex{padding-top:24px;gap:12px;align-items:flex-start}
+  .page-index .proj.big.rev .media-ex .mphone{width:118px;border-radius:20px;padding:4px}
+  .page-index .proj.big.rev .media-ex .mphone img{border-radius:16px}
+  .page-index .proj.big .body{padding:22px 24px 26px;justify-content:flex-start;flex:1}
+  .page-index .proj.big h3{font-size:28px}
+  .page-index .proj p{font-size:16px}
+}
+@media (min-width:801px){
+  .page-index .services.lite .svc{min-height:0}
+  .page-index .services.lite .svc .out{border-top:0;padding-top:16px;justify-content:flex-end}
+}
+
+/* v24: projects as short case studies: the challenge, what was built, the live link and the matching service. */
+.case .cs{display:grid;gap:14px;margin-top:22px;padding-top:20px;border-top:1px solid var(--line)}
+.case .cs dt{font-family:var(--display);font-weight:700;font-size:14px;color:var(--accent-ink);letter-spacing:.01em}
+.case .cs dd{margin:4px 0 0;font-size:17px;line-height:1.55;color:#2e2d2b}
+.case .cs ul{list-style:none;padding:0;margin:0;display:grid;gap:4px}
+.case .cs li{position:relative;padding-inline-start:18px}
+.case .cs li::before{content:"";position:absolute;inset-inline-start:2px;top:.68em;width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.case .acts{align-items:center;flex-wrap:wrap;gap:14px 22px}
+.case .acts .link{min-height:44px}
+.case-head{align-items:start}
+@media (max-width:800px){
+  .case .cs dd{font-size:16px}
+  /* Excerly: swipe through the four screens instead of a tall 2x2 grid */
+  .stage-ex-nice{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding:28px 20px 24px;scrollbar-width:none}
+  .stage-ex-nice::-webkit-scrollbar{display:none}
+  .stage-ex-nice .mphone{flex:0 0 62%;width:auto;scroll-snap-align:center}
+  .stage-ex-nice .mphone:nth-child(n){transform:none}
+}
+.stage-ex-nice[data-scroll-region]:focus-visible{outline:2px solid var(--accent);outline-offset:-4px}

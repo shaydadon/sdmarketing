@@ -49,7 +49,7 @@ $switch_href = $is_en ? url($translated ? $page_path : '') : url('en/' . ($trans
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&family=IBM+Plex+Sans+Hebrew:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="<?= url('assets/css/style.css?v=180') ?>">
+  <link rel="stylesheet" href="<?= url('assets/css/style.css?v=185') ?>">
 </head>
 <body class="page-<?= e($page_id) ?>">
 <?php require __DIR__ . '/icons.php'; ?>

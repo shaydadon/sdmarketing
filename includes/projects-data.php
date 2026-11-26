@@ -12,8 +12,13 @@ $projects = [
         'cat'       => 'web',
         'tag'       => 'חנות אונליין / E-commerce',
         'summary'   => 'חנות אונליין שמוכרת בפועל: עיצוב, פיתוח, ניהול הזמנות וסליקה.',
-        'url'       => 'https://fisha.shop',
+        'url'       => 'https://dev.fisha.shop/shop-2/',
         'url_label' => 'לאתר החי',
+        'challenge' => 'לרכז מוצרים, יצירות מקור וקעקועים בחנות אחת שמוכרת אונליין.',
+        'kind'      => 'פרויקט ללקוחה',
+        'built'     => ['קטלוג עם סינון לפי סוג, גודל ומחיר', 'עגלת קניות וסליקה מאובטחת', 'ניהול הזמנות', 'Fisha Studio: מערכת ניהול שבה בעלת החנות מוסיפה מוצרים, גרסאות ומידות ומנהלת מלאי, עם התחברות דו-שלבית'],
+        'show_link' => false,   // the new design is still on the dev site; link to the live site once it launches
+        'service'   => ['websites', 'לשירות בניית אתרים וחנויות'],
         'layout'    => 'browser',
         'shots'     => [
             ['src' => 'assets/img/projects/fisha/shop-hq-c.webp', 'alt' => 'צילום מסך של החנות fisha.shop', 'w' => 1600, 'h' => 929, 'chrome' => 'fisha.shop'],
@@ -27,6 +32,11 @@ $projects = [
         'summary'   => 'אפליקציית כושר ותזונה מבוססת AI, שמתקינים מהדפדפן ונפתחת כמו אפליקציה.',
         'url'       => 'https://shaydadon.github.io/Excerly/',
         'url_label' => 'לאפליקציה',
+        'challenge' => 'לנהל אימונים ותזונה במקום אחד בטלפון, בלי להוריד אפליקציה מהחנות.',
+        'kind'      => 'מוצר שפיתחתי',
+        'built'     => ['מסך יומי עם האימון והתזונה של היום', 'ספריית אימונים ומסך אימון מודרך', 'מעקב תזונה מבוסס AI'],
+        'show_link' => true,
+        'service'   => ['pwa', 'לשירות אפליקציות PWA'],
         'layout'    => 'phones',
         'shots'     => [
             ['src' => 'assets/img/projects/excerly/home-m.webp', 'alt' => 'צילום מסך של האפליקציה Excerly', 'w' => 780, 'h' => 1688],

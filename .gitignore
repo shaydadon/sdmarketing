@@ -1,6 +1,7 @@
 # Local Claude / tooling (skills restore from skills-lock.json: npx skills experimental_install)
 .claude/*
 !.claude/skills/
+!.claude/agents/
 
 # Playwright
 e2e/node_modules/

@@ -92,9 +92,12 @@ $wa_n = count($wa_msgs);
       </div>
       <div>
         <p class="desc"><?= tr('צ׳אטבוט וואטסאפ לבעלי פנסיונים שמקבל פנייה, אוסף את הפרטים וקובע פגישה לבד.', 'A WhatsApp chatbot that handles a new inquiry, collects every detail and books the meeting on its own.') ?></p>
-        <div class="acts">
-          <a class="btn btn-ink" href="<?= e(wa_link($site, tr('היי, אשמח לשמוע על צ׳אטבוט לוואטסאפ', 'Hi, I’d like to learn more about a WhatsApp chatbot for my business'))) ?>" target="_blank" rel="noopener"><?= tr('לשיחה על בוט', 'Ask me about a chatbot') ?><?= icon('external') ?></a>
-        </div>
+        <?php case_details(
+            tr('בעלי פנסיונים עונים לאותן שאלות על כל כלב חדש, גם בערב ובסוף שבוע.', 'Dog boarding owners answer the same questions about every new dog, evenings and weekends included.'),
+            $is_en ? ['An intake chat: name, breed, age, dates, vaccines and allergies', 'Suggests times and books the meet-and-greet', 'Sends the owner a tidy summary'] : ['שיחת קליטה: שם, גזע, גיל, תאריכים, חיסונים ואלרגיות', 'מציע מועדים וקובע פגישת היכרות', 'שולח לבעל העסק סיכום מסודר'],
+            '<a class="btn btn-ink" href="' . e(wa_link($site, tr('היי, אשמח לשמוע על צ׳אטבוט לוואטסאפ', 'Hi, I’d like to learn more about a WhatsApp chatbot for my business'))) . '" target="_blank" rel="noopener">' . tr('לשיחה על בוט', 'Ask me about a chatbot') . icon('external') . '</a>',
+            ['automations', tr('לשירות אוטומציות וצ׳אטבוטים', 'See automation and chatbots')]
+        ); ?>
       </div>
     </div>
 

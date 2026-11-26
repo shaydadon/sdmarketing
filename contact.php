@@ -214,4 +214,46 @@ function field_error(string $name, array $errors): string
   </div>
 </section>
 
+<?php
+// Practical questions before reaching out. The questions that match a problem to a service are on the services page.
+$contact_faq = $is_en ? [
+    ['q' => 'I’m not sure which service I need. Should I still get in touch?',
+     'a' => 'Yes. Tell me what’s bothering you in the business, and I’ll tell you honestly what I’d build first, and whether you need anything at all.'],
+    ['q' => 'Do I need to prepare anything before we talk?',
+     'a' => 'No. A short message about what your business does and what you’d like to improve is enough. If you already have a website or run ads, send the link and I’ll take a look before we talk.'],
+    ['q' => 'When will I know what it costs?',
+     'a' => 'Before anything is built. You get a written plan with the scope, the order of work, the price and the launch date, and nothing starts until you approve it.'],
+    ['q' => 'What happens after it goes live?',
+     'a' => 'Every website, chatbot and campaign is tracked from day one. I follow the numbers, improve what works and suggest the next step.'],
+] : [
+    ['q' => 'לא בטוחים איזה שירות אתם צריכים? אפשר לפנות בכל זאת?',
+     'a' => 'בטח. ספרו לי מה מפריע לכם בעסק, ואגיד לכם בכנות מה הייתי בונה ראשון, ואם בכלל צריך.'],
+    ['q' => 'צריך להכין משהו לפני השיחה?',
+     'a' => 'לא. הודעה קצרה על מה העסק עושה ומה הייתם רוצים לשפר מספיקה. אם יש לכם אתר או קמפיין פעיל, שלחו קישור ואעבור עליו לפני שנדבר.'],
+    ['q' => 'מתי אדע כמה זה עולה?',
+     'a' => 'לפני שמתחילים לבנות. מקבלים תוכנית כתובה עם היקף, סדר עבודה, מחיר ותאריך עלייה לאוויר, ושום דבר לא מתחיל לפני שאישרתם.'],
+    ['q' => 'מה קורה אחרי שזה עולה לאוויר?',
+     'a' => 'כל אתר, בוט וקמפיין מחוברים למעקב מהיום הראשון. אני עוקב אחרי המספרים, משפר את מה שעובד ומציע את הצעד הבא.'],
+];
+?>
+<section class="faq contact-faq" aria-labelledby="contact-faq-title">
+  <div class="wrap">
+    <span class="eyebrow"><?= tr('לפני שפונים', 'Before you reach out') ?></span>
+    <h2 class="sec" id="contact-faq-title"><?= tr('שאלות נפוצות', 'Common questions') ?></h2>
+    <div class="faq-list">
+      <?php foreach ($contact_faq as $i => $item): ?>
+        <details>
+          <summary id="cfaq-q-<?= $i ?>"><span><?= e($item['q']) ?></span></summary>
+          <div class="faq-a" role="region" aria-labelledby="cfaq-q-<?= $i ?>"><p><?= e($item['a']) ?></p></div>
+        </details>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+<script type="application/ld+json"><?= json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'FAQPage',
+    'mainEntity' => array_map(fn($f) => ['@type' => 'Question', 'name' => $f['q'], 'acceptedAnswer' => ['@type' => 'Answer', 'text' => $f['a']]], $contact_faq),
+], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) ?></script>
+
 <?php require __DIR__ . '/includes/footer.php'; ?>

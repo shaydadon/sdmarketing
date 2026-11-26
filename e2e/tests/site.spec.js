@@ -318,12 +318,13 @@ test.describe('homepage', () => {
     await expect(page.locator('h1')).toContainText('העסק שלכם ממשיך לעבוד.');
     await expect(page.locator('.h3ro .btn-main')).toHaveText(/בואו נדבר על העסק שלכם/);
     await expect(page.locator('.h3-art img')).toHaveCount(3);
-    await expect(page.locator('.h3-why li')).toHaveCount(3);
-    await expect(page.locator('.services.lite .svc .out').first()).toContainText('לפרטים על השירות');
+    // A calm first screen: no overlay labels on the images, and one short line under the button
+    await expect(page.locator('.h3-why')).toHaveCount(0);
+    await expect(page.locator('.h3ro .offer')).toHaveText('הודעה קצרה בוואטסאפ, ואחזור אליכם עם רעיון ראשון.');
   });
 
-  test('faq lists every service and publishes FAQPage data', async ({ page }) => {
-    await page.goto('/');
+  test('faq lists every service and publishes FAQPage data (on the services page)', async ({ page }) => {
+    await page.goto('/services');
     const faq = page.locator('.faq');
     await expect(faq.locator('h2')).toHaveText('שאלות שבעלי עסקים שואלים אותי');
     await expect(faq.locator('details')).toHaveCount(5);
@@ -333,8 +334,8 @@ test.describe('homepage', () => {
     await expect(faq).toContainText('יש לי דף נחיתה, אבל הוא לא מביא פניות או לידים?');
     await expect(faq).not.toContainText('פנסיון');
     await expect(faq).not.toContainText('קלעי');
-    const ld = await page.locator('script[type="application/ld+json"]').textContent();
-    const data = JSON.parse(ld);
+    const lds = await page.locator('script[type="application/ld+json"]').allTextContents();
+    const data = lds.map((t) => JSON.parse(t)).find((d) => d['@type'] === 'FAQPage');
     expect(data['@type']).toBe('FAQPage');
     expect(data.mainEntity).toHaveLength(5);
     const first = faq.locator('details').first();
@@ -345,36 +346,22 @@ test.describe('homepage', () => {
 });
 
 test.describe('projects', () => {
-  test('filters show and hide the right projects, including the Boardog bot', async ({ page }) => {
-    await page.goto('/projects');
-    const fisha = page.locator('[data-showcase] [data-cat="web"]');
-    const apps = page.locator('[data-showcase] [data-cat="pwa"]');
-    const bot = page.locator('#case-bot');
-
-    await expect(fisha).toHaveCount(1);
-    await expect(apps).toHaveCount(1);
-    await expect(bot).toHaveAttribute('data-cat', 'automations');
-    await expect(page.getByRole('button', { name: /הכל/ })).toContainText('3');
-
-    await page.getByRole('button', { name: /אפליקציות PWA/ }).click();
-    await expect(fisha).toBeHidden();
-    await expect(apps).toBeVisible();
-    await expect(bot).toBeHidden();
-
-    await page.getByRole('button', { name: /אתרים וחנויות/ }).click();
-    await expect(fisha).toBeVisible();
-    await expect(apps).toBeHidden();
-    await expect(bot).toBeHidden();
-
-    await page.getByRole('button', { name: /אוטומציות לעסקים/ }).click();
-    await expect(fisha).toBeHidden();
-    await expect(apps).toBeHidden();
-    await expect(bot).toBeVisible();
-
-    await page.getByRole('button', { name: /הכל/ }).click();
-    await expect(fisha).toBeVisible();
-    await expect(apps).toBeVisible();
-    await expect(bot).toBeVisible();
+  test('each project is a short case study: challenge, what was built, a live link and its service', async ({ page }) => {
+    for (const [path, svc] of [['/projects', '/services#websites'], ['/en/projects', '/en/services#websites']]) {
+      await page.goto(path);
+      await expect(page.locator('[data-filters]')).toHaveCount(0);
+      await expect(page.locator('.case')).toHaveCount(3);
+      await expect(page.locator('.case .cs')).toHaveCount(3);
+      await expect(page.locator('#case-fisha .cs li')).toHaveCount(4);   // includes the Fisha Studio back office
+      for (const id of ['#case-excerly', '#case-bot']) await expect(page.locator(`${id} .cs li`)).toHaveCount(3);
+      // fisha: no link until its new design is live; each project says whose it is
+      await expect(page.locator('#case-fisha .acts a[href*="fisha.shop"]')).toHaveCount(0);
+      await expect(page.locator('#case-fisha .tags .tag')).toHaveCount(2);
+      await expect(page.locator('#case-excerly .tags .tag')).toHaveCount(2);
+      await expect(page.locator('#case-excerly .acts a[href="https://shaydadon.github.io/Excerly/"]')).toHaveCount(1);
+      await expect(page.locator(`#case-fisha .acts a[href="${svc}"]`)).toHaveCount(1);
+      await expect(page.locator('#case-bot .acts a[href*="wa.me"]')).toHaveCount(1);
+    }
   });
 
   test('whatsapp bot showcase renders', async ({ page }) => {
@@ -567,15 +554,34 @@ test.describe('site review fixes', () => {
     }
   });
 
-  test('the Hebrew home page shows the 3 latest guides; English (one guide so far) does not', async ({ page }) => {
-    await page.goto('/');
-    const posts = page.locator('.home-posts .hp-card');
-    await expect(posts).toHaveCount(3);
-    await expect(page.locator('.home-posts a[href="/articles"]')).toBeVisible();
-    await posts.first().click();
-    await expect(page).toHaveURL(/\/articles\/[a-z0-9-]+$/);
-    await page.goto('/en/');
-    await expect(page.locator('.home-posts')).toHaveCount(0);
+  test('the home page shows only the essentials, in order: hero, services, projects, about, contact', async ({ page }) => {
+    for (const path of ['/', '/en/']) {
+      await page.goto(path);
+      const order = await page.evaluate(() => [...document.querySelectorAll('body > section, main > section')].map((s) => s.className.split(' ')[0]));
+      expect(order).toEqual(['h3ro', 'services', 'work', 'approach', 'cta']);
+      await expect(page.locator('.home-posts, .faq, .statement, .qs, .process')).toHaveCount(0);
+    }
+  });
+
+  test('the services page ends with the FAQ and the full work process, then the contact section', async ({ page }) => {
+    for (const path of ['/services', '/en/services']) {
+      await page.goto(path);
+      const order = await page.evaluate(() => [...document.querySelectorAll('main > section')].map((s) => s.className.split(' ')[0]));
+      expect(order.slice(-4)).toEqual(['journey', 'faq', 'process', 'cta']);
+      await expect(page.locator('.process .step')).toHaveCount(4);
+    }
+  });
+
+  test('the contact page has four practical questions with FAQPage data, in both languages', async ({ page }) => {
+    for (const [path, first] of [['/contact', 'לא בטוחים איזה שירות'], ['/en/contact', 'I’m not sure which service']]) {
+      await page.goto(path);
+      const faq = page.locator('.contact-faq');
+      await expect(faq.locator('details')).toHaveCount(4);
+      await expect(faq.locator('summary').first()).toContainText(first);
+      const lds = await page.locator('script[type="application/ld+json"]').allTextContents();
+      const data = lds.map((t) => JSON.parse(t)).find((d) => d['@type'] === 'FAQPage');
+      expect(data.mainEntity).toHaveLength(4);
+    }
   });
 
   test('every article has a table of contents whose links land on real headings', async ({ page }) => {
