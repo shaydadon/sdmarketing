@@ -354,10 +354,10 @@ test.describe('projects', () => {
       await expect(page.locator('.case .cs')).toHaveCount(3);
       await expect(page.locator('#case-fisha .cs li')).toHaveCount(4);   // includes the Fisha Studio back office
       for (const id of ['#case-excerly', '#case-bot']) await expect(page.locator(`${id} .cs li`)).toHaveCount(3);
-      // fisha: no link until its new design is live; each project says whose it is
+      // fisha: no link until its new design is live; one tag per project (no ownership labels)
       await expect(page.locator('#case-fisha .acts a[href*="fisha.shop"]')).toHaveCount(0);
-      await expect(page.locator('#case-fisha .tags .tag')).toHaveCount(2);
-      await expect(page.locator('#case-excerly .tags .tag')).toHaveCount(2);
+      await expect(page.locator('#case-fisha .tags .tag')).toHaveCount(1);
+      await expect(page.locator('#case-excerly .tags .tag')).toHaveCount(1);
       await expect(page.locator('#case-excerly .acts a[href="https://shaydadon.github.io/Excerly/"]')).toHaveCount(1);
       await expect(page.locator(`#case-fisha .acts a[href="${svc}"]`)).toHaveCount(1);
       await expect(page.locator('#case-bot .acts a[href*="wa.me"]')).toHaveCount(1);
