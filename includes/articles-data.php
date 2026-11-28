@@ -72,7 +72,7 @@ $articles = [
             ],
         ],
         'cta_html' => '<strong>רוצים לבדוק אם בוט מתאים לעסק שלכם?</strong> ספרו לי אילו שאלות חוזרות אצלכם הכי הרבה בוואטסאפ, ואגיד לכם אילו מהן בוט יכול לקחת. <a href="{BASE}services#automations">לפרטים על אוטומציות וצ׳אטבוטים</a>.',
-        'translated' => False,
+        'translated' => True,
     ],
     [
         'slug' => 'stop-losing-leads',
@@ -156,7 +156,7 @@ $articles = [
             ],
         ],
         'cta_html' => '<strong>רוצים לדעת איפה העסק שלכם מאבד פניות?</strong> ספרו לי מאיפה מגיעות הפניות שלכם היום ומה קורה איתן אחרי שהן נכנסות. <a href="{BASE}services#automations">לפרטים על אוטומציות לעסקים</a>.',
-        'translated' => False,
+        'translated' => True,
     ],
     [
         'slug' => 'small-business-automations',
@@ -241,7 +241,7 @@ $articles = [
             ],
         ],
         'cta_html' => '<strong>רוצים לדעת איזו אוטומציה תחסוך לכם הכי הרבה?</strong> ספרו לי מה גוזל לכם הכי הרבה זמן כל שבוע, ונתחיל משם. <a href="{BASE}services#automations">לפרטים על אוטומציות לעסקים</a>.',
-        'translated' => False,
+        'translated' => True,
     ],
     [
         'slug' => 'pwa-vs-app-store',
@@ -315,7 +315,7 @@ $articles = [
             ],
         ],
         'cta_html' => '<strong>יש לכם רעיון לאפליקציה?</strong> תארו לי אותו בכמה משפטים, ונבדוק יחד אם PWA מתאימה לו. <a href="{BASE}services#pwa">לפרטים על אפליקציות PWA</a>.',
-        'translated' => False,
+        'translated' => True,
     ],
     [
         'slug' => 'landing-page',
@@ -406,7 +406,7 @@ $articles = [
             ],
         ],
         'cta_html' => '<strong>רוצים דף שבנוי סביב פעולה אחת?</strong> שלחו לי קישור לדף הנחיתה שלכם, ואגיד לכם מה הייתי משנה קודם. <a href="{BASE}services#websites">לפרטים על פיתוח אתרים ודפי נחיתה</a>.',
-        'translated' => False,
+        'translated' => True,
     ],
     [
         'slug' => 'conversion-tracking',
@@ -483,7 +483,7 @@ $articles = [
             ],
         ],
         'cta_html' => '<strong>רוצים לדעת מה באמת עובד בפרסום שלכם?</strong> ספרו לי איפה אתם מפרסמים היום ומה אתם מודדים. <a href="{BASE}services#campaigns">לפרטים על שיווק דיגיטלי</a>.',
-        'translated' => False,
+        'translated' => True,
     ],
     [
         'slug' => 'seo-for-small-business',

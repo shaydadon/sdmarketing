@@ -14,7 +14,7 @@ usort($articles, fn($a, $b) => strcmp($b['published'], $a['published']));   // n
   <div class="wrap p-hero sm">
     <nav class="crumb" aria-label="<?= tr('מיקום בעמוד', 'Breadcrumb') ?>"><a href="<?= lurl('') ?>"><?= tr('בית', 'Home') ?></a> / <b><?= tr('מאמרים', 'Articles') ?></b></nav>
     <h1 id="page-title"><?= tr('מאמרים ומדריכים.<span>קצר, מעשי, בלי מילים מיותרות.</span>', 'Articles and guides.<span>Practical, and based on real work.</span>') ?></h1>
-    <p class="lead"><?= tr('איך מופיעים בגוגל, איך לא לאבד פניות, מה לעשות עם הוואטסאפ, מתי אפליקציה שווה את זה, ואיך יודעים מה באמת עובד בפרסום.', 'How Google decides what to show, what to fix first on a small business website, and how to tell whether your marketing is bringing in customers.') ?></p>
+    <p class="lead"><?= tr('איך מופיעים בגוגל, איך לא לאבד פניות, מה לעשות עם הוואטסאפ, מתי אפליקציה שווה את זה, ואיך יודעים מה באמת עובד בפרסום.', 'Getting found on Google, replying to every lead, automating the busywork, apps without an app store, and knowing which ads actually work.') ?></p>
     <?php if (count($articles) > 3): ?>
     <div class="filters" role="group" aria-label="<?= tr('סינון לפי נושא', 'Filter by topic') ?>" data-filters>
       <?php foreach ($article_topics as $key => $label):

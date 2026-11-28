@@ -5,6 +5,7 @@
 require __DIR__ . '/../../includes/icons.php';
 $slug = $_GET['slug'] ?? 'whatsapp-chatbot';
 $en = ($_GET['lang'] ?? 'he') === 'en';   // English covers: assets/img/articles/en/<slug>.webp
+function t(string $he, string $en_text): string { return $GLOBALS['en'] ? $en_text : $he; }
 $A = '../../assets/img/';
 function card(string $ic, string $title, string $sub, string $cls = '', string $style = ''): string
 {
@@ -55,6 +56,7 @@ function card(string $ic, string $title, string $sub, string $cls = '', string $
   .report h4{font-weight:800;font-size:22px;color:var(--ink)}
   .report .sub{font-size:15px;color:#66645F;margin-top:2px}
   .bar-row{display:grid;grid-template-columns:110px 1fr;align-items:center;gap:16px;margin-top:20px;font-weight:700;font-size:17px;color:#2e2d2b}
+  html[lang=en] .bar-row{grid-template-columns:150px 1fr}
   .bar-row span{height:22px;border-radius:99px;background:#ECEAE4;overflow:hidden;display:block}
   .bar-row span i{display:block;height:100%;border-radius:99px;background:var(--ink)}
   .bar-row.best span i{background:var(--accent)}
@@ -85,47 +87,47 @@ function card(string $ic, string $title, string $sub, string $cls = '', string $
 <?php if ($slug === 'whatsapp-chatbot'): ?>
   <span class="tag">WHATSAPP CHATBOT</span>
   <div class="device" style="left:450px;top:60px;width:300px"><img src="<?= $A ?>projects/boardog/chat-end.webp" alt=""></div>
-  <?= card('whatsapp', 'היי, אפשר לקבוע?', 'הודעה חדשה · 02:14', 'wa', 'left:800px;top:120px') ?>
-  <?= card('calendar', 'הפגישה נקבעה', 'יום ג׳ · 16:00', 'on', 'left:110px;top:230px') ?>
-  <?= card('database', 'ליד חדש נשמר', 'סיכום קליטה נשלח', '', 'left:800px;top:360px') ?>
+  <?= card('whatsapp', t('היי, אפשר לקבוע?', 'Hi, can I book?'), t('הודעה חדשה · 02:14', 'New message · 02:14'), 'wa', 'left:800px;top:120px') ?>
+  <?= card('calendar', t('הפגישה נקבעה', 'Meeting booked'), t('יום ג׳ · 16:00', 'Tue · 4:00 pm'), 'on', 'left:110px;top:230px') ?>
+  <?= card('database', t('ליד חדש נשמר', 'New lead saved'), t('סיכום קליטה נשלח', 'Intake summary sent'), '', 'left:800px;top:360px') ?>
 <?php elseif ($slug === 'stop-losing-leads'): ?>
   <span class="tag">LEADS</span>
   <div class="wire" style="left:599px;top:80px;height:450px"></div>
-  <?= card('whatsapp', 'הודעה חדשה בוואטסאפ', 'היי, כמה זה עולה? · 23:40', 'dk wa', 'left:640px;top:84px;min-width:380px') ?>
-  <?= card('mail', 'טופס מהאתר', 'שם וטלפון התקבלו', 'dk', 'left:180px;top:190px;min-width:380px') ?>
-  <?= card('check', 'מענה נשלח תוך דקה', 'אישור אוטומטי ללקוח', 'on', 'left:640px;top:296px;min-width:380px') ?>
-  <?= card('database', 'הליד נשמר בטבלה', 'מקור: קמפיין בגוגל', '', 'left:180px;top:402px;min-width:380px') ?>
+  <?= card('whatsapp', t('הודעה חדשה בוואטסאפ', 'New WhatsApp message'), t('היי, כמה זה עולה? · 23:40', 'Hi, how much is it? · 11:40 pm'), 'dk wa', 'left:640px;top:84px;min-width:380px') ?>
+  <?= card('mail', t('טופס מהאתר', 'Website form'), t('שם וטלפון התקבלו', 'Name and phone received'), 'dk', 'left:180px;top:190px;min-width:380px') ?>
+  <?= card('check', t('מענה נשלח תוך דקה', 'Reply sent within a minute'), t('אישור אוטומטי ללקוח', 'Automatic confirmation'), 'on', 'left:640px;top:296px;min-width:380px') ?>
+  <?= card('database', t('הליד נשמר בטבלה', 'Lead saved to the sheet'), t('מקור: קמפיין בגוגל', 'Source: Google Ads'), '', 'left:180px;top:402px;min-width:380px') ?>
 <?php elseif ($slug === 'small-business-automations'): ?>
   <span class="tag">AUTOMATIONS</span>
-  <div class="node" style="left:955px;top:220px"><span class="ic"><?= icon('mail') ?></span>טופס באתר</div>
+  <div class="node" style="left:955px;top:220px"><span class="ic"><?= icon('mail') ?></span><?= t('טופס באתר', 'Website form') ?></div>
   <div class="arrow" style="left:815px;top:295px;width:130px"></div>
-  <div class="node hot" style="left:655px;top:220px"><span class="ic"><?= icon('flow') ?></span>אוטומציה</div>
+  <div class="node hot" style="left:655px;top:220px"><span class="ic"><?= icon('flow') ?></span><?= t('אוטומציה', 'Automation') ?></div>
   <div class="arrow" style="left:515px;top:295px;width:130px"></div>
-  <div class="node" style="left:355px;top:110px"><span class="ic"><?= icon('database') ?></span>נשמר ב-CRM</div>
-  <div class="node" style="left:355px;top:330px"><span class="ic"><?= icon('calendar') ?></span>תזכורת לפגישה</div>
-  <div class="node" style="left:95px;top:220px"><span class="ic"><?= icon('check') ?></span>מייל המשך</div>
+  <div class="node" style="left:355px;top:110px"><span class="ic"><?= icon('database') ?></span><?= t('נשמר ב-CRM', 'Saved to CRM') ?></div>
+  <div class="node" style="left:355px;top:330px"><span class="ic"><?= icon('calendar') ?></span><?= t('תזכורת לפגישה', 'Appointment reminder') ?></div>
+  <div class="node" style="left:95px;top:220px"><span class="ic"><?= icon('check') ?></span><?= t('מייל המשך', 'Follow-up email') ?></div>
   <div class="arrow" style="left:255px;top:295px;width:90px"></div>
 <?php elseif ($slug === 'pwa-vs-app-store'): ?>
   <span class="tag">PWA</span>
   <div class="device" style="left:330px;top:90px;width:250px"><img src="<?= $A ?>projects/excerly/home-m.webp" alt=""></div>
   <div class="device" style="left:620px;top:40px;width:280px"><img src="<?= $A ?>projects/excerly/session-m.webp" alt=""></div>
-  <span class="chip" style="left:90px;top:300px"><span class="ic"><?= icon('phone') ?></span>הוספה למסך הבית</span>
-  <span class="chip" style="left:930px;top:210px"><span class="ic"><?= icon('check') ?></span>בלי חנות</span>
+  <span class="chip" style="left:90px;top:300px"><span class="ic"><?= icon('phone') ?></span><?= t('הוספה למסך הבית', 'Add to Home Screen') ?></span>
+  <span class="chip" style="left:930px;top:210px"><span class="ic"><?= icon('check') ?></span><?= t('בלי חנות', 'No app store') ?></span>
 <?php elseif ($slug === 'landing-page'): ?>
   <span class="tag">LANDING PAGE</span>
   <div class="browser" style="left:400px;top:80px;width:640px"><div class="bar"><i></i><i></i><i></i><u>fisha.shop</u></div><img src="<?= $A ?>projects/fisha/originals-main.webp" alt=""></div>
-  <div class="form" style="left:150px;top:200px"><b>השאירו פרטים</b><div class="fld">שם מלא</div><div class="fld">טלפון</div><div class="go">שלחו</div></div>
+  <div class="form" style="left:150px;top:200px"><b><?= t('השאירו פרטים', 'Get a free quote') ?></b><div class="fld"><?= t('שם מלא', 'Full name') ?></div><div class="fld"><?= t('טלפון', 'Phone') ?></div><div class="go"><?= t('שלחו', 'Send') ?></div></div>
 <?php elseif ($slug === 'conversion-tracking'): ?>
   <span class="tag">CONVERSION TRACKING</span>
   <div class="report" style="left:340px;top:110px">
-    <h4>פניות לפי מקור</h4><div class="sub">החודש · כל פנייה נספרת</div>
-    <div class="bar-row best"><b>חיפוש בגוגל</b><span><i style="width:86%"></i></span></div>
-    <div class="bar-row"><b>אינסטגרם</b><span><i style="width:58%"></i></span></div>
-    <div class="bar-row"><b>פייסבוק</b><span><i style="width:34%"></i></span></div>
-    <div class="bar-row"><b>אורגני</b><span><i style="width:47%"></i></span></div>
+    <h4><?= t('פניות לפי מקור', 'Leads by source') ?></h4><div class="sub"><?= t('החודש · כל פנייה נספרת', 'This month · every lead counted') ?></div>
+    <div class="bar-row best"><b><?= t('חיפוש בגוגל', 'Google Search') ?></b><span><i style="width:86%"></i></span></div>
+    <div class="bar-row"><b><?= t('אינסטגרם', 'Instagram') ?></b><span><i style="width:58%"></i></span></div>
+    <div class="bar-row"><b><?= t('פייסבוק', 'Facebook') ?></b><span><i style="width:34%"></i></span></div>
+    <div class="bar-row"><b><?= t('אורגני', 'Organic') ?></b><span><i style="width:47%"></i></span></div>
   </div>
-  <span class="chip" style="left:880px;top:420px"><span class="ic"><?= icon('chart') ?></span>מה מביא לקוחות</span>
-  <span class="demo" style="left:360px;top:470px">הדגמה להמחשה</span>
+  <span class="chip" style="left:880px;top:420px"><span class="ic"><?= icon('chart') ?></span><?= t('מה מביא לקוחות', 'What brings customers') ?></span>
+  <span class="demo" style="left:360px;top:470px"><?= t('הדגמה להמחשה', 'Illustration') ?></span>
 <?php elseif ($slug === 'seo-for-small-business'): ?>
   <span class="tag">SEO</span>
   <div class="serp" style="<?= $en ? 'left:110px' : 'left:530px' ?>;top:96px">
