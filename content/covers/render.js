@@ -9,7 +9,7 @@ const fs = require('fs');
 const base = process.argv[2] || 'http://localhost:8811/';
 // [slug, lang]: Hebrew covers go to assets/img/articles/, English ones to assets/img/articles/en/.
 // Pass slugs after the base URL to render only those: node render.js http://localhost:8811/ seo-for-small-business
-const all = [...['whatsapp-chatbot', 'stop-losing-leads', 'small-business-automations', 'pwa-vs-app-store', 'landing-page', 'conversion-tracking', 'seo-for-small-business'].map((s) => [s, 'he']), ['seo-for-small-business', 'en']];
+const all = [...['whatsapp-chatbot', 'stop-losing-leads', 'small-business-automations', 'pwa-vs-app-store', 'landing-page', 'conversion-tracking', 'seo-for-small-business'].map((s) => [s, 'he']), ...['whatsapp-chatbot', 'stop-losing-leads', 'small-business-automations', 'pwa-vs-app-store', 'landing-page', 'conversion-tracking', 'seo-for-small-business'].map((s) => [s, 'en'])];
 const only = process.argv.slice(3);
 const jobs = only.length ? all.filter(([s]) => only.includes(s)) : all;
 const outDir = path.join(__dirname, '..', '..', 'assets', 'img', 'articles');

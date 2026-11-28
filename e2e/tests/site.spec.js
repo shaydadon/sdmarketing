@@ -354,10 +354,10 @@ test.describe('projects', () => {
       await expect(page.locator('.case .cs')).toHaveCount(3);
       await expect(page.locator('#case-fisha .cs li')).toHaveCount(4);   // includes the Fisha Studio back office
       for (const id of ['#case-excerly', '#case-bot']) await expect(page.locator(`${id} .cs li`)).toHaveCount(3);
-      // fisha: no link until its new design is live; each project says whose it is
+      // fisha: no link until its new design is live; one tag per project (no ownership labels)
       await expect(page.locator('#case-fisha .acts a[href*="fisha.shop"]')).toHaveCount(0);
-      await expect(page.locator('#case-fisha .tags .tag')).toHaveCount(2);
-      await expect(page.locator('#case-excerly .tags .tag')).toHaveCount(2);
+      await expect(page.locator('#case-fisha .tags .tag')).toHaveCount(1);
+      await expect(page.locator('#case-excerly .tags .tag')).toHaveCount(1);
       await expect(page.locator('#case-excerly .acts a[href="https://shaydadon.github.io/Excerly/"]')).toHaveCount(1);
       await expect(page.locator(`#case-fisha .acts a[href="${svc}"]`)).toHaveCount(1);
       await expect(page.locator('#case-bot .acts a[href*="wa.me"]')).toHaveCount(1);
@@ -479,10 +479,11 @@ test.describe('english version', () => {
     await page.locator('header .lang-switch').click();
     await expect(page).toHaveURL(/\/services$/);
     await expect(page).not.toHaveURL(/\/en\//);
-    // Hebrew-only pages (articles) switch to the English home page, and claim no English twin
+    // Articles switch to their English twin
     await page.goto('/articles/whatsapp-chatbot');
-    await expect(page.locator('link[hreflang]')).toHaveCount(0);
-    await expect(page.locator('header .lang-switch')).toHaveAttribute('href', '/en/');
+    await page.locator('header .lang-switch').click();
+    await expect(page).toHaveURL(/\/en\/articles\/whatsapp-chatbot$/);
+    await expect(page.locator('h1')).toContainText('WhatsApp Chatbot for Business');
   });
 
   test('the English menu has Services, Projects, Articles, About, Contact, and every link stays in English', async ({ page, isMobile }) => {
@@ -641,11 +642,17 @@ test.describe('SEO guide and English articles', () => {
     }
   });
 
-  test('a Hebrew-only article has no hreflang and no English twin', async ({ page, request }) => {
-    await page.goto('/articles/landing-page');
-    await expect(page.locator('link[hreflang]')).toHaveCount(0);
-    await expect(page.locator('.lang-switch')).toHaveAttribute('href', '/en/');
-    expect((await request.get('/en/articles/landing-page')).status()).toBe(404);
+  test('every Hebrew article has an English twin, linked both ways by hreflang', async ({ page, request }) => {
+    await page.goto('/articles');
+    const slugs = await page.locator('.post-card a').evaluateAll((as) => as.map((a) => a.getAttribute('href').split('/').pop()));
+    expect(slugs.length).toBe(7);
+    for (const slug of slugs) {
+      expect((await request.get(`/en/articles/${slug}`)).status()).toBe(200);
+      await page.goto(`/en/articles/${slug}`);
+      await expect(page.locator('link[hreflang="he"]')).toHaveAttribute('href', `https://sdmarketing.co.il/articles/${slug}`);
+      await expect(page.locator('.lang-switch')).toHaveAttribute('href', `/articles/${slug}`);
+      await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+    }
   });
 
   test('English has an Articles page in the nav, with English links only', async ({ page }) => {
